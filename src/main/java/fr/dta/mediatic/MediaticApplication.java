@@ -2,6 +2,7 @@ package fr.dta.mediatic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
@@ -9,7 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 public class MediaticApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MediaticApplication.class, args);
+    	
+    	ConfigurableApplicationContext context = SpringApplication.run(MediaticApplication.class, args);
+        context.close();
     }
 
 }
