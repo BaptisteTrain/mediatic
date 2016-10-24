@@ -5,6 +5,14 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 public class MediaticWebApplication extends SpringBootServletInitializer {
 
+	
+	public MediaticWebApplication() {
+		
+		
+		
+	}
+	
+	//Renvoie les sources d'une application
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(MediaticApplication.class);
