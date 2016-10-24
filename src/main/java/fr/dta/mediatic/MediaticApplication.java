@@ -11,7 +11,7 @@ public class MediaticApplication {
 
     public static void main(String[] args) {
     	
-    	//Lancement de l'app
+    	// Lancement de l'app
     	ConfigurableApplicationContext context = SpringApplication.run(MediaticApplication.class, args);
         
     	// Fermeture du ConfigurableApplicationContext
