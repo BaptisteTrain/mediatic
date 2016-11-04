@@ -21,16 +21,40 @@
 	<header></header>
 	
 	<main class="container">
-		<h1>Recherche d'adh&eacute;rent</h1><br>
+		<h2>Recherche d'adh&eacute;rent</h2><br>
 
-		<div class="formulaire col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-		
-			<!-- FORMULAIRE RECHERCHE D'ADHERENT -->
-			<form>
-				<br><br><br><br>
-				<!-- todo baptiste -->
-				<input type="button" class="btn btn-default" value="Valider" onclick="afficheTab();">
-			</form><br>
+		<div class="col-xs-12 col-sm-10 col-md-8">
+			<div class="formulaire">
+				<form class="form-horizontal" method="GET" action="#">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-3">Identifiant</label>
+						<div class="col-xs-12 col-sm-9 col-md-9">
+							<input type="text" class="form-control" id="identifiant" name="identifiant" placeholder="identifiant" required>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-3">Nom</label>
+						<div class="col-xs-12 col-sm-9 col-md-9">
+							<input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-3">Prénom</label>
+						<div class="col-xs-12 col-sm-9 col-md-9">
+							<input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<div class="col-xs-12 col-md-3 col-sm-3 col-xs-offset-4 col-md-offset-3 col-sm-offset-3">
+							<input type="submit" class="btn btn-default" value="Ajouter">
+						</div>
+					</div>
+				</form>
+			</div>
+			<br>
 			<!-- / FORMULAIRE RECHERCHE D'ADHERENT -->
 		
 			<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
