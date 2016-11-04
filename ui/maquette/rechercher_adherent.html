@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-	<title>Recherche d'adherent</title>
-	
-	<link rel="stylesheet" href="css/tablesorter-style.css">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<script src="js/bootstrap.js"></script>
-	<script src="js/jquery-latest.js"></script>
-	<script src="js/jquery.tablesorter.min.js"></script>
+<meta charset="UTF-8">
+<title>Recherche d'adhérent</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link media="all" href="css/bootstrap.min.css" rel="stylesheet"/>
+<link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+<link media="all" href="css/tablesorter-style.css" rel="stylesheet">
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
 	
 	<!-- TODO : a changer -->
 	<style>
@@ -34,86 +35,83 @@
 </head>
 
 <body>
+	<header></header>
+	
+	<main class="container">
+		<h1>Recherche d'adh&eacute;rent</h1><br>
 
-	<main>
-	
-		<div class="container">
+		<div class="formulaire col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
 		
-			<h1>Recherche d'adh&eacute;rent</h1><br>
-	
-			<div class="formulaire col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-			
-				<!-- FORMULAIRE RECHERCHE D'ADHERENT -->
-				<form>
-					<br><br><br><br>
-					<!-- todo baptiste -->
-					<input type="button" class="btn btn-default" value="Valider" onclick="afficheTab();">
-				</form><br>
-				<!-- / FORMULAIRE RECHERCHE D'ADHERENT -->
-			
-				<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
-				<table id="tableRechAdh" class="tablesorter hidden">
-					<thead>
-						<tr>
-							<th>Identifiant</th>
-							<th>Nom Pr&eacute;nom</th>
-							<th>Date de naissance</th>
-							<th>A jour de cotisation</th>
-							<th>Nombre de m&eacute;dias emprunt&eacute;s</th>
-							<th>&nbsp;</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>XHGD4554</td>
-							<td>Train Baptiste</td>
-							<td>12/12/1990</td>
-							<td>NON</td>
-							<td>2</td>
-							<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></td>
-						</tr>
-						<tr>
-							<td>DUYS4541</td>
-							<td>Laclau Matthieu</td>
-							<td>01/08/1985</td>
-							<td>OUI</td>
-							<td>1</td>
-							<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></td>
-						</tr>
-						<tr>
-							<td>HGDI4454</td>
-							<td>Allam Nadir</td>
-							<td>05/05/1985</td>
-							<td>NON</td>
-							<td>0</td>
-							<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></td>
-						</tr>
-						<tr>
-							<td>JHGFT5989</td>
-							<td>Martin Lucie</td>
-							<td>01/01/1987</td>
-							<td>OUI</td>
-							<td>2</td>
-							<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></td>
-						</tr>
-					</tbody>
-				</table>
-				<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
-				
-				<!-- PAGINATION 
-				<ul class="pagination">
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-				</ul>
-				 / PAGINATION -->
-			</div>
+			<!-- FORMULAIRE RECHERCHE D'ADHERENT -->
+			<form>
+				<br><br><br><br>
+				<!-- todo baptiste -->
+				<input type="button" class="btn btn-default" value="Valider" onclick="afficheTab();">
+			</form><br>
+			<!-- / FORMULAIRE RECHERCHE D'ADHERENT -->
 		
+			<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
+			<table id="tableRechAdh" class="tablesorter hidden">
+				<thead>
+					<tr>
+						<th>Identifiant</th>
+						<th>Nom Pr&eacute;nom</th>
+						<th>Date de naissance</th>
+						<th>A jour de cotisation</th>
+						<th>Nombre de m&eacute;dias emprunt&eacute;s</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>XHGD4554</td>
+						<td>Train Baptiste</td>
+						<td>12/12/1990</td>
+						<td>NON</td>
+						<td>2</td>
+						<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></a></td>
+					</tr>
+					<tr>
+						<td>DUYS4541</td>
+						<td>Laclau Matthieu</td>
+						<td>01/08/1985</td>
+						<td>OUI</td>
+						<td>1</td>
+						<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></a></td>
+					</tr>
+					<tr>
+						<td>HGDI4454</td>
+						<td>Allam Nadir</td>
+						<td>05/05/1985</td>
+						<td>NON</td>
+						<td>0</td>
+						<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></a></td>
+					</tr>
+					<tr>
+						<td>JHGFT5989</td>
+						<td>Martin Lucie</td>
+						<td>01/01/1987</td>
+						<td>OUI</td>
+						<td>2</td>
+						<td><a class="glyphicon glyphicon-search" aria-hidden="true" href="fiche_adherent.html" class="pointer"></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
+			
+			<!-- PAGINATION 
+			<ul class="pagination">
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+			</ul>
+			 / PAGINATION -->
 		</div>
-	
 	</main>
+	
+	<footer></footer>
 	
 	<script>
 		// Fonction pour le tri
