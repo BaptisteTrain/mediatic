@@ -14,27 +14,28 @@
 	
 	<main class="container">
 		<div class="row">
-			<div class="formulaire col-xs-9 col-sm-8 col-md-6 col-sm-offset-1 col-md-offset-2">
+			<h2 class="col-xs-12 col-sm-12 col-md-12">Fiche média</h2>
+			<div class="formulaire col-xs-9 col-sm-9 col-md-8">
 			
 				<form class="form-horizontal">
 				
 					<div class="form-group">
 						<label class="control-label col-xs-9 col-sm-2 col-md-2">Titre:</label>
-						<div class="col-xs-9 col-sm-6 col-md-4">
+						<div class="col-xs-9 col-sm-7 col-md-6">
 							<input type="text" class="form-control" id="titre" name="titre" placeholder="titre" required>
 						</div>
 					</div>
 					<br>
 					<div class="form-group">
 						<label class="control-label col-xs-9 col-sm-2 col-md-2">Auteur:</label>
-						<div class="col-xs-9 col-sm-6 col-md-4">
+						<div class="col-xs-9 col-sm-7 col-md-6">
 							<input type="text" class="form-control" id="autheur" name="autheur" placeholder="autheur" required>
 						</div>
 					</div>
 					<br>
 					<div class="form-group">
 						<label class="control-label col-xs-9 col-sm-2 col-md-2">Type:</label>
-						<div class="col-xs-9 col-sm-6 col-md-4">
+						<div class="col-xs-9 col-sm-7 col-md-6">
 							<select id="type" class="form-control" name="type" required>
 								<option value="Livre">Livre</option>
 								<option value="CD">CD</option>
@@ -53,31 +54,40 @@
 			
 			</div>
 		
-			<div class="liste col-xs-3 col-sm-2 col-md-2">
+			<div class="liste col-xs-3 col-sm-3 col-md-4">
 			
-				<table class="table table-striped table-hover">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Liste des emprunteur</h4>
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped table-hover">
 				
-					<tr>
-						<td>Train</td>
-						<td>Baptiste</td>
-					</tr>
-					
-					<tr>
-						<td>Allam</td>
-						<td>Nadir</td>
-					</tr>
-					
-					<tr>
-						<td>Laclau</td>
-						<td>Matthieu</td>
-					</tr>
-					
-					<tr>
-						<td>Couturier</td>
-						<td>Fanny</td>
-					</tr>
+							<tr>
+								<td>Train</td>
+								<td>Baptiste</td>
+							</tr>
+							
+							<tr>
+								<td>Allam</td>
+								<td>Nadir</td>
+							</tr>
+							
+							<tr>
+								<td>Laclau</td>
+								<td>Matthieu</td>
+							</tr>
+							
+							<tr>
+								<td>Couturier</td>
+								<td>Fanny</td>
+							</tr>
 				
-				</table>
+						</table>
+					</div>
+				</div>
+			
+				
 			
 			</div>
 		</div>
