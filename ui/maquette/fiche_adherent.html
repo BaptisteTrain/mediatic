@@ -4,77 +4,127 @@
 <meta charset="UTF-8">
 <title>Fiche Adhérent</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link media="all" href="css/bootstrap.min.css" rel="stylesheet"/>
-<link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+<link media="all" href="css/bootstrap.min.css" rel="stylesheet" />
+<link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet" />
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<style>
+.jumbotron.dernier {
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+.anoir a:visited, .anoir a:hover, .anoir a:link, .anoir a:active {
+	color: black;
+	font-weight: bold;
+	font-size: 16px;
+}
+/*
+main {
+	margin-bottom: 159px;
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+*/
+</style>
 </head>
 <body>
-	<header></header>
+	<header>
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Mediatic</h1>
+				<p>volutpat sed placerat diam. Donec suscipit metus non placerat.</p>
+			</div>
+		</div>
+		<div class="container">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="media.html"><strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span>Medias</strong><span class="sr-only">(current)</span></a></li>
+							<li><a href="rechercher_adherent.html"><strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Adhérents</strong></a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="login.html"><strong><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Déconnexion</strong></a></li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		</div>
+		<!-- navbar-inverse nav-justified  navbar-fixed-top -->
+	</header>
 
 	<main class="container">
 		<div class="row">
 			<div class="col-xs-12">
 				<h2>Fiche adhérent</h2>
-				<div class="formulaire col-xs-12 col-sm-10 col-md-8">
-					<form class="form-horizontal col-xs-12 col-sm-10 col-md-8" method="GET" action="#">
+				<div class="formulaire">
+					<form class="form-horizontal" method="GET" action="#">
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="nom">Nom :</label>
-							<div class="col-xs-12 col-md-9 col-sm-9">
-								<input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
-							</div>
-							</div>
-						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="prenom">Prénom :</label>
-							<div class="col-xs-12 col-md-9 col-sm-9">
-								<input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="lastname">Nom</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom" required="required">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="anniversaire">Anniversaire :</label>
-							<div class="col-xs-12 col-md-9 col-sm-9">
-								<input type="date" class="form-control" id="anniversaire" name="anniversaire" placeholder="anniversaire" required>
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="firstname">Prénom</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prénom" required="required">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="age">Age :</label>
-							<div class="col-xs-12 col-md-9 col-sm-9">
-								<input type="text" class="form-control" id="age" name="age" placeholder="age" readonly> 
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="birthday">Date de naissance</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+								<input type="date" class="form-control" id="birthday" name="birthday" placeholder="Date de naissance" required="required">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="email">Email :</label>
-							<div class="col-xs-12 col-md-9 col-sm-9">
-								<input type="email" class="form-control" id="email" name="email" placeholder="email">
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="birthday">Age</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="birthday" name="age" placeholder="Age" readonly>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="adresse">Adresse :</label>
-							<div class="col-xs-12 col-md-9 col-sm-9">
-								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="adresse">
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="email" required="required">E-mail</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+								<input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="genre">Genre :</label>
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="adress">Adresse</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="adress" name="adress" placeholder="Adresse">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2"
+								for="gender">Sexe</label>
 							<div class="col-xs-1 col-md-1 col-sm-1">
 								<div class="radio">
-									<label><input type="radio" name="genre" placeholder="genre" value="Homme">Homme</label>
-									<label><input type="radio" name="genre" placeholder="genre" value="Femme">Femme</label>
+									<label><input type="radio" name="gender" placeholder="gender" value="Homme" required="required">Homme</label>
+									<label><input type="radio" name="gender" placeholder="gender" value="Femme" required="required">Femme</label>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-md-3 col-sm-3" for="cotisation">Cotisation :</label>
-							<div class="col-xs-12 col-sm-9 col-md-9">
+							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="cotisation">Cotisation</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
 								<div class="input-group">
-							    	<div class="input-group-addon">$</div>
-							    	<input type="number" class="form-control" id="cotisation" placeholder="cotisation" required>
-							    	<div class="input-group-addon">.00</div>
-						    	</div>
-						    </div>
+									<span class="input-group-addon" id="basic-addon1">€</span>
+									<input type="number" class="form-control" id="cotisation" name="cotisation" placeholder="Montant">
+									<span class="input-group-addon" id="basic-addon2">.00</span>
+								</div>
+							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-xs-12 col-md-3 col-sm-3 col-xs-offset-4 col-md-offset-3 col-sm-offset-3">
+							<div
+								class="col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-2 col-lg-2">
 								<input type="submit" class="btn btn-default" value="Valider">
 							</div>
 						</div>
@@ -85,13 +135,13 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h2>La liste des emprunts</h2>
-				<table class="table table-hover">
+				<table class="table table-striped">
 					<tr>
-						<th>Référence</th>
-						<th>Type</th>
-						<th>Titre</th>
-						<th>Date d&eacute;emprunt</th>
-						<th>Jours restants</th>
+						<th class="col-xs-2">Référence</th>
+						<th class="col-xs-2">Type</th>
+						<th class="col-xs-4">Titre</th>
+						<th class="col-xs-2">Date d'emprunt</th>
+						<th class="col-xs-2">Jours restants</th>
 					</tr>
 					<tr>
 						<td>123456798</td>
@@ -119,7 +169,7 @@
 		</div>
 	
 		<!-- Formulaire de Recherche et d'Ajout d'Emprunts (Matthieu) -->
-		
+	
 		<div class="row">
 			<aside class="col-xs-12">
 				<h2>Ajout Emprunt<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true" data-toggle="collapse" data-target="#emprunt"></span></h2>
@@ -144,17 +194,17 @@
 								<input type="text" class="form-control" id="idAuteur" name="prenom" placeholder="Auteur">
 							</div>
 						</div>
-					<div class="form-group">
-						<label for="idCategorie" class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2">Type</label>
-						<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
-							<select name="option" class="form-control">
-								<option id="idTous" value="tous"></option>
-								<option id="idLivre" value="livre">Livre</option>
-								<option id="idCD" value="cd">CD</option>
-								<option id="idDVD" value="dvd">DVD</option>
-							</select>
+						<div class="form-group">
+							<label for="idCategorie" class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2">Type</label>
+							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+								<select name="option" class="form-control">
+									<option id="idTous" value="tous"></option>
+									<option id="idLivre" value="livre">Livre</option>
+									<option id="idCD" value="cd">CD</option>
+									<option id="idDVD" value="dvd">DVD</option>
+								</select>
+							</div>
 						</div>
-					</div>
 						<div class="form-group">
 							<div class="col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-2 col-lg-2">
 								<button type="submit" class="btn btn-default">Rechercher</button>
@@ -179,63 +229,49 @@
 									<td>Nadir ALLAM</td>
 									<td>978-2075074209</td>
 									<td class="text-center">Livre</td>
-									<td class="form-group">
-										<input type="radio" id="matt" name="media" value="matt" required="required"/>
-									</td>
+									<td class="form-group"><input type="radio" id="matt" name="media" value="matt" required="required" /></td>
 								</tr>
 								<tr>
 									<td>L'informatique est un long fleuve tranquille</td>
 									<td>Fanny COUTURIER</td>
 									<td>B01K2WUR9E</td>
 									<td class="text-center">DVD</td>
-									<td class="form-group">
-										<input type="radio" id="" name="media" value="" required="required"/>
-									</td>
+									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 								<tr>
 									<td>CSS Dance Party Vol. 5</td>
 									<td>Matthieu LACLAU</td>
 									<td>B01GO3JWPK</td>
 									<td class="text-center">CD</td>
-									<td class="form-group">
-										<input type="radio" id="" name="media" value="" required="required"/>
-									</td>
+									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 								<tr>
 									<td>Sopra, si près</td>
 									<td>Baptiste TRAIN</td>
 									<td>978-3155058290</td>
 									<td class="text-center">Livre</td>
-									<td class="form-group">
-										<input type="radio" id="" name="media" value="" required="required"/>
-									</td>
+									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 								<tr>
 									<td>La mélancolie du Javascript</td>
 									<td>Fanny COUTURIER</td>
 									<td>978-5135666210</td>
 									<td class="text-center">Livre</td>
-									<td class="form-group">
-										<input type="radio" id="" name="media" value="" required="required"/>
-									</td>
+									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 								<tr>
 									<td>La Bible de Jquery</td>
 									<td>Matthieu LACLAU</td>
 									<td>978-5554867824</td>
 									<td class="text-center">Livre</td>
-									<td class="form-group">
-										<input type="radio" id="" name="media" value="" required="required"/>
-									</td>
+									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 								<tr>
 									<td>Sport et Informatique: Comment se muscler le cerveau</td>
 									<td>Nadir ALLAM</td>
 									<td>B01L3XTC9E</td>
 									<td class="text-center">DVD</td>
-									<td class="form-group">
-										<input type="radio" id="" name="media" value="" required="required"/>
-									</td>
+									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -250,5 +286,16 @@
 			</aside>
 		</div>
 	</main>
+
+	<footer>
+		<div class="jumbotron dernier">
+			<div class="container">
+				<div class="text-center anoir">
+					<a href="#">© La team.</a><br>
+				</div>
+			</div>
+			<br> <br>
+		</div>
+	</footer>
 </body>
 </html>
