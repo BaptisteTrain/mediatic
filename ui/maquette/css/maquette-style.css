@@ -1,13 +1,13 @@
-h2 {
-	text-align: center;
-}
-
 .hidden {
 	display: none;
 }
 
 .pointer {
 	cursor: pointer;
+}
+
+.lignePb {
+	background-color: #ffb3b3 !important;
 }
 
 /* Pagination */
@@ -24,11 +24,13 @@ h2 {
 .gris .pagination > li > a {
 	color: #262626 !important;
 }
+
 /* Le footer */
 .jumbotron.dernier {
 	padding-bottom: 0px;
 	margin-bottom: 0px;
 }
+
 /* couleur des liens - footer */
 .anoir a:visited, .anoir a:hover, .anoir a:link, .anoir a:active {
 	color: black;
