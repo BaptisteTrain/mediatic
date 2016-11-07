@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fiche Adhérent</title>
+<title>Fiche Adh&eacute;rent</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link media="all" href="css/bootstrap.min.css" rel="stylesheet" />
 <link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet" />
@@ -60,47 +60,47 @@
 	<main class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2>Fiche adhérent</h2>
+				<h2>Fiche adh&eacute;rent</h2>
 				<hr/>
 				<div class="formulaire">
 					<form class="form-horizontal" method="GET" action="#">
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="lastname">Nom</label>
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom" required>
+								<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom" required value="Train">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="firstname">Prénom</label>
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="firstname">Pr&eacute;nom</label>
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prénom" required>
+								<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Pr&eacute;nom" required value="Baptiste">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthday">Date de naissance</label>
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-								<input type="date" class="form-control" id="birthday" name="birthday" placeholder="Date de naissance" required>
+								<input type="date" class="form-control" id="birthday" name="birthday" placeholder="Date de naissance" required value="12/12/1990">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthday">Age</label>
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="birthday" name="age" placeholder="Age" readonly>
+								<input type="text" class="form-control" id="birthday" name="age" placeholder="Age" readonly value="25 ans">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail</label>
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-								<input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+								<input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required value="baba@gmail.com">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="adress">Adresse</label>
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">&nbsp;
+								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse" value="4 impasse Villardouin">&nbsp;
 								<div class="form-inline">
-									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Code postal">&nbsp;
-									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Ville">
+									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Code postal" value="34090">&nbsp;
+									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Ville" value="Montpellier">
 								</div>
 							</div>
 						</div>
@@ -109,7 +109,7 @@
 								for="gender">Genre</label>
 							<div class="col-xs-1 col-sm-1 col-md-1">
 								<div class="radio">
-									<label><input type="radio" name="gender" placeholder="gender" value="Homme">Homme</label>
+									<label><input type="radio" name="gender" placeholder="gender" value="Homme" checked="checked">Homme</label>
 									<label><input type="radio" name="gender" placeholder="gender" value="Femme">Femme</label>
 								</div>
 							</div>
@@ -119,15 +119,15 @@
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1">€</span>
-									<input type="number" class="form-control" id="cotisation" name="cotisation" placeholder="Montant">
+									<input type="number" class="form-control" id="cotisation" name="cotisation" placeholder="Montant" value="300">
 									<span class="input-group-addon" id="basic-addon2">.00</span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<div
-								class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-2 col-lg-2">
-								<input type="submit" class="btn btn-default" value="Valider">
+								class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-5 col-lg-5">
+								<input type="submit" class="btn btn-success pull-right" value="Modifier">
 							</div>
 						</div>
 					</form>
@@ -140,7 +140,7 @@
 				<table class="table table-striped">
 					<thead>
 					<tr>
-						<th class="col-xs-2">Référence</th>
+						<th class="col-xs-2">R&eacute;f&eacute;rence</th>
 						<th class="col-xs-2">Type</th>
 						<th class="col-xs-4">Titre</th>
 						<th class="col-xs-2">Date d'emprunt</th>
@@ -212,8 +212,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-2 col-lg-2">
-								<button type="submit" class="btn btn-default">Rechercher</button>
+							<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-5 col-lg-5">
+								<button type="submit" class="btn btn-success pull-right">Rechercher</button>
 							</div>
 						</div>
 					</form>
@@ -252,14 +252,14 @@
 									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 								<tr>
-									<td>Sopra, si près</td>
+									<td>Sopra, si pr&egrave;s</td>
 									<td>Baptiste TRAIN</td>
 									<td>978-3155058290</td>
 									<td class="text-center">Livre</td>
 									<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
 								</tr>
 								<tr>
-									<td>La mélancolie du Javascript</td>
+									<td>La m&eacute;lancolie du Javascript</td>
 									<td>Fanny COUTURIER</td>
 									<td>978-5135666210</td>
 									<td class="text-center">Livre</td>
@@ -283,7 +283,7 @@
 						</table>
 						<div class="form-group">
 							<div class="col-xs-offset-6 col-sm-offset-8 col-md-offset-10 col-lg-offset-10 col-xs-6 col-sm-4 col-md-2 col-lg-2">
-								<button type="submit" class="btn btn-default pull-right">Ajouter</button>
+								<button type="submit" class="btn btn-success pull-right">Ajouter un m&eacute;dia</button>
 							</div>
 						</div>
 					</form>

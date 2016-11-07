@@ -6,10 +6,6 @@
 	cursor: pointer;
 }
 
-.lignePb {
-	background-color: #ffb3b3 !important;
-}
-
 /* Pagination */
 
 .gris {
@@ -37,7 +33,7 @@
 	font-weight: bold;
 	font-size: 16px;
 }
-/* nav bar - Avoir les icones à la place des titres dans les petits écrans */
+/* nav bar - Avoir les icones ï¿½ la place des titres dans les petits ï¿½crans */
 .navbar {
     min-height: 40px;
 }

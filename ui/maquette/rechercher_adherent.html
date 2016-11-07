@@ -32,7 +32,7 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="media.html"><strong><span
 										class="glyphicon glyphicon-film" aria-hidden="true"></span>
-										Medias</strong><span class="sr-only">(current)</span></a></li>
+										M&eacute;dias</strong><span class="sr-only">(current)</span></a></li>
 							<li><a href="rechercher_adherent.html"><strong><span
 										class="glyphicon glyphicon-user" aria-hidden="true"></span>
 										Adh&eacute;rents</strong></a></li>
@@ -55,7 +55,7 @@
 	<main class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2>Recherche d'adhérent</h2>
+				<h2>Recherche d'adh&eacute;rent</h2>
 				<hr/>
 				<div class="formulaire">
 					<form class="form-horizontal" method="GET" action="#">
@@ -72,16 +72,16 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Prénom</label>
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Pr&eacute;nom</label>
 							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
+								<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Pr&eacute;nom">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-5 col-md-5 col-lg-5">
 								<div class="form-inline">
-									<input type="button" class="btn btn-default" value="Valider" onclick="afficheTab();">&nbsp;
-									<input type="button" class="btn btn-default pull-right" value="Ajouter un adh&eacute;rent" onclick="location.href='nouveau_adherent.html'">
+									<input type="button" class="btn btn-info" value="Ajouter un adh&eacute;rent" onclick="location.href='nouveau_adherent.html'">
+									<input type="button" class="btn btn-success pull-right" value="Rechercher" onclick="afficheTab();">&nbsp;
 								</div>
 							</div>
 						</div>
@@ -92,8 +92,7 @@
 		
 				<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
 				<div id="divRechAdh" class="hidden">
-					<table id="tableRechAdh"
-						class="table table-striped table-hover tablesorter">
+					<table id="tableRechAdh" class="table table-striped table-hover tablesorter">
 						<thead>
 							<tr>
 								<th>Identifiant</th>
@@ -116,16 +115,16 @@
 							<tr>
 								<td>DUYS4541</td>
 								<td>Laclau Matthieu</td>
-								<td>01/08/1985</td>
+								<td>12/08/1985</td>
 								<td>OUI</td>
 								<td>1</td>
 								<td><i class="glyphicon glyphicon-search pointer" aria-hidden="true" onclick="location.href='fiche_adherent.html'"></i></td>
 							</tr>
-							<tr class="danger">
+							<tr>
 								<td>HGDI4454</td>
 								<td>Allam Nadir</td>
 								<td>05/05/1985</td>
-								<td>NON</td>
+								<td>OUI</td>
 								<td>0</td>
 								<td><i class="glyphicon glyphicon-search pointer" aria-hidden="true" onclick="location.href='fiche_adherent.html'"></i></td>
 							</tr>
@@ -133,6 +132,30 @@
 								<td>JHGFT5989</td>
 								<td>Martin Lucie</td>
 								<td>01/01/1987</td>
+								<td>OUI</td>
+								<td>2</td>
+								<td><i class="glyphicon glyphicon-search pointer" aria-hidden="true" onclick="location.href='fiche_adherent.html'"></i></td>
+							</tr>
+							<tr>
+								<td>JHGFT5989</td>
+								<td>Dupont Jacques</td>
+								<td>01/01/1967</td>
+								<td>OUI</td>
+								<td>2</td>
+								<td><i class="glyphicon glyphicon-search pointer" aria-hidden="true" onclick="location.href='fiche_adherent.html'"></i></td>
+							</tr>
+							<tr class="danger">
+								<td>TYIG5489</td>
+								<td>Jean Guillaume</td>
+								<td>07/05/1977</td>
+								<td>NON</td>
+								<td>2</td>
+								<td><i class="glyphicon glyphicon-search pointer" aria-hidden="true" onclick="location.href='fiche_adherent.html'"></i></td>
+							</tr>
+							<tr>
+								<td>YTDF4569</td>
+								<td>Ben Nadir</td>
+								<td>18/02/1984</td>
 								<td>OUI</td>
 								<td>2</td>
 								<td><i class="glyphicon glyphicon-search pointer" aria-hidden="true" onclick="location.href='fiche_adherent.html'"></i></td>
