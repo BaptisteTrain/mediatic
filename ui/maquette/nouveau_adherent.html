@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mot de passe oublié</title>
+<title>Nouveau adhérent</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link media="all" href="css/bootstrap.min.css" rel="stylesheet" />
 <link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet" />
@@ -10,7 +10,6 @@
 <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<header>
 		<div class="jumbotron">
 			<div class="container">
@@ -49,74 +48,77 @@
 	
 	<main class="container">
 		<div class="row">
-			<h2 class="col-xs-12 col-sm-12 col-md-12">Nouveau adhérent</h2>
-			<div class="formulaire col-xs-12 col-sm-10 col-md-8">
-				<form class="form-horizontal" method="GET" action="#">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="nom">Nom</label>
-						<div class="col-xs-12 col-md-9 col-sm-9">
-							<input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
-						</div>
-						</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="prenom">Prénom</label>
-						<div class="col-xs-12 col-md-9 col-sm-9">
-							<input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="anniversaire">Date de naissance</label>
-						<div class="col-xs-12 col-md-9 col-sm-9">
-							<input type="date" class="form-control" id="anniversaire" name="anniversaire" placeholder="anniversaire" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="age">Age</label>
-						<div class="col-xs-12 col-md-9 col-sm-9">
-							<input type="text" class="form-control" id="age" name="age" placeholder="age" readonly> 
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="email">Email</label>
-						<div class="col-xs-12 col-md-9 col-sm-9">
-							<input type="email" class="form-control" id="email" name="email" placeholder="email" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="adresse">Adresse</label>
-						<div class="col-xs-12 col-md-9 col-sm-9">
-							<input type="text" class="form-control" id="adresse" name="adresse" placeholder="adresse">&nbsp;
-							<div class="form-inline">
-								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="code postale">&nbsp;
-								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="ville">
+			<div class="col-xs-12">
+				<h2>Nouveau adhérent</h2>
+				<hr/>
+				<div class="formulaire">
+					<form class="form-horizontal" method="GET" action="#">
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="nom">Nom</label>
+							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" required>
+							</div>
+							</div>
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="prenom">Prénom</label>
+							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" required>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="genre">Genre</label>
-						<div class="col-xs-1 col-md-1 col-sm-1">
-							<div class="radio">
-								<label><input type="radio" name="genre" placeholder="genre" value="Homme">Homme</label>
-								<label><input type="radio" name="genre" placeholder="genre" value="Femme">Femme</label>
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="datenaissance">Date de naissance</label>
+							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+								<input type="date" class="form-control" id="datenaissance" name="datenaissance" placeholder="Date de naissance" required>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-3 col-sm-3" for="cotisation">Cotisation</label>
-						<div class="col-xs-12 col-sm-9 col-md-9">
-							<div class="input-group">
-						    	<div class="input-group-addon">€</div>
-						    	<input type="number" class="form-control" id="cotisation" placeholder="cotisation">
-						    	<div class="input-group-addon">.00</div>
-					    	</div>
-					    </div>
-					</div>
-					<div class="form-group">
-						<div class="col-xs-12 col-md-3 col-sm-3 col-xs-offset-4 col-md-offset-3 col-sm-offset-3">
-							<input type="submit" class="btn btn-default" value="Valider">
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="age">Age</label>
+							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="age" name="age" placeholder="Age" readonly> 
+							</div>
 						</div>
-					</div>
-				</form>
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail</label>
+							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+								<input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="adresse">Adresse</label>
+							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">&nbsp;
+								<div class="form-inline">
+									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Code postal">&nbsp;
+									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Ville">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="genre">Genre</label>
+							<div class="col-xs-1 col-md-1 col-sm-1">
+								<div class="radio">
+									<label><input type="radio" name="genre" placeholder="genre" value="Homme">Homme</label>
+									<label><input type="radio" name="genre" placeholder="genre" value="Femme">Femme</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="cotisation">Cotisation</label>
+							<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+								<div class="input-group">
+							    	<div class="input-group-addon">€</div>
+							    	<input type="number" class="form-control" id="cotisation" placeholder="Cotisation">
+							    	<div class="input-group-addon">.00</div>
+						    	</div>
+						    </div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-2 col-lg-2">
+								<input type="submit" class="btn btn-default" value="Valider">
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</main>
