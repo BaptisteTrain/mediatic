@@ -35,3 +35,19 @@ h2 {
 	font-weight: bold;
 	font-size: 16px;
 }
+/* nav bar - Avoir les icones à la place des titres dans les petits écrans */
+.navbar {
+    min-height: 40px;
+}
+.navbar-right {
+    float: right !important;
+    margin-right: -15px;
+}
+.navbar-nav {
+    float: left;
+    margin: 0;
+}
+.navbar-nav > li {
+    float: left;
+}
+/* fin nav bar */
