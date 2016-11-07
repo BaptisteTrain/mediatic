@@ -8,28 +8,6 @@
 <link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet" />
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<style>
-.jumbotron.dernier {
-	padding-bottom: 0px;
-	margin-bottom: 0px;
-}
-
-.anoir a:visited, .anoir a:hover, .anoir a:link, .anoir a:active {
-	color: black;
-	font-weight: bold;
-	font-size: 16px;
-}
-/*
-main {
-	margin-bottom: 159px;
-}
-footer {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-}
-*/
-</style>
 </head>
 <body>
 	<header>
@@ -98,15 +76,17 @@ footer {
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2" for="adress">Adresse</label>
-							<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="adresse">
-								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="code postale">
-								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="ville">
+							<div class="col-xs-12 col-md-9 col-sm-9">
+								<input type="text" class="form-control" id="adresse" name="adresse" placeholder="adresse">&nbsp;
+								<div class="form-inline">
+									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="code postale">&nbsp;
+									<input type="text" class="form-control" id="adresse" name="adresse" placeholder="ville">
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-12 col-md-2 col-lg-2"
-								for="gender">Sexe</label>
+								for="gender">Genre</label>
 							<div class="col-xs-1 col-md-1 col-sm-1">
 								<div class="radio">
 									<label><input type="radio" name="gender" placeholder="gender" value="Homme">Homme</label>
