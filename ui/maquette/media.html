@@ -97,8 +97,12 @@
 						</div>
 						<div class="form-group">
 							<div class="col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-5 col-lg-5">
-								<input type="button" class="btn btn-info" value="Ajouter un m&eacute;dia" onclick="location.href='nouveau_media.html'">
-								<input type="button" class="btn btn-success pull-right" value="Rechercher" onclick="afficheTab();">
+								<div class="hidden-xs">
+									<input type="button" class="btn btn-info hidden-xs" value="Ajouter un m&eacute;dia" onclick="location.href='nouveau_media.html'"></div>
+									<button type="button" class="btn btn-info visible-xs-inline-block" onclick="location.href='nouveau_media.html'"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+									<input type="button" class="btn btn-success pull-right hidden-xs" value="Rechercher" onclick="afficheTab();">
+									<button type="button" class="btn btn-success pull-right visible-xs-inline-block" onclick="afficheTab();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -127,7 +131,7 @@
 								<td>Voltaire</td>
 								<td>Mathieu Laclaux</td>
 								<td>20/11/2016</td>
-								<td><i class="glyphicon glyphicon-search pointer"
+								<td><i class="glyphicon glyphicon-eye-open"
 									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
 							</tr>
 							<tr>
@@ -136,7 +140,7 @@
 								<td>Virgine Despentes</td>
 								<td>Lucy Martin</td>
 								<td>12/09/2016</td>
-								<td><i class="glyphicon glyphicon-search pointer"
+								<td><i class="glyphicon glyphicon-eye-open"
 									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
 							</tr>
 							<tr>
@@ -145,7 +149,7 @@
 								<td>Muse</td>
 								<td>Nadir Allam</td>
 								<td>15/11/2016</td>
-								<td><i class="glyphicon glyphicon-search pointer"
+								<td><i class="glyphicon glyphicon-eye-open"
 									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
 							</tr>
 							<tr>
@@ -154,7 +158,7 @@
 								<td>Guillaume Dupont</td>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
-								<td><i class="glyphicon glyphicon-search pointer"
+								<td><i class="glyphicon glyphicon-eye-open"
 									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
 							</tr>
 							<tr>
@@ -163,7 +167,7 @@
 								<td>Machin chose</td>
 								<td>Baptiste Train</td>
 								<td>15/11/2016</td>
-								<td><i class="glyphicon glyphicon-search pointer"
+								<td><i class="glyphicon glyphicon-eye-open"
 									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
 							</tr>
 						</tbody>
