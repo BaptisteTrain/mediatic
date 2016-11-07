@@ -30,7 +30,7 @@
 						<ul class="nav navbar-nav">
 							<li class="active">
 								<a href="media.html" class="hidden-xs">
-									<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span>&nbsp;<span>M&eacute;dias</span></strong>
+									<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span><span>&nbsp;M&eacute;dias</span></strong>
 								</a>
 								<a href="media.html" class="visible-xs-inline-block">
 									<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span></strong>
@@ -69,6 +69,7 @@
 			<div class="col-xs-12">
 				<h2>Recherche de m&eacute;dias</h2>
 				<hr/>
+				<!-- FORMULAIRE RECHERCHE DE MEDIA -->
 				<div class="formulaire">
 					<form class="form-horizontal" method="GET" action="#">
 						<div class="form-group">
@@ -101,88 +102,89 @@
 							</div>
 						</div>
 					</form>
-					
-					<!-- / FORMULAIRE RECHERCHE DE MEDIA -->
-			
-					<!-- TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
-					<div id="divRechMedia" class="hidden">
-						<table id="tableRechMedia"
-							class="table table-striped table-hover tablesorter">
-							<thead>
-								<tr>
-									<th>Titre</th>
-									<th>Type</th>
-									<th>Auteur</th>
-									<th>Emprunteur</th>
-									<th>Date de retour</th>
-									<th>&nbsp;</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Candide</td>
-									<td>Livre</td>
-									<td>Voltaire</td>
-									<td>Mathieu Laclaux</td>
-									<td>20/11/2016</td>
-									<td><i class="glyphicon glyphicon-search pointer"
-										aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-								</tr>
-								<tr>
-									<td>Les jolies choses</td>
-									<td>Livre</td>
-									<td>Virgine Despentes</td>
-									<td>Lucy Martin</td>
-									<td>12/09/2016</td>
-									<td><i class="glyphicon glyphicon-search pointer"
-										aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-								</tr>
-								<tr>
-									<td>Drones</td>
-									<td>CD</td>
-									<td>Muse</td>
-									<td>Nadir Allam</td>
-									<td>15/11/2016</td>
-									<td><i class="glyphicon glyphicon-search pointer"
-										aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-								</tr>
-								<tr>
-									<td>Le java en 500 pages</td>
-									<td>Livre</td>
-									<td>Guillaume Dupont</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td><i class="glyphicon glyphicon-search pointer"
-										aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-								</tr>
-								<tr>
-									<td>L'auberge espagnole</td>
-									<td>DVD</td>
-									<td>Machin chose</td>
-									<td>Baptiste Train</td>
-									<td>15/11/2016</td>
-									<td><i class="glyphicon glyphicon-search pointer"
-										aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-								</tr>
-							</tbody>
-						</table>
-						<!-- / TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
-			
-						<!-- PAGINATION -->
-						<div class="dataTables_paginate paging_simple_numbers gris">
-							<ul class="pagination">
-								<li class="paginate_button previous disabled"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a></li>
-								<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
-								<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">2</a></li>
-								<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0">3</a></li>
-								<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0">4</a></li>
-								<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0">5</a></li>
-								<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0">6</a></li>
-								<li class="paginate_button next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
-							</ul>
-						</div>
-					</div>
 				</div>
+				<br>
+				<!-- / FORMULAIRE RECHERCHE DE MEDIA -->
+			
+				<!-- TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
+				<div id="divRechMedia" class="hidden">
+					<table id="tableRechMedia"
+						class="table table-striped table-hover tablesorter">
+						<thead>
+							<tr>
+								<th>Titre</th>
+								<th>Type</th>
+								<th>Auteur</th>
+								<th>Emprunteur</th>
+								<th>Date de retour</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Candide</td>
+								<td>Livre</td>
+								<td>Voltaire</td>
+								<td>Mathieu Laclaux</td>
+								<td>20/11/2016</td>
+								<td><i class="glyphicon glyphicon-search pointer"
+									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+							</tr>
+							<tr>
+								<td>Les jolies choses</td>
+								<td>Livre</td>
+								<td>Virgine Despentes</td>
+								<td>Lucy Martin</td>
+								<td>12/09/2016</td>
+								<td><i class="glyphicon glyphicon-search pointer"
+									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+							</tr>
+							<tr>
+								<td>Drones</td>
+								<td>CD</td>
+								<td>Muse</td>
+								<td>Nadir Allam</td>
+								<td>15/11/2016</td>
+								<td><i class="glyphicon glyphicon-search pointer"
+									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+							</tr>
+							<tr>
+								<td>Le java en 500 pages</td>
+								<td>Livre</td>
+								<td>Guillaume Dupont</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td><i class="glyphicon glyphicon-search pointer"
+									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+							</tr>
+							<tr>
+								<td>L'auberge espagnole</td>
+								<td>DVD</td>
+								<td>Machin chose</td>
+								<td>Baptiste Train</td>
+								<td>15/11/2016</td>
+								<td><i class="glyphicon glyphicon-search pointer"
+									aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<!-- PAGINATION -->
+					<div class="dataTables_paginate paging_simple_numbers gris">
+						<ul class="pagination">
+							<li class="paginate_button previous disabled"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a></li>
+							<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
+							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">2</a></li>
+							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0">3</a></li>
+							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0">4</a></li>
+							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0">5</a></li>
+							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0">6</a></li>
+							<li class="paginate_button next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
+						</ul>
+					</div>
+					<!-- / PAGINATION -->
+				</div>
+				<!-- / TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
 			</div>
 		</div>
 	</main>
@@ -194,6 +196,7 @@
 					<a href="#">© La team.</a>
 				</div>
 			</div>
+			<br> <br>
 		</div>
 	</footer>
 

@@ -21,6 +21,13 @@
 	color: #262626 !important;
 }
 
+/* Header */
+.jumbotron {
+	background: url(livre.jpg) no-repeat;
+	background-size: 100%;
+	color: black;
+}
+
 /* Le footer */
 .jumbotron.dernier {
 	padding-bottom: 0px;
