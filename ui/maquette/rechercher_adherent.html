@@ -11,7 +11,7 @@
 <link media="all" href="css/tablesorter-style.css" rel="stylesheet">
 <link media="all" href="css/maquette-style.css" rel="stylesheet" />
 
-<script src="js/jquery-latest.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.tablesorter.min.js"></script>
 <style>
@@ -76,22 +76,41 @@ footer {
 	</header>
 
 	<main class="container">
-	<h1>Recherche d'adh&eacute;rent</h1>
-	<br>
 
-	<div
-		class="formulaire col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+		<h2>Recherche d'adh&eacute;rent</h2><br>
 
-		<!-- FORMULAIRE RECHERCHE D'ADHERENT -->
-		<form>
-			<br>
-			<br>
-			<br>
-			<br>
-			<!-- todo baptiste -->
-			<input type="button" class="btn btn-default" value="Valider"
-				onclick="afficheTab();">
-		</form>
+		<div class="col-xs-12 col-sm-10 col-md-8">
+			<div class="formulaire">
+				<form class="form-horizontal" method="GET" action="#">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-3">Identifiant</label>
+						<div class="col-xs-12 col-sm-9 col-md-9">
+							<input type="text" class="form-control" id="identifiant" name="identifiant" placeholder="identifiant" required>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-3">Nom</label>
+						<div class="col-xs-12 col-sm-9 col-md-9">
+							<input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-3">Prénom</label>
+						<div class="col-xs-12 col-sm-9 col-md-9">
+							<input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<div class="col-xs-12 col-md-3 col-sm-3 col-xs-offset-4 col-md-offset-3 col-sm-offset-3">
+							<input type="button" class="btn btn-default" value="Valider" onclick="afficheTab();">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 		<br>
 		<!-- / FORMULAIRE RECHERCHE D'ADHERENT -->
 
@@ -148,29 +167,20 @@ footer {
 					</tr>
 				</tbody>
 			</table>
-			<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
+			<!-- / TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
 
 			<!-- PAGINATION -->
-			<div class="dataTables_paginate paging_simple_numbers"
-				id="example_paginate">
+			<div class="dataTables_paginate paging_simple_numbers gris">
 				<ul class="pagination">
-					<li class="paginate_button previous disabled" id="example_previous"><a
-						href="#" aria-controls="example" data-dt-idx="0" tabindex="0"><<</a></li>
-					<li class="paginate_button active"><a href="#"
-						aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
-					<li class="paginate_button "><a href="#"
-						aria-controls="example" data-dt-idx="2" tabindex="0">2</a></li>
-					<li class="paginate_button "><a href="#"
-						aria-controls="example" data-dt-idx="3" tabindex="0">3</a></li>
-					<li class="paginate_button "><a href="#"
-						aria-controls="example" data-dt-idx="4" tabindex="0">4</a></li>
-					<li class="paginate_button "><a href="#"
-						aria-controls="example" data-dt-idx="5" tabindex="0">5</a></li>
-					<li class="paginate_button "><a href="#"
-						aria-controls="example" data-dt-idx="6" tabindex="0">6</a></li>
-					<li class="paginate_button next" id="example_next"><a href="#"
-						aria-controls="example" data-dt-idx="7" tabindex="0">>></a></li>
-					<ul>
+					<li class="paginate_button previous disabled"><a href="#" data-dt-idx="0" tabindex="0"><<</a></li>
+					<li class="paginate_button active"><a href="#" data-dt-idx="1" tabindex="0">1</a></li>
+					<li class="paginate_button "><a href="#" data-dt-idx="2" tabindex="0">2</a></li>
+					<li class="paginate_button "><a href="#" data-dt-idx="3" tabindex="0">3</a></li>
+					<li class="paginate_button "><a href="#" data-dt-idx="4" tabindex="0">4</a></li>
+					<li class="paginate_button "><a href="#" data-dt-idx="5" tabindex="0">5</a></li>
+					<li class="paginate_button "><a href="#" data-dt-idx="6" tabindex="0">6</a></li>
+					<li class="paginate_button next"><a href="#" data-dt-idx="7" tabindex="0">>></a></li>
+				<ul>
 			</div>
 			<!-- / PAGINATION -->
 		</div>
