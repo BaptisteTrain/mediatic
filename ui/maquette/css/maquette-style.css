@@ -41,12 +41,18 @@
 .jumbotron.dernier {
 	padding-bottom: 0px;
 	margin-bottom: 0px;
+	
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	font-weight: bolder;
+	/* font-size: 500px; */
 	color: #dbdbdb;
+	text-shadow: 5px 5px 9px red;
+	text-align: center;
 }
 
 /* couleur des liens - footer */
 .anoir a:visited, .anoir a:hover, .anoir a:link, .anoir a:active {
-	color: black;
+	color: white;
 	font-weight: bold;
 	font-size: 16px;
 }
