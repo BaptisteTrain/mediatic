@@ -6,6 +6,7 @@ import javax.persistence.*;
 import fr.dta.mediatic.loan.model.Loan;
 import fr.dta.mediatic.model.*;
 
+@Entity
 public class Member {
 	
 	/* COLUMNS */
