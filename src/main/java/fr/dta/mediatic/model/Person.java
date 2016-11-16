@@ -21,6 +21,9 @@ public class Person {
 	@NotBlank
 	@Column(name="email")
 	private String email;
+	
+	@Column(name="gender")
+	private Gender gender;
 
 	
 	/* CONSTRUCTORS */
@@ -29,11 +32,12 @@ public class Person {
 		
 	}
 
-	public Person(String lastname, String firstname, String email) {
+	public Person(String lastname, String firstname, String email, Gender gender) {
 
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.email = email;
+		this.gender = gender;
 	}
 
 	
@@ -68,5 +72,17 @@ public class Person {
 		
 		this.email = email;
 	}
+
+	public Gender getGender() {
+		
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		
+		this.gender = gender;
+	}
+	
+	
 
 }
