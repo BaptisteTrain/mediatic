@@ -13,7 +13,7 @@ import fr.dta.mediatic.model.Gender;
 import fr.dta.mediatic.model.Person;
 
 @Entity
-@Table(name="user")
+@Table(name="user_")
 public class User {
 	
 	/* COLUMNS */

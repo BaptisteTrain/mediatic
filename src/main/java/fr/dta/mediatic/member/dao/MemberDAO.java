@@ -12,10 +12,6 @@ import fr.dta.mediatic.member.model.Member;
 
 public class MemberDAO extends GenericDAO<Member> {
 	
-	/*ajouter un adherent
-	supp ""
-	modif ""*/
-	
 	private static MemberDAO dao;
 	
 	public MemberDAO() {
@@ -32,20 +28,6 @@ public class MemberDAO extends GenericDAO<Member> {
 		
 		return dao;
 	}
-	
-	/*
-	public static void addMember(Member member) {
-		dao.persist(member);
-	}
-	
-	public static void removeMember(Member member) {
-		dao.remove(member.getIdentifier());
-	}
-	
-	public static void modifyMenber(Member member) {
-		dao.merge(member);
-	}
-	*/
 	
 	public List<Member> findMembersFromMedia(Media media) {
 		EntityManager em = DataBaseHelper.createEntityManager();
