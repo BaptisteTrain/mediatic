@@ -30,12 +30,12 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * Select all the medias with the loans list and the member of the loan
 	 * @return
 	 */
-	public static List<Media> selectAllMedias() {
+	public List<Media> selectAllMedias() {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
 											   + "FROM Media m "
-											   + "INNER JOIN m.loanList l ", Media.class);
+											   + "LEFT OUTER JOIN m.loanList l ", Media.class);
 		List<Media> listeReturn = query.getResultList();
 		em.close();
 		return listeReturn;
@@ -46,7 +46,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @param id
 	 * @return
 	 */
-	public static List<Media> findMediaByTitle(String title) {
+	public List<Media> findMediaByTitle(String title) {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
@@ -63,7 +63,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @param id
 	 * @return
 	 */
-	public static List<Media> findMediaByAuthor(String author) {
+	public List<Media> findMediaByAuthor(String author) {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
@@ -80,7 +80,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @param id
 	 * @return
 	 */
-	public static List<Media> findMediaByType(TypeMedia type) {
+	public List<Media> findMediaByType(TypeMedia type) {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "

@@ -14,6 +14,8 @@ public class Media {
 	@GeneratedValue
 	private Long id ;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(length=4)
 	private TypeMedia type;
 	
 	private String title;
@@ -73,7 +75,11 @@ public class Media {
 		this.loanList = loanList;
 	}
 
+	@Override
 	public String toString() {
-		return "Media [reference=" + id + ", type=" + type + ", title=" + title + ", author=" + author + "]";
+		return "Media [id=" + id + ", type=" + type + ", title=" + title + ", author=" + author + ", loanList="
+				+ loanList + "]";
 	}
+
+	
 }
