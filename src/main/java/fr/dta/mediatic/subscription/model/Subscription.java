@@ -1,12 +1,15 @@
-package fr.dta.mediatic.model;
+package fr.dta.mediatic.subscription.model;
 
 import java.util.*;
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 public class Subscription {
 	
 	/* COLUMNS */
+	@Id
+	@GeneratedValue
+	private Long id ;
 	
 	@Column(name = "amount")
 	private int amount;
@@ -35,6 +38,14 @@ public class Subscription {
 	}
 	
 	/* GETTERS / SETTERS */
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public int getAmount() {
 		return amount;
@@ -71,5 +82,5 @@ public class Subscription {
 	
 	public void setSubscriptionEndDate(Date subscriptionEndDate) {
 		this.subscriptionEndDate = subscriptionEndDate;
-	}
+	}	
 }
