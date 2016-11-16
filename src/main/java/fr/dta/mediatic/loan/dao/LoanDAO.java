@@ -17,6 +17,7 @@ public class LoanDAO extends GenericDAO<Loan> {
 		super(Loan.class);
 	}
 	
+	/* Pour que la class soit singleton */
 	public static LoanDAO instance() {
 		if(dao == null) {
 			dao = new LoanDAO();
