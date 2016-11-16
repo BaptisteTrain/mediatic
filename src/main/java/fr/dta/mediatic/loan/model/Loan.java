@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 import fr.dta.mediatic.media.model.Media;
+import fr.dta.mediatic.member.model.Member;
 
 @Entity
 @Table(name="loan")
@@ -14,10 +15,14 @@ public class Loan  {
 	@GeneratedValue
 	private Long id ;
 	
+	@Temporal(TemporalType.DATE)
 	private Date loanDate;
 	
+
+	@Temporal(TemporalType.DATE)
 	private Date returnDate;
 	
+	@Temporal(TemporalType.DATE)
 	private Date plannedReturnDate;
 	
 	@ManyToOne
