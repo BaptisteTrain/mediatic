@@ -10,25 +10,21 @@ import fr.dta.mediatic.helper.GenericDAO;
 import fr.dta.mediatic.media.model.Media;
 import fr.dta.mediatic.media.model.TypeMedia;
 
-public class MediaDAO {
+public class MediaDAO extends GenericDAO<Media> {
 	
-	private static GenericDAO<Media> genericDAO = new GenericDAO<Media>(Media.class);
+	private static MediaDAO dao;
 	
-	/**
-	 * Insert a new media
-	 * @param mediaToAdd
-	 */
-	public static void insertMedia(Media mediaToAdd) {
-		genericDAO.persist(mediaToAdd);
+	private MediaDAO() {
+		super(Media.class);
 	}
 	
-	/**
-	 * Update the media
-	 * @param mediaToAdd
-	 */
-	public static void updateMedia(Media mediaToAdd) {
-		genericDAO.merge(mediaToAdd);
+	public static MediaDAO instance() {
+		if (dao == null) {
+			dao = new MediaDAO();
+		}
+		return dao;
 	}
+	
 	
 	/**
 	 * Select all the medias with the loans list and the member of the loan
@@ -43,15 +39,6 @@ public class MediaDAO {
 		List<Media> listeReturn = query.getResultList();
 		em.close();
 		return listeReturn;
-	}
-	
-	/**
-	 * Find the media by its id
-	 * @param id
-	 * @return
-	 */
-	public static Media findMediaById(Long id) {
-		return genericDAO.find(id);
 	}
 	
 	/**
