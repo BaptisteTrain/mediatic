@@ -3,6 +3,7 @@ package fr.dta.mediatic.user.model;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,7 +19,10 @@ public class User {
 	/* COLUMN */
 	
 	@Id
-	@Column(name="login")
+	@GeneratedValue
+	private long id;
+	
+	@Column(name="login",unique=true)
 	private String login;
 	
 	@NotBlank
