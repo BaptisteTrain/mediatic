@@ -3,8 +3,10 @@ package fr.dta.mediatic.member.model;
 import java.util.*;
 import javax.persistence.*;
 
+import fr.dta.mediatic.loan.model.Loan;
 import fr.dta.mediatic.model.*;
 
+@Entity
 public class Member {
 	
 	/* COLUMNS */
@@ -27,6 +29,9 @@ public class Member {
 	
 	@Embedded
 	Subscription subscription;
+	
+	@OneToMany(mappedBy = "member")
+	List<Loan> listLoan;
 	
 	/* CONSTRUCTORS */
 	

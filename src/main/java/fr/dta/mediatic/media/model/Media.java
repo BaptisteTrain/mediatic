@@ -12,8 +12,10 @@ public class Media {
 
 	@Id
 	@GeneratedValue
-	private Long reference ;
+	private Long id ;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(length=4)
 	private TypeMedia type;
 	
 	private String title;
@@ -27,18 +29,18 @@ public class Media {
 
 	public Media(Long reference, TypeMedia type, String title, String author) {
 		super();
-		this.reference = reference;
+		this.id = reference;
 		this.type = type;
 		this.title = title;
 		this.author = author;
 	}
 
 	public Long getReference() {
-		return reference;
+		return id;
 	}
 
 	public void setReference(Long reference) {
-		this.reference = reference;
+		this.id = reference;
 	}
 
 	public TypeMedia getType() {
@@ -73,7 +75,11 @@ public class Media {
 		this.loanList = loanList;
 	}
 
+	@Override
 	public String toString() {
-		return "Media [reference=" + reference + ", type=" + type + ", title=" + title + ", author=" + author + "]";
+		return "Media [id=" + id + ", type=" + type + ", title=" + title + ", author=" + author + ", loanList="
+				+ loanList + "]";
 	}
+
+	
 }
