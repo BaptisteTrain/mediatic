@@ -42,4 +42,14 @@ public class MemberDAO extends GenericDAO<Member> {
 		return listeReturn;
 	}
 	
+	public Member findMemberFromField() {
+		
+		EntityManager em = DataBaseHelper.createEntityManager();
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery("SELECT u"
+				+ "FROM Member m"
+				+ "WEHRE m.lastname = :lastname AND m.firstname = :firstname AND "
+				+ "")
+	}
+	
 }
