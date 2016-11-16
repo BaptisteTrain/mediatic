@@ -12,14 +12,8 @@ import fr.dta.mediatic.media.model.TypeMedia;
 public class Run {
 
 	public static void main(String[] args) {
-		EntityManager em = DataBaseHelper.createEntityManager();
-		DataBaseHelper.beginTx(em);
-
 		// Media
 		mediaOperations();
-
-
-		em.close();
 	}
 	
 	

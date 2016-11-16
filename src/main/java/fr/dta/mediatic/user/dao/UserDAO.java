@@ -24,19 +24,4 @@ public class UserDAO extends GenericDAO<User> {
 		
 		return dao;
 	}
-	
-	public static void addMember(User user) {
-		
-		dao.persist(user);
-	}
-	
-	public static void removeMember(User user) {
-		
-		dao.remove(user.getId());
-	}
-	
-	public static void modifyMenber(User user) {
-		
-		dao.merge(user);
-	}
 }
