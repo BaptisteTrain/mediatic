@@ -35,12 +35,12 @@ public class Media {
 		this.author = author;
 	}
 
-	public Long getReference() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setReference(Long reference) {
-		this.id = reference;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public TypeMedia getType() {

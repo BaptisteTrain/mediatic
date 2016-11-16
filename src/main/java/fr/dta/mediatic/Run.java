@@ -15,22 +15,39 @@ public class Run {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
 
-		MediaDAO mediaDAO = MediaDAO.instance();
+		// Media
+		mediaOperations();
 
+
+		em.close();
+	}
+	
+	
+	/**
+	 * Operations on the media
+	 */
+	public static void mediaOperations() {
+		MediaDAO mediaDAO = MediaDAO.instance();
 		// New medias
 		Media mediaBookVoltaire = new Media(null, TypeMedia.BOOK, "Candide", "Voltaire");
 		mediaDAO.persist(mediaBookVoltaire);
 		Media mediaBookTrain = new Media(null, TypeMedia.BOOK, "Everything you need to know about Nadir", "BTrain");
 		mediaDAO.persist(mediaBookTrain);
+		
+		// Update media
+		mediaBookTrain.setAuthor("b-Train");
+		mediaDAO.merge(mediaBookTrain);
+		
+		// Remove media
+		mediaDAO.remove(mediaBookTrain.getId());
 
+		// Select all the medias
 		List<Media> listM = mediaDAO.selectAllMedias();
 		System.out.println("--------ALL MEDIAS---------");
 		for (Media m : listM) {
 			System.out.println(">>>>>>>>>>>MEDIA = " + m);
 			System.out.println("------------------------");
 		}
-
-		em.close();
 	}
 
 }
