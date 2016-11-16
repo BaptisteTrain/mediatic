@@ -37,6 +37,11 @@
 	text-align: center;
 }
 
+.jumbotron.titre > div {
+	margin-top: -25px;
+	margin-bottom: -20px;
+}
+
 /* Le footer */
 .jumbotron.dernier {
 	padding-bottom: 0px;
