@@ -16,7 +16,7 @@ import fr.dta.mediatic.model.Person;
 @Table(name="user")
 public class User {
 	
-	/* COLUMN */
+	/* COLUMNS */
 	
 	@Id
 	@GeneratedValue
@@ -35,6 +35,9 @@ public class User {
 	@Embedded
 	private Person person;
 
+	
+	/* CRONSTRUCTORS */
+	
 	public User() {
 
 	}
@@ -45,6 +48,17 @@ public class User {
 		this.password = password;
 		this.role = role;
 		this.person = new Person(lastname, firstname, email, gender);
+	}
+
+	
+	/* GETTERS AND SETTERS */
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getLogin() {
@@ -87,6 +101,4 @@ public class User {
 		this.person = person;
 	}
 	
-	
-
 }
