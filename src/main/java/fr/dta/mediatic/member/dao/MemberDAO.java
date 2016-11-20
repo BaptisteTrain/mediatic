@@ -42,14 +42,26 @@ public class MemberDAO extends GenericDAO<Member> {
 		return listeReturn;
 	}
 	
-	public Member findMemberFromField() {
-		
+	/**
+	 * Find the members by id or lastname or firstname
+	 * @param id
+	 * @param lastname
+	 * @param firstname
+	 * @return List<Member>
+	 */
+	public List<Member> findMemberFromField(long id, String lastname, String firstname) {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
-		TypedQuery<Member> query = em.createQuery("SELECT u"
-				+ "FROM Member m"
-				+ "WEHRE m.lastname = :lastname AND m.firstname = :firstname AND "
-				+ "")
+		TypedQuery<Member> query = em.createQuery("SELECT m"
+												+ "FROM Member m"
+												+ "WEHRE m.lastname = :lastname "
+												+ "OR m.firstname = :firstname "
+												+ "OR m.id = :id", Member.class);
+		query.setParameter("id", id);
+		query.setParameter("lastname", lastname);
+		query.setParameter("firstname", firstname);
+		List<Member> listeReturn = query.getResultList();
+		em.close();
+		return listeReturn;
 	}
-	
 }
