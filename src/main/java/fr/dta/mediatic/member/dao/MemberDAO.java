@@ -54,7 +54,7 @@ public class MemberDAO extends GenericDAO<Member> {
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Member> query = em.createQuery("SELECT m"
 												+ "FROM Member m"
-												+ "WEHRE m.lastname = :lastname "
+												+ "WHERE m.lastname = :lastname "
 												+ "OR m.firstname = :firstname "
 												+ "OR m.id = :id", Member.class);
 		query.setParameter("id", id);
