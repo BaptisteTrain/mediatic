@@ -33,11 +33,14 @@ public class Loan  {
 	
 	public Loan() {}
 
-	public Loan(Date loanDate, Date returnDate, Date plannedReturnDate) {
+	public Loan(Long id, Date loanDate, Date returnDate, Date plannedReturnDate, Media media, Member member) {
 		super();
+		this.id = id;
 		this.loanDate = loanDate;
 		this.returnDate = returnDate;
 		this.plannedReturnDate = plannedReturnDate;
+		this.media = media;
+		this.member = member;
 	}
 	
 	public Long getId() {

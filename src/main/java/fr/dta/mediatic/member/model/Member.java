@@ -13,6 +13,7 @@ public class Member {
 	/* COLUMNS */
 	
 	@Id
+	@GeneratedValue
 	@Column(name = "identifier")
 	private Long identifier;
 	
@@ -40,13 +41,13 @@ public class Member {
 		this.numberOfLoans = 0;
 	}
 	
-	public Member(Long identifier, Date birthDate, String lastname, String firstname, String email, Gender gender, String address, int postalCode, String city, int amount, Date paymentDate) {
+	public Member(Long identifier, Date birthDate, String lastname, String firstname, String email, Gender gender, String address, int postalCode, String city, Subscription sub) {
 		this.identifier = identifier;
 		this.birthDate = birthDate;
 		this.numberOfLoans = 0;
 		this.person = new Person(lastname, firstname, email, gender);
 		this.address = new Address(address, postalCode,city);
-		this.subscription = new Subscription(amount, paymentDate);
+		this.subscription = sub;
 	}
 	
 	/* GETTERS / SETTERS */
