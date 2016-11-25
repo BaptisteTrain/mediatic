@@ -44,7 +44,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	
 	/**
 	 * Find the media by its title
-	 * @param id
+	 * @param title
 	 * @return
 	 */
 	public List<Media> findMediaByTitle(String title) {
@@ -52,8 +52,8 @@ public class MediaDAO extends GenericDAO<Media> {
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
 											   + "FROM Media m "
-											   + "WHERE upper(m.title) LIKE ':title%'", Media.class);
-		query.setParameter("title", title.toUpperCase());
+											   + "WHERE upper(m.title) LIKE :title", Media.class);
+		query.setParameter("title", title.toUpperCase()+'%');
 		List<Media> listeReturn = query.getResultList();
 		em.close();
 		return listeReturn;
@@ -61,7 +61,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	
 	/**
 	 * Find the media by its author
-	 * @param id
+	 * @param author
 	 * @return
 	 */
 	public List<Media> findMediaByAuthor(String author) {
@@ -69,8 +69,8 @@ public class MediaDAO extends GenericDAO<Media> {
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
 											   + "FROM Media m "
-											   + "WHERE upper(m.author) LIKE ':author%'", Media.class);
-		query.setParameter("author", author.toUpperCase());
+											   + "WHERE upper(m.author) LIKE :author", Media.class);
+		query.setParameter("author", author.toUpperCase()+'%');
 		List<Media> listeReturn = query.getResultList();
 		em.close();
 		return listeReturn;
@@ -78,7 +78,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	
 	/**
 	 * Find the media by its type
-	 * @param id
+	 * @param type
 	 * @return
 	 */
 	public List<Media> findMediaByType(TypeMedia type) {
