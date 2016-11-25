@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import fr.dta.mediatic.loan.model.Loan;
 import fr.dta.mediatic.model.*;
+import fr.dta.mediatic.subscription.model.Subscription;
 
 @Entity
 public class Member {
