@@ -28,7 +28,6 @@ public class Member {
 	@Embedded
 	Address address;
 	
-	@Embedded
 	Subscription subscription;
 	
 	@OneToMany(mappedBy = "member")
