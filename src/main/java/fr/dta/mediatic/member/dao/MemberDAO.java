@@ -45,7 +45,7 @@ public class MemberDAO extends GenericDAO<Member> {
      * @param id
      * @return
      */
-    public List<Member> findMembersByIdPartial(int id) {
+    public List<Member> findMembersByIdPartial(String id) {
 
 	EntityManager em = DataBaseHelper.createEntityManager();
 
@@ -54,8 +54,7 @@ public class MemberDAO extends GenericDAO<Member> {
 						+ "FROM Member m " 
 						+ "WHERE m.identifier LIKE :id", Member.class);
 
-	query.setParameter("id", "%" + id); 
-	// TODO faudrait que l'id soit un string (rajout d'un champ ?)
+	query.setParameter("id",  id + "%");
 	em.close();
 
 	return query.getResultList();
@@ -120,7 +119,7 @@ public class MemberDAO extends GenericDAO<Member> {
 	query.setParameter("id", id);
 	query.setParameter("lastname", lastname);
 	query.setParameter("firstname", firstname);
-	// TODO : pas de LIKE sur lastname and firstname 
+	// TODO : pas de LIKE sur lastname and firstname ?
 	List<Member> listeReturn = query.getResultList();
 	em.close();
 	return listeReturn;
