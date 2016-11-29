@@ -14,26 +14,29 @@ public class Member {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
+    private Long id;
+    
     @Column(name = "identifier")
-    private Long identifier;
+    private String identifier;
 
     @Column(name = "birthDate")
     private Date birthDate;
 
     @Column(name = "numberOfLoans")
-    int numberOfLoans;
+    private int numberOfLoans;
 
     @Embedded
-    Person person;
+    private Person person;
 
     @Embedded
-    Address address;
+    private Address address;
 
     @OneToOne
-    Subscription subscription;
+    private Subscription subscription;
 
     @OneToMany(mappedBy = "member")
-    List<Loan> listLoan;
+    private List<Loan> listLoan;
 
     /* CONSTRUCTORS */
 
@@ -41,7 +44,8 @@ public class Member {
 	this.numberOfLoans = 0;
     }
 
-    public Member(Long identifier, Date birthDate, String lastname, String firstname, String email, Gender gender, String address, String postalCode, String city, Subscription sub) {
+    public Member(Long id, String identifier, Date birthDate, String lastname, String firstname, String email, Gender gender, String address, String postalCode, String city, Subscription sub) {
+	this.id = id;
 	this.identifier = identifier;
 	this.birthDate = birthDate;
 	this.numberOfLoans = 0;
@@ -52,11 +56,19 @@ public class Member {
 
     /* GETTERS / SETTERS */
 
-    public Long getIdentifier() {
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(Long id) {
+	this.id = id;
+    }
+    
+    public String getIdentifier() {
 	return identifier;
     }
 
-    public void setIdentifier(Long identifier) {
+    public void setIdentifier(String identifier) {
 	this.identifier = identifier;
     }
 
