@@ -26,10 +26,15 @@ public class Run {
     static SubscriptionDAO subscriptionDAO = SubscriptionDAO.instance();
     static UserDAO userDAO = UserDAO.instance();
     
-
+    /**
+     * There
+     * @param args
+     */
     public static void main(String[] args) {
-	//fillBD();
-	memberOperations();
+	fillBD();
+	//mediaOperations();
+	//memberOperations();
+	
     }
 
     /**
@@ -263,14 +268,15 @@ public class Run {
 	memberDAO.remove(member1.getIdentifier());
 	System.out.println("--------/REMOVE MEMBER---------");
 
-	// Select all the members
 	List<Member> listM;
-	/*listM = memberDAO.selectAllMembers();
+	
+	// Select all the members
+	listM = memberDAO.selectAllMembers();
 	System.out.println("--------ALL MEMBERS---------");
 	for (Member m : listM) {
 	    System.out.println(">>>>>>>>>>>MEMBER = " + m);
 	    System.out.println("--------/ALL MEMBERS-------");
-	}*/
+	}
 
 	// Select member by id
 	System.out.println("--------MEMBER BY ID---------");
@@ -295,13 +301,13 @@ public class Run {
 	}
 
 	// Select members from media
-	System.out.println("--------MEMBER FROM AUTHOR---------");
+	System.out.println("--------MEMBER FROM MEDIA---------");
 	Media mediaBookTrain = mediaDAO.persist(new Media(null, TypeMedia.BOOK, "Everything you need to know about Nadir", "BTrain"));
 	listM = memberDAO.findMembersFromMedia(mediaBookTrain);
 	for (Member m : listM) {
 	    System.out.println(">>>>>>>>>>>MEMBER = " + m);
 	}
-	System.out.println("--------/MEMBER FROM AUTHOR---------");
+	System.out.println("--------/MEMBER FROM MEDIA---------");
 
 
     }
