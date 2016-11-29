@@ -29,6 +29,53 @@ public class MemberDAO extends GenericDAO<Member> {
 		return dao;
 	}
 	
+	public Member findMembersById(int id) {
+		
+		EntityManager em = DataBaseHelper.createEntityManager();
+		
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery("SELECT m"
+				+ "FROM Member m"
+				+ "WHERE m.id = :id", Member.class);
+		
+		query.setParameter("id", id);
+		em.close();
+		
+		return query.getResultList().get(0);
+	}
+	
+	public List<Member> findMembersByIdPartial(int id) {
+		
+		EntityManager em = DataBaseHelper.createEntityManager();
+		
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery("SELECT m"
+				+ "FROM Member m"
+				+ "WHERE m.id LIKE :id", Member.class);
+		
+		query.setParameter("id", "%" + id);
+		em.close();
+		
+		return query.getResultList();
+	}
+	
+	public List<Member> findMemberByName(String lastname, String firstname) {
+		
+		EntityManager em = DataBaseHelper.createEntityManager();
+		
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery("SELECT m"
+				+ "FROM Member m"
+				+ "WHERE m.lastname LIKE :lastname"
+				+ "AND m.firstname LIKE :firstname", Member.class);
+		
+		query.setParameter("lastname", "%" + lastname + "%");
+		query.setParameter("firstname", "%" + firstname + "%");
+		em.close();
+		
+		return query.getResultList();		
+	}
+	
 	public List<Member> findMembersFromMedia(Media media) {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
@@ -64,4 +111,5 @@ public class MemberDAO extends GenericDAO<Member> {
 		em.close();
 		return listeReturn;
 	}
+	
 }
