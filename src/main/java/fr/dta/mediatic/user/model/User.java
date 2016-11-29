@@ -5,14 +5,12 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 import fr.dta.mediatic.model.Gender;
 import fr.dta.mediatic.model.Person;
-import fr.dta.mediatic.subscription.model.Subscription;
 
 @Entity
 @Table(name="user_")
@@ -36,9 +34,6 @@ public class User {
 	
 	@Embedded
 	private Person person;
-	
-	@OneToOne
-	private Subscription subscription;
 
 	
 	/* CRONSTRUCTORS */
@@ -104,14 +99,6 @@ public class User {
 	public void setPerson(Person person) {
 		
 		this.person = person;
-	}
-
-	public Subscription getSubscription() {
-		return subscription;
-	}
-
-	public void setSubscription(Subscription subscription) {
-		this.subscription = subscription;
 	}
 	
 }
