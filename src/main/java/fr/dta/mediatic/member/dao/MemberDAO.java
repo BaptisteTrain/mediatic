@@ -55,9 +55,10 @@ public class MemberDAO extends GenericDAO<Member> {
 						+ "WHERE m.identifier LIKE :id", Member.class);
 
 	query.setParameter("id",  id + "%");
+	List<Member> listeReturn = query.getResultList();
 	em.close();
 
-	return query.getResultList();
+	return listeReturn;
     }
 
     /**
@@ -78,9 +79,10 @@ public class MemberDAO extends GenericDAO<Member> {
 
 	query.setParameter("lastname", "%" + lastname.toUpperCase() + "%");
 	query.setParameter("firstname", "%" + firstname.toUpperCase() + "%");
+	List<Member> listeReturn = query.getResultList();
 	em.close();
 
-	return query.getResultList();
+	return listeReturn;
     }
 
     /**
@@ -94,7 +96,7 @@ public class MemberDAO extends GenericDAO<Member> {
 	TypedQuery<Member> query = em.createQuery("SELECT m " 
 						+ "FROM Member m " 
 						+ "JOIN m.listLoan l " 
-						+ "WHERE l.media = :id ", Member.class);
+						+ "WHERE l.media.id = :id ", Member.class);
 	query.setParameter("id", media.getId());
 	List<Member> listeReturn = query.getResultList();
 	em.close();

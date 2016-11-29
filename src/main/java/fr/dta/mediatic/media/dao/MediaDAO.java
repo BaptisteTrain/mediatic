@@ -51,8 +51,8 @@ public class MediaDAO extends GenericDAO<Media> {
 	TypedQuery<Media> query = em.createQuery("SELECT m " 
 						+ "FROM Media m " 
 						+ "LEFT OUTER JOIN m.loanList l "
-						+ "WHERE l.member = :id ", Media.class);
-	query.setParameter("id", member.getIdentifier());
+						+ "WHERE l.member.id = :id ", Media.class);
+	query.setParameter("id", member.getId());
 	List<Media> listeReturn = query.getResultList();
 	em.close();
 	return listeReturn;
