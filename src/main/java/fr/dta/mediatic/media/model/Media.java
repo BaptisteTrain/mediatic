@@ -7,79 +7,78 @@ import javax.persistence.*;
 import fr.dta.mediatic.loan.model.Loan;
 
 @Entity
-@Table(name="media")
+@Table(name = "media")
 public class Media {
 
-	@Id
-	@GeneratedValue
-	private Long id ;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(length=4)
-	private TypeMedia type;
-	
-	private String title;
-	
-	private String author;
-	
-	@OneToMany(mappedBy = "media")
-	private List<Loan> loanList;
-	
-	public Media() {}
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	public Media(Long reference, TypeMedia type, String title, String author) {
-		super();
-		this.id = reference;
-		this.type = type;
-		this.title = title;
-		this.author = author;
-	}
+    @Enumerated(EnumType.STRING)
+    @Column(length = 4)
+    private TypeMedia type;
 
-	public Long getId() {
-		return id;
-	}
+    private String title;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String author;
 
-	public TypeMedia getType() {
-		return type;
-	}
+    @OneToMany(mappedBy = "media")
+    private List<Loan> loanList;
 
-	public void setType(TypeMedia type) {
-		this.type = type;
-	}
+    public Media() {
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public Media(Long reference, TypeMedia type, String title, String author) {
+	super();
+	this.id = reference;
+	this.type = type;
+	this.title = title;
+	this.author = author;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public TypeMedia getType() {
+	return type;
+    }
 
-	public List<Loan> getLoanList() {
-		return loanList;
-	}
+    public void setType(TypeMedia type) {
+	this.type = type;
+    }
 
-	public void setLoanList(List<Loan> loanList) {
-		this.loanList = loanList;
-	}
+    public String getTitle() {
+	return title;
+    }
 
-	@Override
-	public String toString() {
-		return "Media [id=" + id + ", type=" + type + ", title=" + title + ", author=" + author + ", loanList="
-				+ loanList + "]";
-	}
+    public void setTitle(String title) {
+	this.title = title;
+    }
 
-	
+    public String getAuthor() {
+	return author;
+    }
+
+    public void setAuthor(String author) {
+	this.author = author;
+    }
+
+    public List<Loan> getLoanList() {
+	return loanList;
+    }
+
+    public void setLoanList(List<Loan> loanList) {
+	this.loanList = loanList;
+    }
+
+    @Override
+    public String toString() {
+	return "Media [id=" + id + ", type=" + type + ", title=" + title + ", author=" + author + "]";
+    }
+
 }
