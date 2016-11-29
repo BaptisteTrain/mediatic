@@ -9,6 +9,7 @@ import fr.dta.mediatic.helper.DataBaseHelper;
 import fr.dta.mediatic.helper.GenericDAO;
 import fr.dta.mediatic.media.model.Media;
 import fr.dta.mediatic.media.model.TypeMedia;
+import fr.dta.mediatic.member.model.Member;
 
 public class MediaDAO extends GenericDAO<Media> {
 
@@ -26,25 +27,39 @@ public class MediaDAO extends GenericDAO<Media> {
     }
 
     /**
-     * Select all the medias with the loans list and the member of the loan
-     * 
+     * Select all the medias
      * @return
      */
     public List<Media> selectAllMedias() {
 	EntityManager em = DataBaseHelper.createEntityManager();
 	DataBaseHelper.beginTx(em);
 	TypedQuery<Media> query = em.createQuery("SELECT m " 
-						+ "FROM Media m " 
-						+ "LEFT OUTER JOIN m.loanList l ", Media.class);
+					       + "FROM Media m " 
+					       + "LEFT OUTER JOIN m.loanList l ", Media.class);
 	List<Media> listeReturn = query.getResultList();
 	em.close();
 	return listeReturn;
-
+    }
+    
+    /**
+     * Select all the medias with the loans list for the member in param
+     * @return
+     */
+    public List<Media> selectMediasFromMember(Member member) {
+	EntityManager em = DataBaseHelper.createEntityManager();
+	DataBaseHelper.beginTx(em);
+	TypedQuery<Media> query = em.createQuery("SELECT m " 
+						+ "FROM Media m " 
+						+ "LEFT OUTER JOIN m.loanList l "
+						+ "WHERE l.member = :id ", Media.class);
+	query.setParameter("id", member.getIdentifier());
+	List<Media> listeReturn = query.getResultList();
+	em.close();
+	return listeReturn;
     }
 
     /**
-     * Find the media by its title
-     * 
+     * Find the media by its title 
      * @param title
      * @return
      */
@@ -62,7 +77,6 @@ public class MediaDAO extends GenericDAO<Media> {
 
     /**
      * Find the media by its author
-     * 
      * @param author
      * @return
      */
@@ -80,7 +94,6 @@ public class MediaDAO extends GenericDAO<Media> {
 
     /**
      * Find the media by its type
-     * 
      * @param type
      * @return
      */

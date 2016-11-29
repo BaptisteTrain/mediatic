@@ -14,19 +14,30 @@ public class MemberDAO extends GenericDAO<Member> {
 
     private static MemberDAO dao;
 
-    public MemberDAO() {
-
+    private MemberDAO() {
 	super(Member.class);
     }
 
     public static MemberDAO instance() {
-
 	if (dao == null) {
-
 	    dao = new MemberDAO();
 	}
-
 	return dao;
+    }
+    
+    /**
+     * Select all the members with the loans list and the media of the loan
+     * @return
+     */
+    public List<Member> selectAllMembers() {
+	EntityManager em = DataBaseHelper.createEntityManager();
+	DataBaseHelper.beginTx(em);
+	TypedQuery<Member> query = em.createQuery("SELECT m "
+						+ "FROM Member m " 
+						+ "LEFT OUTER JOIN m.listLoan l ", Member.class);
+	List<Member> listeReturn = query.getResultList();
+	em.close();
+	return listeReturn;
     }
 
     /**
@@ -43,14 +54,15 @@ public class MemberDAO extends GenericDAO<Member> {
 						+ "FROM Member m " 
 						+ "WHERE m.identifier LIKE :id", Member.class);
 
-	query.setParameter("id", "%" + id); // faudrait que l'id soit un string (rajout d'un champ ?)
+	query.setParameter("id", "%" + id); 
+	// TODO faudrait que l'id soit un string (rajout d'un champ ?)
 	em.close();
 
 	return query.getResultList();
     }
 
     /**
-     * 
+     * Find members by name
      * @param lastname
      * @param firstname
      * @return
@@ -62,18 +74,18 @@ public class MemberDAO extends GenericDAO<Member> {
 	DataBaseHelper.beginTx(em);
 	TypedQuery<Member> query = em.createQuery("SELECT m " 
 						+ "FROM Member m " 
-						+ "WHERE m.person.lastname LIKE :lastname " 
-						+ "AND m.person.firstname LIKE :firstname", Member.class);
+						+ "WHERE upper(m.person.lastname) LIKE :lastname " 
+						+ "AND upper(m.person.firstname) LIKE :firstname", Member.class);
 
-	query.setParameter("lastname", "%" + lastname + "%");
-	query.setParameter("firstname", "%" + firstname + "%");
+	query.setParameter("lastname", "%" + lastname.toUpperCase() + "%");
+	query.setParameter("firstname", "%" + firstname.toUpperCase() + "%");
 	em.close();
 
 	return query.getResultList();
     }
 
     /**
-     * 
+     * Find the members and its loan from a media
      * @param media
      * @return
      */
@@ -92,13 +104,12 @@ public class MemberDAO extends GenericDAO<Member> {
 
     /**
      * Find the members by id or lastname or firstname
-     * 
      * @param id
      * @param lastname
      * @param firstname
      * @return List<Member>
      */
-    public List<Member> findMemberFromField(long id, String lastname, String firstname) {
+    public List<Member> findMemberByIdOrNames(String id, String lastname, String firstname) {
 	EntityManager em = DataBaseHelper.createEntityManager();
 	DataBaseHelper.beginTx(em);
 	TypedQuery<Member> query = em.createQuery("SELECT m " 
@@ -109,6 +120,7 @@ public class MemberDAO extends GenericDAO<Member> {
 	query.setParameter("id", id);
 	query.setParameter("lastname", lastname);
 	query.setParameter("firstname", firstname);
+	// TODO : pas de LIKE sur lastname and firstname 
 	List<Member> listeReturn = query.getResultList();
 	em.close();
 	return listeReturn;
