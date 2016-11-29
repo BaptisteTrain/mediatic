@@ -10,6 +10,7 @@ import fr.dta.mediatic.media.model.Media;
 import fr.dta.mediatic.media.model.TypeMedia;
 import fr.dta.mediatic.member.dao.MemberDAO;
 import fr.dta.mediatic.member.model.Member;
+import fr.dta.mediatic.model.Address;
 import fr.dta.mediatic.model.Gender;
 import fr.dta.mediatic.subscription.dao.SubscriptionDAO;
 import fr.dta.mediatic.subscription.model.Subscription;
@@ -18,20 +19,23 @@ import fr.dta.mediatic.user.model.Role;
 import fr.dta.mediatic.user.model.User;
 
 public class Run {
+    
+    static MediaDAO mediaDAO = MediaDAO.instance();
+    static LoanDAO loadDAO = LoanDAO.instance();
+    static MemberDAO memberDAO = MemberDAO.instance();
+    static SubscriptionDAO subscriptionDAO = SubscriptionDAO.instance();
+    static UserDAO userDAO = UserDAO.instance();
+    
 
     public static void main(String[] args) {
-	fillBD();
+	//fillBD();
+	memberOperations();
     }
 
     /**
      * Fill the BD
      */
     public static void fillBD() {
-	MediaDAO mediaDAO = MediaDAO.instance();
-	LoanDAO loadDAO = LoanDAO.instance();
-	MemberDAO memberDAO = MemberDAO.instance();
-	SubscriptionDAO subscriptionDAO = SubscriptionDAO.instance();
-	UserDAO userDAO = UserDAO.instance();
 	
 	// Users
 	userDAO.persist(new User("admin", "admin", Role.Manager, "Traa", "Baba", "baba@gmail.com", Gender.Homme));
@@ -174,8 +178,6 @@ public class Run {
      * Operations on the media
      */
     public static void mediaOperations() {
-	// Instanciation
-	MediaDAO mediaDAO = MediaDAO.instance();
 
 	// New medias
 	System.out.println("--------NEW MEDIAS---------");
@@ -186,15 +188,15 @@ public class Run {
 	System.out.println("--------/NEW MEDIAS---------");
 
 	// Update media
-	System.out.println("--------UPDATE MEDIAS---------");
+	System.out.println("--------UPDATE MEDIA---------");
 	mediaBookTrain.setAuthor("b-Train");
 	mediaDAO.merge(mediaBookTrain);
-	System.out.println("--------/UPDATE MEDIAS---------");
+	System.out.println("--------/UPDATE MEDIA---------");
 
 	// Remove media
-	System.out.println("--------REMOVE MEDIAS---------");
+	System.out.println("--------REMOVE MEDIA---------");
 	mediaDAO.remove(mediaBookTrain.getId());
-	System.out.println("--------/REMOVE MEDIAS---------");
+	System.out.println("--------/REMOVE MEDIA---------");
 
 	// Select all the medias
 	List<Media> listM = mediaDAO.selectAllMedias();
@@ -218,7 +220,7 @@ public class Run {
 	    System.out.println("--------/MEDIA BY TITLE--------");
 	}
 
-	// Select media by title
+	// Select media by author
 	System.out.println("--------MEDIA BY AUTHOR---------");
 	listM = mediaDAO.findMediaByAuthor("Volt");
 	for (Media m : listM) {
@@ -233,6 +235,75 @@ public class Run {
 	    System.out.println(">>>>>>>>>>>MEDIA = " + m);
 	}
 	System.out.println("--------/MEDIA BY TYPE---------");
+    }
+    
+    /**
+     * Operations on the media
+     */
+    public static void memberOperations() {
+	
+	// New member
+	System.out.println("--------NEW MEMBER---------");
+	Subscription sub1 = subscriptionDAO.persist(new Subscription(300, new Date()));
+	Subscription sub2 = subscriptionDAO.persist(new Subscription(200, new Date()));
+	Member member1 = new Member(null, new Date(), "Dupont", "Jacques", "jacques@gmail.com", Gender.Homme, "3 rue Apre", "01000", "AINVILLE", sub1);
+	memberDAO.persist(member1);
+	Member member2 = new Member(null, new Date(), "Dupond", "Jacquart", "jacques2@gmail.com", Gender.Homme, "3 rue Apres", "01000", "AINVILLE", sub2);
+	memberDAO.persist(member2);
+	System.out.println("--------/NEW MEMBER---------");
+
+	// Update member
+	System.out.println("--------UPDATE MEMBER---------");
+	member2.setAddress(new Address("4 rue Delphie", "56000", "DELPHE"));
+	memberDAO.merge(member1);
+	System.out.println("--------/UPDATE MEMBER---------");
+
+	// Remove member
+	System.out.println("--------REMOVE MEMBER---------");
+	memberDAO.remove(member1.getIdentifier());
+	System.out.println("--------/REMOVE MEMBER---------");
+
+	// Select all the members
+	List<Member> listM;
+	/*listM = memberDAO.selectAllMembers();
+	System.out.println("--------ALL MEMBERS---------");
+	for (Member m : listM) {
+	    System.out.println(">>>>>>>>>>>MEMBER = " + m);
+	    System.out.println("--------/ALL MEMBERS-------");
+	}*/
+
+	// Select member by id
+	System.out.println("--------MEMBER BY ID---------");
+	Member memberFind = memberDAO.find(member2.getIdentifier());
+	System.out.println(">>>>>>>>>>>>MEMBER = " + memberFind.getPerson().getFirstname());
+	System.out.println("--------/MEMBER BY ID---------");
+	
+	// Select member by id partiel
+	/*System.out.println("--------MEMBER BY ID PARTIAL---------");
+	listM = memberDAO.findMembersByIdPartial(member1.getIdentifier().intValue());
+	for (Member m : listM) {
+	    System.out.println(">>>>>>>>>>>MEMBER = " + m);
+	    System.out.println("--------/MEMBER BY ID PARTIAL--------");
+	}*/
+
+	// Select member by name
+	System.out.println("--------MEMBER BY NAME---------");
+	listM = memberDAO.findMemberByName("Dup", "ja");
+	for (Member m : listM) {
+	    System.out.println(">>>>>>>>>>>MEMBER = " + m);
+	    System.out.println("--------/MEMBER BY NAME--------");
+	}
+
+	// Select members from media
+	System.out.println("--------MEMBER FROM AUTHOR---------");
+	Media mediaBookTrain = mediaDAO.persist(new Media(null, TypeMedia.BOOK, "Everything you need to know about Nadir", "BTrain"));
+	listM = memberDAO.findMembersFromMedia(mediaBookTrain);
+	for (Member m : listM) {
+	    System.out.println(">>>>>>>>>>>MEMBER = " + m);
+	}
+	System.out.println("--------/MEMBER FROM AUTHOR---------");
+
+
     }
 
 }
