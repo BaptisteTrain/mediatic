@@ -33,7 +33,7 @@ public class Run {
     public static void main(String[] args) {
 	fillBD();
 	//mediaOperations();
-	//memberOperations();
+	memberOperations();
 	
     }
 
@@ -240,13 +240,15 @@ public class Run {
 	    System.out.println(">>>>>>>>>>>MEDIA = " + m);
 	}
 	System.out.println("--------/MEDIA BY TYPE---------");
+	
+	// TODO selectMediasFromMember
     }
     
     /**
      * Operations on the media
      */
     public static void memberOperations() {
-	
+
 	// New member
 	System.out.println("--------NEW MEMBER---------");
 	Subscription sub1 = subscriptionDAO.persist(new Subscription(300, new Date()));
@@ -309,7 +311,7 @@ public class Run {
 	}
 	System.out.println("--------/MEMBER FROM MEDIA---------");
 
-
+	//TODO findMemberByIdOrNames
     }
 
 }
