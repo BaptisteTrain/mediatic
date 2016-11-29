@@ -41,7 +41,7 @@ public class Member {
 		this.numberOfLoans = 0;
 	}
 	
-	public Member(Long identifier, Date birthDate, String lastname, String firstname, String email, Gender gender, String address, int postalCode, String city, Subscription sub) {
+	public Member(Long identifier, Date birthDate, String lastname, String firstname, String email, Gender gender, String address, String postalCode, String city, Subscription sub) {
 		this.identifier = identifier;
 		this.birthDate = birthDate;
 		this.numberOfLoans = 0;

@@ -11,8 +11,8 @@ public class Address {
 	@Column(name="address")
 	private String address;
 	
-	@Column(name="postalCode")
-	private int postalCode;
+	@Column(name="postalCode", length=5)
+	private String postalCode;
 	
 	@Column(name="city")
 	private String city;
@@ -24,7 +24,7 @@ public class Address {
 
 	}
 
-	public Address(String address, int postalCode, String city) {
+	public Address(String address, String postalCode, String city) {
 		super();
 		this.address = address;
 		this.postalCode = postalCode;
@@ -44,12 +44,12 @@ public class Address {
 		this.address = address;
 	}
 
-	public int getPostalCode() {
+	public String getPostalCode() {
 		
 		return postalCode;
 	}
 
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(String postalCode) {
 		
 		this.postalCode = postalCode;
 	}
