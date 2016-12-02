@@ -23,7 +23,7 @@
 
 /* Header */
 .jumbotron {
-	background: url(livre.jpg) no-repeat;
+	background: url(./img/livre.jpg) no-repeat;
 	background-size: 100%;
 	color: black;
 }
