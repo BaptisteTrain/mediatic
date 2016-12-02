@@ -27,9 +27,12 @@ angular.module('MemberSheet', [])
 			];
 		
 		mbshCtrl.books =
+			[
+				
+			];
 	}])
 	.config(function($routeProvider) {
-		$routeProvider.when('/member', {
+		$routeProvider.when('/member/sheet', {
 			templateUrl: '/member/fiche_adherent.html',
 			controller: 'MemberSheetController',
 			controllerAs: 'mbshCtrl'
