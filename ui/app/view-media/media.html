@@ -4,31 +4,31 @@
 		<hr/>
 		<!-- FORMULAIRE RECHERCHE DE MEDIA -->
 		<div class="formulaire">
-			<form class="form-horizontal" method="GET" action="#">
+			<form name="formSearchMedias" class="form-horizontal" novalidate ng-submit="media.searchMedias()">
 				<div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre</label>
 					<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-						<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
+						<input type="text" class="form-control" ng-model="media.search.title" id="titre" name="titre" placeholder="Titre" maxlength=200>
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<!--  <div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2"></label>
 					<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
 						<label>Ou</label>
 					</div>
-				</div>
+				</div>-->
 				
 				<div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur</label>
 					<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-						<input type="text" class="form-control" id="auteur" name="auteur" placeholder="Auteur">
+						<input type="text" class="form-control" ng-model="media.search.author" id="auteur" name="auteur" placeholder="Auteur" maxlength=200>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type</label>
 					<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-						<select id="type" class="form-control" name="type">
+						<select id="type" class="form-control" name="type" ng-model="media.search.type">
 							<option value=""></option>
 							<option value="Livre">Livre</option>
 							<option value="CD">CD</option>
@@ -37,11 +37,17 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-md-offset-2 col-lg-offset-2 col-sm-offset-3 col-xs-12 col-sm-5 col-md-5 col-lg-5">
-						<input type="button" class="btn btn-info hidden-xs" value="Ajouter un m&eacute;dia" onclick="location.href='nouveau_media.html'">
-						<button type="button" class="btn btn-info visible-xs-inline-block" onclick="location.href='nouveau_media.html'"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-						<input type="button" class="btn btn-success pull-right hidden-xs" value="Rechercher" onclick="afficheTab();">
-						<button type="button" class="btn btn-success pull-right visible-xs-inline-block" onclick="afficheTab();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					<div class="col-md-offset-2 col-lg-offset-2 col-sm-offset-3 col-xs-12 col-sm-6 col-md-5 col-lg-5">
+						<!-- BUTTONS ADD NEW MEDIA -->
+						<input type="button" class="btn btn-info hidden-xs" value="Ajouter un m&eacute;dia" ng-click="media.goNewMedia()">
+						<button type="button" class="btn btn-info visible-xs-inline-block" ng-click="media.goNewMedia()">
+							<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+						</button>
+						<!-- BUTTONS SEARCH -->
+						<input type="submit" class="btn btn-success pull-right hidden-xs" value="Rechercher" >
+						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button>
 					</div>
 				</div>
 			</form>
@@ -50,9 +56,8 @@
 		<!-- / FORMULAIRE RECHERCHE DE MEDIA -->
 	
 		<!-- TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
-		<div id="divRechMedia" class="hidden">
-			<table id="tableRechMedia"
-				class="table table-striped table-hover tablesorter">
+		<div id="divRechMedia" ng-show="media.mediasList.length>0">
+			<table id="tableRechMedia" class="table table-striped table-hover tablesorter">
 				<thead>
 					<tr>
 						<th>Titre</th>
@@ -64,45 +69,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Candide</td>
-						<td>Livre</td>
-						<td>Voltaire</td>
-						<td>Mathieu Laclaux</td>
-						<td>20/11/2016</td>
-						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-					</tr>
-					<tr>
-						<td>Les jolies choses</td>
-						<td>Livre</td>
-						<td>Virgine Despentes</td>
-						<td>Lucy Martin</td>
-						<td>12/09/2016</td>
-						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-					</tr>
-					<tr>
-						<td>Drones</td>
-						<td>CD</td>
-						<td>Muse</td>
-						<td>Nadir Allam</td>
-						<td>15/11/2016</td>
-						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-					</tr>
-					<tr>
-						<td>Le java en 500 pages</td>
-						<td>Livre</td>
-						<td>Guillaume Dupont</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-					</tr>
-					<tr>
-						<td>L'auberge espagnole</td>
-						<td>DVD</td>
-						<td>Machin chose</td>
-						<td>Baptiste Train</td>
-						<td>15/11/2016</td>
-						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+					<tr ng-repeat="med in media.mediasList 
+								  | filter : {'title':media.search.title} 
+								  | filter : {'author':media.search.author} 
+								  | filter : {'type':media.search.type}" >
+						<td ng-bind="med.title"></td>
+						<td ng-bind="med.type"></td>
+						<td ng-bind="med.author"></td>
+						<td ng-bind="med.borrower"></td>
+						<td ng-bind="med.returnDate"></td>
+						<td>
+							<a href="#/mediaSheet/{{med.id}}">
+								<i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true"></i>
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -143,8 +123,4 @@
 		});
 	});
 
-	// Patch pour afficher le tableau au clic du bouton Valider
-	function afficheTab() {
-		$('#divRechMedia').removeClass('hidden');
-	}
 </script>
