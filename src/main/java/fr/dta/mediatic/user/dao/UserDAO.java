@@ -30,7 +30,7 @@ public class UserDAO extends GenericDAO<User> {
     
     /**
      * Select all the users
-     * @return
+     * @return List<User>
      */
     public List<User> selectAllUsers() {
 	EntityManager em = DataBaseHelper.createEntityManager();
@@ -45,7 +45,7 @@ public class UserDAO extends GenericDAO<User> {
     /**
      * 
      * @param id
-     * @return
+     * @return List<User>
      */
     public List<User> findUsersByIdPartial(String id) {
 
@@ -54,7 +54,7 @@ public class UserDAO extends GenericDAO<User> {
 	DataBaseHelper.beginTx(em);
 	TypedQuery<User> query = em.createQuery("SELECT u " 
 						+ "FROM User u " 
-						+ "WHERE u.identifier = :id", User.class);
+						+ "WHERE u.identifier LIKE :id", User.class);
 
 	query.setParameter("id",  id + "%");
 	List<User> listeReturn = query.getResultList();
@@ -67,7 +67,7 @@ public class UserDAO extends GenericDAO<User> {
      * Find members by name
      * @param lastname
      * @param firstname
-     * @return
+     * @return List<User>
      */
     public List<User> findUserByName(String lastname, String firstname) {
 
@@ -76,8 +76,8 @@ public class UserDAO extends GenericDAO<User> {
 	DataBaseHelper.beginTx(em);
 	TypedQuery<User> query = em.createQuery("SELECT u " 
 						+ "FROM User u " 
-						+ "WHERE upper(u.person.lastname) = :lastname " 
-						+ "AND upper(u.person.firstname) = :firstname", User.class);
+						+ "WHERE upper(u.person.lastname) LIKE :lastname " 
+						+ "AND upper(u.person.firstname) LIKE :firstname", User.class);
 
 	query.setParameter("lastname", "%" + lastname.toUpperCase() + "%");
 	query.setParameter("firstname", "%" + firstname.toUpperCase() + "%");
@@ -92,19 +92,19 @@ public class UserDAO extends GenericDAO<User> {
      * @param id
      * @param lastname
      * @param firstname
-     * @return List<Member>
+     * @return List<User>
      */
     public List<User> findUserByIdOrNames(String id, String lastname, String firstname) {
 	EntityManager em = DataBaseHelper.createEntityManager();
 	DataBaseHelper.beginTx(em);
 	TypedQuery<User> query = em.createQuery("SELECT u " 
 						+ "FROM User u " 
-						+ "WHERE u.person.lastname = :lastname " 
-						+ "OR u.person.firstname = :firstname " 
-						+ "OR u.identifier = :id", User.class);
-	query.setParameter("id", id);
-	query.setParameter("lastname", lastname);
-	query.setParameter("firstname", firstname);
+						+ "WHERE u.person.lastname LIKE :lastname " 
+						+ "OR u.person.firstname LIKE :firstname " 
+						+ "OR u.identifier LIKE :id", User.class);
+	query.setParameter("id", id + "%");
+	query.setParameter("lastname", "%" + lastname + "%");
+	query.setParameter("firstname", "%" + firstname + "%");
 	List<User> listeReturn = query.getResultList();
 	em.close();
 	return listeReturn;

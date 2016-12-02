@@ -115,12 +115,12 @@ public class MemberDAO extends GenericDAO<Member> {
 	DataBaseHelper.beginTx(em);
 	TypedQuery<Member> query = em.createQuery("SELECT m " 
 						+ "FROM Member m " 
-						+ "WHERE m.person.lastname = :lastname " 
-						+ "OR m.person.firstname = :firstname " 
-						+ "OR m.identifier = :id", Member.class);
-	query.setParameter("id", id);
-	query.setParameter("lastname", lastname);
-	query.setParameter("firstname", firstname);
+						+ "WHERE m.person.lastname LIKE :lastname " 
+						+ "OR m.person.firstname LIKE :firstname " 
+						+ "OR m.identifier LIKE :id", Member.class);
+	query.setParameter("id", id + "%");
+	query.setParameter("lastname", "%" + lastname + "%");
+	query.setParameter("firstname", "%" + firstname + "%");
 	// TODO : pas de LIKE sur lastname and firstname ?
 	List<Member> listeReturn = query.getResultList();
 	em.close();
