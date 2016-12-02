@@ -72,7 +72,7 @@
 					<tr ng-repeat="med in media.mediasList 
 								  | filter : {'title':media.search.title} 
 								  | filter : {'author':media.search.author} 
-								  | filter : {'type':media.search.type}" ts-repeat>
+								  | filter : {'type':media.search.type} as l" ts-repeat>
 						<td ng-bind="med.title"></td>
 						<td ng-bind="med.type"></td>
 						<td ng-bind="med.author"></td>
@@ -87,20 +87,15 @@
 				</tbody>
 			</table>
 			
-			<!-- PAGINATION -->
+			<!-- PAGINATION 
 			<div class="dataTables_paginate paging_simple_numbers gris">
-				<ul class="pagination">
-					<li class="paginate_button previous disabled"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a></li>
-					<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">2</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0">3</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0">4</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0">5</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0">6</a></li>
-					<li class="paginate_button next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
+				pagination
+				<ul uib-pagination boundary-links="true" total-items="media.mediasList.length" ng-model="1" 
+				 	class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" 
+				 	first-text="&laquo;" last-text="&raquo;">
 				</ul>
 			</div>
-			<!-- / PAGINATION -->
+			 / PAGINATION -->
 		</div>
 		<!-- / TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
 	</div>
