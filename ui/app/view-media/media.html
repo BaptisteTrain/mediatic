@@ -1,203 +1,154 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Recherche de m&eacute;dia</title>
-
-<link media="all" href="css/bootstrap.min.css" rel="stylesheet" />
-<link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet" />
-<link media="all" href="css/tablesorter-style.css" rel="stylesheet" />
-<link media="all" href="css/maquette-style.css" rel="stylesheet" />
-
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.tablesorter.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Recherche de m&eacute;dia</title>
+	
+	<link media="all" href="../css/bootstrap.css" rel="stylesheet" />
+	<link media="all" href="../css/bootstrap-theme.css" rel="stylesheet" />
+	<link media="all" href="../css/tablesorter-style.css" rel="stylesheet" />
+	<link media="all" href="../css/maquette-style.css" rel="stylesheet" />
+	
+	<script src="../bower_components/angular/angular.js"></script>
+	<script src="../bower_components/angular-route/angular-route.js"></script>
+	<script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+	<script src="../bower_components/angular-tablesort/js/angular-tablesort.js"></script>
+	
 </head>
+
 <body>
-	<header>
-		<div class="jumbotron titre">
-			<div class="container">
-				<h1>Mediatic</h1>
-				<!--  <p>Le site de gestion des emprunts et des adh&eacute;rents de la m&eacute;diath&egrave;que</p> -->
-			</div>
-		</div>
-		<nav class="navbar navbar-inverse navbar-static-top">
-			<div class="container">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a href="media.html" class="hidden-xs">
-							<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span><span>&nbsp;M&eacute;dias</span></strong>
-						</a>
-						<a href="media.html" class="visible-xs-inline-block">
-							<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span></strong>
-						</a>
-					</li>
-					<li>
-						<a href="rechercher_adherent.html" class="hidden-xs">
-							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Adh&eacute;rents</strong>
-						</a>
-						<a href="rechercher_adherent.html" class="visible-xs-inline-block">
-							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span></strong>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="login.html" class="hidden-xs">
-							<strong><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;D&eacute;connexion</strong>
-						</a>
-						<a href="login.html" class="visible-xs-inline-block">
-							<strong><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></strong>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
 
-	<main class="container">
 
-		<div class="row">
-			<div class="col-xs-12">
-				<h2>Recherche de m&eacute;dias</h2>
-				<hr/>
-				<!-- FORMULAIRE RECHERCHE DE MEDIA -->
-				<div class="formulaire">
-					<form class="form-horizontal" method="GET" action="#">
-						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre</label>
-							<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
-							</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>Recherche de m&eacute;dias</h2>
+			<hr/>
+			<!-- FORMULAIRE RECHERCHE DE MEDIA -->
+			<div class="formulaire">
+				<form class="form-horizontal" method="GET" action="#">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre</label>
+						<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
 						</div>
-						
-						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2"></label>
-							<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-								<label>Ou</label>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur</label>
-							<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-								<input type="text" class="form-control" id="auteur" name="auteur" placeholder="Auteur">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type</label>
-							<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-								<select id="type" class="form-control" name="type">
-									<option value=""></option>
-									<option value="Livre">Livre</option>
-									<option value="CD">CD</option>
-									<option value="DVD">DVD</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-offset-2 col-lg-offset-2 col-sm-offset-3 col-xs-12 col-sm-5 col-md-5 col-lg-5">
-								<input type="button" class="btn btn-info hidden-xs" value="Ajouter un m&eacute;dia" onclick="location.href='nouveau_media.html'">
-								<button type="button" class="btn btn-info visible-xs-inline-block" onclick="location.href='nouveau_media.html'"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-								<input type="button" class="btn btn-success pull-right hidden-xs" value="Rechercher" onclick="afficheTab();">
-								<button type="button" class="btn btn-success pull-right visible-xs-inline-block" onclick="afficheTab();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-							</div>
-						</div>
-					</form>
-				</div>
-				<br>
-				<!-- / FORMULAIRE RECHERCHE DE MEDIA -->
-			
-				<!-- TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
-				<div id="divRechMedia" class="hidden">
-					<table id="tableRechMedia"
-						class="table table-striped table-hover tablesorter">
-						<thead>
-							<tr>
-								<th>Titre</th>
-								<th>Type</th>
-								<th>Auteur</th>
-								<th>Emprunteur</th>
-								<th>Date de retour</th>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Candide</td>
-								<td>Livre</td>
-								<td>Voltaire</td>
-								<td>Mathieu Laclaux</td>
-								<td>20/11/2016</td>
-								<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-							</tr>
-							<tr>
-								<td>Les jolies choses</td>
-								<td>Livre</td>
-								<td>Virgine Despentes</td>
-								<td>Lucy Martin</td>
-								<td>12/09/2016</td>
-								<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-							</tr>
-							<tr>
-								<td>Drones</td>
-								<td>CD</td>
-								<td>Muse</td>
-								<td>Nadir Allam</td>
-								<td>15/11/2016</td>
-								<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-							</tr>
-							<tr>
-								<td>Le java en 500 pages</td>
-								<td>Livre</td>
-								<td>Guillaume Dupont</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-							</tr>
-							<tr>
-								<td>L'auberge espagnole</td>
-								<td>DVD</td>
-								<td>Machin chose</td>
-								<td>Baptiste Train</td>
-								<td>15/11/2016</td>
-								<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<!-- PAGINATION -->
-					<div class="dataTables_paginate paging_simple_numbers gris">
-						<ul class="pagination">
-							<li class="paginate_button previous disabled"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a></li>
-							<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
-							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">2</a></li>
-							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0">3</a></li>
-							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0">4</a></li>
-							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0">5</a></li>
-							<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0">6</a></li>
-							<li class="paginate_button next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
-						</ul>
 					</div>
-					<!-- / PAGINATION -->
-				</div>
-				<!-- / TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
+					
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2"></label>
+						<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+							<label>Ou</label>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur</label>
+						<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="auteur" name="auteur" placeholder="Auteur">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type</label>
+						<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+							<select id="type" class="form-control" name="type">
+								<option value=""></option>
+								<option value="Livre">Livre</option>
+								<option value="CD">CD</option>
+								<option value="DVD">DVD</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-lg-offset-2 col-sm-offset-3 col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<input type="button" class="btn btn-info hidden-xs" value="Ajouter un m&eacute;dia" onclick="location.href='nouveau_media.html'">
+							<button type="button" class="btn btn-info visible-xs-inline-block" onclick="location.href='nouveau_media.html'"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+							<input type="button" class="btn btn-success pull-right hidden-xs" value="Rechercher" onclick="afficheTab();">
+							<button type="button" class="btn btn-success pull-right visible-xs-inline-block" onclick="afficheTab();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						</div>
+					</div>
+				</form>
 			</div>
+			<br>
+			<!-- / FORMULAIRE RECHERCHE DE MEDIA -->
+		
+			<!-- TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
+			<div id="divRechMedia" class="hidden">
+				<table id="tableRechMedia"
+					class="table table-striped table-hover tablesorter">
+					<thead>
+						<tr>
+							<th>Titre</th>
+							<th>Type</th>
+							<th>Auteur</th>
+							<th>Emprunteur</th>
+							<th>Date de retour</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Candide</td>
+							<td>Livre</td>
+							<td>Voltaire</td>
+							<td>Mathieu Laclaux</td>
+							<td>20/11/2016</td>
+							<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+						</tr>
+						<tr>
+							<td>Les jolies choses</td>
+							<td>Livre</td>
+							<td>Virgine Despentes</td>
+							<td>Lucy Martin</td>
+							<td>12/09/2016</td>
+							<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+						</tr>
+						<tr>
+							<td>Drones</td>
+							<td>CD</td>
+							<td>Muse</td>
+							<td>Nadir Allam</td>
+							<td>15/11/2016</td>
+							<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+						</tr>
+						<tr>
+							<td>Le java en 500 pages</td>
+							<td>Livre</td>
+							<td>Guillaume Dupont</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+						</tr>
+						<tr>
+							<td>L'auberge espagnole</td>
+							<td>DVD</td>
+							<td>Machin chose</td>
+							<td>Baptiste Train</td>
+							<td>15/11/2016</td>
+							<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" onclick="location.href='fiche_media.html'"></i></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<!-- PAGINATION -->
+				<div class="dataTables_paginate paging_simple_numbers gris">
+					<ul class="pagination">
+						<li class="paginate_button previous disabled"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a></li>
+						<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
+						<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">2</a></li>
+						<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0">3</a></li>
+						<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0">4</a></li>
+						<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0">5</a></li>
+						<li class="paginate_button "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0">6</a></li>
+						<li class="paginate_button next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
+					</ul>
+				</div>
+				<!-- / PAGINATION -->
+			</div>
+			<!-- / TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
 		</div>
-	</main>
+	</div>
 
-	<footer>
-		<div class="jumbotron dernier">
-			<div class="container">
-				<div class="text-center anoir">
-					<a href="#">© La team.</a>
-				</div>
-			</div>
-			<br> <br>
-		</div>
-	</footer>
 
 	<script>
 		// Fonction pour le tri
