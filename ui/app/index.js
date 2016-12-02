@@ -4,7 +4,8 @@ angular
 	.module('MediaticApp', ['ngRoute', 
 							'MemberSheet', 
 							'MediaSheet',
-							'Media'])
+							'Media',
+							'ui.bootstrap'])
 	.config(function($routeProvider) {
 		$routeProvider.otherwise({
 			redirectTo: '/media'
