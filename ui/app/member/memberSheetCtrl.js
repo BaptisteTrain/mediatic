@@ -1,10 +1,10 @@
 angular.module('MemberSheetApp', [])
-	.controller('MemberSheetController', function() {
+	.controller('MemberSheetController', ['$scope', function($scope) {
 		var msCtrl = this;
-	})
+	}])
 	.config(function($routeProvider) {
 		$routeProvider.when('/member', {
-			templateUrl: '/view-catalog/fiche_adherent.html',
+			templateUrl: '/member/fiche_adherent.html',
 			controller: 'MemberSheetController',
 			controllerAs: 'msCtrl'
 		});

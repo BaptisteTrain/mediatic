@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MyApp', ['ngRoute', 'MemberSheetApp'])
+angular.module('MediaticApp', ['ngRoute', 'MemberSheetApp'])
 .config(function($routeProvider) {
 	$routeProvider.otherwise({
 		redirectTo: '/mediatic'
