@@ -95,36 +95,22 @@
 			<h2>La liste des emprunts</h2>
 			<table class="table table-striped table-hover">
 				<thead>
-				<tr>
-					<th class="col-xs-2">R&eacute;f&eacute;rence</th>
-					<th class="col-xs-2">Type</th>
-					<th class="col-xs-4">Titre</th>
-					<th class="col-xs-2">Date d'emprunt</th>
-					<th class="col-xs-2">Jours restants</th>
-				</tr>
+					<tr>
+						<th class="col-xs-2">R&eacute;f&eacute;rence</th>
+						<th class="col-xs-2">Type</th>
+						<th class="col-xs-4">Titre</th>
+						<th class="col-xs-2">Date d'emprunt</th>
+						<th class="col-xs-2">Jours restants</th>
+					</tr>
 				</thead>
 				<tbody>
-				<tr>
-					<td>123456798</td>
-					<td>CD</td>
-					<td>Star Wars</td>
-					<td>02/11/2016</td>
-					<td>10</td>
-				</tr>
-				<tr>
-					<td>123456789</td>
-					<td>Livre</td>
-					<td>Le livre de la jungle</td>
-					<td>03/11/2016</td>
-					<td>6</td>
-				</tr>
-				<tr>
-					<td>123466789</td>
-					<td>DVD</td>
-					<td>Suits : avocats sur mesure</td>
-					<td>08/11/2016</td>
-					<td>1</td>
-				</tr>
+					<tr ng-repeat="loan in mbshCtrl.loans">
+						<td ng-bind="loan.reference"></td>
+						<td ng-bind="loan.type"></td>
+						<td ng-bind="loan.title"></td>
+						<td ng-bind="loan.loandate"></td>
+						<td></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -141,19 +127,19 @@
 					<div class="form-group">
 						<label for="idIdentifiant" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Identifiant</label>
 						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="idIdentifiant" name="nom" placeholder="Identifiant">
+							<input type="text" class="form-control" id="idIdentifiant" name="identifiant" placeholder="Identifiant">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="idTitre" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre</label>
 						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="idTitre" name="nom" placeholder="Titre">
+							<input type="text" class="form-control" id="idTitre" name="titre" placeholder="Titre">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="idAuteur" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur</label>
 						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="idAuteur" name="prenom" placeholder="Auteur">
+							<input type="text" class="form-control" id="idAuteur" name="auteur" placeholder="Auteur">
 						</div>
 					</div>
 					<div class="form-group">
@@ -187,54 +173,56 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tr ng-repeat="loan in mbshCtrl.loans">
+								<td ng-bind="loan.reference"></td>
 							<tr>
 								<td>Java pour les Ploucs</td>
 								<td>Nadir ALLAM</td>
 								<td>978-2075074209</td>
 								<td class="text-center">Livre</td>
-								<td class="form-group"><input type="radio" id="matt" name="media" value="matt" required="required" /></td>
+								<td class="form-group"><input type="radio" id="matt" name="media" value="matt" ng-required="true"/></td>
 							</tr>
 							<tr>
 								<td>L'informatique est un long fleuve tranquille</td>
 								<td>Fanny COUTURIER</td>
 								<td>B01K2WUR9E</td>
 								<td class="text-center">DVD</td>
-								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
 							</tr>
 							<tr>
 								<td>CSS Dance Party Vol. 5</td>
 								<td>Matthieu LACLAU</td>
 								<td>B01GO3JWPK</td>
 								<td class="text-center">CD</td>
-								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
 							</tr>
 							<tr>
 								<td>Sopra, si pr&egrave;s</td>
 								<td>Baptiste TRAIN</td>
 								<td>978-3155058290</td>
 								<td class="text-center">Livre</td>
-								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
 							</tr>
 							<tr>
 								<td>La m&eacute;lancolie du Javascript</td>
 								<td>Fanny COUTURIER</td>
 								<td>978-5135666210</td>
 								<td class="text-center">Livre</td>
-								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
 							</tr>
 							<tr>
 								<td>La Bible de Jquery</td>
 								<td>Matthieu LACLAU</td>
 								<td>978-5554867824</td>
 								<td class="text-center">Livre</td>
-								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
 							</tr>
 							<tr>
 								<td>Sport et Informatique: Comment se muscler le cerveau</td>
 								<td>Nadir ALLAM</td>
 								<td>B01L3XTC9E</td>
 								<td class="text-center">DVD</td>
-								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
 							</tr>
 						</tbody>
 					</table>
