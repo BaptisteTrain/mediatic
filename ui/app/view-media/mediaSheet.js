@@ -18,6 +18,9 @@ angular
 				console.log('J\'ai fini de charger le média.');
 				$scope.myMedia = response.data;
 			});
+		$scope.isNavCollapsed = true;
+		$scope.isCollapsed = false;
+		$scope.isCollapsedHorizontal = false;
 	})
 	.controller('MediaSheetMediaCtrl', function($scope) {
 		var ctrl = this;
