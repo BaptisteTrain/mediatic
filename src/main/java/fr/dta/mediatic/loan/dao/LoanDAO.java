@@ -2,10 +2,9 @@ package fr.dta.mediatic.loan.dao;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import fr.dta.mediatic.helper.DataBaseHelper;
 import fr.dta.mediatic.helper.GenericDAO;
@@ -52,12 +51,26 @@ public class LoanDAO extends GenericDAO<Loan> {
 	 * Count how many loan's media
 	 * @return int
 	 */
-	public int howManyLoan() {
+	public int howManyAllLoanMedia() {
 		EntityManager em = DataBaseHelper.createEntityManager();
 		DataBaseHelper.beginTx(em);
-		TypedQuery<Loan> query = em.createQuery("SELECT count(l) "
-											   + "FROM Loan l ", Loan.class);
-		int count = query.getMaxResults();
+		Query query = em.createQuery("SELECT count(l) FROM Loan l ");
+		int count = ((Integer) query.getSingleResult()).intValue();
+		em.close();
+		return count;
+	}
+
+	/**
+	 * Count how many loaning's media
+	 * @return int
+	 */
+	public int howManyLoaningMedia() {
+		EntityManager em = DataBaseHelper.createEntityManager();
+		DataBaseHelper.beginTx(em);
+		Query query = em.createQuery(" SELECT count(l) "
+									+ "FROM Loan l "
+									+ "WHERE l.returnDate is null ");
+		int count = ((Integer) query.getSingleResult()).intValue();
 		em.close();
 		return count;
 	}
