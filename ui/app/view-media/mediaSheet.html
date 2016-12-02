@@ -66,10 +66,10 @@
 <div class="row" ng-controller="MediaSheetLoanCtrl as MediaSheetLoan">
 	<aside class="col-xs-12">
 		<h2>
-			Ajout Emprunteur<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true" data-toggle="collapse" data-target="#emprunteur"></span>
+			Ajout Emprunteur<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true" data-toggle="collapse" data-target="#emprunteur" ng-click="isNavCollapsed = !isNavCollapsed"></span>
 		</h2>
 		<hr />
-		<div id="emprunteur" class="collapse">
+		<div id="emprunteur" class="collapse" uib-collapse="isNavCollapsed">
 			<form id="rechercheEmprunteur" action="" method="GET" class="form-horizontal">
 				<div class="form-group">
 					<label for="idIdentifiant" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Identifiant</label>
