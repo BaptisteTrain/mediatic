@@ -1,108 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Nouveau m&eacute;dia</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link media="all" href="css/bootstrap.min.css" rel="stylesheet" />
-<link media="all" href="css/bootstrap-theme.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/maquette-style.css">
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</head>
-<body>
-	<header>
-		<div class="jumbotron titre">
-			<div class="container">
-				<h1>Mediatic</h1>
-				<!-- <p>Le site de gestion des emprunts et des adh&eacute;rents de la m&eacute;diath&egrave;que</p> -->
-			</div>
-		</div>
-		<nav class="navbar navbar-inverse navbar-static-top">
-			<div class="container">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a href="media.html" class="hidden-xs">
-							<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span><span>&nbsp;M&eacute;dias</span></strong>
-						</a>
-						<a href="media.html" class="visible-xs-inline-block">
-							<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span></strong>
-						</a>
-					</li>
-					<li>
-						<a href="rechercher_adherent.html" class="hidden-xs">
-							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Adh&eacute;rents</strong>
-						</a>
-						<a href="rechercher_adherent.html" class="visible-xs-inline-block">
-							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span></strong>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="login.html" class="hidden-xs">
-							<strong><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;D&eacute;connexion</strong>
-						</a>
-						<a href="login.html" class="visible-xs-inline-block">
-							<strong><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></strong>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-
-	<main class="container">
-		<div class="row">
-			<div class="col-xs-12">
-			<h2>Nouveau m&eacute;dia</h2>
-			<hr/>
-			<div class="formulaire">
-				<form class="form-horizontal" method="GET" action="#">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre*</label>
-						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre" required>
-						</div>
+<div class="row">
+	<div class="col-xs-12">
+	
+		<h2>Nouveau m&eacute;dia</h2>
+		<hr/>
+		
+		<div class="formulaire">
+			<form class="form-horizontal" method="GET" action="#">
+				<div class="form-group">
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre*</label>
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+						<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre" required>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur*</label>
-						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="auteur" name="auteur" placeholder="Auteur" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type*</label>
-						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-							<select id="type" class="form-control" name="type" required>
-								<option value=""></option>
-								<option value="Livre">Livre</option>
-								<option value="CD">CD</option>
-								<option value="DVD">DVD</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-4 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-4 col-md-5 col-lg-5">
-							<input type="submit" class="btn btn-success pull-right hidden-xs" value="Ajouter">
-							<button type="submit" class="btn btn-success pull-right visible-xs-inline-block"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-						</div>
-					</div>
-				</form>
-			</div>
-			</div>
-		</div>
-	</main>
-
-	<footer>
-		<div class="jumbotron dernier">
-			<div class="container">
-				<div class="text-center anoir">
-					<a href="#">© La team.</a><br>
 				</div>
-			</div>
-			<br> <br>
+				<div class="form-group">
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur*</label>
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+						<input type="text" class="form-control" id="auteur" name="auteur" placeholder="Auteur" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type*</label>
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+						<select id="type" class="form-control" name="type" required>
+							<option value=""></option>
+							<option value="Livre">Livre</option>
+							<option value="CD">CD</option>
+							<option value="DVD">DVD</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-5 col-md-5 col-lg-5">
+						<!-- BUTTON CANCEL -->
+						<input type="button" class="btn btn-default hidden-xs" value="Annuler" ng-click="newMedia.goBackMedia()">
+						<button type="button" class="btn btn-default visible-xs-inline-block" ng-click="newMedia.goBackMedia()">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						
+						<!-- BUTTON ADD -->
+						<input type="submit" class="btn btn-success pull-right hidden-xs" value="Ajouter">
+						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block">
+							<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
+			</form>
 		</div>
-	</footer>
-</body>
-</html>
+	</div>
+</div>
