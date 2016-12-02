@@ -1,0 +1,252 @@
+<main class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>Fiche adh&eacute;rent</h2>
+			<hr/>
+			<div class="formulaire">
+				<form name="MemberSheetForm" class="form-horizontal" method="GET" action="#" novalidate>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="lastname">Nom*</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="firstname">Pr&eacute;nom*</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Pr&eacute;nom" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthday">Date de naissance*</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<input type="date" class="form-control" id="birthday" name="birthday" placeholder="Date de naissance" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthday">Age</label>
+						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="age" name="age" placeholder="Age" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail*</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="adress">Adresse</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">
+					    </div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">&nbsp;</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+				            <div class="form-group row">
+				                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				                    <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Code postal">
+				                </div>
+				                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				                    <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Ville">
+				                </div>
+				            </div>
+				        </div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2"
+							for="gender">Genre</label>
+						<div class="col-xs-1 col-sm-1 col-md-1">
+							<div class="radio">
+								<label><input type="radio" name="gender" placeholder="gender" value="Homme" checked="checked">Homme</label>
+								<label><input type="radio" name="gender" placeholder="gender" value="Femme">Femme</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="cotisation">Cotisation</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">€</span>
+								<input type="number" class="form-control" id="cotisation" name="cotisation" placeholder="Montant">
+								<span class="input-group-addon" id="basic-addon2">.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="dateCotisation">Date de cotisation</label>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+							<input type="date" class="form-control" id="dateCotisation" name="dateCotisation" placeholder="Date de cotisation" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-4 col-md-5 col-lg-5">
+							<input type="submit" class="btn btn-success pull-right hidden-xs" value="Modifier">
+							<button type="submit" class="btn btn-success pull-right visible-xs-inline-block"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>La liste des emprunts</h2>
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th class="col-xs-2">R&eacute;f&eacute;rence</th>
+					<th class="col-xs-2">Type</th>
+					<th class="col-xs-4">Titre</th>
+					<th class="col-xs-2">Date d'emprunt</th>
+					<th class="col-xs-2">Jours restants</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>123456798</td>
+					<td>CD</td>
+					<td>Star Wars</td>
+					<td>02/11/2016</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<td>123456789</td>
+					<td>Livre</td>
+					<td>Le livre de la jungle</td>
+					<td>03/11/2016</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td>123466789</td>
+					<td>DVD</td>
+					<td>Suits : avocats sur mesure</td>
+					<td>08/11/2016</td>
+					<td>1</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Formulaire de Recherche et d'Ajout d'Emprunts (Matthieu) -->
+
+	<div class="row">
+		<aside class="col-xs-12">
+			<h2>Ajout Emprunt<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true" data-toggle="collapse" data-target="#emprunt"></span></h2>
+			<hr/>
+			<div id="emprunt" class="collapse">
+				<form name="MemberLoanSearchForm" id="rechercheEmprunt" action="" method="GET" class="form-horizontal">
+					<div class="form-group">
+						<label for="idIdentifiant" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Identifiant</label>
+						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="idIdentifiant" name="nom" placeholder="Identifiant">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="idTitre" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre</label>
+						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="idTitre" name="nom" placeholder="Titre">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="idAuteur" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur</label>
+						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+							<input type="text" class="form-control" id="idAuteur" name="prenom" placeholder="Auteur">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="idCategorie" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type</label>
+						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+							<select name="option" class="form-control">
+								<option id="idTous" value="tous"></option>
+								<option id="idLivre" value="livre">Livre</option>
+								<option id="idCD" value="cd">CD</option>
+								<option id="idDVD" value="dvd">DVD</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-5 col-lg-5">
+							<button type="submit" class="btn btn-success pull-right hidden-xs">Rechercher</button>
+							<button type="submit" class="btn btn-success pull-right visible-xs-inline-block"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						</div>
+					</div>
+				</form>
+				<hr/>
+				<form name="MemberLoanAddForm" id="validEmprunt" action="" method="GET" class="form-horizontal">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th class="col-xs-4">Titre</th>
+								<th class="col-xs-3">Auteur</th>
+								<th class="col-xs-2">Identifiant</th>
+								<th class="col-xs-2 text-center">Type</th>
+								<th class="col-xs-1"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Java pour les Ploucs</td>
+								<td>Nadir ALLAM</td>
+								<td>978-2075074209</td>
+								<td class="text-center">Livre</td>
+								<td class="form-group"><input type="radio" id="matt" name="media" value="matt" required="required" /></td>
+							</tr>
+							<tr>
+								<td>L'informatique est un long fleuve tranquille</td>
+								<td>Fanny COUTURIER</td>
+								<td>B01K2WUR9E</td>
+								<td class="text-center">DVD</td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+							</tr>
+							<tr>
+								<td>CSS Dance Party Vol. 5</td>
+								<td>Matthieu LACLAU</td>
+								<td>B01GO3JWPK</td>
+								<td class="text-center">CD</td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+							</tr>
+							<tr>
+								<td>Sopra, si pr&egrave;s</td>
+								<td>Baptiste TRAIN</td>
+								<td>978-3155058290</td>
+								<td class="text-center">Livre</td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+							</tr>
+							<tr>
+								<td>La m&eacute;lancolie du Javascript</td>
+								<td>Fanny COUTURIER</td>
+								<td>978-5135666210</td>
+								<td class="text-center">Livre</td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+							</tr>
+							<tr>
+								<td>La Bible de Jquery</td>
+								<td>Matthieu LACLAU</td>
+								<td>978-5554867824</td>
+								<td class="text-center">Livre</td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+							</tr>
+							<tr>
+								<td>Sport et Informatique: Comment se muscler le cerveau</td>
+								<td>Nadir ALLAM</td>
+								<td>B01L3XTC9E</td>
+								<td class="text-center">DVD</td>
+								<td class="form-group"><input type="radio" id="" name="media" value="" required="required" /></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="form-group">
+						<div class="col-xs-offset-6 col-sm-offset-8 col-md-offset-10 col-lg-offset-10 col-xs-6 col-sm-4 col-md-2 col-lg-2">
+							<button type="submit" class="btn btn-success pull-right hidden-xs">Ajouter un m&eacute;dia</button>
+							<button type="submit" class="btn btn-success pull-right visible-xs-inline-block"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+						</div>
+					</div>
+				</form>
+				<hr/>
+			</div>
+		</aside>
+	</div>
+</main>
