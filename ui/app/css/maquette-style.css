@@ -1,0 +1,79 @@
+.hidden {
+	display: none;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+/* Pagination */
+
+.gris {
+	text-align: center;
+ }
+
+.gris .pagination > .active > a {
+	background-color: #bfbfbf !important;
+	border-color: #bfbfbf !important;
+}
+
+.gris .pagination > li > a {
+	color: #262626 !important;
+}
+
+/* Header */
+.jumbotron {
+	background: url(livre.jpg) no-repeat;
+	background-size: 100%;
+	color: black;
+}
+
+.jumbotron.titre {
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	font-weight: bolder;
+	font-size: 500px;
+	color: #dbdbdb;
+	text-shadow: 5px 5px 9px red;
+	text-align: center;
+}
+
+.jumbotron.titre > div {
+	margin-top: -25px;
+	margin-bottom: -20px;
+}
+
+/* Le footer */
+.jumbotron.dernier {
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	font-weight: bolder;
+	/* font-size: 500px; */
+	color: #dbdbdb;
+	text-shadow: 5px 5px 9px red;
+	text-align: center;
+}
+
+/* couleur des liens - footer */
+.anoir a:visited, .anoir a:hover, .anoir a:link, .anoir a:active {
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+}
+/* nav bar - Avoir les icones � la place des titres dans les petits �crans */
+.navbar {
+    min-height: 40px;
+}
+.navbar-right {
+    float: right !important;
+    margin-right: -15px;
+}
+.navbar-nav {
+    float: left;
+    margin: 0;
+}
+.navbar-nav > li {
+    float: left;
+}
+/* fin nav bar */
