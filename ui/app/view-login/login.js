@@ -46,7 +46,7 @@ angular.module('Login', [])
 }])
 
 
-.factory('AuthentificationService', function($http, IpService) {
+.factory('AuthentificationService', 'IpService', function($http, IpService) {
 	// F5 bypass
 	//var defaut = 'Basic YXplOmF6ZQ==';
 	//$http.defaults.headers.common['Authorization'] = defaut;

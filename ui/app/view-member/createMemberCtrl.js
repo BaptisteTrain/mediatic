@@ -1,5 +1,5 @@
 angular.module('CreateMember', [])
-	.controller('CreateMemberCtrl', ['$http', 'MemberSheetService',  function($http, MemberSheetService) {
+	.controller('CreateMemberCtrl', ['MemberSheetService',  function(MemberSheetService) {
 		var obj = this;
 		
 		obj.setMemberSheet = function() {

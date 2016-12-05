@@ -121,7 +121,7 @@ angular.module('MemberSheet', [])
 			}
 		}
 	})
-	.factory('MemberSheetService', function($http, IpService) {
+	.factory('MemberSheetService', 'IpService', function($http, IpService) {
 		var url = 'http://'+IpService+':8090/resource/';
 		
 		return {

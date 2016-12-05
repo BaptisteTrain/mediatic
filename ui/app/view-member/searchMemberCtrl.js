@@ -59,7 +59,7 @@ angular.module('SearchMember', [])
 	.value('Memorisation', {
 		'searchMemberCtrl' : {}
 	})
-	.service('SearchMemberService', ['$http', function($http, IpService) {
+	.service('SearchMemberService', ['$http', 'IpService', function($http, IpService) {
 		this.getMembers = function(element) {
 			var http;
 			http = $http;
