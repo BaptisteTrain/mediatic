@@ -1,5 +1,5 @@
 angular.module('MemberSearch', [])
-	.controller('MemberSearchCtrl', ['MemberSearchService', '$location', function(MemberSearchService, $location) {
+	.controller('MemberSearchCtrl', ['MemberSearchService', 'Memorisation', '$location', function(MemberSearchService, Memorisation, $location) {
 		var obj = this;
 		obj.adherents;
 		
@@ -13,6 +13,8 @@ angular.module('MemberSearch', [])
 			obj.currentPage = newPage;
 		};
 
+		obj.element = Memorisation.memberSearchCtrl;
+		
 		obj.search = function() {
 
 			MemberSearchService.getMembers(obj.element).then(function(response) {
@@ -21,6 +23,10 @@ angular.module('MemberSearch', [])
 			}, function(reason) {
 				console.log('Les adherent n\'ont pas pas être récupéré');
 			})
+		}
+		obj.addNewMember = function() {
+			Memorisation.memberSearchCtrl = {'lastname' : obj.element.lastname, 'firstname' : obj.element.firstname}
+			$location.path('/member/new');
 		}
 		obj.callMemberSheet = function(id){
 			$location.path('/member/'+id);
@@ -43,6 +49,9 @@ angular.module('MemberSearch', [])
 			
 			return result;
 		}
+	})
+	.value('Memorisation', {
+		'memberSearchCtrl' : {}
 	})
 	.service('MemberSearchService', ['$http', function($http) {
 		this.getMembers = function(element) {

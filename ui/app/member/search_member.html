@@ -25,8 +25,8 @@
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-5 col-md-5 col-lg-5">
 						<div class="form-inline">
-							<input type="button" class="btn btn-info hidden-xs" value="Ajouter un adh&eacute;rent">
-							<button type="submit" class="btn btn-info visible-xs-inline-block"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+							<input type="button" class="btn btn-info hidden-xs" value="Ajouter un adh&eacute;rent" ng-click="memberSearchCtrl.addNewMember()">
+							<button type="submit" class="btn btn-info visible-xs-inline-block" ng-click="memberSearchCtrl.addNewMember()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
 							<input type="button" class="btn btn-success pull-right hidden-xs" value="Rechercher" ng-click="memberSearchCtrl.search()">
 							<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-click="memberSearchCtrl.search()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 						</div>
@@ -55,7 +55,7 @@
 						<td ng-bind="adherent.prenom"></td>
 						<td ng-bind="adherent.date_naissance"></td>
 						<td ng-bind="adherent.emprunt.length"></td>
-						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" ng-click="callMemberSheet(adherent.id)"></i></td>	
+						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" ng-click="memberSearchCtrl.callMemberSheet(adherent.id)"></i></td>	
 					</tr>
 				</tbody>
 			</table>
