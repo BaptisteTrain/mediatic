@@ -10,14 +10,22 @@ angular.module('Login', [])
 	});
 })
 
-.controller('LoginCtrl', ['$location', '$http', '$scope', 'AuthentificationService', 
-					function($location, $http, $scope, AuthentificationService) {
+.controller('LoginCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService', 
+					function($location, $http, $rootScope, AuthentificationService) {
 	
 	var self = this;
 	
+	// Don't display the login/mdp error
 	this.diplayMessError = false;
 	
-	// Check the authentification
+	// Page's title
+	$rootScope.titre = 'Mediatic';
+	
+	// Menu active
+	$rootScope.mediaActive = '';
+	$rootScope.memberActive = '';
+	
+	// Check the authentication
 	this.checkAuth = function() {
 		console.log('verifAuth');
 		
@@ -44,7 +52,7 @@ angular.module('Login', [])
 	//$http.defaults.headers.common['Authorization'] = defaut;
 	var connected;
 	return {
-		// Check the authentification
+		// Check the authentication
 		connect : function(login, password) {
 			var auth = 'Basic' + btoa(login + ':' + password);
 			var config = {
@@ -69,7 +77,7 @@ angular.module('Login', [])
 			});
 		},
 		
-		// Tells if the user is authentified
+		// Tells if the user is authenticated
 		isConnected : function() {
 			return connected;
 		}

@@ -10,19 +10,29 @@ angular.module('Media', [])
 	});
 })
 
-.controller('MediaCtrl', ['$location', '$http', '$sce', '$rootScope',
-						 function($location, $http, $sce, $rootScope) {
+.controller('MediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService',
+						 function($location, $http, $rootScope, AuthentificationService) {
 	var self = this;
+	
+	// Check if authenticated
+	if (! AuthentificationService.isConnected()) {
+		// Redirection toward login
+		$location.url('/login');
+	}
 
 	// Page's title
-	$rootScope.titre = "Media";
+	$rootScope.titre = 'Media';
+	
+	// Menu active
+	$rootScope.mediaActive = 'active';
+	$rootScope.memberActive = '';
 	
 	// Redirection from button add a media to page newMedia
 	this.goNewMedia = function() {
 		$location.url('/newMedia');
 	}
 	
-	// Loading liste de medias
+	// Loading list of medias
 	this.mediasList = [];
 	this.searchMedias = function() {
 		var url = 'http://192.168.10.34:8090/resource/media.recherche';

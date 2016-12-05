@@ -10,12 +10,22 @@ angular.module('NewMedia', [])
 	});
 })
 
-.controller('NewMediaCtrl', ['$location', '$http', '$sce', '$rootScope',
-						 function($location, $http, $sce, $rootScope) {
+.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService',
+						 function($location, $http, $rootScope, AuthentificationService) {
 	var self = this;
+	
+	// Check if authenticated
+	if (! AuthentificationService.isConnected()) {
+		// Redirection toward login
+		$location.url('/login');
+	}
 
-	// Titre de la page
+	// Page's title
 	$rootScope.titre = 'Nouveau Media';
+	
+	// Menu active
+	$rootScope.mediaActive = 'active';
+	$rootScope.memberActive = '';
 	
 	// Redirection
 	this.goBackMedia = function() {
