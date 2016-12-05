@@ -188,7 +188,7 @@ angular.module('MemberSheet', [])
 	})
 	.config(function($routeProvider) {
 		$routeProvider.when('/member/:idMember', {
-			templateUrl: '/view-member/memberSheet.html',
+			templateUrl: '/member/memberSheet.html',
 			controller: 'MemberSheetController',
 			controllerAs: 'mbshCtrl'
 		});
