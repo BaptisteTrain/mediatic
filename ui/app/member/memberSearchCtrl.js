@@ -1,20 +1,23 @@
 angular.module('MemberSearch', [])
-	.controller('MemberSearchCtrl', ['MemberSearchService', function(MemberSearchService, $location) {
+	.controller('MemberSearchCtrl', ['MemberSearchService', '$location', function(MemberSearchService, $location) {
 		var obj = this;
 		obj.adherents;
-		obj.totalAdherents;
+		
+		obj.totalItems;
+		obj.itemsPerPage = 2;
+		obj.maxSize = 5;
 		
 		obj.currentPage = 1;
-		obj.maxSize = 5;
 		
 		obj.setPage = function (newPage) {
 			obj.currentPage = newPage;
 		};
-		
+
 		obj.search = function() {
+
 			MemberSearchService.getMembers(obj.element).then(function(response) {
 				obj.adherents = response;
-				obj.totalAdherents = response.length;
+				obj.totalItems = response.length;
 			}, function(reason) {
 				console.log('Les adherent n\'ont pas pas être récupéré');
 			})
@@ -24,6 +27,23 @@ angular.module('MemberSearch', [])
 		}
   
 	}])
+	.filter('paginationMembersFilter', function() {
+		return function(input, currentPage, itemsPerPage) {
+			var result = [];
+			
+			if (input != undefined && input != null && input != '') {
+				
+				var start = (currentPage - 1) * itemsPerPage;
+				var end = start + itemsPerPage;
+
+				for (var i = start;i < end;i++) {
+					result.push(input[i]);
+				}
+			}
+			
+			return result;
+		}
+	})
 	.service('MemberSearchService', ['$http', function($http) {
 		this.getMembers = function(element) {
 			var http;
@@ -31,14 +51,16 @@ angular.module('MemberSearch', [])
 			
 			var url = 'http://192.168.1.93:8090/resource/adherent.recherche?';
 			
-			if ('id' in element && element.id != undefined && element.id != null && element.id != '') {
-				url += "id=" + element.id + "&";
-			}
-			if ('lastname' in element && element.lastname != undefined && element.lastname != null && element.lastname != '') {
-				url += "nom=" + element.lastname + "&";
-			}
-			if ('firstname' in element && element.firstname != undefined && element.firstname != null && element.firstname != '') {
-				url += "prenom=" + element.firstname;
+			if (element != undefined) {
+				if ('id' in element && element.id != undefined && element.id != null && element.id != '') {
+					url += "id=" + element.id + "&";
+				}
+				if ('lastname' in element && element.lastname != undefined && element.lastname != null && element.lastname != '') {
+					url += "nom=" + element.lastname + "&";
+				}
+				if ('firstname' in element && element.firstname != undefined && element.firstname != null && element.firstname != '') {
+					url += "prenom=" + element.firstname;
+				}
 			}
 			
 			return http.get(url).then(function(response) {

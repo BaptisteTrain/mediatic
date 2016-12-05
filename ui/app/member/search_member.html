@@ -35,35 +35,47 @@
 			</form>
 		</div>
 		<br>
+		<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
+		<div id="divRechAdh" ng-class="{hidden : (memberSearchCtrl.adherents == undefined) || (memberSearchCtrl.adherents.length <= 0) }">
+			<table id="tableRechAdh" class="table table-striped table-hover tablesorter">
+				<thead>
+					<tr>
+						<th>Identifiant</th>
+						<th>Nom</th>
+						<th>Date naissance</th>
+						<th>Cotisation &agrave; jour</th>
+						<th>Nb emprunts</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="adherent in memberSearchCtrl.adherents | paginationMembersFilter:memberSearchCtrl.currentPage:memberSearchCtrl.itemsPerPage">
+						<td ng-bind="adherent.id"></td>
+						<td ng-bind="adherent.nom"></td>
+						<td ng-bind="adherent.prenom"></td>
+						<td ng-bind="adherent.date_naissance"></td>
+						<td ng-bind="adherent.emprunt.length"></td>
+						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" ng-click="callMemberSheet(adherent.id)"></i></td>	
+					</tr>
+				</tbody>
+			</table>
+			<!-- / TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
+		
+			<!-- PAGINATION -->
+			<div class="paginationMember">
+				<div uib-pagination	boundary-links="true" 
+							total-items="memberSearchCtrl.totalItems" 
+							items-per-page="memberSearchCtrl.itemsPerPage" 
+							ng-model="memberSearchCtrl.currentPage" 
+							num-pages="memberSearchCtrl.maxSize" 
+							previous-text="&lsaquo;" 
+							next-text="&rsaquo;" 
+							first-text="&laquo;" 
+							last-text="&raquo;"
+							style="margin: auto;">
+				</div>
+			</div>
+			<!-- / PAGINATION -->
+		</div>
 	</div>
-</div>
-<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
-<div id="divRechAdh" ng-class="{hidden : (memberSearchCtrl.adherents == undefined) || (memberSearchCtrl.adherents.length <= 0) }">
-	<table id="tableRechAdh" class="table table-striped table-hover tablesorter">
-		<thead>
-			<tr>
-				<th>Identifiant</th>
-				<th>Nom</th>
-				<th>Date naissance</th>
-				<th>Cotisation &agrave; jour</th>
-				<th>Nb emprunts</th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="adherent in memberSearchCtrl.adherents">
-				<td ng-bind="adherent.id"></td>
-				<td ng-bind="adherent.nom"></td>
-				<td ng-bind="adherent.prenom"></td>
-				<td ng-bind="adherent.date_naissance"></td>
-				<td ng-bind="adherent.emprunt.length"></td>
-				<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" ng-click="callMemberSheet(adherent.id)"></i></td>	
-			</tr>
-		</tbody>
-	</table>
-	<!-- / TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
-
-	<!-- PAGINATION -->
-	<pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-	<!-- / PAGINATION -->
 </div>

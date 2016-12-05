@@ -5,23 +5,23 @@
 		<hr/>
 		
 		<div class="formulaire">
-			<form class="form-horizontal" method="GET" action="#">
+			<form name="formNewMedia" class="form-horizontal" novalidate ng-submit="newMedia.addMedia()">
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre*</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre *</label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-						<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre" required>
+						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.title" id="titre" name="title" placeholder="Titre" ng-required="true" maxlength=200>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur*</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur *</label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-						<input type="text" class="form-control" id="auteur" name="auteur" placeholder="Auteur" required>
+						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.author" id="auteur" name="author" placeholder="Auteur" ng-required="true" maxlength=200>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type*</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type *</label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-						<select id="type" class="form-control" name="type" required>
+						<select id="type" class="form-control" ng-model="newMedia.mediaToAdd.type" name="type" ng-required="true">
 							<option value=""></option>
 							<option value="Livre">Livre</option>
 							<option value="CD">CD</option>
@@ -38,8 +38,8 @@
 						</button>
 						
 						<!-- BUTTON ADD -->
-						<input type="submit" class="btn btn-success pull-right hidden-xs" value="Ajouter">
-						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block">
+						<input type="submit" class="btn btn-success pull-right hidden-xs" value="Ajouter" ng-disabled="formNewMedia.$invalid">
+						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-disabled="formNewMedia.$invalid">
 							<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 						</button>
 					</div>
