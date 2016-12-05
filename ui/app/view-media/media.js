@@ -27,6 +27,9 @@ angular.module('Media', [])
 	$rootScope.mediaActive = 'active';
 	$rootScope.memberActive = '';
 	
+	// Has the right to create a new media
+	this.displayButtonAdd = AuthentificationService.hasRightMediaCreation();
+	
 	// Redirection from button add a media to page newMedia
 	this.goNewMedia = function() {
 		$location.url('/newMedia');

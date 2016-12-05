@@ -53,8 +53,8 @@ angular.module('Login', [])
 	var connected = false;
 	
 	// Rights for the creation buttons
-	var rightMem = false;
-	var rightMed = false;
+	var rightMemberCreation = false;
+	var rightMediaCreation = false;
 	
 	return {
 		// Check the authentication
@@ -73,9 +73,9 @@ angular.module('Login', [])
 				// Retrieve of the rights
 				for (var i in response.data) {
 					if (response.data[i] == 'creation-adherent') {
-						rightMem = true;
+						rightMemberCreation = true;
 					} else if (response.data[i] == 'creation-media') {
-						rightMed = true;
+						rightMediaCreation = true;
 					}
 				}
 				// Authentication for the http services
@@ -97,6 +97,16 @@ angular.module('Login', [])
 		// Disconnect the user
 		disconnect: function() {
 			connected = false;
+		},
+		
+		// Has the right to create a new member
+		hasRightMemberCreation: function() {
+			return rightMemberCreation;
+		},
+		
+		// Has the right to create a new member
+		hasRightMediaCreation: function() {
+			return rightMediaCreation;
 		}
 	}
 });
