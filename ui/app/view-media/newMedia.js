@@ -10,12 +10,22 @@ angular.module('NewMedia', [])
 	});
 })
 
-.controller('NewMediaCtrl', ['$location', '$http', '$sce', '$rootScope',
-						 function($location, $http, $sce, $rootScope) {
+.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService', 'IpService',
+						 function($location, $http, $rootScope, AuthentificationService, IpService) {
 	var self = this;
+	
+	// Check if authenticated
+	if (! AuthentificationService.isConnected()) {
+		// Redirection toward login
+		$location.url('/login');
+	}
 
-	// Titre de la page
+	// Page's title
 	$rootScope.titre = 'Nouveau Media';
+	
+	// Menu active
+	$rootScope.mediaActive = 'active';
+	$rootScope.memberActive = '';
 	
 	// Redirection
 	this.goBackMedia = function() {
@@ -24,7 +34,7 @@ angular.module('NewMedia', [])
 	
 	// Add a new media
 	this.addMedia = function() {
-		var url = 'http://192.168.10.34:8090/resource/media.creation';
+		var url = 'http://'+IpService+':8090/resource/media.creation';
 		var mediaToSend = {titre: self.mediaToAdd.title, auteur: self.mediaToAdd.author, type: self.mediaToAdd.type};
 		$http.post(url, mediaToSend).then(function(response) {});
 	};

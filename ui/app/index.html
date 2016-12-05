@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html ng-app="MediaticApp">
 <head>
@@ -8,28 +7,38 @@
 	<!-- TODO TROUBLE LIBRARIES -->
 	<link media="all" href="./css/bootstrap.css" rel="stylesheet" />
 	<link media="all" href="./css/bootstrap-theme.css" rel="stylesheet" />
-	<link media="all" href="./css/tablesorter-style.css" rel="stylesheet" />
-	<link media="all" href="./css/app-style.css" rel="stylesheet" />
-
-	<!-- /TROUBLE LIBRARIES -->
 	<link media="all" href="./css/tablesort.css" rel="stylesheet" />
+	<link media="all" href="./css/tablesorter-style.css" rel="stylesheet" />
+	<!-- /TROUBLE LIBRARIES -->
 	
+	<!-- Css for the app -->
+	<link media="all" href="./css/app-style.css" rel="stylesheet" />
+	
+	
+	<!-- Angular's Libraries -->
 	<script src="./bower_components/angular/angular.js"></script>
 	<script src="./bower_components/angular-route/angular-route.js"></script>
 	<script src="./bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 	<script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-	<script src="./bower_components/angular-tablesort/js/angular-tablesort.js"></script>
+	<!-- / Angular's Libraries -->
 	
+	<!-- Library modified for tablesort -->
 	<script src="./js/angular-tablesort.js"></script>
 	
+	<!-- Controllers -->
 	<script src="./index.js"></script>
+	<script src="./js/IpService.js"></script>
+	
+	<script src="./view-login/login.js"></script>
 
 	<script src="./view-media/media.js"></script>
 	<script src="./view-media/newMedia.js"></script>
 	<script src="./view-media/mediaSheet.js"></script>
 
 	<script src="./view-member/searchMemberCtrl.js"></script>
+	<script src="./view-member/createMemberCtrl.js"></script>
 	<script src="./view-member/memberSheetCtrl.js"></script>
+	<!-- / Controllers -->
 	
 	<title ng-bind="titre"></title>
 	
@@ -47,7 +56,7 @@
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
 				<ul class="nav navbar-nav">
-					<li class="active">
+					<li class="{{mediaActive}}">
 						<a href="#/media" class="hidden-xs">
 							<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span><span>&nbsp;M&eacute;dias</span></strong>
 						</a>
@@ -55,7 +64,7 @@
 							<strong><span class="glyphicon glyphicon-film" aria-hidden="true"></span></strong>
 						</a>
 					</li>
-					<li>
+					<li class="{{memberActive}}">
 						<a href="#/searchMember" class="hidden-xs">
 							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Adh&eacute;rents</strong>
 						</a>

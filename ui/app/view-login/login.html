@@ -1,0 +1,23 @@
+<div class="row"> 
+	<h1 class="text-center">Connexion</h1>
+	<br>
+	<div class="col-xs-4"></div>
+	<form name="formLogin" class="form-signin col-xs-4" novalidate ng-submit="login.checkAuth()">
+		<input type="text" id="login" name="id" ng-model="login.id" class="form-control" placeholder="Login" ng-required="true" autofocus>
+		<br>
+		<input type="password" id="inputPassword" name="psw" ng-model="login.psw" class="form-control" placeholder="Mot de passe" ng-required="true">
+		<div class="checkbox">
+			<label><a href="motdepasse_oublie.html">Mot de passe oubli&eacute; ?</a></label>
+		</div>
+		
+		<!-- Error message -->
+		<div class="text-danger" ng-show="login.diplayMessError">
+			Mauvaise combinaison login/mot de passe.<br /><br />
+		</div>
+		<!-- / Error message -->
+		
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="formLogin.$invalid">Connexion</button>
+	</form>
+	<div class="col-xs-4"></div>
+</div>
+<br><br><br><br><br><br><br><br><br>

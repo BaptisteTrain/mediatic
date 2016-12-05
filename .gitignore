@@ -6,4 +6,8 @@ target/
 .classpath
 .project
 
+npm-debug.log
+
+ui/app/js/IpService.js
+
 .DS_Store

@@ -7,11 +7,12 @@ angular
 		    ControllerAs : 'MediaSheet'
 		});
 	})
-	.controller('MediaSheetCtrl', function($scope, $http, $routeParams) {
+
+	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, IpService) {
 		var ctrl = this;
 		var id   = $routeParams.id;
-		var url1 = 'http://192.168.1.93:8090/resource/media.accession?id='+id;
-		var url2 = 'http://192.168.1.93:8090/resource/adherent.recherche';
+		var url1 = 'http://'+IpService+':8090/resource/media.accession?id='+id;
+		var url2 = 'http://'+IpService+':8090/resource/adherent.recherche';
 		//console.log('Je commande à charger le média.');
 		$scope.myMedia = {};
 		$http.get(url1)
@@ -28,7 +29,7 @@ angular
 		$scope.isCollapsed = false;
 		$scope.isCollapsedHorizontal = false;
 	})
-	.controller('MediaSheetMediaCtrl', function($scope, $http, $rootScope) {
+	.controller('MediaSheetMediaCtrl', function($scope, $http, IpService) {
 		var ctrl = this;
 		ctrl.emprunteurs = [];
 		$scope.$watch('myMedia.emprunteurs', function(newValue, oldValue){
@@ -52,7 +53,7 @@ angular
 
 		// Edit a media
 		ctrl.editMedia = function(id, title, author, type) {
-			var url = 'http://192.168.1.93:8090/resource/media.modification';
+			var url = 'http://'+IpService+':8090/resource/media.modification';
 			var data = {
 				id	   : id,
 				titre  : title, 
@@ -83,7 +84,7 @@ angular
 			//console.log(ctrl.mySearchList);
 			ctrl.addLoan = function(idMember) {
 				console.log('kkkkkk');
-				var url = 'http://192.168.1.93:8090/resource/emprunt.ajout';
+				var url = 'http://'+IpService+':8090/resource/emprunt.ajout';
 				var time;
 				if(type == 'Livre') {
 					time = 30;

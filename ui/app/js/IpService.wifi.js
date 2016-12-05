@@ -1,0 +1,1 @@
+angular.module('MediaticApp').constant('IpService', '192.168.1.93');
