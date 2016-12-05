@@ -1,5 +1,5 @@
 angular.module('MemberSheet', [])
-	.controller('MemberSheetController', ['$http', 'MemberSheetService', '$routeParams', function($http, MemberSheetService, $routeParams) {
+	.controller('MemberSheetController', ['$http', '$routeParams', 'MemberSheetService', 'MediaListService', function($http, $routeParams, MemberSheetService, MediaListService) {
 		var mbshCtrl = this;
 		console.log($routeParams.idMember);
 		
@@ -10,39 +10,32 @@ angular.module('MemberSheet', [])
 			mbshCtrl.lastname = liste.nom;
 			mbshCtrl.firstname = liste.prenom;
 			var pattern = "/(\d{4})\-(\d{2})\-(\d{2})/";
-			mbshCtrl.birthdate = new Date(liste.date_naissance.replace(pattern,'$1-$2-$3'));
+			mbshCtrl.birthdate = new Date(liste.date_naissance);
 			mbshCtrl.email = liste.email;
 			mbshCtrl.address = liste.adresse.ligne1 + " " + liste.adresse.ligne2;
 			mbshCtrl.postalcode =  liste.adresse.codepostal;
 			mbshCtrl.town =  liste.adresse.ville;
 			mbshCtrl.age = liste.age;
 			mbshCtrl.subscriptionAmount = liste.cotisation.montant;
-			mbshCtrl.subscriptionDate = new Date(liste.cotisation.debut.replace(pattern,'$1-$2-$3'));
-			
-
-			console.log("Emprunts: ");
-			console.log(liste);
+			mbshCtrl.subscriptionDate = new Date(liste.cotisation.debut);
+			mbshCtrl.loans = liste.emprunt;
 		});
 		
-		console.log("mbshCtrl.sheet: ");
-		console.log(mbshCtrl.sheet);
 		
-		/*for(var i in mbshCtrl.sheet) {
-			console.log(mbshCtrl.sheet[i]);
-			for(var j in mbshCtrl.sheet[i]) {
-				console.log(mbshCtrl.sheet[i][j]);
-			}
-		}*/
-		
-		angular.forEach(mbshCtrl.sheet, function(member) {
-			console.log("Member: ");
-			console.log(member);
-			angular.forEach(member, function(dd) {
-				console.log("dd: " + dd);
+		mbshCtrl.getMedias = function() {
+			console.log("Titre: " + mbshCtrl.title);
+			console.log("Author: " + mbshCtrl.author);
+			console.log("Type: " + mbshCtrl.type);
+			MediaListService.getList(mbshCtrl.title || "",mbshCtrl.author || "",mbshCtrl.type || "").then(function(listeMedia) {
+				console.log("Liste des médias: ");
+				console.log(listeMedia);
+				mbshCtrl.medias = listeMedia;
 			});
-		});
+		};
 		
-		mbshCtrl.loans =
+		
+		
+		/*mbshCtrl.loans =
 			[
 				{
 					reference: '123456798',
@@ -64,9 +57,9 @@ angular.module('MemberSheet', [])
 					title: 'Suits: avocats sur mesure',
 					loandate: '08/11/2016'
 				}
-			];
+			];*/
 		
-		mbshCtrl.medias =
+		/*mbshCtrl.medias =
 			[
 				{
 					title: 'Java pour les Ploucs',
@@ -116,8 +109,30 @@ angular.module('MemberSheet', [])
 					reference: 'B01L3XTC9E',
 					type: 'dvd'
 				}
-			];
+			];*/
+		
+		mbshCtrl.isNavCollapsed = true;
+		mbshCtrl.isCollapsed = false;
+		mbshCtrl.isCollapsedHorizontal = false;
 	}])
+	.filter('remainingDays', function() {
+		return function(input) {
+			if(input == undefined) {
+				return 0;
+			}
+			
+			var today = new Date().getTime();
+			var date = new Date(input).getTime();
+			var result = Math.trunc((date - today) / 1000 / 60 / 60 / 24);
+			
+			if(result > 0) {
+				return result;
+			}
+			else {
+				return 0;
+			}
+		}
+	})
 	.factory('MemberSheetService', function($http) {
 		var url = 'http://192.168.10.34:8090/resource/adherent.accession?id=';
 		
@@ -131,6 +146,32 @@ angular.module('MemberSheet', [])
 				});
 			}
 		}
+	}).factory('MediaListService', function($http) {
+		var urlMedia = 'http://192.168.10.34:8090/resource/media.recherche';
+		
+		return {
+			getList : function(title,author,type) {
+				var request = "?titre=" + title + "&auteur=" + author + "&type=";
+				
+				return $http.get(urlMedia + request).then(function(responseMedia) {
+					console.log("Data: " + responseMedia.data);
+					return responseMedia.data;
+				});
+			}
+		}
+	})
+	.directive('date', function (dateFilter) {
+	    return {
+	        require:'ngModel',
+	        link:function (scope, elm, attrs, ctrl) {
+
+	            var dateFormat = attrs['date'] || 'yyyy-MM-dd';
+	           
+	            ctrl.$formatters.unshift(function (modelValue) {
+	                return dateFilter(modelValue, dateFormat);
+	            });
+	        }
+	    };
 	})
 	.config(function($routeProvider) {
 		$routeProvider.when('/member/:idMember', {
