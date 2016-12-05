@@ -85,7 +85,7 @@ angular.module('SearchMember', [])
 	}])
 	.config(function($routeProvider) {
 		$routeProvider.when('/member/search', {
-			templateUrl : '/member/searchMember.html',
+			templateUrl : '/view-member/searchMember.html',
 			controller : 'SearchMemberCtrl',
 			controllerAs : 'searchMemberCtrl'
 		})
