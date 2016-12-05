@@ -27,9 +27,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-3 col-xs-12 col-sm-4 col-md-7 col-lg-7">
+					<div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-3 col-xs-12 col-sm-4 col-md-7 col-lg-7" ng-click="ctrl.editMedia(ctrl.media.mediaEditId, ctrl.media.mediaEditTitre,ctrl.media.mediaEditAuteur,ctrl.media.mediaEditType)">
 						<input type="submit" class="btn btn-success pull-right hidden-xs" value="Modifier" ng-disabled="formEditMedia.$invalid">
-						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-disabled="formEditMedia.$invalid"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-disabled="formEditMedia.$invalid">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
 					</div>
 				</div>
 			</form>
@@ -63,7 +65,7 @@
 
 <!-- Formulaire de Recherche et d'Ajout Emprunteur (Matthieu) -->
 
-<div class="row" ng-controller="MediaSheetLoanCtrl as MediaSheetLoan">
+<div class="row" ng-controller="MediaSheetLoanCtrl as ctrl">
 	<aside class="col-xs-12">
 		<h2>
 			Ajout Emprunteur<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true" data-toggle="collapse" data-target="#emprunteur" ng-click="isNavCollapsed = !isNavCollapsed"></span>
@@ -74,70 +76,61 @@
 				<div class="form-group">
 					<label for="idIdentifiant" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Identifiant</label>
 					<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-						<input type="text" class="form-control" id="idIdentifiant" name="nom" placeholder="Identifiant">
+						<input type="text" class="form-control" id="mediaIdSearch" ng-model="mediaIdSearch" placeholder="Identifiant">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="idNom" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Nom</label>
 					<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-						<input type="text" class="form-control" id="idNom" name="nom" placeholder="Nom">
+						<input type="text" class="form-control" id="mediaNameSearch" ng-model="mediaNameSearch" placeholder="Nom">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="idPrenom" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Pr&eacute;nom</label>
 					<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-						<input type="text" class="form-control" id="idPrenom" name="prenom" placeholder="Pr&eacute;nom">
+						<input type="text" class="form-control" id="mediaSecondeNameSearch" ng-model="mediaSecondeNameSearch" placeholder="Pr&eacute;nom">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-5 col-lg-5">
 						<button type="submit" class="btn btn-success pull-right hidden-xs">Rechercher</button>
-						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button>
 					</div>
 				</div>
 			</form>
 			<hr />
-			<form id="validEmprunteur" action="" method="GET" class="form-horizontal">
+			<form id="validEmprunteur" name="loanForm" action="" method="GET" class="form-horizontal" ng-show="ctrl.mySearchList.length>0" novalidate>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
+							<th class="col-xs-3">Identifiant</th>
 							<th class="col-xs-4">Nom</th>
 							<th class="col-xs-4">Pr&eacute;nom</th>
-							<th class="col-xs-3">Identifiant</th>
 							<th class="col-xs-1"><!-- <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> --></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>LACLAU</td>
-							<td>Matthieu</td>
-							<td>matt</td>
-							<td class="form-group"><input type="radio" id="matt" name="adherent" value="matt" required="required" /></td>
-						</tr>
-						<tr>
-							<td>TRAIN</td>
-							<td>Baptiste</td>
-							<td>lunefenduedu34</td>
-							<td class="form-group"><input type="radio" id="lunefenduedu34" name="adherent" value="lunefenduedu34" required="required" /></td>
-						</tr>
-						<tr>
-							<td>COUTURIER</td>
-							<td>Fanny</td>
-							<td>fannydetoulouse</td>
-							<td class="form-group"><input type="radio" id="fannydetoulouse" name="adherent" value="fannydetoulouse" required="required" /></td>
-						</tr>
-						<tr>
-							<td>ALLAM</td>
-							<td>Nadir</td>
-							<td>sudoku75</td>
-							<td class="form-group"><input type="radio" id="sudoku75" name="adherent" value="sudoku75" required="required" /></td>
+						<tr ng-repeat="search in ctrl.mySearchList
+								  | filter : {'id'          : mediaIdSearch} 
+								  | filter : {'firstname'   : mediaNameSearch} 
+								  | filter : {'secondename' : mediaSecondeNameSearch} as l">
+							<td ng-bind="search.id"></td>
+							<td ng-bind="search.firstname"></td>
+							<td ng-bind="search.secondename"></td>
+							<td class="form-group">
+								<input type="radio" id="{{search.id}}" ng-model="loanMember" name="toto" ng-required="true" />
+							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="form-group">
 					<div class="col-xs-offset-6 col-sm-offset-8 col-md-offset-10 col-lg-offset-10 col-xs-6 col-sm-4 col-md-2 col-lg-2">
-						<button type="submit" class="btn btn-success pull-right hidden-xs">Ajouter l'emprunteur</button>
-						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+						<button type="submit" class="btn btn-success pull-right hidden-xs" ng-disabled="loanForm.$invalid">Ajouter l'emprunteur</button>
+						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-disabled="loanForm.$invalid">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
 					</div>
 				</div>
 			</form>
