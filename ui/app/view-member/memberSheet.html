@@ -176,7 +176,7 @@
 					</div>
 				</form>
 				<hr/>
-				<form name="MemberLoanAddForm" id="validEmprunt" class="form-horizontal" ng-submit="" ng-show="mbshCtrl.medias.length" novalidate>
+				<form name="MemberLoanAddForm" id="validEmprunt" class="form-horizontal" ng-submit="mbshCtrl.AddLoan()" ng-show="mbshCtrl.medias.length" novalidate>
 					<table class="table table-striped table-hover" ts-wrapper>
 						<thead>
 							<tr>
@@ -193,7 +193,7 @@
 								<td ng-bind="media.auteur"></td>
 								<td ng-bind="media.id"></td>
 								<td ng-bind="media.type"></td>
-								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
+								<td class="form-group"><input type="radio" id="media_{{media.id}}" name="media" ng-model="mbshCtrl.idMedia" value="{{media.id}}" ng-required="true"/></td>
 							</tr>
 						</tbody>
 					</table>
