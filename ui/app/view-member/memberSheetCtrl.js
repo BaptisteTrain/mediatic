@@ -1,11 +1,15 @@
-angular.module('MemberSheet', [])
-	.controller('MemberSheetController', ['$http', '$routeParams', 'MemberSheetService', function($http, $routeParams, MemberSheetService) {
-		var mbshCtrl = this;
+/* AUTHOR: Matthieu */
 
+angular.module('MemberSheet', [])
+	.controller('MemberSheetController', ['$http', '$routeParams', '$location', 'IpService', 'MemberSheetService', function($http, $routeParams, $location, IpService, MemberSheetService) {
+		var mbshCtrl = this;
+		
+		/* Variables pour la fonction Collapse d'Ajout Emprunt */
 		mbshCtrl.isNavCollapsed = true;
 		mbshCtrl.isCollapsed = false;
 		mbshCtrl.isCollapsedHorizontal = false;
 		
+		/* Récupération de la Fiche Adhérent en fonction de l'ID passé en paramètre dans la barre d'adresse */
 		MemberSheetService.getSheet($routeParams.idMember).then(function(liste) {
 			//console.log("La fiche du membre est: ");
 			//console.log(liste);
@@ -24,9 +28,13 @@ angular.module('MemberSheet', [])
 			/* Not used in form */mbshCtrl.subscriptionEndDate = liste.cotisation.fin;
 			mbshCtrl.loans = liste.emprunt;
 			mbshCtrl.nbLoans = liste.nombre_media;
+		},
+		function(response) {
+			console.log("Cet Adhérent n'existe pas.");
+			$location.path('/createMember'); //Si l'Adhérent n'existe pas on effectue une redirection vers la page d'Ajout d'un nouveau Membre.
 		});
 		
-		
+		/* Récupérer la Liste des Médias en fonction des paramètres du formulaire (MemberLoanSearchForm) */
 		mbshCtrl.getMedias = function() {
 			//console.log("Titre: " + mbshCtrl.title);
 			//console.log("Author: " + mbshCtrl.author);
@@ -36,6 +44,7 @@ angular.module('MemberSheet', [])
 			});
 		};
 		
+		/* Envoi du contenu de la Fiche Adhérent vers la BDD */
 		mbshCtrl.setMemberSheet = function() {
 			//console.log("ID: " + $routeParams.idMember);
 			//console.log("Lastname: " + mbshCtrl.lastname);
@@ -53,6 +62,7 @@ angular.module('MemberSheet', [])
 			//console.log("Loans: " + mbshCtrl.loans);
 			//console.log("Number of Loans: " + mbshCtrl.nbLoans);
 			
+			/* Tableau contenant les données à envoyer à la BDD */
 			var data = {
                 id: parseInt($routeParams.idMember),
                 nom: mbshCtrl.lastname,
@@ -69,19 +79,20 @@ angular.module('MemberSheet', [])
 			//console.log("Data à envoyer: ");
 			//console.log(data);
 			
+			/* Lancement de la requête */
 			MemberSheetService.setSheet(data).then(function(response) {
 				//console.log("Response: ");
 				//console.log(response);
 			});
 		};
 		
-
-		
+		/* Ajouter un Emprunt à l'Adhérent actuel en fonction du Media sélectionné (MemberLoanAddForm)*/
 		mbshCtrl.AddLoan = function() {
 			//console.log("ID Adhérent: " + $routeParams.idMember);
 			//console.log("ID Média: " + mbshCtrl.idMedia);
 			//console.log("Date: " + new Date().toISOString().substring(0, 10));
 			
+			/* Tableau contenant les données à envoyer à la BDD */
 			var data = {
 				id_adherent: parseInt($routeParams.idMember),
 				id_media: parseInt(mbshCtrl.idMedia),
@@ -91,10 +102,12 @@ angular.module('MemberSheet', [])
 			//console.log("Data à envoyer: ");
 			//console.log(data);
 			
+			/* Lancement de la requête */
 			MemberSheetService.setLoan(data).then(function(response) {
 				//console.log("Response: ");
 				//console.log(response);
 				
+				/* Requête pour mettre à jour la Liste des Emprunts affichée */
 				MemberSheetService.getSheet($routeParams.idMember).then(function(liste) {
 					mbshCtrl.loans = liste.emprunt;
 					mbshCtrl.nbLoans = liste.nombre_media;
@@ -103,6 +116,7 @@ angular.module('MemberSheet', [])
 		};
 		
 	}])
+	/* Filtre qui calcule le nombre de jours séparant la Date du jour et la Date sur laquelle le filtre est appliqué */
 	.filter('remainingDays', function() {
 		return function(input) {
 			if(input == undefined) {
@@ -121,10 +135,12 @@ angular.module('MemberSheet', [])
 			}
 		}
 	})
-	.factory('MemberSheetService', 'IpService', function($http, IpService) {
-		var url = 'http://'+IpService+':8090/resource/';
+	/* Services permettant de communiquer avec la BDD */
+	.factory('MemberSheetService', function($http, IpService) {
+		var url = 'http://' + IpService + ':8090/resource/';
 		
 		return {
+			/* Récupère l'Adhérent en fonction de l'ID */
 			getSheet : function(id) {
 				var resource = "adherent.accession?id=";
 				//console.log("ID: " + id);
@@ -135,6 +151,7 @@ angular.module('MemberSheet', [])
 				});
 			},
 			
+			/* Modifie un Adhérent avec les données passées en paramètres */
 			setSheet : function(data) {
 				var resource = "adherent.modification";
 				//console.log("URL + Resource: " + url + resource);
@@ -144,6 +161,7 @@ angular.module('MemberSheet', [])
 				});
 			},
 			
+			/* Ajout d'une Emprunt pour un Adhérent concernant un Media donné */
 			setLoan : function(data) {
 				var resource = "emprunt.ajout";
 				//console.log("URL + Resource: " + url + resource);
@@ -153,6 +171,7 @@ angular.module('MemberSheet', [])
 				});
 			},
 			
+			/* Récupère les Medias en fonction du Titre, de l'Auteur et du Type */
 			getMedias : function(title,author,type) {
 				var resource = "media.recherche";
 				var request = "?titre=" + title + "&auteur=" + author + "&type=" + type;
@@ -164,6 +183,7 @@ angular.module('MemberSheet', [])
 			}
 		}
 	})
+	/* Attribut date permettnat de formater une date selon le pattern passé en paramètre */
 	.directive('date', function (dateFilter) {
 	    return {
 	        require:'ngModel',
@@ -177,6 +197,7 @@ angular.module('MemberSheet', [])
 	        }
 	    };
 	})
+	/* Configuration de la Route */
 	.config(function($routeProvider) {
 		$routeProvider.when('/member/:idMember', {
 			templateUrl: '/view-member/memberSheet.html',
