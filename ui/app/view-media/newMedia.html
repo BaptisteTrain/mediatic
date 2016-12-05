@@ -7,19 +7,19 @@
 		<div class="formulaire">
 			<form name="formNewMedia" class="form-horizontal" novalidate ng-submit="newMedia.addMedia()">
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre *</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.title" id="titre" name="title" placeholder="Titre" ng-required="true" maxlength=200>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur *</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.author" id="auteur" name="author" placeholder="Auteur" ng-required="true" maxlength=200>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type *</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 						<select id="type" class="form-control" ng-model="newMedia.mediaToAdd.type" name="type" ng-required="true">
 							<option value=""></option>

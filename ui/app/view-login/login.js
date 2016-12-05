@@ -25,18 +25,18 @@ angular.module('Login', [])
 	$rootScope.mediaActive = '';
 	$rootScope.memberActive = '';
 	
+	// Disconnect if previously was connected
+	AuthentificationService.disconnect();
+	
 	// Check the authentication
 	this.checkAuth = function() {
 		console.log('verifAuth');
 		
 		AuthentificationService.connect(this.id, this.psw).then(function(resolution) {
-			console.log('AFTER');
 			if (resolution) {
 				// Redirection
-				console.log('END OK');
 				$location.url('/media');
 			} else {
-				console.log('END NOP');
 				// display mess erreur
 				self.diplayMessError = true;
 			}
@@ -67,12 +67,10 @@ angular.module('Login', [])
 			return $http.post(url, logPsw).then(function() {
 				connected = true;
 				$http.defaults.headers.common['Authorization'] = auth;
-				console.log('OK CONNECT');
 				return true;
 			}, function() {
 				connected = false;
 				$http.defaults.headers.common['Authorization'] = 'Basic';
-				console.log('NOP CONNECT');
 				return false;
 			});
 		},
@@ -80,6 +78,11 @@ angular.module('Login', [])
 		// Tells if the user is authenticated
 		isConnected : function() {
 			return connected;
+		},
+		
+		// Disconnect the user
+		disconnect: function() {
+			connected = false;
 		}
 	}
 });
