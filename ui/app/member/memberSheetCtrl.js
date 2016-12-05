@@ -1,6 +1,11 @@
 angular.module('MemberSheet', [])
 	.controller('MemberSheetController', ['$http', '$routeParams', 'MemberSheetService', 'MediaListService', function($http, $routeParams, MemberSheetService, MediaListService) {
 		var mbshCtrl = this;
+
+		mbshCtrl.isNavCollapsed = true;
+		mbshCtrl.isCollapsed = false;
+		mbshCtrl.isCollapsedHorizontal = false;
+		
 		console.log($routeParams.idMember);
 		
 		console.log("Ici");
@@ -13,12 +18,16 @@ angular.module('MemberSheet', [])
 			mbshCtrl.birthdate = new Date(liste.date_naissance);
 			mbshCtrl.email = liste.email;
 			mbshCtrl.address = liste.adresse.ligne1 + " " + liste.adresse.ligne2;
+			/**/mbshCtrl.ligne1 = liste.adresse.ligne1;
+			/**/mbshCtrl.ligne2 = liste.adresse.ligne2;
 			mbshCtrl.postalcode =  liste.adresse.codepostal;
 			mbshCtrl.town =  liste.adresse.ville;
 			mbshCtrl.age = liste.age;
 			mbshCtrl.subscriptionAmount = liste.cotisation.montant;
 			mbshCtrl.subscriptionDate = new Date(liste.cotisation.debut);
+			/**/mbshCtrl.subscriptionEndDate = liste.cotisation.fin;
 			mbshCtrl.loans = liste.emprunt;
+			mbshCtrl.nbLoans = liste.nombre_media;
 		});
 		
 		
@@ -33,87 +42,36 @@ angular.module('MemberSheet', [])
 			});
 		};
 		
-		
-		
-		/*mbshCtrl.loans =
-			[
-				{
-					reference: '123456798',
-					type: 'cd',
-					title: 'Star Wars',
-					loandate: '02/11/2016'
-				},
-				
-				{
-					reference: '123456789',
-					type: 'book',
-					title: 'Le livre de la jungle',
-					loandate: '03/11/2016'
-				},
-				
-				{
-					reference: '543216798',
-					type: 'dvd',
-					title: 'Suits: avocats sur mesure',
-					loandate: '08/11/2016'
-				}
-			];*/
-		
-		/*mbshCtrl.medias =
-			[
-				{
-					title: 'Java pour les Ploucs',
-					author: 'Nadir ALLAM',
-					reference: '978-2075074209',
-					type: 'book'
-				},
-				
-				{
-					title: 'L\'informatique est un long fleuve tranquille',
-					author: 'Fanny COUTURIER',
-					reference: 'B01K2WUR9E',
-					type: 'dvd'
-				},
-				
-				{
-					title: 'CSS Dance Party Vol. 5',
-					author: 'Matthieu LACLAU',
-					reference: 'B01GO3JWPK',
-					type: 'cd'
-				},
-				
-				{
-					title: 'Sopra, si près',
-					author: 'Baptiste TRAIN',
-					reference: '978-3155058290',
-					type: 'book'
-				},
-				
-				{
-					title: 'La mélancolie du Javascript',
-					author: 'Fanny COUTURIER',
-					reference: '978-5135666210',
-					type: 'book'
-				},
-				
-				{
-					title: 'La Bible de Jquery',
-					author: 'Matthieu LACLAU',
-					reference: '978-5554867824',
-					type: 'book'
-				},
-				
-				{
-					title: 'Sport et Informatique: Comment se muscler le cerveau',
-					author: 'Nadir ALLAM',
-					reference: 'B01L3XTC9E',
-					type: 'dvd'
-				}
-			];*/
-		
-		mbshCtrl.isNavCollapsed = true;
-		mbshCtrl.isCollapsed = false;
-		mbshCtrl.isCollapsedHorizontal = false;
+		mbshCtrl.setMemberSheet = function() {
+			console.log("Lastname: " + mbshCtrl.lastname);
+			console.log("Firstname: " + mbshCtrl.firstname);
+			console.log("Birthdate: " + mbshCtrl.birthdate);
+			console.log("E-mail: " + mbshCtrl.email);
+			console.log("Address: " + mbshCtrl.ligne1);
+			console.log("Address: " + mbshCtrl.ligne2);
+			console.log("Postal Code: " + mbshCtrl.postalcode);
+			console.log("Town: " + mbshCtrl.town);
+			console.log("Age: " + mbshCtrl.age);
+			console.log("Subscription Amount: " + mbshCtrl.subscriptionAmount);
+			console.log("Subscription Date: " + mbshCtrl.subscriptionDate);
+			console.log("Loans: " + mbshCtrl.loans);
+			
+			var data = {
+                id: parseInt($routeParams.idMember),
+                nom: mbshCtrl.lastname,
+                prenom: mbshCtrl.firstname,
+                date_naissance: mbshCtrl.birthdate,
+                email: mbshCtrl.email,
+                adresse: {ligne1: mbshCtrl.ligne1, ligne2: mbshCtrl.ligne2, codepostal: mbshCtrl.postalcode, ville: mbshCtrl.town},
+                cotisation: {debut: mbshCtrl.subscriptionDate, fin: mbshCtrl.subscriptionEndDate, montant: mbshCtrl.subscriptionAmount},
+                age: mbshCtrl.age,
+                emprunt: mbshCtrl.loans,
+                nombre_media: mbshCtrl.nbLoans
+            };
+			
+			console.log("Data à envoyer: ");
+			console.log(data);
+		}
 	}])
 	.filter('remainingDays', function() {
 		return function(input) {
@@ -134,24 +92,35 @@ angular.module('MemberSheet', [])
 		}
 	})
 	.factory('MemberSheetService', function($http) {
-		var url = 'http://192.168.10.34:8090/resource/adherent.accession?id=';
+		var url = 'http://192.168.10.34:8090/resource/';
 		
 		return {
 			getSheet : function(id) {
+				var resource = "adherent.accession?id=";
 				console.log("ID: " + id);
-				console.log("URL+ID: " + url + id);
-				return $http.get(url + id).then(function(response) {
+				console.log("URL + Resource + ID: " + url + resource + id);
+				return $http.get(url + resource + id).then(function(response) {
 					console.log("Data: " + response.data);
 					return response.data;
 				});
-			}
+			}/*,
+			
+			setSheet : function(id) {
+				var resource = "adherent.modification";
+				console.log("ID: " + id);
+				console.log("URL + Resource: " + url + resource);
+				return $http.post(url + resource, data).then(function(response) {
+					console.log("Data: " + response.data);
+				});
+			}*/
 		}
-	}).factory('MediaListService', function($http) {
+	})
+	.factory('MediaListService', function($http) {
 		var urlMedia = 'http://192.168.10.34:8090/resource/media.recherche';
 		
 		return {
 			getList : function(title,author,type) {
-				var request = "?titre=" + title + "&auteur=" + author + "&type=";
+				var request = "?titre=" + title + "&auteur=" + author + "&type=" + type;
 				
 				return $http.get(urlMedia + request).then(function(responseMedia) {
 					console.log("Data: " + responseMedia.data);
