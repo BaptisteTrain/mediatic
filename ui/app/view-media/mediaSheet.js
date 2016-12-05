@@ -29,7 +29,7 @@ angular
 		$scope.isCollapsed = false;
 		$scope.isCollapsedHorizontal = false;
 	})
-	.controller('MediaSheetMediaCtrl', function($scope, $http, IpService) {
+	.controller('MediaSheetMediaCtrl', function($scope, $http, $rootScope, IpService) {
 		var ctrl = this;
 		ctrl.emprunteurs = [];
 		$scope.$watch('myMedia.emprunteurs', function(newValue, oldValue){
@@ -69,9 +69,10 @@ angular
 	            });
 		}
 	})
-	.controller('MediaSheetLoanCtrl', function($scope, $http) {
+	.controller('MediaSheetLoanCtrl', function($scope, $http, IpService) {
 		var ctrl = this;
 		ctrl.mySearchList = [];
+		
 		$scope.$watch('mySearch', function(newValue, oldValue){
 			ctrl.mySearchList.splice(0,ctrl.mySearchList.length);
 			for(var i in $scope.mySearch) {
@@ -82,38 +83,41 @@ angular
 				});
 			}
 			//console.log(ctrl.mySearchList);
-			ctrl.addLoan = function(idMember) {
-				console.log('kkkkkk');
-				var url = 'http://'+IpService+':8090/resource/emprunt.ajout';
-				var time;
-				if(type == 'Livre') {
-					time = 30;
-				}else{
-					time = 15;
-				}
-				var idMedia   = $scope.myMedia.id;
-				var typeMedia = $scope.myMedia.type;
-				
-				var today     = '05/12/2016';
-				var tabDate   = today.split('/');
-				var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0] + 30);
-				
-				var data      = {
-					id_adherent : idMember,
-					id_media	: idMedia,
-					depart		: nextDate
-				};
-				
-				console.log(nextDate.toLocaleString());
-				$http.post(url, data)
-					.success(function (data, status, headers, config) {
-						console.log('SUCCESS');
-		            })
-		            .error(function (data, status, header, config) {
-		            	console.log('ERROR');
-		            });
-				
-			}
 		});
+		
+		ctrl.addLoan = function() {
+			console.log('kkkkkk');
+			if(loanForm.$invalid){
+				return;
+			}
+			var url = 'http://'+IpService+':8090/resource/emprunt.ajout';
+			var time;
 
+			var idMedia   = $scope.myMedia.id;
+			var typeMedia = $scope.myMedia.type;
+			if(typeMedia == 'Livre') {
+				time = 30;
+			}else{
+				time = 15;
+			}
+			var today     = '05/12/2016';
+			var tabDate   = today.split('/');
+			var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0] + 30);
+			
+			var data      = {
+				id_adherent : ctrl.loanMember,
+				id_media	: idMedia,
+				depart		: nextDate
+			};
+			
+			console.log(nextDate.toLocaleString());
+			$http.post(url, data)
+				.success(function (data, status, headers, config) {
+					console.log('SUCCESS');
+	            })
+	            .error(function (data, status, header, config) {
+	            	console.log('ERROR');
+	            });
+			
+		}
 	});
