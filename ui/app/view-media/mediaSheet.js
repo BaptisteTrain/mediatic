@@ -7,7 +7,7 @@ angular
 		    ControllerAs : 'MediaSheet'
 		});
 	})
-	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope) {
+	.controller('MediaSheetCtrl', function($scope, $http, $routeParams) {
 		var ctrl = this;
 		var id   = $routeParams.id;
 		var url1 = 'http://192.168.1.93:8090/resource/media.accession?id='+id;
@@ -27,10 +27,8 @@ angular
 		$scope.isNavCollapsed = true;
 		$scope.isCollapsed = false;
 		$scope.isCollapsedHorizontal = false;
-		// Page's title
-		$rootScope.titre = 'MediaSheet';
 	})
-	.controller('MediaSheetMediaCtrl', function($scope, $http) {
+	.controller('MediaSheetMediaCtrl', function($scope, $http, $rootScope) {
 		var ctrl = this;
 		ctrl.emprunteurs = [];
 		$scope.$watch('myMedia.emprunteurs', function(newValue, oldValue){
@@ -48,6 +46,8 @@ angular
 				mediaEditAuteur : $scope.myMedia.auteur,
 				mediaEditType   : $scope.myMedia.type
 			};
+			// Page's title
+			$rootScope.titre = $scope.myMedia.titre;
 		});
 
 		// Edit a media
@@ -81,5 +81,38 @@ angular
 				});
 			}
 			//console.log(ctrl.mySearchList);
+			ctrl.addLoan = function(idMember) {
+				console.log('kkkkkk');
+				var url = 'http://192.168.1.93:8090/resource/emprunt.ajout';
+				var time;
+				if(type == 'Livre') {
+					time = 30;
+				}else{
+					time = 15;
+				}
+				var idMedia   = $scope.myMedia.id;
+				var typeMedia = $scope.myMedia.type;
+				
+				var today     = '05/12/2016';
+				var tabDate   = today.split('/');
+				var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0] + 30);
+				
+				var data      = {
+					id_adherent : idMember,
+					id_media	: idMedia,
+					depart		: nextDate
+				};
+				
+				console.log(nextDate.toLocaleString());
+				$http.post(url, data)
+					.success(function (data, status, headers, config) {
+						console.log('SUCCESS');
+		            })
+		            .error(function (data, status, header, config) {
+		            	console.log('ERROR');
+		            });
+				
+			}
 		});
+
 	});
