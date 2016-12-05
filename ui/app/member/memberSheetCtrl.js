@@ -43,27 +43,30 @@ angular.module('MemberSheet', [])
 		};
 		
 		mbshCtrl.setMemberSheet = function() {
+			console.log("ID: " + $routeParams.idMember);
 			console.log("Lastname: " + mbshCtrl.lastname);
 			console.log("Firstname: " + mbshCtrl.firstname);
-			console.log("Birthdate: " + mbshCtrl.birthdate);
+			console.log("Birthdate: " + mbshCtrl.birthdate.toISOString().substring(0, 10));
 			console.log("E-mail: " + mbshCtrl.email);
 			console.log("Address: " + mbshCtrl.ligne1);
 			console.log("Address: " + mbshCtrl.ligne2);
 			console.log("Postal Code: " + mbshCtrl.postalcode);
 			console.log("Town: " + mbshCtrl.town);
-			console.log("Age: " + mbshCtrl.age);
+			console.log("Subscription Date: " + mbshCtrl.subscriptionDate.toISOString().substring(0, 10));
+			console.log("Subscription End Date: " + mbshCtrl.subscriptionEndDate);
 			console.log("Subscription Amount: " + mbshCtrl.subscriptionAmount);
-			console.log("Subscription Date: " + mbshCtrl.subscriptionDate);
+			console.log("Age: " + mbshCtrl.age);
 			console.log("Loans: " + mbshCtrl.loans);
+			console.log("Number of Loans: " + mbshCtrl.nbLoans);
 			
 			var data = {
                 id: parseInt($routeParams.idMember),
                 nom: mbshCtrl.lastname,
                 prenom: mbshCtrl.firstname,
-                date_naissance: mbshCtrl.birthdate,
+                date_naissance: mbshCtrl.birthdate.toISOString().substring(0, 10),
                 email: mbshCtrl.email,
                 adresse: {ligne1: mbshCtrl.ligne1, ligne2: mbshCtrl.ligne2, codepostal: mbshCtrl.postalcode, ville: mbshCtrl.town},
-                cotisation: {debut: mbshCtrl.subscriptionDate, fin: mbshCtrl.subscriptionEndDate, montant: mbshCtrl.subscriptionAmount},
+                cotisation: {debut: mbshCtrl.subscriptionDate.toISOString().substring(0, 10), fin: mbshCtrl.subscriptionEndDate, montant: parseInt(mbshCtrl.subscriptionAmount)},
                 age: mbshCtrl.age,
                 emprunt: mbshCtrl.loans,
                 nombre_media: mbshCtrl.nbLoans
@@ -71,7 +74,39 @@ angular.module('MemberSheet', [])
 			
 			console.log("Data à envoyer: ");
 			console.log(data);
-		}
+			
+			MemberSheetService.setSheet(data).then(function(response) {
+				console.log("Response: ");
+				console.log(response);
+			});
+		};
+		
+
+		
+		mbshCtrl.AddLoan = function() {
+			console.log("ID Adhérent: " + $routeParams.idMember);
+			console.log("ID Média: " + mbshCtrl.idMedia);
+			console.log("Date: " + new Date().toISOString().substring(0, 10));
+			
+			var data = {
+				id_adherent: parseInt($routeParams.idMember),
+				id_media: parseInt(mbshCtrl.idMedia),
+				depart: new Date().toISOString().substring(0, 10)
+            };
+			
+			console.log("Data à envoyer: ");
+			console.log(data);
+			
+			MemberSheetService.setLoan(data).then(function(response) {
+				console.log("Response: ");
+				console.log(response);
+				
+				MemberSheetService.getSheet($routeParams.idMember).then(function(liste) {
+					mbshCtrl.loans = liste.emprunt;
+					mbshCtrl.nbLoans = liste.nombre_media;
+				});
+			});
+		};
 	}])
 	.filter('remainingDays', function() {
 		return function(input) {
@@ -103,16 +138,25 @@ angular.module('MemberSheet', [])
 					console.log("Data: " + response.data);
 					return response.data;
 				});
-			}/*,
+			},
 			
-			setSheet : function(id) {
+			setSheet : function(data) {
 				var resource = "adherent.modification";
-				console.log("ID: " + id);
 				console.log("URL + Resource: " + url + resource);
 				return $http.post(url + resource, data).then(function(response) {
 					console.log("Data: " + response.data);
+					return response.data;
 				});
-			}*/
+			},
+			
+			setLoan : function(data) {
+				var resource = "emprunt.ajout";
+				console.log("URL + Resource: " + url + resource);
+				return $http.post(url + resource, data).then(function(response) {
+					console.log("Data: " + response.data);
+					return response.data;
+				});
+			}
 		}
 	})
 	.factory('MediaListService', function($http) {
