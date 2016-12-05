@@ -4,6 +4,7 @@ angular
 	.module('MediaticApp', ['ngRoute',
 							'ui.bootstrap',
 							'tableSort',
+							'Login',
 							'MemberSearch',
 							'MemberSheet', 
 							'MediaSheet',
@@ -12,6 +13,6 @@ angular
 
 	.config(function($routeProvider) {
 		$routeProvider.otherwise({
-			redirectTo: '/media'
+			redirectTo: '/login'
 		});
 	});
