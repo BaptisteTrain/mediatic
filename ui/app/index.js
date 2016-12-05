@@ -5,7 +5,7 @@ angular
 							'ui.bootstrap',
 							'tableSort',
 							'Login',
-							'MemberSearch',
+							'SearchMember',
 							'MemberSheet', 
 							'MediaSheet',
 							'Media',
