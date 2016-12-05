@@ -10,8 +10,8 @@ angular.module('Media', [])
 	});
 })
 
-.controller('MediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService',
-						 function($location, $http, $rootScope, AuthentificationService) {
+.controller('MediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService', 'IpService',
+						 function($location, $http, $rootScope, AuthentificationService, IpService) {
 	var self = this;
 	
 	// Check if authenticated
@@ -35,7 +35,7 @@ angular.module('Media', [])
 	// Loading list of medias
 	this.mediasList = [];
 	this.searchMedias = function() {
-		var url = 'http://192.168.10.34:8090/resource/media.recherche';
+		var url = 'http://'+IpService+':8090/resource/media.recherche';
 		$http.get(url).then(function(response) {
 			for (var i in response.data) {
 				// If there's no borrower on the media, the line stays empty

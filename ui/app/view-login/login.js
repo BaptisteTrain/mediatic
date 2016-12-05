@@ -46,7 +46,7 @@ angular.module('Login', [])
 }])
 
 
-.factory('AuthentificationService', function($http) {
+.factory('AuthentificationService', function($http, IpService) {
 	// F5 bypass
 	//var defaut = 'Basic YXplOmF6ZQ==';
 	//$http.defaults.headers.common['Authorization'] = defaut;
@@ -63,7 +63,7 @@ angular.module('Login', [])
 			
 			var logPsw = {login: login, mdp:password};
 			
-			var url = 'http://192.168.10.34:8090/resource/connexion.login';
+			var url = 'http://'+IpService+':8090/resource/connexion.login';
 			return $http.post(url, logPsw).then(function() {
 				connected = true;
 				$http.defaults.headers.common['Authorization'] = auth;

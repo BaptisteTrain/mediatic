@@ -59,12 +59,12 @@ angular.module('SearchMember', [])
 	.value('Memorisation', {
 		'searchMemberCtrl' : {}
 	})
-	.service('SearchMemberService', ['$http', function($http) {
+	.service('SearchMemberService', ['$http', function($http, IpService) {
 		this.getMembers = function(element) {
 			var http;
 			http = $http;
 			
-			var url = 'http://192.168.1.93:8090/resource/adherent.recherche?';
+			var url = 'http://'+IpService+':8090/resource/adherent.recherche?';
 			
 			if (element != undefined) {
 				if ('id' in element && element.id != undefined && element.id != null && element.id != '') {

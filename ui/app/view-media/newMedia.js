@@ -10,8 +10,8 @@ angular.module('NewMedia', [])
 	});
 })
 
-.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService',
-						 function($location, $http, $rootScope, AuthentificationService) {
+.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService', 'IpService',
+						 function($location, $http, $rootScope, AuthentificationService, IpService) {
 	var self = this;
 	
 	// Check if authenticated
@@ -34,7 +34,7 @@ angular.module('NewMedia', [])
 	
 	// Add a new media
 	this.addMedia = function() {
-		var url = 'http://192.168.10.34:8090/resource/media.creation';
+		var url = 'http://'+IpService+':8090/resource/media.creation';
 		var mediaToSend = {titre: self.mediaToAdd.title, auteur: self.mediaToAdd.author, type: self.mediaToAdd.type};
 		$http.post(url, mediaToSend).then(function(response) {});
 	};
