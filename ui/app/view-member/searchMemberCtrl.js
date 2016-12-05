@@ -1,5 +1,5 @@
-angular.module('MemberSearch', [])
-	.controller('MemberSearchCtrl', ['MemberSearchService', 'Memorisation', '$location', function(MemberSearchService, Memorisation, $location) {
+angular.module('SearchMember', [])
+	.controller('SearchMemberCtrl', ['SearchMemberService', 'Memorisation', '$location', function(SearchMemberService, Memorisation, $location) {
 		var obj = this;
 		obj.adherents;
 		
@@ -13,11 +13,11 @@ angular.module('MemberSearch', [])
 			obj.currentPage = newPage;
 		};
 
-		obj.element = Memorisation.memberSearchCtrl;
+		obj.element = Memorisation.searchMemberCtrl;
 		
 		obj.search = function() {
 
-			MemberSearchService.getMembers(obj.element).then(function(response) {
+			SearchMemberService.getMembers(obj.element).then(function(response) {
 				obj.adherents = response;
 				obj.totalItems = response.length;
 			}, function(reason) {
@@ -26,7 +26,7 @@ angular.module('MemberSearch', [])
 		}
 		obj.addNewMember = function() {
 			Memorisation.memberSearchCtrl = {'lastname' : obj.element.lastname, 'firstname' : obj.element.firstname}
-			$location.path('/member/new');
+			$location.path('/member/create');
 		}
 		obj.callMemberSheet = function(id){
 			$location.path('/member/'+id);
@@ -40,7 +40,13 @@ angular.module('MemberSearch', [])
 			if (input != undefined && input != null && input != '') {
 				
 				var start = (currentPage - 1) * itemsPerPage;
-				var end = start + itemsPerPage;
+				var end;
+				
+				if ((input.length - start) < itemsPerPage) {
+					end = start + (input.length - start);
+				} else {
+					end = start + itemsPerPage;
+				}
 
 				for (var i = start;i < end;i++) {
 					result.push(input[i]);
@@ -51,9 +57,9 @@ angular.module('MemberSearch', [])
 		}
 	})
 	.value('Memorisation', {
-		'memberSearchCtrl' : {}
+		'searchMemberCtrl' : {}
 	})
-	.service('MemberSearchService', ['$http', function($http) {
+	.service('SearchMemberService', ['$http', function($http) {
 		this.getMembers = function(element) {
 			var http;
 			http = $http;
@@ -78,9 +84,9 @@ angular.module('MemberSearch', [])
 		}
 	}])
 	.config(function($routeProvider) {
-		$routeProvider.when('/search_member', {
-			templateUrl : '/member/search_member.html',
-			controller : 'MemberSearchCtrl',
-			controllerAs : 'memberSearchCtrl'
+		$routeProvider.when('/searchMember', {
+			templateUrl : '/view-member/searchMember.html',
+			controller : 'SearchMemberCtrl',
+			controllerAs : 'searchMemberCtrl'
 		})
 	});
