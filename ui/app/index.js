@@ -4,7 +4,7 @@ angular
 	.module('MediaticApp', ['ngRoute',
 							'ui.bootstrap',
 							'tableSort',
-							'MemberSearch',
+							'SearchMember',
 							'MemberSheet', 
 							'MediaSheet',
 							'Media',
