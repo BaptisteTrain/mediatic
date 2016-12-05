@@ -21,12 +21,12 @@ angular.module('SearchMember', [])
 				obj.adherents = response;
 				obj.totalItems = response.length;
 			}, function(reason) {
-				console.log('Les adherent n\'ont pas pas être récupéré');
+				console.log('Les adherents n\'ont pas pu être récupérés');
 			})
 		}
 		obj.addNewMember = function() {
 			Memorisation.memberSearchCtrl = {'lastname' : obj.element.lastname, 'firstname' : obj.element.firstname}
-			$location.path('/member/create');
+			$location.path('/createMember');
 		}
 		obj.callMemberSheet = function(id){
 			$location.path('/member/'+id);
