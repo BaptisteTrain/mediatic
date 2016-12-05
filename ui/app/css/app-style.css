@@ -8,18 +8,11 @@
 
 /* Pagination */
 
-.gris {
+.paginationMember {
 	text-align: center;
+	font-size: 17px;
+	
  }
-
-.gris .pagination > .active > a {
-	background-color: #bfbfbf !important;
-	border-color: #bfbfbf !important;
-}
-
-.gris .pagination > li > a {
-	color: #262626 !important;
-}
 
 /* Header */
 .jumbotron {
