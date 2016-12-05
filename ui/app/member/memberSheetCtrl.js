@@ -1,5 +1,5 @@
 angular.module('MemberSheet', [])
-	.controller('MemberSheetController', ['$http', 'MemberSheetService', '$routeParams', function($http, MemberSheetService, $routeParams) {
+	.controller('MemberSheetController', ['$http', '$routeParams', 'MemberSheetService', 'MediaListService', function($http, $routeParams, MemberSheetService, MediaListService) {
 		var mbshCtrl = this;
 		console.log($routeParams.idMember);
 		
@@ -20,6 +20,20 @@ angular.module('MemberSheet', [])
 			mbshCtrl.subscriptionDate = new Date(liste.cotisation.debut);
 			mbshCtrl.loans = liste.emprunt;
 		});
+		
+		
+		mbshCtrl.getMedias = function() {
+			console.log("Titre: " + mbshCtrl.title);
+			console.log("Author: " + mbshCtrl.author);
+			console.log("Type: " + mbshCtrl.type);
+			MediaListService.getList(mbshCtrl.title || "",mbshCtrl.author || "",mbshCtrl.type || "").then(function(listeMedia) {
+				console.log("Liste des médias: ");
+				console.log(listeMedia);
+				mbshCtrl.medias = listeMedia;
+			});
+		};
+		
+		
 		
 		/*mbshCtrl.loans =
 			[
@@ -129,6 +143,19 @@ angular.module('MemberSheet', [])
 				return $http.get(url + id).then(function(response) {
 					console.log("Data: " + response.data);
 					return response.data;
+				});
+			}
+		}
+	}).factory('MediaListService', function($http) {
+		var urlMedia = 'http://192.168.10.34:8090/resource/media.recherche';
+		
+		return {
+			getList : function(title,author,type) {
+				var request = "?titre=" + title + "&auteur=" + author + "&type=";
+				
+				return $http.get(urlMedia + request).then(function(responseMedia) {
+					console.log("Data: " + responseMedia.data);
+					return responseMedia.data;
 				});
 			}
 		}
