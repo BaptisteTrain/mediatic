@@ -30,8 +30,6 @@ angular.module('Login', [])
 	
 	// Check the authentication
 	this.checkAuth = function() {
-		console.log('verifAuth');
-		
 		AuthentificationService.connect(this.id, this.psw).then(function(resolution) {
 			if (resolution) {
 				// Redirection
@@ -46,11 +44,18 @@ angular.module('Login', [])
 }])
 
 
-.factory('AuthentificationService', 'IpService', function($http, IpService) {
+.factory('AuthentificationService', function($http, IpService) {
 	// F5 bypass
 	//var defaut = 'Basic YXplOmF6ZQ==';
 	//$http.defaults.headers.common['Authorization'] = defaut;
-	var connected;
+	
+	// If the user is connected
+	var connected = false;
+	
+	// Rights for the creation buttons
+	var rightMemberCreation = false;
+	var rightMediaCreation = false;
+	
 	return {
 		// Check the authentication
 		connect : function(login, password) {
@@ -60,15 +65,24 @@ angular.module('Login', [])
 					'Authorization' : auth
 				}
 			};
+			var url = 'http://'+IpService+':8090/resource/connexion.rights';
 			
-			var logPsw = {login: login, mdp:password};
-			
-			var url = 'http://'+IpService+':8090/resource/connexion.login';
-			return $http.post(url, logPsw).then(function() {
+			return $http.get(url, config).then(function(response) {
+				// Authentication OK
 				connected = true;
+				// Retrieve of the rights
+				for (var i in response.data) {
+					if (response.data[i] == 'creation-adherent') {
+						rightMemberCreation = true;
+					} else if (response.data[i] == 'creation-media') {
+						rightMediaCreation = true;
+					}
+				}
+				// Authentication for the http services
 				$http.defaults.headers.common['Authorization'] = auth;
 				return true;
 			}, function() {
+				// Authentication NOP
 				connected = false;
 				$http.defaults.headers.common['Authorization'] = 'Basic';
 				return false;
@@ -83,6 +97,16 @@ angular.module('Login', [])
 		// Disconnect the user
 		disconnect: function() {
 			connected = false;
+		},
+		
+		// Has the right to create a new member
+		hasRightMemberCreation: function() {
+			return rightMemberCreation;
+		},
+		
+		// Has the right to create a new member
+		hasRightMediaCreation: function() {
+			return rightMediaCreation;
 		}
 	}
 });
