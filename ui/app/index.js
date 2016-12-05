@@ -6,7 +6,8 @@ angular
 							'tableSort',
 							'Login',
 							'SearchMember',
-							'MemberSheet', 
+							'MemberSheet',
+							'CreateMember',
 							'MediaSheet',
 							'Media',
 							'NewMedia'])
