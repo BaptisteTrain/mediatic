@@ -138,29 +138,29 @@
 			<h2>Ajout Emprunt<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true" data-toggle="collapse" data-target="#emprunt" ng-click="isNavCollapsed = !isNavCollapsed"></span></h2>
 			<hr/>
 			<div id="emprunt" class="collapse" uib-collapse="!isNavCollapsed">
-				<form name="MemberLoanSearchForm" id="rechercheEmprunt" class="form-horizontal" ng-submit="" novalidate>
+				<form name="MemberLoanSearchForm" id="rechercheEmprunt" class="form-horizontal" ng-submit="mbshCtrl.getMedias()" novalidate>
 					<div class="form-group">
 						<label for="idIdentifiant" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Identifiant</label>
 						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="idIdentifiant" name="identifiant" placeholder="Identifiant">
+							<input type="text" class="form-control" id="idIdentifier" name="identier" ng-model="mbshCtrl.identifier" placeholder="Identifiant">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="idTitre" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre</label>
 						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="idTitre" name="titre" placeholder="Titre">
+							<input type="text" class="form-control" id="idTitle" name="title" ng-model="mbshCtrl.title" placeholder="Titre">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="idAuteur" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur</label>
 						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-							<input type="text" class="form-control" id="idAuteur" name="auteur" placeholder="Auteur">
+							<input type="text" class="form-control" id="idAuthor" name="author" ng-model="mbshCtrl.author" placeholder="Auteur">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="idCategorie" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type</label>
+						<label for="idType" class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Type</label>
 						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-							<select name="option" class="form-control">
+							<select id="idType" name="type" ng-model="mbshCtrl.type" class="form-control">
 								<option id="idTous" value="tous"></option>
 								<option id="idLivre" value="livre">Livre</option>
 								<option id="idCD" value="cd">CD</option>
@@ -189,9 +189,9 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="media in mbshCtrl.medias">
-								<td ng-bind="media.title"></td>
-								<td ng-bind="media.author"></td>
-								<td ng-bind="media.reference"></td>
+								<td ng-bind="media.titre"></td>
+								<td ng-bind="media.auteur"></td>
+								<td ng-bind="media.id"></td>
 								<td ng-bind="media.type"></td>
 								<td class="form-group"><input type="radio" id="" name="media" value="" ng-required="true"/></td>
 							</tr>
