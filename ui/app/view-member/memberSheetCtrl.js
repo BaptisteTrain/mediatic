@@ -3,6 +3,9 @@
 angular.module('MemberSheet', [])
 	.controller('MemberSheetController', ['$http', '$routeParams', '$location', 'IpService', 'MemberSheetService', function($http, $routeParams, $location, IpService, MemberSheetService) {
 		var mbshCtrl = this;
+		mbshCtrl.medias;
+		
+		mbshCtrl.itemsPerPage = 10;
 		
 		/* Variables pour la fonction Collapse d'Ajout Emprunt */
 		mbshCtrl.isNavCollapsed = true;

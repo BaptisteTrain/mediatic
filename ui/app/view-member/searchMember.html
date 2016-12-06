@@ -36,7 +36,7 @@
 		</div>
 		<br>
 		<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
-		<div id="divRechAdh" ng-class="{hidden : (searchMemberCtrl.adherents == undefined) || (searchMemberCtrl.adherents.length <= 0) }">
+		<div id="divRechAdh" ng-controller="PaginationCtrl as paginationCtrl" ng-class="{hidden : (searchMemberCtrl.adherents == undefined) || (searchMemberCtrl.adherents.length <= 0) }">
 			<table id="tableRechAdh" class="table table-striped table-hover tablesorter">
 				<thead>
 					<tr>
@@ -50,7 +50,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="adherent in searchMemberCtrl.adherents | paginationMembersFilter:searchMemberCtrl.currentPage:searchMemberCtrl.itemsPerPage">
+					<tr ng-repeat="adherent in searchMemberCtrl.adherents | paginationFilter:paginationCtrl.currentPage:searchMemberCtrl.itemsPerPage">
 						<td ng-bind="adherent.id"></td>
 						<td ng-bind="adherent.nom"></td>
 						<td ng-bind="adherent.prenom"></td>
@@ -66,10 +66,10 @@
 			<!-- PAGINATION -->
 			<div class="paginationMember">
 				<div uib-pagination	boundary-links="true" 
-							total-items="searchMemberCtrl.totalItems" 
+							total-items="searchMemberCtrl.adherents.length" 
 							items-per-page="searchMemberCtrl.itemsPerPage" 
-							ng-model="searchMemberCtrl.currentPage" 
-							max-size="searchMemberCtrl.maxSize" 
+							ng-model="paginationCtrl.currentPage" 
+							max-size="paginationCtrl.maxSize" 
 							previous-text="&lsaquo;" 
 							next-text="&rsaquo;" 
 							first-text="&laquo;" 

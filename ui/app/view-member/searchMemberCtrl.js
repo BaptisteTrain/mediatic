@@ -3,15 +3,7 @@ angular.module('SearchMember', [])
 		var obj = this;
 		obj.adherents;
 		
-		obj.totalItems;
-		obj.itemsPerPage = 2;
-		obj.maxSize = 5;
-		
-		obj.currentPage = 1;
-		
-		obj.setPage = function (newPage) {
-			obj.currentPage = newPage;
-		};
+		obj.itemsPerPage = 10;
 
 		obj.element = Memorisation.searchMemberCtrl;
 		
@@ -19,7 +11,6 @@ angular.module('SearchMember', [])
 
 			SearchMemberService.getMembers(obj.element).then(function(response) {
 				obj.adherents = response;
-				obj.totalItems = response.length;
 			}, function(reason) {
 				console.log('Les adherents n\'ont pas pu être récupérés');
 			})
@@ -33,29 +24,6 @@ angular.module('SearchMember', [])
 		}
   
 	}])
-	.filter('paginationMembersFilter', function() {
-		return function(input, currentPage, itemsPerPage) {
-			var result = [];
-			
-			if (input != undefined && input != null && input != '') {
-				
-				var start = (currentPage - 1) * itemsPerPage;
-				var end;
-				
-				if ((input.length - start) < itemsPerPage) {
-					end = start + (input.length - start);
-				} else {
-					end = start + itemsPerPage;
-				}
-
-				for (var i = start;i < end;i++) {
-					result.push(input[i]);
-				}
-			}
-			
-			return result;
-		}
-	})
 	.value('Memorisation', {
 		'searchMemberCtrl' : {}
 	})
