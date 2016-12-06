@@ -3,7 +3,8 @@
 <div ng-show="showSuccess" ng-class="{fade:doFade}" class="alert alert-success"><strong>Le livre est emprunt&eacute; :</strong> emprunt r&eacute;alis&eacute; avec succ&egrave;s</div>
 <!-- / Messages -->
 
-<div class="row" ng-controller="MediaSheetMediaCtrl as MSMctrl">
+<div ng-controller="MediaSheetMediaCtrl as MSMctrl">
+<div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 		<h2>D&eacute;tail d'un m&eacute;dia</h2>
 		<hr/>
@@ -42,30 +43,26 @@
 			</form>
 		</div>
 	</div>
-	<br /><br />
-	<div class="liste col-xs-12 col-sm-12 col-md-4 col-lg-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>Liste des emprunteurs</h4>
-			</div>
-			<div class="panel-body">
-				<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
-					<thead>
-						<tr>
-							<th ts-criteria="nom" ts-default>Nom</th>
-							<th ts-criteria="prenom">Pr&eacute;nom</th>
-						</tr>
-					</thead>
-					<tbody ng-repeat="loan in MSMctrl.emprunteurs" ts-repeat>
-						<tr>
-							<td>{{loan.nom}}</td>
-							<td>{{loan.prenom}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+</div>
+<div class="row">
+	<div class="liste col-xs-12 col-sm-12 col-md-8 col-lg-8">
+		<h2>Liste des emprunteurs</h2>
+		<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
+			<thead>
+				<tr>
+					<th ts-criteria="nom" ts-default>Nom</th>
+					<th ts-criteria="prenom">Pr&eacute;nom</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="loan in MSMctrl.emprunteurs" ts-repeat>
+				<tr>
+					<td>{{loan.nom}}</td>
+					<td>{{loan.prenom}}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+</div>
 </div>
 
 
