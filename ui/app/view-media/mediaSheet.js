@@ -101,6 +101,9 @@ angular
 	.controller('MediaSheetMediaCtrl', function($scope, $http, $rootScope, IpService) {
 		var ctrl = this;
 		ctrl.emprunteurs = [];
+		
+		ctrl.itemsPerPage = 10;
+		
 		$scope.$watch('myMedia.emprunteurs', function(newValue, oldValue){
 			ctrl.emprunteurs.splice(0,ctrl.emprunteurs.length);
 			//console.log('J\'utilise le média.', newValue, oldValue);

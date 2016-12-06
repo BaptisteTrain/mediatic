@@ -13,7 +13,7 @@ angular.module('Pagination', [])
 	.filter('paginationFilter', function() {
 		return function(input, currentPage, itemsPerPage) {
 			var result = [];
-			
+
 			if (input != undefined && input != null && input != '') {
 				
 				var start = (currentPage - 1) * itemsPerPage;
@@ -24,7 +24,6 @@ angular.module('Pagination', [])
 				} else {
 					end = start + itemsPerPage;
 				}
-
 				for (var i = start;i < end;i++) {
 					result.push(input[i]);
 				}
