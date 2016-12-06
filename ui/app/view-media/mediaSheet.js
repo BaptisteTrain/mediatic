@@ -15,20 +15,30 @@ angular
 		var url2 = 'http://'+IpService+':8090/resource/adherent.recherche';
 		//console.log('Je commande à charger le média.');
 		$scope.myMedia = {};
-		$http.get(url1)
-			.then(function(response) {
-				//console.log('J\'ai fini de charger le média.');
-				$scope.myMedia = response.data;
-			});
-		$http.get(url2)
-			.then(function(response){
-				$scope.mySearch = response.data;
-			});
+		function loadData(){
+			$http.get(url1)
+				.then(function(response) {
+					//console.log('J\'ai fini de charger le média.');
+					$scope.myMedia = response.data;
+				});
+			$http.get(url2)
+				.then(function(response){
+					$scope.mySearch = response.data;
+				});
+		}
+		loadData();
+		
+		$scope.$on('addLoan', function(event, data){
+console.log('ON');
+			loadData();
+		});
+		
 		// show/hide search form
 		$scope.isNavCollapsed = true;
 		$scope.isCollapsed = false;
 		$scope.isCollapsedHorizontal = false;
 	})
+	
 	.controller('MediaSheetMediaCtrl', function($scope, $http, $rootScope, IpService) {
 		var ctrl = this;
 		ctrl.emprunteurs = [];
@@ -41,12 +51,14 @@ angular
 					prenom : $scope.myMedia.emprunteurs[i].adherent.prenom
 				});
 			}
+			console.log('Les emprunteurs : ', ctrl.emprunteurs);
 			ctrl.media = {
 				mediaEditId  	: $scope.myMedia.id,
 				mediaEditTitre  : $scope.myMedia.titre,
 				mediaEditAuteur : $scope.myMedia.auteur,
 				mediaEditType   : $scope.myMedia.type
-			};
+			};			
+			
 			// Page's title
 			$rootScope.titre = $scope.myMedia.titre;
 		});
@@ -69,6 +81,7 @@ angular
 	            });
 		}
 	})
+	
 	.controller('MediaSheetLoanCtrl', function($scope, $http, IpService) {
 		var ctrl = this;
 		ctrl.mySearchList = [];
@@ -85,7 +98,7 @@ angular
 			//console.log(ctrl.mySearchList);
 		});
 		
-		ctrl.addLoan = function() {
+		ctrl.addLoan = function(idMember) {
 			console.log('kkkkkk');
 			if(loanForm.$invalid){
 				return;
@@ -105,7 +118,7 @@ angular
 			var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0] + 30);
 			
 			var data      = {
-				id_adherent : ctrl.loanMember,
+				id_adherent : idMember,
 				id_media	: idMedia,
 				depart		: nextDate
 			};
@@ -114,6 +127,8 @@ angular
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {
 					console.log('SUCCESS');
+					$scope.$emit('addLoan');
+					$scope.isNavCollapsed = true;
 	            })
 	            .error(function (data, status, header, config) {
 	            	console.log('ERROR');
