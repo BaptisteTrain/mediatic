@@ -1,7 +1,7 @@
 <main class="container">
 	<div class="row">
 		<div class="col-xs-12">
-			<h2>Fiche adh&eacute;rent</h2>
+			<h2>Cr&eacute;er adh&eacute;rent</h2>
 			<hr/>
 			<div class="formulaire">
 				<form name="CreateMemberForm" class="form-horizontal" ng-submit="createMemberCtrl.setMemberSheet()" novalidate>
@@ -20,19 +20,19 @@
 					<div class="form-group">
 						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthdate">Date de naissance&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-							<input type="date" class="form-control" id="birthdate" name="birthdate" ng-model="createMemberCtrl.birthdate" date="dd/MM/yyyy" placeholder="Date de naissance" ng-required="true">
+							<input type="date" class="form-control" id="birthdate" name="birthdate" ng-model="createMemberCtrl.birthdate" placeholder="Date de naissance (AAAA-MM-JJ)" ng-required="true">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="age">Age</label>
-						<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="text" class="form-control" id="age" name="age" ng-model="createMemberCtrl.age" placeholder="Age" readonly>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-							<input type="email" class="form-control" id="email" name="email" ng-model="createMemberCtrl.email" placeholder="E-mail" ng-required="true">
+							<input type="email" class="form-control" id="email" name="email" ng-model="createMemberCtrl.email" placeholder="E-mail (exemple@exemple.com)" ng-required="true">
 						</div>
 					</div>
 					<div class="form-group">
@@ -77,38 +77,41 @@
 					<div class="form-group">
 						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="subscriptionDate">Date de cotisation</label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-							<input type="date" class="form-control" id="subscriptionDate" name="subscriptionDate" ng-model="createMemberCtrl.subscriptionDate" date="dd/MM/yyyy" placeholder="Date de cotisation" readonly>
+							<input type="date" class="form-control" id="subscriptionDate" name="subscriptionDate" ng-model="createMemberCtrl.subscriptionDate" placeholder="Date de cotisation" readonly>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-4 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-4 col-md-5 col-lg-5">
-							<button type="submit" class="btn btn-success hidden-xs" ng-disabled="CreateMemberForm.$invalid">Créer Adhérent</button>
+							<button type="button" class="btn btn-default hidden-xs" ng-click="createMemberCtrl.returnToSearch()">Retour</button>
 							<div class="btn-group pull-right" role="group" aria-label="...">
-								<button type="reset" class="btn btn-info hidden-xs">Remettre à zéro</button>
-								<button type="button" class="btn btn-danger hidden-xs" ng-click="createMemberCtrl.returnToSearch()">Retour</button>
+								<button type="reset" class="btn btn-info hidden-xs">Remettre à z&eacute;ro</button>
+								<button type="submit" class="btn btn-success hidden-xs" ng-disabled="CreateMemberForm.$invalid">Cr&eacute;er Adh&eacute;rent</button>
 							</div>
 							
-							<!-- Bouton de la Version mobile -->
-							<button type="submit" class="btn btn-success visible-xs-inline-block" ng-disabled="CreateMemberForm.$invalid"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
-							<div class="btn-group pull-right" role="group" aria-label="...">
-								<button type="reset" class="btn btn-info visible-xs-inline-block"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
-								<button type="button" class="btn btn-danger visible-xs-inline-block"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
+							<!-- Boutons de la Version mobile -->
+							<div class="btn-group btn-group-justified" role="group" aria-label="...">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-default visible-xs-inline-block" ng-click="createMemberCtrl.returnToSearch()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
+								</div>
+								<div class="btn-group" role="group">
+									<button type="reset" class="btn btn-info visible-xs-inline-block"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
+								</div>
+								<div class="btn-group" role="group">
+									<button type="submit" class="btn btn-success visible-xs-inline-block" ng-disabled="CreateMemberForm.$invalid"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+								</div>
 							</div>
 						</div>
 					</div>
 					
 					<!-- Gestion des erreurs de saisie dans le formulaire -->
-						<div ng-show="CreateMemberForm.lastname.$dirty && CreateMemberForm.lastname.$invalid" style="color: white; background-color: red">
-							<span ng-show="CreateMemberForm.lastname.$error.required">Le Nom est requis.</span>
-						</div>
-						<div ng-show="CreateMemberForm.firstname.$dirty && CreateMemberForm.firstname.$invalid" style="color: white; background-color: red">
-							<span ng-show="CreateMemberForm.firstname.$error.required">Le Prénom est requis.</span>
-						</div>
-						<div ng-show="CreateMemberForm.birthdate.$dirty && CreateMemberForm.birthdate.$invalid" style="color: white; background-color: red">
-							<span ng-show="CreateMemberForm.birthdate.$error.required">La Date de naissance est requise.</span>
-						</div>
-						<div ng-show="CreateMemberForm.email.$dirty && CreateMemberForm.email.$invalid" style="color: white; background-color: red">
-							<span ng-show="CreateMemberForm.email.$error.required">L'E-mail est requis.</span>
+						<div ng-show="CreateMemberForm.lastname.$dirty && CreateMemberForm.firstname.$dirty && CreateMemberForm.birthdate.$dirty && CreateMemberForm.email.$dirty && CreateMemberForm.$invalid" class="alert alert-danger" role="alert">
+							<span>Le Formulaire est invalide:</span><br/>
+							<span ng-show="CreateMemberForm.lastname.$dirty && CreateMemberForm.lastname.$error.required">- Le Nom est requis.<br/></span>
+							<span ng-show="CreateMemberForm.firstname.$dirty && CreateMemberForm.firstname.$error.required">- Le Pr&eacute;nom est requis.<br/></span>
+							<span ng-show="CreateMemberForm.birthdate.$dirty && CreateMemberForm.birthdate.$invalid">- La Date de naissance est mal-form&eacute;e: elle doit être de la forme: 'AAAA-MM-JJ'.<br/></span>
+							<span ng-show="CreateMemberForm.birthdate.$dirty && CreateMemberForm.birthdate.$error.required">- La Date de naissance est requise.<br/></span>
+							<span ng-show="CreateMemberForm.email.$dirty && CreateMemberForm.email.$invalid">- L'E-mail est mal-form&eacute;. Il doit être de la forme: 'exemple@exemple.com'.<br/></span>
+							<span ng-show="CreateMemberForm.email.$dirty && CreateMemberForm.email.$error.required">- L'E-mail est requis.<br/></span>
 						</div>
 					<!-- / -->
 				</form>
