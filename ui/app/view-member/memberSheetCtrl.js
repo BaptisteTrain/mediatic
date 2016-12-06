@@ -129,6 +129,10 @@ angular.module('MemberSheet', [])
 			});
 		};
 		
+		mbshCtrl.returnToSearch = function() {
+			$location.path('/searchMember');
+		};
+		
 	}])
 	/* Filtre qui calcule le nombre de jours séparant la Date du jour et la Date sur laquelle le filtre est appliqué */
 	.filter('remainingDays', function() {

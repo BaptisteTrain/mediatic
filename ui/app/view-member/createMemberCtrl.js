@@ -1,6 +1,6 @@
 angular.module('CreateMember', [])
-	.controller('CreateMemberCtrl', ['MemberSheetService',  'AuthenticationService', '$rootScope', 
-								function(MemberSheetService, AuthenticationService, $rootScope) {
+	.controller('CreateMemberCtrl', ['MemberSheetService',  'AuthenticationService', '$rootScope', '$location', 
+								function(MemberSheetService, AuthenticationService, $rootScope, $location) {
 		var obj = this;
 		
 		// Check if authenticated
@@ -38,7 +38,11 @@ angular.module('CreateMember', [])
 			}, function(reason) {
 				console.log("L'adhérent n'a pas pu être enregistré: " + reason);
 			});
-		}
+		};
+		
+		obj.returnToSearch = function() {
+			$location.path('/searchMember');
+		};
 		
 	}])
 	
