@@ -1,9 +1,15 @@
 <!-- Messages -->
-<div ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger"><strong>Une erreur s'est produite :</strong> emprunt non effectu&eacute;</div>
-<div ng-show="showSuccess" ng-class="{fade:doFade}" class="alert alert-success"><strong>Le livre est emprunt&eacute; :</strong> emprunt r&eacute;alis&eacute; avec succ&egrave;s</div>
+<div ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger"><strong>Une erreur s'est produite :</strong> emprunt non effectu&eacute;
+	<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
+
+<div ng-show="showSuccess" ng-class="{fade:doFade}" class="alert alert-success"><strong>Le livre est emprunt&eacute; :</strong> emprunt r&eacute;alis&eacute; avec succ&egrave;s
+	<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
 <!-- / Messages -->
 
-<div class="row" ng-controller="MediaSheetMediaCtrl as MSMctrl">
+<div ng-controller="MediaSheetMediaCtrl as MSMctrl">
+<div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 		<h2>D&eacute;tail d'un m&eacute;dia</h2>
 		<hr/>
@@ -42,30 +48,26 @@
 			</form>
 		</div>
 	</div>
-	<br /><br />
-	<div class="liste col-xs-12 col-sm-12 col-md-4 col-lg-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>Liste des emprunteurs</h4>
-			</div>
-			<div class="panel-body">
-				<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
-					<thead>
-						<tr>
-							<th ts-criteria="nom" ts-default>Nom</th>
-							<th ts-criteria="prenom">Pr&eacute;nom</th>
-						</tr>
-					</thead>
-					<tbody ng-repeat="loan in MSMctrl.emprunteurs" ts-repeat>
-						<tr>
-							<td>{{loan.nom}}</td>
-							<td>{{loan.prenom}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+</div>
+<div class="row">
+	<div class="liste col-xs-12 col-sm-12 col-md-8 col-lg-8">
+		<h2>Emprunteurs</h2>
+		<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
+			<thead>
+				<tr>
+					<th ts-criteria="nom" ts-default>Nom</th>
+					<th ts-criteria="prenom">Pr&eacute;nom</th>
+				</tr>
+			</thead>
+			<tbody >
+				<tr ng-repeat="loan in MSMctrl.emprunteurs" ts-repeat>
+					<td ng-bind="loan.nom"></td>
+					<td ng-bind="loan.prenom"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+</div>
 </div>
 
 
@@ -98,7 +100,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-4 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-5 col-lg-5">
+					<div class="col-sm-offset-4 col-md-offset-2 col-lg-offset-2 col-xs-6 col-sm-4 col-md-5 col-lg-5" ng-click="MSLctrl.searchMember()">
 						<button type="submit" class="btn btn-success pull-right hidden-xs">Rechercher</button>
 						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -106,8 +108,8 @@
 					</div>
 				</div>
 			</form>
-			<hr />
-			<form id="validEmprunteur" name="loanForm" class="form-horizontal" ng-show="MSLctrl.mySearchList.length>0" novalidate ng-submit="MSLctrl.addLoan(MSLctrl.loanMember)">
+			<br>
+			<form id="validEmprunteur" name="loanForm" ng-controller="PaginationCtrl as paginationCtrl" class="form-horizontal" ng-show="MSLctrl.mySearchList.length>0" novalidate ng-submit="MSLctrl.addLoan(MSLctrl.loanMember)">
 				<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 					<thead>
 						<tr>
@@ -119,10 +121,11 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="search in MSLctrl.mySearchList
-								  | filter : {'id'          : mediaIdSearch} 
+								  | filter : {'id'          : mediaIdSearch}
 								  | filter : {'firstname'   : mediaNameSearch}
 								  | filter : {'secondename' : mediaSecondeNameSearch}
-								  | paginationFilter:paginationCtrl.currentPage:MSLctrl.itemsPerPage as listFilter" ts-repeat>
+								  | paginationFilter:paginationCtrl.currentPage:MSLctrl.itemsPerPage
+								  as listFilter" ts-repeat>
 							<td ng-bind="search.id"></td>
 							<td ng-bind="search.firstname"></td>
 							<td ng-bind="search.secondename"></td>
@@ -134,16 +137,17 @@
 				</table>
 				<!-- PAGINATION -->
 				<div class="paginationElement">
-					<div uib-pagination	boundary-links="true" 
-								total-items="MSLctrl.mediasList.length" 
-								items-per-page="MSLctrl.itemsPerPage" 
-								ng-model="paginationCtrl.currentPage" 
-								max-size="paginationCtrl.maxSize" 
-								previous-text="&lsaquo;" 
-								next-text="&rsaquo;" 
-								first-text="&laquo;" 
-								last-text="&raquo;"
-								style="margin: auto;">
+					<div uib-pagination	
+							boundary-links="true" 
+							total-items="(MSLctrl.mySearchList | filter : {'id': mediaIdSearch} | filter : {'firstname' : mediaNameSearch} | filter : {'secondename' : mediaSecondeNameSearch}).length"
+							items-per-page="MSLctrl.itemsPerPage" 
+							ng-model="paginationCtrl.currentPage" 
+							max-size="paginationCtrl.maxSize" 
+							previous-text="&lsaquo;" 
+							next-text="&rsaquo;" 
+							first-text="&laquo;" 
+							last-text="&raquo;"
+							style="margin: auto;">
 					</div>
 				</div>
 				<!-- / PAGINATION -->
