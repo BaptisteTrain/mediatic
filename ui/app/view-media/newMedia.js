@@ -27,6 +27,9 @@ angular.module('NewMedia', [])
 	$rootScope.mediaActive = 'active';
 	$rootScope.memberActive = '';
 	
+	// Message creation success
+	this.messCreateOk = false;
+	
 	// Redirection
 	this.goBackMedia = function() {
 		$location.url('/media');
@@ -35,8 +38,13 @@ angular.module('NewMedia', [])
 	// Add a new media
 	this.addMedia = function() {
 		var url = 'http://'+IpService+':8090/resource/media.creation';
-		var mediaToSend = {titre: self.mediaToAdd.title, auteur: self.mediaToAdd.author, type: self.mediaToAdd.type};
-		$http.post(url, mediaToSend).then(function(response) {});
+		var mediaToSend = {titre: self.mediaToAdd.title, 
+						   auteur: self.mediaToAdd.author, 
+						   type: self.mediaToAdd.type};
+		$http.post(url, mediaToSend).then(function(response) {
+			self.messCreateOk = true;
+			self.mediaToAdd = {};
+		});
 	};
 	
 	
