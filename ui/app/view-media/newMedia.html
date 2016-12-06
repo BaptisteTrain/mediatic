@@ -1,3 +1,9 @@
+<!-- Messages -->
+<div ng-show="newMedia.messCreateOk" ng-class="{fade:doFade}" class="alert alert-success">
+	<strong>Le media a bien &eacute;t&eacute; cr&eacute;&eacute.</strong>
+</div>
+<!-- / Messages -->
+
 <div class="row">
 	<div class="col-xs-12">
 	
@@ -38,7 +44,7 @@
 						</button>
 						
 						<!-- BUTTON ADD -->
-						<input type="submit" class="btn btn-success pull-right hidden-xs" value="Ajouter" ng-disabled="formNewMedia.$invalid">
+						<input type="submit" class="btn btn-success pull-right hidden-xs" value="Cr&eacute;er le m&eacute;dia" ng-disabled="formNewMedia.$invalid">
 						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-disabled="formNewMedia.$invalid">
 							<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 						</button>
