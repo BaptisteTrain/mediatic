@@ -42,7 +42,6 @@ angular
 		
 		$scope.$on('addLoan', function(event, data){
 			loadData();
-			$scope.showSuccess = false;
 		    $scope.doFade = false;
 		    
 		    $scope.showSuccess = true;
@@ -54,7 +53,6 @@ angular
 		});
 		
 		$scope.$on('errorLoan', function(event, data){
-			$scope.showError = false;
 		    $scope.doFade = false;
 		    
 		    $scope.showError = true;
@@ -64,10 +62,34 @@ angular
 				$scope.showError = false;
 		    }, 3000);
 		});
+		
+		$scope.$on('editMediaError', function(event, data){
+		    $scope.doFade = false;
+		    
+		    $scope.showErrorEdit = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+				$scope.showErrorEdit = false;
+		    }, 3000);
+		});
+		
+		$scope.$on('editMediaSuccess', function(event, data){
+		    $scope.doFade = false;
+		    
+		    $scope.showSuccessEdit = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+				$scope.showSuccessEdit = false;
+		    }, 3000);
+		});
 
 		// hide success and error message 
 		$scope.showSuccess = false;
 		$scope.showError = false;
+		$scope.showSuccessEdit = false;
+		$scope.showErrorEdit = false;
 		console.log('showerror = ', $scope.showError);
 		//$scope.doFade = false;
 		// show/hide search form
@@ -112,10 +134,11 @@ angular
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {
 					console.log('SUCCESS');
-					$scope.showSuccess = true;
+					$scope.$emit('editMediaSuccess');
 	            })
 	            .error(function (data, status, header, config) {
 	            	console.log('ERROR');
+	            	$scope.$emit('editMediaError');
 	            });
 		}
 	})
@@ -165,25 +188,11 @@ angular
 				depart		: nextDate
 			};
 			
-			/* 
-			$scope.fakeError = function() {
-			    //reset
-				console.log('ok');
-			    $scope.showError = false;
-			    $scope.doFade = false;
-			    
-			    $scope.showError = true;
-			    
-			    $timeout(function(){
-			    	$scope.doFade = true;
-			    }, 3000);
-			}
-			*/
-			
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {
 					console.log('SUCCESS');
 					$scope.$emit('addLoan');
+					ctrl.loanMember = null;
 					$scope.isNavCollapsed = true;
 	            })
 	            .error(function (data, status, header, config) {
