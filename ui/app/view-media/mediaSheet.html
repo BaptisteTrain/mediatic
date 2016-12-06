@@ -112,7 +112,7 @@
 				</div>
 			</form>
 			<br>
-			<form id="validEmprunteur" name="loanForm" class="form-horizontal" ng-show="MSLctrl.mySearchList.length>0" novalidate ng-submit="MSLctrl.addLoan(MSLctrl.loanMember)">
+			<form id="validEmprunteur" name="loanForm" ng-controller="PaginationCtrl as paginationCtrl" class="form-horizontal" ng-show="MSLctrl.mySearchList.length>0" novalidate ng-submit="MSLctrl.addLoan(MSLctrl.loanMember)">
 				<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 					<thead>
 						<tr>
@@ -124,10 +124,11 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="search in MSLctrl.mySearchList
-								  | filter : {'id'          : mediaIdSearch} 
+								  | filter : {'id'          : mediaIdSearch}
 								  | filter : {'firstname'   : mediaNameSearch}
 								  | filter : {'secondename' : mediaSecondeNameSearch}
-								  | paginationFilter:paginationCtrl.currentPage:ctrl.itemsPerPage as listFilter" ts-repeat>
+								  | paginationFilter:paginationCtrl.currentPage:MSLctrl.itemsPerPage
+								  as listFiltered" ts-repeat>
 							<td ng-bind="search.id"></td>
 							<td ng-bind="search.firstname"></td>
 							<td ng-bind="search.secondename"></td>
@@ -139,9 +140,10 @@
 				</table>
 				<!-- PAGINATION -->
 				<div class="paginationElement">
-					<div uib-pagination	boundary-links="true" 
-								total-items="ctrl.mediasList.length" 
-								items-per-page="ctrl.itemsPerPage" 
+					<div uib-pagination	
+								boundary-links="true" 
+								total-items="(MSLctrl.mySearchList | filter : {'id': mediaIdSearch} | filter : {'firstname' : mediaNameSearch} | filter : {'secondename' : mediaSecondeNameSearch}).length" 
+								items-per-page="MSLctrl.itemsPerPage" 
 								ng-model="paginationCtrl.currentPage" 
 								max-size="paginationCtrl.maxSize" 
 								previous-text="&lsaquo;" 
