@@ -39,8 +39,8 @@
 				<div class="form-group">
 					<div class="col-md-offset-2 col-lg-offset-2 col-sm-offset-3 col-xs-12 col-sm-6 col-md-5 col-lg-5">
 						<!-- BUTTONS ADD NEW MEDIA -->
-						<input type="button" class="btn btn-info hidden-xs" value="Ajouter un m&eacute;dia" ng-click="media.goNewMedia()">
-						<button type="button" class="btn btn-info visible-xs-inline-block" ng-click="media.goNewMedia()">
+						<input type="button" class="btn btn-info hidden-xs" value="Ajouter un m&eacute;dia" ng-click="media.goNewMedia()" ng-show="media.displayButtonAdd">
+						<button type="button" class="btn btn-info visible-xs-inline-block" ng-click="media.goNewMedia()" ng-show="media.displayButtonAdd">
 							<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 						</button>
 						<!-- BUTTONS SEARCH -->
@@ -72,7 +72,7 @@
 					<tr ng-repeat="med in media.mediasList 
 								  | filter : {'title':media.search.title} 
 								  | filter : {'author':media.search.author} 
-								  | filter : {'type':media.search.type} as l" ts-repeat>
+								  | filter : {'type':media.search.type} as mediaListFilt" ts-repeat>
 						<td ng-bind="med.title"></td>
 						<td ng-bind="med.type"></td>
 						<td ng-bind="med.author"></td>
@@ -87,15 +87,21 @@
 				</tbody>
 			</table>
 			
-			<!-- PAGINATION 
-			<div class="dataTables_paginate paging_simple_numbers gris">
-				pagination
-				<ul uib-pagination boundary-links="true" total-items="media.mediasList.length" ng-model="1" 
-				 	class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" 
-				 	first-text="&laquo;" last-text="&raquo;">
-				</ul>
+			<!-- PAGINATION -->
+			<div class="paginationMember">
+				<div uib-pagination	boundary-links="true" 
+					 total-items="45" 
+					 items-per-page="4" 
+					 ng-model="1" 
+					 num-pages="10" 
+					 previous-text="&lsaquo;" 
+					 next-text="&rsaquo;" 
+					 first-text="&laquo;" 
+					 last-text="&raquo;"
+					 style="margin: auto;">
+				</div>
 			</div>
-			 / PAGINATION -->
+			<!-- / PAGINATION -->
 		</div>
 		<!-- / TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
 	</div>
