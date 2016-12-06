@@ -87,7 +87,7 @@
 			<!-- PAGINATION -->
 			<div class="paginationElement">
 				<div uib-pagination	boundary-links="true" 
-							total-items="media.mediasList.length" 
+							total-items="(media.mediasList | filter : {'title':media.search.title} | filter : {'author':media.search.author} | filter : {'type':media.search.type}).length" 
 							items-per-page="media.itemsPerPage" 
 							ng-model="paginationCtrl.currentPage" 
 							max-size="paginationCtrl.maxSize" 

@@ -122,7 +122,7 @@
 								  | filter : {'id'          : mediaIdSearch} 
 								  | filter : {'firstname'   : mediaNameSearch}
 								  | filter : {'secondename' : mediaSecondeNameSearch}
-								  | paginationFilter:paginationCtrl.currentPage:ctrl.itemsPerPage as listFilter" ts-repeat>
+								  | paginationFilter:paginationCtrl.currentPage:MSLctrl.itemsPerPage as listFilter" ts-repeat>
 							<td ng-bind="search.id"></td>
 							<td ng-bind="search.firstname"></td>
 							<td ng-bind="search.secondename"></td>
@@ -135,8 +135,8 @@
 				<!-- PAGINATION -->
 				<div class="paginationElement">
 					<div uib-pagination	boundary-links="true" 
-								total-items="ctrl.mediasList.length" 
-								items-per-page="ctrl.itemsPerPage" 
+								total-items="MSLctrl.mediasList.length" 
+								items-per-page="MSLctrl.itemsPerPage" 
 								ng-model="paginationCtrl.currentPage" 
 								max-size="paginationCtrl.maxSize" 
 								previous-text="&lsaquo;" 
