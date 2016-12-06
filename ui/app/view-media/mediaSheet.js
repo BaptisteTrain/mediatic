@@ -8,8 +8,20 @@ angular
 		});
 	})
 
-	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, IpService) {
+	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, $location, IpService, AuthenticationService) {
 		var ctrl = this;
+		
+		// Check if authenticated
+		if (! AuthenticationService.isConnected()) {
+			// Redirection toward login
+			$location.url('/login');
+		}
+		
+		// Menu active
+		$rootScope.mediaActive = 'active';
+		$rootScope.memberActive = '';
+
+		// Load of the media
 		var id   = $routeParams.id;
 		var url1 = 'http://'+IpService+':8090/resource/media.accession?id='+id;
 		var url2 = 'http://'+IpService+':8090/resource/adherent.recherche';
@@ -29,10 +41,13 @@ angular
 		loadData();
 		
 		$scope.$on('addLoan', function(event, data){
-console.log('ON');
 			loadData();
 		});
-		
+
+		// hide success and error message 
+		$scope.showSuccess = false;
+		$scope.showError = false;
+		$scope.doFade = false;
 		// show/hide search form
 		$scope.isNavCollapsed = true;
 		$scope.isCollapsed = false;
@@ -75,6 +90,7 @@ console.log('ON');
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {
 					console.log('SUCCESS');
+					$scope.showSuccess = true;
 	            })
 	            .error(function (data, status, header, config) {
 	            	console.log('ERROR');
@@ -82,7 +98,7 @@ console.log('ON');
 		}
 	})
 	
-	.controller('MediaSheetLoanCtrl', function($scope, $http, IpService) {
+	.controller('MediaSheetLoanCtrl', function($scope, $http, IpService, $timeout) {
 		var ctrl = this;
 		ctrl.mySearchList = [];
 		
@@ -101,7 +117,6 @@ console.log('ON');
 		});
 		
 		ctrl.addLoan = function(idMember) {
-			console.log('kkkkkk');
 			if(loanForm.$invalid){
 				return;
 			}
@@ -125,16 +140,40 @@ console.log('ON');
 				depart		: nextDate
 			};
 			
-			console.log(nextDate.toLocaleString());
+			/* 
+			$scope.fakeError = function() {
+			    //reset
+				console.log('ok');
+			    $scope.showError = false;
+			    $scope.doFade = false;
+			    
+			    $scope.showError = true;
+			    
+			    $timeout(function(){
+			    	$scope.doFade = true;
+			    }, 3000);
+			}
+			*/
+			
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {
 					console.log('SUCCESS');
 					$scope.$emit('addLoan');
 					$scope.isNavCollapsed = true;
+					// show success message
+					{
+						//$scope.showError = false;
+					    //$scope.doFade = false;
+					    
+					    $scope.showError = true;
+					    
+					    //$timeout(function(){
+					    	//$scope.doFade = true;
+					    //}, 3000);
+					}
 	            })
 	            .error(function (data, status, header, config) {
 	            	console.log('ERROR');
 	            });
-			
 		}
 	});

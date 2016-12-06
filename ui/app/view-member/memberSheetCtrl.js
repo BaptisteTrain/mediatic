@@ -1,8 +1,21 @@
 /* AUTHOR: Matthieu */
 
 angular.module('MemberSheet', [])
-	.controller('MemberSheetController', ['$http', '$routeParams', '$location', 'IpService', 'MemberSheetService', function($http, $routeParams, $location, IpService, MemberSheetService) {
+	.controller('MemberSheetController', ['$http', '$routeParams', '$location', 'IpService', 'MemberSheetService', 'AuthenticationService', '$rootScope',
+								  function($http, $routeParams, $location, IpService, MemberSheetService, AuthenticationService, $rootScope) {
 		var mbshCtrl = this;
+		
+		// Check if authenticated
+		if (! AuthenticationService.isConnected()) {
+			// Redirection toward login
+			$location.url('/login');
+		}
+		
+		// Menu active
+		$rootScope.mediaActive = '';
+		$rootScope.memberActive = 'active';
+		
+		
 		mbshCtrl.medias;
 		
 		mbshCtrl.itemsPerPage = 10;
@@ -18,6 +31,10 @@ angular.module('MemberSheet', [])
 			//console.log(liste);
 			mbshCtrl.lastname = liste.nom;
 			mbshCtrl.firstname = liste.prenom;
+			
+			// Page's title
+			$rootScope.titre = 'Adherent '+mbshCtrl.lastname+' '+liste.prenom;
+			
 			mbshCtrl.birthdate = new Date(liste.date_naissance);
 			mbshCtrl.email = liste.email;
 			mbshCtrl.address = liste.adresse.ligne1;
@@ -110,6 +127,10 @@ angular.module('MemberSheet', [])
 					mbshCtrl.nbLoans = liste.nombre_media;
 				});
 			});
+		};
+		
+		mbshCtrl.returnToSearch = function() {
+			$location.path('/searchMember');
 		};
 		
 	}])

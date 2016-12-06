@@ -1,6 +1,25 @@
 angular.module('SearchMember', [])
-	.controller('SearchMemberCtrl', ['SearchMemberService', 'Memorisation', '$location', function(SearchMemberService, Memorisation, $location) {
+	.controller('SearchMemberCtrl', ['SearchMemberService', 'Memorisation', '$location', 'AuthenticationService', '$rootScope', 
+							function(SearchMemberService, Memorisation, $location, AuthenticationService, $rootScope) {
 		var obj = this;
+		
+		// Check if authenticated
+		if (! AuthenticationService.isConnected()) {
+			// Redirection toward login
+			$location.url('/login');
+		}
+
+		// Page's title
+		$rootScope.titre = 'Adherents';
+		
+		// Menu active
+		$rootScope.mediaActive = '';
+		$rootScope.memberActive = 'active';
+		
+		// Has the right to create a new member
+		obj.displayButtonAdd = AuthenticationService.hasRightMemberCreation();
+		
+		
 		obj.adherents;
 		
 		obj.itemsPerPage = 10;
@@ -24,9 +43,11 @@ angular.module('SearchMember', [])
 		}
   
 	}])
+	
 	.value('Memorisation', {
 		'searchMemberCtrl' : {}
 	})
+	
 	.service('SearchMemberService', ['$http', 'IpService', function($http, IpService) {
 		this.getMembers = function(element) {
 			var http;
@@ -51,6 +72,7 @@ angular.module('SearchMember', [])
 			});
 		}
 	}])
+	
 	.config(function($routeProvider) {
 		$routeProvider.when('/searchMember', {
 			templateUrl : '/view-member/searchMember.html',

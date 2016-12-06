@@ -3,7 +3,7 @@
 		<h2>Recherche d'adh&eacute;rent</h2>
 		<hr/>
 		<div class="formulaire">
-			<form class="form-horizontal" method="GET" action="#" name="searchMemberForm">
+			<form class="form-horizontal" method="GET" name="searchMemberForm" novalidate>
 				<div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Identifiant</label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
@@ -25,9 +25,13 @@
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-5 col-md-5 col-lg-5">
 						<div class="form-inline">
-							<input type="button" class="btn btn-info hidden-xs" value="Ajouter un adh&eacute;rent" ng-click="searchMemberCtrl.addNewMember()">
-							<button type="submit" class="btn btn-info visible-xs-inline-block" ng-click="searchMemberCtrl.addNewMember()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-							<input type="button" class="btn btn-success pull-right hidden-xs" value="Rechercher" ng-click="searchMemberCtrl.search()">
+							<!-- BUTTONS ADD NEW MEMBER -->
+							<input type="button" class="btn btn-info hidden-xs" value="Ajouter un adh&eacute;rent" ng-click="searchMemberCtrl.addNewMember()" ng-show="searchMemberCtrl.displayButtonAdd">
+							<button type="submit" class="btn btn-info visible-xs-inline-block" ng-click="searchMemberCtrl.addNewMember()" ng-show="searchMemberCtrl.displayButtonAdd">
+								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+							</button>
+							<!-- BUTTONS SEARCH -->
+							<button type="submit" class="btn btn-success pull-right hidden-xs" ng-click="searchMemberCtrl.search()">Rechercher</button>
 							<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-click="searchMemberCtrl.search()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 						</div>
 					</div>
@@ -37,20 +41,20 @@
 		<br>
 		<!-- TABLE RESULTAT DE LA RECHERCHE D'ADHERENT -->
 		<div id="divRechAdh" ng-controller="PaginationCtrl as paginationCtrl" ng-class="{hidden : (searchMemberCtrl.adherents == undefined) || (searchMemberCtrl.adherents.length <= 0) }">
-			<table id="tableRechAdh" class="table table-striped table-hover tablesorter">
+			<table id="tableRechAdh" class="table table-striped table-hover tablesorter" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 				<thead>
 					<tr>
-						<th>Identifiant</th>
-						<th>Nom</th>
-						<th>Prénom</th>
-						<th>Date naissance</th>
-						<th>Cotisation &agrave; jour</th>
-						<th>Nb emprunts</th>
+						<th ts-criteria="id" ts-default>Identifiant</th>
+						<th ts-criteria="nom">Nom</th>
+						<th ts-criteria="prenom">Prénom</th>
+						<th ts-criteria="date_naissance">Date naissance</th>
+						<th ts-criteria="cotisation.debut">Cotisation &agrave; jour</th>
+						<th ts-criteria="emprunt.length">Nb emprunts</th>
 						<th>&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="adherent in searchMemberCtrl.adherents | paginationFilter:paginationCtrl.currentPage:searchMemberCtrl.itemsPerPage">
+					<tr ng-repeat="adherent in searchMemberCtrl.adherents | paginationFilter:paginationCtrl.currentPage:searchMemberCtrl.itemsPerPage" ts-repeat>
 						<td ng-bind="adherent.id"></td>
 						<td ng-bind="adherent.nom"></td>
 						<td ng-bind="adherent.prenom"></td>

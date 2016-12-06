@@ -1,25 +1,30 @@
-<div class="row" ng-controller="MediaSheetMediaCtrl as ctrl">
+<!-- Messages -->
+<div ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger"><strong>Une erreur s'est produite :</strong> emprunt non effectu&eacute;</div>
+<div ng-show="showSuccess" ng-class="{fade:doFade}" class="alert alert-success"><strong>Le livre est emprunt&eacute; :</strong> emprunt r&eacute;alis&eacute; avec succ&egrave;s</div>
+<!-- / Messages -->
+
+<div class="row" ng-controller="MediaSheetMediaCtrl as MSMctrl">
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-		<h2>Fiche m&eacute;dia</h2>
+		<h2>D&eacute;tail d'un m&eacute;dia</h2>
 		<hr/>
 		<div class="formulaire">
 			<form name="formEditMedia" class="form-horizontal" novalidate>
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3">Titre*</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3">Titre&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-7 col-lg-7">
-						<input type="text" class="form-control" id="mediaEditTitre" ng-model="ctrl.media.mediaEditTitre" placeholder="Titre" ng-required="true">
+						<input type="text" class="form-control" id="mediaEditTitre" ng-model="MSMctrl.media.mediaEditTitre" placeholder="Titre" ng-required="true">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3">Auteur*</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3">Auteur&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-7 col-lg-7">
-						<input type="text" class="form-control" id="mediaEditAuteur" ng-model="ctrl.media.mediaEditAuteur" placeholder="Auteur" ng-required="true">
+						<input type="text" class="form-control" id="mediaEditAuteur" ng-model="MSMctrl.media.mediaEditAuteur" placeholder="Auteur" ng-required="true">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3">Type*</label>
+					<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3">Type&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-7 col-lg-7">
-						<select id="mediaEditType" class="form-control" ng-model="ctrl.media.mediaEditType" ng-required="true">
+						<select id="mediaEditType" class="form-control" ng-model="MSMctrl.media.mediaEditType" ng-required="true">
 							<option value="Livre">Livre</option>
 							<option value="CD">CD</option>
 							<option value="DVD">DVD</option>
@@ -27,7 +32,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-3 col-xs-12 col-sm-4 col-md-7 col-lg-7" ng-click="ctrl.editMedia(ctrl.media.mediaEditId, ctrl.media.mediaEditTitre,ctrl.media.mediaEditAuteur,ctrl.media.mediaEditType)">
+					<div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-3 col-xs-12 col-sm-4 col-md-7 col-lg-7" ng-click="MSMctrl.editMedia(MSMctrl.media.mediaEditId, MSMctrl.media.mediaEditTitre, MSMctrl.media.mediaEditAuteur, MSMctrl.media.mediaEditType)">
 						<input type="button" class="btn btn-success pull-right hidden-xs" value="Modifier" ng-disabled="formEditMedia.$invalid">
 						<button type="submit" class="btn btn-success pull-right visible-xs-inline-block" ng-disabled="formEditMedia.$invalid">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -37,21 +42,21 @@
 			</form>
 		</div>
 	</div>
-	<br><br><br>
+	<br /><br />
 	<div class="liste col-xs-12 col-sm-12 col-md-4 col-lg-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4>Liste des emprunteurs</h4>
 			</div>
 			<div class="panel-body">
-				<table class="table table-striped table-hover">
+				<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 					<thead>
 						<tr>
-							<th>Nom</th>
-							<th>Pr&eacute;nom</th>
+							<th ts-criteria="nom" ts-default>Nom</th>
+							<th ts-criteria="prenom">Pr&eacute;nom</th>
 						</tr>
 					</thead>
-					<tbody ng-repeat="loan in ctrl.emprunteurs">
+					<tbody ng-repeat="loan in MSMctrl.emprunteurs" ts-repeat>
 						<tr>
 							<td>{{loan.nom}}</td>
 							<td>{{loan.prenom}}</td>
@@ -63,9 +68,10 @@
 	</div>
 </div>
 
+
 <!-- Formulaire de Recherche et d'Ajout Emprunteur (Matthieu) -->
 
-<div class="row" ng-controller="MediaSheetLoanCtrl as ctrl">
+<div class="row" ng-controller="MediaSheetLoanCtrl as MSLctrl">
 	<aside class="col-xs-12">
 		<h2>
 			R&eacute;aliser un emprunt<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true" data-toggle="collapse" data-target="#emprunteur" ng-click="isNavCollapsed = !isNavCollapsed"></span>
@@ -101,27 +107,27 @@
 				</div>
 			</form>
 			<hr />
-			<form id="validEmprunteur" name="loanForm" ng-controller="PaginationCtrl as paginationCtrl" class="form-horizontal" ng-show="ctrl.mySearchList.length>0" novalidate ng-submit="ctrl.addLoan(ctrl.loanMember)">
-				<table class="table table-striped table-hover">
+			<form id="validEmprunteur" name="loanForm" class="form-horizontal" ng-show="MSLctrl.mySearchList.length>0" novalidate ng-submit="MSLctrl.addLoan(MSLctrl.loanMember)">
+				<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 					<thead>
 						<tr>
-							<th class="col-xs-3">Identifiant</th>
-							<th class="col-xs-4">Nom</th>
-							<th class="col-xs-4">Pr&eacute;nom</th>
+							<th class="col-xs-3" ts-criteria="id" ts-default>Identifiant</th>
+							<th class="col-xs-4" ts-criteria="firstname">Nom</th>
+							<th class="col-xs-4" ts-criteria="secondename">Pr&eacute;nom</th>
 							<th class="col-xs-1"><!-- <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> --></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="search in ctrl.mySearchList
+						<tr ng-repeat="search in MSLctrl.mySearchList
 								  | filter : {'id'          : mediaIdSearch} 
-								  | filter : {'firstname'   : mediaNameSearch} 
+								  | filter : {'firstname'   : mediaNameSearch}
 								  | filter : {'secondename' : mediaSecondeNameSearch}
-								  | paginationFilter:paginationCtrl.currentPage:ctrl.itemsPerPage as l">
+								  | paginationFilter:paginationCtrl.currentPage:ctrl.itemsPerPage as listFilter" ts-repeat>
 							<td ng-bind="search.id"></td>
 							<td ng-bind="search.firstname"></td>
 							<td ng-bind="search.secondename"></td>
 							<td class="form-group">
-								<input type="radio" id="{{search.id}}" ng-model="ctrl.loanMember" name="toto" value="{{search.id}}" ng-required="true"/>
+								<input type="radio" id="{{search.id}}" ng-model="MSLctrl.loanMember" name="toto" value="{{search.id}}" ng-required="true"/>
 							</td>
 						</tr>
 					</tbody>
