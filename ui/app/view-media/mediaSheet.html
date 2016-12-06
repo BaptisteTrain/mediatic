@@ -125,8 +125,9 @@
 					<tbody>
 						<tr ng-repeat="search in MSLctrl.mySearchList
 								  | filter : {'id'          : mediaIdSearch} 
-								  | filter : {'firstname'   : mediaNameSearch} 
-								  | filter : {'secondename' : mediaSecondeNameSearch} as listFilter" ts-repeat>
+								  | filter : {'firstname'   : mediaNameSearch}
+								  | filter : {'secondename' : mediaSecondeNameSearch}
+								  | paginationFilter:paginationCtrl.currentPage:ctrl.itemsPerPage as listFilter" ts-repeat>
 							<td ng-bind="search.id"></td>
 							<td ng-bind="search.firstname"></td>
 							<td ng-bind="search.secondename"></td>
@@ -136,6 +137,21 @@
 						</tr>
 					</tbody>
 				</table>
+				<!-- PAGINATION -->
+				<div class="paginationElement">
+					<div uib-pagination	boundary-links="true" 
+								total-items="ctrl.mediasList.length" 
+								items-per-page="ctrl.itemsPerPage" 
+								ng-model="paginationCtrl.currentPage" 
+								max-size="paginationCtrl.maxSize" 
+								previous-text="&lsaquo;" 
+								next-text="&rsaquo;" 
+								first-text="&laquo;" 
+								last-text="&raquo;"
+								style="margin: auto;">
+					</div>
+				</div>
+				<!-- / PAGINATION -->
 				<div class="form-group">
 					<div class="col-xs-offset-6 col-sm-offset-8 col-md-offset-10 col-lg-offset-10 col-xs-6 col-sm-4 col-md-2 col-lg-2">
 						<input type="submit" class="btn btn-success pull-right hidden-xs" ng-disabled="loanForm.$invalid" value="Ajouter l'emprunteur"/>

@@ -13,6 +13,9 @@ angular.module('Media', [])
 .controller('MediaCtrl', ['$location', '$http', '$rootScope', 'AuthenticationService', 'IpService',
 						 function($location, $http, $rootScope, AuthenticationService, IpService) {
 	var self = this;
+	self.mediasList;
+	
+	self.itemsPerPage = 10;
 	
 	// Check if authenticated
 	if (! AuthenticationService.isConnected()) {

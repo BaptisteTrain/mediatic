@@ -122,6 +122,8 @@ angular
 		var ctrl = this;
 		ctrl.mySearchList = [];
 		
+		ctrl.itemsPerPage = 10;
+		
 		ctrl.searchMember = function(){
 			$scope.$watch('mySearch', function(newValue, oldValue){
 			
@@ -136,6 +138,7 @@ angular
 				//console.log(ctrl.mySearchList);
 			});
 		}
+
 		ctrl.addLoan = function(idMember) {
 			if(loanForm.$invalid){
 				return;
