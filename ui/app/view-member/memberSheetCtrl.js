@@ -154,6 +154,9 @@ angular.module('MemberSheet', [])
 			/* Modifie un Adhérent avec les données passées en paramètres */
 			setSheet : function(data) {
 				var resource = "adherent.modification";
+				if(data.id==undefined){
+					var resource = "adherent.creation";
+				}
 				//console.log("URL + Resource: " + url + resource);
 				return $http.post(url + resource, data).then(function(response) {
 					//console.log("Data: " + response.data);
