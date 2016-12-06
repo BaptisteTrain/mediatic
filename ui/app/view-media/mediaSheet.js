@@ -49,6 +49,7 @@ angular
 		    
 		    $timeout(function(){
 		    	$scope.doFade = true;
+				$scope.showSuccess = false;
 		    }, 3000);
 		});
 		
@@ -60,6 +61,7 @@ angular
 		    
 		    $timeout(function(){
 		    	$scope.doFade = true;
+				$scope.showError = false;
 		    }, 3000);
 		});
 
