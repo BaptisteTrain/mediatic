@@ -25,12 +25,10 @@ angular.module('MemberSheet', [])
 			mbshCtrl.age = liste.age;
 			mbshCtrl.subscriptionAmount = liste.cotisation.montant;
 			mbshCtrl.subscriptionDate = new Date(liste.cotisation.debut);
-			/* Not used in form */mbshCtrl.subscriptionEndDate = liste.cotisation.fin;
 			mbshCtrl.loans = liste.emprunt;
-			mbshCtrl.nbLoans = liste.nombre_media;
 		},
 		function(response) {
-			console.log("Cet Adhérent n'existe pas.");
+			console.log("Cet Adhérent n'existe pas. Redirection sur la page d'Ajout d'un nouvel adhérent.");
 			$location.path('/createMember'); //Si l'Adhérent n'existe pas on effectue une redirection vers la page d'Ajout d'un nouveau Membre.
 		});
 		
@@ -55,32 +53,23 @@ angular.module('MemberSheet', [])
 			//console.log("Address: " + mbshCtrl.ligne2);
 			//console.log("Postal Code: " + mbshCtrl.postalcode);
 			//console.log("Town: " + mbshCtrl.town);
-			//console.log("Subscription Date: " + mbshCtrl.subscriptionDate.toISOString().substring(0, 10));
-			//console.log("Subscription End Date: " + mbshCtrl.subscriptionEndDate);
-			//console.log("Subscription Amount: " + mbshCtrl.subscriptionAmount);
-			//console.log("Age: " + mbshCtrl.age);
-			//console.log("Loans: " + mbshCtrl.loans);
-			//console.log("Number of Loans: " + mbshCtrl.nbLoans);
 			
 			/* Tableau contenant les données à envoyer à la BDD */
 			var data = {
-                id: parseInt($routeParams.idMember),
-                nom: mbshCtrl.lastname,
-                prenom: mbshCtrl.firstname,
-                date_naissance: mbshCtrl.birthdate.toISOString().substring(0, 10),
-                email: mbshCtrl.email,
-                adresse: {ligne1: mbshCtrl.ligne1, ligne2: mbshCtrl.ligne2, codepostal: mbshCtrl.postalcode, ville: mbshCtrl.town},
-                cotisation: {debut: mbshCtrl.subscriptionDate.toISOString().substring(0, 10), fin: mbshCtrl.subscriptionEndDate, montant: parseInt(mbshCtrl.subscriptionAmount)},
-                age: mbshCtrl.age,
-                emprunt: mbshCtrl.loans,
-                nombre_media: mbshCtrl.nbLoans
-            };
+				id: parseInt($routeParams.idMember),
+				nom: mbshCtrl.lastname,
+				prenom: mbshCtrl.firstname,
+				date_naissance: mbshCtrl.birthdate.toISOString().substring(0, 10),
+				email: mbshCtrl.email,
+				adresse: {ligne1: mbshCtrl.ligne1, ligne2: mbshCtrl.ligne2, codepostal: mbshCtrl.postalcode, ville: mbshCtrl.town}
+			};
 			
 			//console.log("Data à envoyer: ");
 			//console.log(data);
 			
 			/* Lancement de la requête */
 			MemberSheetService.setSheet(data).then(function(response) {
+				console.log("La Fiche de l'Adhérent a bien été modifiée.");
 				//console.log("Response: ");
 				//console.log(response);
 			});
@@ -104,6 +93,7 @@ angular.module('MemberSheet', [])
 			
 			/* Lancement de la requête */
 			MemberSheetService.setLoan(data).then(function(response) {
+				console.log("Le Média a été ajouté à la Liste d'Emprunts de l'Adhérent.");
 				//console.log("Response: ");
 				//console.log(response);
 				
@@ -183,7 +173,7 @@ angular.module('MemberSheet', [])
 			}
 		}
 	})
-	/* Attribut date permettnat de formater une date selon le pattern passé en paramètre */
+	/* Attribut date permettnat de formater une date selon le pattern passé en paramètre */ /* N'est plus utilisé pour l'instant. */
 	.directive('date', function (dateFilter) {
 	    return {
 	        require:'ngModel',
