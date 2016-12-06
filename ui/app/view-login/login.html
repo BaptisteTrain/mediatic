@@ -4,11 +4,11 @@
 	<div class="col-xs-4"></div>
 	<form name="formLogin" class="form-signin col-xs-4" novalidate ng-submit="login.checkAuth()">
 		<input type="text" id="login" name="id" ng-model="login.id" class="form-control" placeholder="Login" ng-required="true" autofocus>
-		<br>
+		<br />
 		<input type="password" id="inputPassword" name="psw" ng-model="login.psw" class="form-control" placeholder="Mot de passe" ng-required="true">
-		<div class="checkbox">
+		<!--  <div class="checkbox">
 			<label><a href="motdepasse_oublie.html">Mot de passe oubli&eacute; ?</a></label>
-		</div>
+		</div>--><br /><br />
 		
 		<!-- Error message -->
 		<div class="text-danger" ng-show="login.diplayMessError">

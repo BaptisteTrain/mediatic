@@ -17,4 +17,11 @@ angular
 		$routeProvider.otherwise({
 			redirectTo: '/login'
 		});
+	})
+	
+	.controller('IndexCtrl', function(AuthenticationService) {
+		// Check the authentication
+		this.isConnect = function(){
+			return AuthenticationService.isConnected();
+		};
 	});
