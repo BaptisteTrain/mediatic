@@ -86,6 +86,8 @@ console.log('ON');
 		var ctrl = this;
 		ctrl.mySearchList = [];
 		
+		ctrl.itemsPerPage = 10;
+		
 		$scope.$watch('mySearch', function(newValue, oldValue){
 			ctrl.mySearchList.splice(0,ctrl.mySearchList.length);
 			for(var i in $scope.mySearch) {

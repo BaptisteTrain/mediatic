@@ -56,7 +56,7 @@
 		<!-- / FORMULAIRE RECHERCHE DE MEDIA -->
 	
 		<!-- TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
-		<div id="divRechMedia" ng-show="media.mediasList.length>0">
+		<div id="divRechMedia" ng-controller="PaginationCtrl as paginationCtrl" ng-show="media.mediasList.length>0">
 			<table id="tableRechMedia" class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 				<thead>
 					<tr>
@@ -72,7 +72,8 @@
 					<tr ng-repeat="med in media.mediasList 
 								  | filter : {'title':media.search.title} 
 								  | filter : {'author':media.search.author} 
-								  | filter : {'type':media.search.type} as mediaListFilt" ts-repeat>
+								  | filter : {'type':media.search.type}
+								  | paginationFilter:paginationCtrl.currentPage:media.itemsPerPage as mediaListFilt" ts-repeat>
 						<td ng-bind="med.title"></td>
 						<td ng-bind="med.type"></td>
 						<td ng-bind="med.author"></td>
@@ -83,22 +84,21 @@
 				</tbody>
 			</table>
 			
-			<!-- PAGINATION 
-			<div class="paginationMember">
+			<!-- PAGINATION -->
+			<div class="paginationElement">
 				<div uib-pagination	boundary-links="true" 
-					 total-items="mediaListFilt.length" 
-					 items-per-page="4" 
-					 ng-model="1" 
-					 num-pages="10" 
-					 previous-text="&lsaquo;" 
-					 next-text="&rsaquo;" 
-					 first-text="&laquo;" 
-					 last-text="&raquo;"
-					 style="margin: auto;">
+							total-items="media.mediasList.length" 
+							items-per-page="media.itemsPerPage" 
+							ng-model="paginationCtrl.currentPage" 
+							max-size="paginationCtrl.maxSize" 
+							previous-text="&lsaquo;" 
+							next-text="&rsaquo;" 
+							first-text="&laquo;" 
+							last-text="&raquo;"
+							style="margin: auto;">
 				</div>
-			</div>-->
+			</div>
 			<!-- / PAGINATION -->
-		</div>
 		<!-- / TABLE RESULTAT DE LA RECHERCHE DE MEDIA -->
 	</div>
 </div>
