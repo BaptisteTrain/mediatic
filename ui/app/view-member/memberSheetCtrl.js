@@ -17,7 +17,7 @@ angular.module('MemberSheet', [])
 			mbshCtrl.firstname = liste.prenom;
 			mbshCtrl.birthdate = new Date(liste.date_naissance);
 			mbshCtrl.email = liste.email;
-			mbshCtrl.address = liste.adresse.ligne1 + " " + liste.adresse.ligne2;
+			mbshCtrl.address = liste.adresse.ligne1;
 			/* Not used in form */mbshCtrl.ligne1 = liste.adresse.ligne1;
 			/* Not used in form */mbshCtrl.ligne2 = liste.adresse.ligne2;
 			mbshCtrl.postalcode =  liste.adresse.codepostal;
@@ -61,7 +61,11 @@ angular.module('MemberSheet', [])
 				prenom: mbshCtrl.firstname,
 				date_naissance: mbshCtrl.birthdate.toISOString().substring(0, 10),
 				email: mbshCtrl.email,
-				adresse: {ligne1: mbshCtrl.ligne1, ligne2: mbshCtrl.ligne2, codepostal: mbshCtrl.postalcode, ville: mbshCtrl.town}
+				adresse: {ligne1: mbshCtrl.address || null, ligne2: mbshCtrl.ligne2 || null, codepostal: mbshCtrl.postalcode || null, ville: mbshCtrl.town || null},
+				cotisation: null
+				//age: mbshCtrl.age,
+				//emprunt: mbshCtrl.loans,
+				//nombre_media: mbshCtrl.nbLoans
 			};
 			
 			//console.log("Data à envoyer: ");
