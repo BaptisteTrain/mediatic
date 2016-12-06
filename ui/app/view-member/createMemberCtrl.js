@@ -1,6 +1,20 @@
 angular.module('CreateMember', [])
-	.controller('CreateMemberCtrl', ['MemberSheetService',  function(MemberSheetService) {
+	.controller('CreateMemberCtrl', ['MemberSheetService',  'AuthenticationService', '$rootScope', 
+								function(MemberSheetService, AuthenticationService, $rootScope) {
 		var obj = this;
+		
+		// Check if authenticated
+		if (! AuthenticationService.isConnected()) {
+			// Redirection toward login
+			$location.url('/login');
+		}
+
+		// Page's title
+		$rootScope.titre = 'Nouveau Membre';
+		
+		// Menu active
+		$rootScope.mediaActive = '';
+		$rootScope.memberActive = 'active';
 		
 		obj.setMemberSheet = function() {
 			
@@ -27,6 +41,7 @@ angular.module('CreateMember', [])
 		}
 		
 	}])
+	
 	.config(function($routeProvider) {
 		$routeProvider.when('/createMember', {
 			templateUrl : '/view-member/createMember.html',

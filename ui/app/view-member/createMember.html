@@ -6,19 +6,19 @@
 			<div class="formulaire">
 				<form name="CreateMemberForm" class="form-horizontal" ng-submit="createMemberCtrl.setMemberSheet()" novalidate>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="lastname">Nom*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="lastname">Nom&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="text" class="form-control" id="lastname" name="lastname" ng-model="createMemberCtrl.lastname" placeholder="Nom" ng-required="true">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="firstname">Pr&eacute;nom*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="firstname">Pr&eacute;nom&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="text" class="form-control" id="firstname" name="firstname" ng-model="createMemberCtrl.firstname" placeholder="Pr&eacute;nom" ng-required="true">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthdate">Date de naissance*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthdate">Date de naissance&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="date" class="form-control" id="birthdate" name="birthdate" ng-model="createMemberCtrl.birthdate" date="dd/MM/yyyy" placeholder="Date de naissance" ng-required="true">
 						</div>
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="email" class="form-control" id="email" name="email" ng-model="createMemberCtrl.email" placeholder="E-mail" ng-required="true">
 						</div>
@@ -95,7 +95,7 @@
 							<span ng-show="CreateMemberForm.firstname.$error.required">Le Prénom est requis.</span>
 						</div>
 						<div ng-show="CreateMemberForm.birthdate.$dirty && CreateMemberForm.birthdate.$invalid" style="color: white; background-color: red">
-							<span ng-show="CreateMemberForm.birthdate.$error.required">La Date de naissance est requis.</span>
+							<span ng-show="CreateMemberForm.birthdate.$error.required">La Date de naissance est requise.</span>
 						</div>
 						<div ng-show="CreateMemberForm.email.$dirty && CreateMemberForm.email.$invalid" style="color: white; background-color: red">
 							<span ng-show="CreateMemberForm.email.$error.required">L'E-mail est requis.</span>

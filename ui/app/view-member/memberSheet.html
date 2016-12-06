@@ -6,19 +6,19 @@
 			<div class="formulaire">
 				<form name="MemberSheetForm" class="form-horizontal" ng-submit="mbshCtrl.setMemberSheet()" novalidate>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="lastname">Nom*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="lastname">Nom&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="text" class="form-control" id="lastname" name="lastname" ng-model="mbshCtrl.lastname" placeholder="Nom" ng-required="true">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="firstname">Pr&eacute;nom*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="firstname">Pr&eacute;nom&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="text" class="form-control" id="firstname" name="firstname" ng-model="mbshCtrl.firstname" placeholder="Pr&eacute;nom" ng-required="true">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthdate">Date de naissance*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="birthdate">Date de naissance&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="date" class="form-control" id="birthdate" name="birthdate" ng-model="mbshCtrl.birthdate" placeholder="Date de naissance" ng-required="true">
 						</div>
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail*</label>
+						<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2" for="email">E-mail&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
 							<input type="email" class="form-control" id="email" name="email" ng-model="mbshCtrl.email" placeholder="E-mail" ng-required="true">
 						</div>
@@ -108,19 +108,19 @@
 	<div class="row">
 		<div class="col-xs-12" ng-show="mbshCtrl.loans.length">
 			<h2>La liste des emprunts</h2>
-			<table class="table table-striped table-hover">
+			<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 				<thead>
 					<tr>
-						<th class="col-xs-1">R&eacute;f&eacute;rence</th>
-						<th class="col-xs-4">Titre</th>
-						<th class="col-xs-2">Auteur</th>
-						<th class="col-xs-1">Type</th>
-						<th class="col-xs-2">Date d'emprunt</th>
-						<th class="col-xs-2">Jours restants</th>
+						<th ts-criteria="media.id" ts-default class="col-xs-1">R&eacute;f</th>
+						<th ts-criteria="media.titre" class="col-xs-4">Titre</th>
+						<th ts-criteria="media.auteur" class="col-xs-2">Auteur</th>
+						<th ts-criteria="media.type" class="col-xs-1">Type</th>
+						<th ts-criteria="depart" class="col-xs-2">Date d'emprunt</th>
+						<th ts-criteria="retour" class="col-xs-2">Jours restants</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="loan in mbshCtrl.loans">
+					<tr ng-repeat="loan in mbshCtrl.loans" ts-repeat>
 						<td ng-bind="loan.media.id"></td>
 						<td ng-bind="loan.media.titre"></td>
 						<td ng-bind="loan.media.auteur"></td>
@@ -179,10 +179,10 @@
 				</form>
 				<hr/>
 				<form name="MemberLoanAddForm" id="validEmprunt" class="form-horizontal" ng-controller="PaginationCtrl as paginationCtrl" ng-submit="mbshCtrl.AddLoan()" ng-show="mbshCtrl.medias.length" novalidate>
-					<table class="table table-striped table-hover" ts-wrapper>
+					<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
 						<thead>
 							<tr>
-								<th ts-criteria="id" class="col-xs-1">Référence</th>
+								<th ts-criteria="id" ts-default class="col-xs-1">R&eacute;f</th>
 								<th ts-criteria="titre" ts-default class="col-xs-4">Titre</th>
 								<th ts-criteria="auteur" class="col-xs-2">Auteur</th>
 								<th ts-criteria="type" class="col-xs-4">Type</th>
@@ -190,7 +190,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="media in mbshCtrl.medias | paginationFilter:paginationCtrl.currentPage:mbshCtrl.itemsPerPage"" ts-repeat>
+							<tr ng-repeat="media in mbshCtrl.medias | paginationFilter:paginationCtrl.currentPage:mbshCtrl.itemsPerPage" ts-repeat>
 								<td ng-bind="media.id"></td>
 								<td ng-bind="media.titre"></td>
 								<td ng-bind="media.auteur"></td>

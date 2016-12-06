@@ -8,8 +8,20 @@ angular
 		});
 	})
 
-	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, IpService) {
+	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, $location, IpService, AuthenticationService) {
 		var ctrl = this;
+		
+		// Check if authenticated
+		if (! AuthenticationService.isConnected()) {
+			// Redirection toward login
+			$location.url('/login');
+		}
+		
+		// Menu active
+		$rootScope.mediaActive = 'active';
+		$rootScope.memberActive = '';
+
+		// Load of the media
 		var id   = $routeParams.id;
 		var url1 = 'http://'+IpService+':8090/resource/media.accession?id='+id;
 		var url2 = 'http://'+IpService+':8090/resource/adherent.recherche';
