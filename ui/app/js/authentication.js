@@ -1,7 +1,4 @@
 angular.module('MediaticApp').factory('AuthenticationService', function($http, IpService) {
-	// F5 bypass
-	//var defaut = 'Basic YXplOmF6ZQ==';
-	//$http.defaults.headers.common['Authorization'] = defaut;
 	
 	// If the user is connected
 	var connected = false;
@@ -13,7 +10,7 @@ angular.module('MediaticApp').factory('AuthenticationService', function($http, I
 	return {
 		// Check the authentication
 		connect : function(login, password) {
-			var auth = 'Basic' + btoa(login + ':' + password);
+			var auth = 'Basic ' + btoa(login + ':' + password);
 			var config = {
 				headers : {
 					'Authorization' : auth
