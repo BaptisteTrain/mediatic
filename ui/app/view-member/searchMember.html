@@ -42,6 +42,7 @@
 					<tr>
 						<th>Identifiant</th>
 						<th>Nom</th>
+						<th>Prénom</th>
 						<th>Date naissance</th>
 						<th>Cotisation &agrave; jour</th>
 						<th>Nb emprunts</th>
@@ -53,7 +54,8 @@
 						<td ng-bind="adherent.id"></td>
 						<td ng-bind="adherent.nom"></td>
 						<td ng-bind="adherent.prenom"></td>
-						<td ng-bind="adherent.date_naissance"></td>
+						<td ng-bind="adherent.date_naissance | date: 'dd/MM/yyyy'"></td>
+						<td ng-bind="adherent.cotisation.debut | date: 'dd/MM/yyyy'"></td>
 						<td ng-bind="adherent.emprunt.length"></td>
 						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" ng-click="searchMemberCtrl.callMemberSheet(adherent.id)"></i></td>	
 					</tr>
@@ -67,7 +69,7 @@
 							total-items="searchMemberCtrl.totalItems" 
 							items-per-page="searchMemberCtrl.itemsPerPage" 
 							ng-model="searchMemberCtrl.currentPage" 
-							num-pages="searchMemberCtrl.maxSize" 
+							max-size="searchMemberCtrl.maxSize" 
 							previous-text="&lsaquo;" 
 							next-text="&rsaquo;" 
 							first-text="&laquo;" 
