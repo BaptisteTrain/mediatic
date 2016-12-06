@@ -10,12 +10,12 @@ angular.module('NewMedia', [])
 	});
 })
 
-.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService', 'IpService',
-						 function($location, $http, $rootScope, AuthentificationService, IpService) {
+.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthenticationService', 'IpService',
+						 function($location, $http, $rootScope, AuthenticationService, IpService) {
 	var self = this;
 	
 	// Check if authenticated
-	if (! AuthentificationService.isConnected()) {
+	if (! AuthenticationService.isConnected()) {
 		// Redirection toward login
 		$location.url('/login');
 	}
