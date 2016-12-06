@@ -8,7 +8,7 @@ angular
 		});
 	})
 
-	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, $location, IpService, AuthenticationService) {
+	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, $location, IpService, AuthenticationService, $timeout) {
 		var ctrl = this;
 		
 		// Check if authenticated
@@ -42,12 +42,32 @@ angular
 		
 		$scope.$on('addLoan', function(event, data){
 			loadData();
+			$scope.showSuccess = false;
+		    $scope.doFade = false;
+		    
+		    $scope.showSuccess = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+		    }, 3000);
+		});
+		
+		$scope.$on('errorLoan', function(event, data){
+			$scope.showError = false;
+		    $scope.doFade = false;
+		    
+		    $scope.showError = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+		    }, 3000);
 		});
 
 		// hide success and error message 
 		$scope.showSuccess = false;
 		$scope.showError = false;
-		$scope.doFade = false;
+		console.log('showerror = ', $scope.showError);
+		//$scope.doFade = false;
 		// show/hide search form
 		$scope.isNavCollapsed = true;
 		$scope.isCollapsed = false;
@@ -98,22 +118,27 @@ angular
 		}
 	})
 	
-	.controller('MediaSheetLoanCtrl', function($scope, $http, IpService, $timeout) {
+	.controller('MediaSheetLoanCtrl', function($scope, $http, IpService) {
 		var ctrl = this;
 		ctrl.mySearchList = [];
 		
-		$scope.$watch('mySearch', function(newValue, oldValue){
-			ctrl.mySearchList.splice(0,ctrl.mySearchList.length);
-			for(var i in $scope.mySearch) {
-				ctrl.mySearchList.push({
-					id 			: $scope.mySearch[i].id,
-					firstname   : $scope.mySearch[i].nom,
-					secondename : $scope.mySearch[i].prenom
-				});
-			}
-			//console.log(ctrl.mySearchList);
-		});
+		ctrl.itemsPerPage = 10;
 		
+		ctrl.searchMember = function(){
+			$scope.$watch('mySearch', function(newValue, oldValue){
+			
+				ctrl.mySearchList.splice(0,ctrl.mySearchList.length);
+				for(var i in $scope.mySearch) {
+					ctrl.mySearchList.push({
+						id 			: $scope.mySearch[i].id,
+						firstname   : $scope.mySearch[i].nom,
+						secondename : $scope.mySearch[i].prenom
+					});
+				}
+				//console.log(ctrl.mySearchList);
+			});
+		}
+
 		ctrl.addLoan = function(idMember) {
 			if(loanForm.$invalid){
 				return;
@@ -158,20 +183,10 @@ angular
 					console.log('SUCCESS');
 					$scope.$emit('addLoan');
 					$scope.isNavCollapsed = true;
-					// show success message
-					{
-						//$scope.showError = false;
-					    //$scope.doFade = false;
-					    
-					    $scope.showError = true;
-					    
-					    //$timeout(function(){
-					    	//$scope.doFade = true;
-					    //}, 3000);
-					}
 	            })
 	            .error(function (data, status, header, config) {
 	            	console.log('ERROR');
+	            	$scope.$emit('errorLoan');
 	            });
 		}
 	});

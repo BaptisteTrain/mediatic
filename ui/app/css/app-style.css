@@ -8,11 +8,12 @@
 
 th {
 	background-color: #f5f5f5;
+	border-top: 0 !important;
 }
 
 /* Pagination */
 
-.paginationMember {
+.paginationElement {
 	text-align: center;
 	font-size: 17px;
 	
