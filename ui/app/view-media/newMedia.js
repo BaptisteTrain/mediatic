@@ -10,8 +10,8 @@ angular.module('NewMedia', [])
 	});
 })
 
-.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthenticationService', 'IpService',
-						 function($location, $http, $rootScope, AuthenticationService, IpService) {
+.controller('NewMediaCtrl', ['$location', '$http', '$rootScope', 'AuthenticationService', 'IpService', '$timeout', '$scope',
+						 function($location, $http, $rootScope, AuthenticationService, IpService, $timeout, $scope) {
 	var self = this;
 	
 	// Check if authenticated
@@ -42,7 +42,12 @@ angular.module('NewMedia', [])
 						   auteur: self.mediaToAdd.author, 
 						   type: self.mediaToAdd.type};
 		$http.post(url, mediaToSend).then(function(response) {
+			// Show a message
 			self.messCreateOk = true;
+			$timeout(function(){
+		    	$scope.doFade = true;
+		    }, 3000);
+			// Clear the fields
 			self.mediaToAdd = {};
 		});
 	};
