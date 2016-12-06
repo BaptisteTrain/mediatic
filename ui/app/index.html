@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
-<html ng-app="MediaticApp">
+<html ng-app="MediaticApp" ng-controller="IndexCtrl as index">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<!-- TODO TROUBLE LIBRARIES -->
+	<!-- Css Styles from bootstrap -->
 	<link media="all" href="./css/bootstrap.css" rel="stylesheet" />
 	<link media="all" href="./css/bootstrap-theme.css" rel="stylesheet" />
+	
+	<!-- TODO : voir si ca sert encore -->
 	<link media="all" href="./css/tablesort.css" rel="stylesheet" />
 	<link media="all" href="./css/tablesorter-style.css" rel="stylesheet" />
-	<!-- /TROUBLE LIBRARIES -->
 	
 	<!-- Css for the app -->
 	<link media="all" href="./css/app-style.css" rel="stylesheet" />
@@ -20,15 +21,18 @@
 	<script src="./bower_components/angular-route/angular-route.js"></script>
 	<script src="./bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 	<script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-	<!-- / Angular's Libraries -->
 	
 	<!-- Library modified for tablesort -->
 	<script src="./js/angular-tablesort.js"></script>
 	
-	<!-- Controllers -->
+	<!-- Main controller -->
 	<script src="./index.js"></script>
-	<script src="./js/IpService.js"></script>
 	
+	<!-- Services -->
+	<script src="./js/IpService.js"></script>
+	<script src="./js/authentication.js"></script>
+	
+	<!-- Other Controllers -->
 	<script src="./view-login/login.js"></script>
 
 	<script src="./view-media/media.js"></script>
@@ -46,11 +50,12 @@
 </head>
 
 <body>
-	<header>
+
+	<!-- HEADER FOR CONNECTED PAGES -->
+	<header ng-if="index.isConnect()">
 		<div class="jumbotron titre">
 			<div class="container">
 				<h1>Mediatic</h1>
-				<!--  <p>Le site de gestion des emprunts et des adh&eacute;rents de la m&eacute;diath&egrave;que</p> -->
 			</div>
 		</div>
 		<nav class="navbar navbar-inverse navbar-static-top">
@@ -72,14 +77,6 @@
 							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span></strong>
 						</a>
 					</li>
-					<li>
-						<a href="#/member/sheet" class="hidden-xs">
-							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Fiche adhérent (Temp)</strong>
-						</a>
-						<a href="#/member/sheet" class="visible-xs-inline-block">
-							<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span></strong>
-						</a>
-					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
@@ -94,12 +91,25 @@
 			</div>
 		</nav>
 	</header>
+	<!-- / HEADER FOR CONNECTED PAGES -->
+	
+	<!-- HEADER FOR NOT CONNECTED PAGES (LOGIN) -->
+	<header ng-if="! index.isConnect()">
+		<div class="container">
+			<div class="jumbotron titre">
+				<h1>Bienvenue sur Mediatic</h1>
+				<p>Le site de gestion des emprunts et des adh&eacute;rents de la m&eacute;diath&egrave;que</p>
+			</div>
+		</div>
+	</header>
+	<!-- / HEADER FOR NOT CONNECTED PAGES (LOGIN) -->
 	
 	<main class="container">
 		<ng-view></ng-view>
 	</main>
 	
-	<footer>
+	<!-- FOOTER FOR CONNECTED PAGES -->
+	<footer ng-if="index.isConnect()">
 		<div class="jumbotron dernier">
 			<div class="container">
 				<div class="text-center anoir">
@@ -109,3 +119,22 @@
 			<br> <br>
 		</div>
 	</footer>
+	<!-- / FOOTER FOR CONNECTED PAGES -->
+
+	<!-- FOOTER FOR NOT CONNECTED PAGES (LOGIN) -->
+	<footer ng-if="! index.isConnect()">
+		<div class="container">
+			<div class="jumbotron dernier">
+				<div class="container">
+					<div class="text-center anoir">
+						<a href="#">© La team.</a><br>
+					</div>
+				</div>
+				<br> <br>
+			</div>
+		</div>
+	</footer>
+	<!-- / FOOTER FOR NOT CONNECTED PAGES (LOGIN) -->
+	
+</body>
+</html>
