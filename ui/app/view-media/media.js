@@ -10,12 +10,12 @@ angular.module('Media', [])
 	});
 })
 
-.controller('MediaCtrl', ['$location', '$http', '$rootScope', 'AuthentificationService', 'IpService',
-						 function($location, $http, $rootScope, AuthentificationService, IpService) {
+.controller('MediaCtrl', ['$location', '$http', '$rootScope', 'AuthenticationService', 'IpService',
+						 function($location, $http, $rootScope, AuthenticationService, IpService) {
 	var self = this;
 	
 	// Check if authenticated
-	if (! AuthentificationService.isConnected()) {
+	if (! AuthenticationService.isConnected()) {
 		// Redirection toward login
 		$location.url('/login');
 	}
@@ -28,11 +28,15 @@ angular.module('Media', [])
 	$rootScope.memberActive = '';
 	
 	// Has the right to create a new media
-	this.displayButtonAdd = AuthentificationService.hasRightMediaCreation();
+	this.displayButtonAdd = AuthenticationService.hasRightMediaCreation();
 	
 	// Redirection from button add a media to page newMedia
 	this.goNewMedia = function() {
 		$location.url('/newMedia');
+	}
+	// Redirection from detail icon to page 
+	this.goMediaSheet = function(id) {
+		$location.path('/mediaSheet/'+id);
 	}
 	
 	// Loading list of medias
