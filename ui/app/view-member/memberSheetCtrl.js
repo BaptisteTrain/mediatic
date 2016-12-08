@@ -1,8 +1,8 @@
 /* AUTHOR: Matthieu */
 
 angular.module('MemberSheet', [])
-	.controller('MemberSheetController', ['$http', '$routeParams', '$location', 'IpService', 'MemberSheetService', 'AuthenticationService', '$rootScope',
-								  function($http, $routeParams, $location, IpService, MemberSheetService, AuthenticationService, $rootScope) {
+	.controller('MemberSheetController', ['$http', '$rootScope', '$routeParams', '$location', '$scope', '$timeout', 'IpService', 'MemberSheetService', 'AuthenticationService',
+		function($http, $rootScope, $routeParams, $location, $scope, $timeout, IpService, MemberSheetService, AuthenticationService) {
 		var mbshCtrl = this;
 		
 		// Check if authenticated
@@ -16,7 +16,7 @@ angular.module('MemberSheet', [])
 		$rootScope.memberActive = 'active';
 		
 		
-		mbshCtrl.medias;
+		//mbshCtrl.medias;
 		
 		mbshCtrl.itemsPerPage = 10;
 		
@@ -45,6 +45,7 @@ angular.module('MemberSheet', [])
 			mbshCtrl.age = liste.age;
 			mbshCtrl.subscriptionAmount = liste.cotisation.montant;
 			mbshCtrl.subscriptionDate = new Date(liste.cotisation.debut);
+			mbshCtrl.subscriptionEndDate = new Date(liste.cotisation.fin);
 			mbshCtrl.loans = liste.emprunt;
 		},
 		function(response) {
@@ -57,7 +58,7 @@ angular.module('MemberSheet', [])
 			//console.log("Titre: " + mbshCtrl.title);
 			//console.log("Author: " + mbshCtrl.author);
 			//console.log("Type: " + mbshCtrl.type);
-			MemberSheetService.getMedias(mbshCtrl.title || "",mbshCtrl.author || "",mbshCtrl.type || "").then(function(listeMedia) {
+			MemberSheetService.getMedias(mbshCtrl.title || "", mbshCtrl.author || "", mbshCtrl.type || "").then(function(listeMedia) {
 				mbshCtrl.medias = listeMedia;
 			});
 		};
@@ -82,7 +83,8 @@ angular.module('MemberSheet', [])
 				date_naissance: mbshCtrl.birthdate.toISOString().substring(0, 10),
 				email: mbshCtrl.email,
 				adresse: {ligne1: mbshCtrl.address || null, ligne2: mbshCtrl.ligne2 || null, codepostal: mbshCtrl.postalcode || null, ville: mbshCtrl.town || null},
-				cotisation: null
+				cotisation: {debut: mbshCtrl.subscriptionDate.toISOString().substring(0, 10), fin: mbshCtrl.subscriptionEndDate.toISOString().substring(0, 10), montant: mbshCtrl.subscriptionAmount}
+				//cotisation: null
 				//age: mbshCtrl.age,
 				//emprunt: mbshCtrl.loans,
 				//nombre_media: mbshCtrl.nbLoans
@@ -94,8 +96,11 @@ angular.module('MemberSheet', [])
 			/* Lancement de la requête */
 			MemberSheetService.setSheet(data).then(function(response) {
 				console.log("La Fiche de l'Adhérent a bien été modifiée.");
+				mbshCtrl.varFct();
 				//console.log("Response: ");
 				//console.log(response);
+			}, function(response) {
+				$scope.$emit('editMediaError');
 			});
 		};
 		
@@ -132,6 +137,62 @@ angular.module('MemberSheet', [])
 		mbshCtrl.returnToSearch = function() {
 			$location.path('/searchMember');
 		};
+		
+		mbshCtrl.varTest = false;
+		mbshCtrl.doFade = false;
+		
+		mbshCtrl.varFct = function() {
+			mbshCtrl.varTest = true;
+			mbshCtrl.doFade = true;
+			
+			$timeout(function(){
+		    	mbshCtrl.varTest = false;
+		    }, 5000);
+
+			mbshCtrl.doFade = false;
+		};
+		
+		/*$scope.$on('addLoan', function(event, data){
+		    $scope.doFade = false;
+		    $scope.showSuccess = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+				$scope.showSuccess = false;
+		    }, 3000);
+		});
+		
+		$scope.$on('errorLoan', function(event, data){
+		    $scope.doFade = false;
+		    $scope.showError = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+				$scope.showError = false;
+		    }, 3000);
+		});
+		
+		$scope.$on('editMediaError', function(event, data){
+		    $scope.doFade = false;
+		    $scope.showErrorEdit = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+				$scope.showErrorEdit = false;
+		    }, 3000);
+		});
+		
+		$scope.$on('editMediaSuccess', function(event, data){
+		    $scope.doFade = false;
+		    $scope.showSuccessEdit = true;
+		    
+		    $timeout(function(){
+		    	$scope.doFade = true;
+				$scope.showSuccessEdit = false;
+		    }, 3000);
+		});*/
+		
+		
 		
 	}])
 	/* Filtre qui calcule le nombre de jours séparant la Date du jour et la Date sur laquelle le filtre est appliqué */
