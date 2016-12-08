@@ -46,6 +46,7 @@ angular.module('NewMedia', [])
 			self.messCreateOk = true;
 			$timeout(function(){
 		    	$scope.doFade = true;
+		    	self.messCreateOk = false;
 		    }, 3000);
 			// Clear the fields
 			self.mediaToAdd = {};

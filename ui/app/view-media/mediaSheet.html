@@ -49,7 +49,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
+<div class="row" ng-controller="PaginationCtrl as paginationCtrl">
 	<div class="liste col-xs-12 col-sm-12 col-md-8 col-lg-8">
 		<h2>Emprunteurs</h2>
 		<table class="table table-striped table-hover" ts-wrapper ts-no-data-text="Aucun r&eacute;sultat">
@@ -60,14 +60,29 @@
 				</tr>
 			</thead>
 			<tbody >
-				<tr ng-repeat="loan in MSMctrl.emprunteurs" ts-repeat>
+				<tr ng-repeat="loan in MSMctrl.emprunteurs | paginationFilter:paginationCtrl.currentPage:MSMctrl.itemsPerPage" ts-repeat>
 					<td ng-bind="loan.nom"></td>
 					<td ng-bind="loan.prenom"></td>
 				</tr>
 			</tbody>
 		</table>
+		<!-- PAGINATION -->
+		<div class="paginationElement">
+			<div uib-pagination	
+					boundary-links="true" 
+					total-items="MSMctrl.emprunteurs.length"
+					items-per-page="MSMctrl.itemsPerPage" 
+					ng-model="paginationCtrl.currentPage" 
+					max-size="paginationCtrl.maxSize" 
+					previous-text="&lsaquo;" 
+					next-text="&rsaquo;" 
+					first-text="&laquo;" 
+					last-text="&raquo;"
+					style="margin: auto;">
+			</div>
+		</div>
+		<!-- / PAGINATION -->
 	</div>
-</div>
 </div>
 
 
@@ -138,16 +153,16 @@
 				<!-- PAGINATION -->
 				<div class="paginationElement">
 					<div uib-pagination	
-								boundary-links="true" 
-								total-items="(MSLctrl.mySearchList | filter : {'id': mediaIdSearch} | filter : {'firstname' : mediaNameSearch} | filter : {'secondename' : mediaSecondeNameSearch}).length" 
-								items-per-page="MSLctrl.itemsPerPage" 
-								ng-model="paginationCtrl.currentPage" 
-								max-size="paginationCtrl.maxSize" 
-								previous-text="&lsaquo;" 
-								next-text="&rsaquo;" 
-								first-text="&laquo;" 
-								last-text="&raquo;"
-								style="margin: auto;">
+							boundary-links="true" 
+							total-items="(MSLctrl.mySearchList | filter : {'id': mediaIdSearch} | filter : {'firstname' : mediaNameSearch} | filter : {'secondename' : mediaSecondeNameSearch}).length"
+							items-per-page="MSLctrl.itemsPerPage" 
+							ng-model="paginationCtrl.currentPage" 
+							max-size="paginationCtrl.maxSize" 
+							previous-text="&lsaquo;" 
+							next-text="&rsaquo;" 
+							first-text="&laquo;" 
+							last-text="&raquo;"
+							style="margin: auto;">
 					</div>
 				</div>
 				<!-- / PAGINATION -->
