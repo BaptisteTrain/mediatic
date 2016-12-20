@@ -52,7 +52,7 @@ public class LoanDAO extends GenericDAO<Loan> {
 	 * @return int
 	 */
 	public int howManyAllLoanMedia() {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		Query query = em.createQuery("SELECT count(l) FROM Loan l ");
 		int count = ((Integer) query.getSingleResult()).intValue();
@@ -65,7 +65,7 @@ public class LoanDAO extends GenericDAO<Loan> {
 	 * @return int
 	 */
 	public int howManyLoaningMedia() {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		Query query = em.createQuery(" SELECT count(l) "
 									+ "FROM Loan l "
