@@ -15,14 +15,15 @@ public class MemberDAO extends GenericDAO<Member> {
     private static MemberDAO dao;
 
     private MemberDAO() {
-	super(Member.class);
+    	super(Member.class);
     }
 
     public static MemberDAO instance() {
-	if (dao == null) {
-	    dao = new MemberDAO();
-	}
-	return dao;
+		if (dao == null) {
+		    dao = new MemberDAO();
+		}
+		
+		return dao;
     }
     
     /**
@@ -30,77 +31,101 @@ public class MemberDAO extends GenericDAO<Member> {
      * @return
      */
     public List<Member> selectAllMembers() {
-	EntityManager em = DataBaseHelper.createEntityManager();
-	DataBaseHelper.beginTx(em);
-	TypedQuery<Member> query = em.createQuery("SELECT m "
-						+ "FROM Member m " 
-						+ "LEFT OUTER JOIN m.listLoan l ", Member.class);
-	List<Member> listeReturn = query.getResultList();
-	em.close();
-	return listeReturn;
+		EntityManager em = DataBaseHelper.createEntityManager();
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery("SELECT m "
+							+ "FROM Member m " 
+							+ "LEFT OUTER JOIN m.listLoan l ", Member.class);
+		List<Member> listeReturn = query.getResultList();
+		em.close();
+		return listeReturn;
     }
 
     /**
      * 
      * @param id
-     * @return
+     * @return List<Member>
      */
     public List<Member> findMembersByIdPartial(String id) {
+		EntityManager em = DataBaseHelper.createEntityManager();
+	
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery(
+			"SELECT m " 
+			+ "FROM Member m " 
+			+ "WHERE m.identifier LIKE :id", Member.class);
+	
+		query.setParameter("id",  id + "%");
+		List<Member> listeReturn = query.getResultList();
+		em.close();
+	
+		return listeReturn;
+    }
 
-	EntityManager em = DataBaseHelper.createEntityManager();
-
-	DataBaseHelper.beginTx(em);
-	TypedQuery<Member> query = em.createQuery("SELECT m " 
-						+ "FROM Member m " 
-						+ "WHERE m.identifier LIKE :id", Member.class);
-
-	query.setParameter("id",  id + "%");
-	List<Member> listeReturn = query.getResultList();
-	em.close();
-
-	return listeReturn;
+    /**
+     * Return the member with this id 
+     * @param id
+     * @return Member
+     */
+    public Member findMemberById(String id) {
+		EntityManager em = DataBaseHelper.createEntityManager();
+	
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery(
+			"SELECT m " 
+			+ "FROM Member m " 
+			+ "WHERE m.identifier = :id", Member.class);
+	
+		query.setParameter("id", id);
+		Member result = query.getSingleResult();
+		em.close();
+	
+		return result;
     }
 
     /**
      * Find members by name
      * @param lastname
      * @param firstname
-     * @return
+     * @return List<Member>
      */
     public List<Member> findMemberByName(String lastname, String firstname) {
-
-	EntityManager em = DataBaseHelper.createEntityManager();
-
-	DataBaseHelper.beginTx(em);
-	TypedQuery<Member> query = em.createQuery("SELECT m " 
-						+ "FROM Member m " 
-						+ "WHERE upper(m.person.lastname) LIKE :lastname " 
-						+ "AND upper(m.person.firstname) LIKE :firstname", Member.class);
-
-	query.setParameter("lastname", "%" + lastname.toUpperCase() + "%");
-	query.setParameter("firstname", "%" + firstname.toUpperCase() + "%");
-	List<Member> listeReturn = query.getResultList();
-	em.close();
-
-	return listeReturn;
+		EntityManager em = DataBaseHelper.createEntityManager();
+	
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery(
+			"SELECT m " 
+			+ "FROM Member m " 
+			+ "WHERE UPPER(m.person.lastname) LIKE :lastname " 
+			+ "AND UPPER(m.person.firstname) LIKE :firstname", Member.class);
+	
+		query.setParameter("lastname", "%" + lastname.toUpperCase() + "%");
+		query.setParameter("firstname", "%" + firstname.toUpperCase() + "%");
+		List<Member> listeReturn = query.getResultList();
+		em.close();
+	
+		return listeReturn;
     }
 
     /**
      * Find the members and its loan from a media
      * @param media
-     * @return
+     * @return List<Member>
      */
     public List<Member> findMembersFromMedia(Media media) {
-	EntityManager em = DataBaseHelper.createEntityManager();
-	DataBaseHelper.beginTx(em);
-	TypedQuery<Member> query = em.createQuery("SELECT m " 
-						+ "FROM Member m " 
-						+ "JOIN m.listLoan l " 
-						+ "WHERE l.media.id = :id ", Member.class);
-	query.setParameter("id", media.getId());
-	List<Member> listeReturn = query.getResultList();
-	em.close();
-	return listeReturn;
+		EntityManager em = DataBaseHelper.createEntityManager();
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery(
+			"SELECT m " 
+			+ "FROM Member m " 
+			+ "JOIN m.listLoan l " 
+			+ "WHERE l.media.id = :id ", Member.class);
+		
+		query.setParameter("id", media.getId());
+		List<Member> listeReturn = query.getResultList();
+		em.close();
+		
+		return listeReturn;
     }
 
     /**
@@ -110,21 +135,23 @@ public class MemberDAO extends GenericDAO<Member> {
      * @param firstname
      * @return List<Member>
      */
-    public List<Member> findMemberByIdOrNames(String id, String lastname, String firstname) {
-	EntityManager em = DataBaseHelper.createEntityManager();
-	DataBaseHelper.beginTx(em);
-	TypedQuery<Member> query = em.createQuery("SELECT m " 
-						+ "FROM Member m " 
-						+ "WHERE m.person.lastname LIKE :lastname " 
-						+ "OR m.person.firstname LIKE :firstname " 
-						+ "OR m.identifier LIKE :id", Member.class);
-	query.setParameter("id", id + "%");
-	query.setParameter("lastname", "%" + lastname + "%");
-	query.setParameter("firstname", "%" + firstname + "%");
-	// TODO : pas de LIKE sur lastname and firstname ?
-	List<Member> listeReturn = query.getResultList();
-	em.close();
-	return listeReturn;
+    public List<Member> findMembersByIdOrNames(String id, String lastname, String firstname) {
+		EntityManager em = DataBaseHelper.createEntityManager();
+		DataBaseHelper.beginTx(em);
+		TypedQuery<Member> query = em.createQuery(
+			"SELECT m " 
+			+ "FROM Member m " 
+			+ "WHERE m.person.lastname LIKE :lastname " 
+			+ "OR m.person.firstname LIKE :firstname " 
+			+ "OR m.identifier LIKE :id", Member.class);
+		
+		query.setParameter("id", id + "%");
+		query.setParameter("lastname", "%" + lastname + "%");
+		query.setParameter("firstname", "%" + firstname + "%");
+		List<Member> listeReturn = query.getResultList();
+		em.close();
+		
+		return listeReturn;
     }
 
 }
