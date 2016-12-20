@@ -28,11 +28,11 @@ public class UserDAO extends GenericDAO<User> {
 	 /**
      * Select all the users
      * 
-     * @return List<User>
+     * @return List<User> 
      */
     public List<User> selectAllUsers() {
     	
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<User> query = em.createQuery("SELECT u "
 							+ "FROM User u", User.class);
@@ -50,7 +50,7 @@ public class UserDAO extends GenericDAO<User> {
      */
     public User findUsersById(String id) {
 
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 	
 		DataBaseHelper.beginTx(em);
 		TypedQuery<User> query = em.createQuery("SELECT u " 
@@ -72,7 +72,7 @@ public class UserDAO extends GenericDAO<User> {
      */
     public List<User> findUsersByIdPartial(String id) {
 
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 	
 		DataBaseHelper.beginTx(em);
 		TypedQuery<User> query = em.createQuery("SELECT u " 
@@ -96,7 +96,7 @@ public class UserDAO extends GenericDAO<User> {
      */
     public List<User> findUserByName(String lastname, String firstname) {
 
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 	
 		DataBaseHelper.beginTx(em);
 		TypedQuery<User> query = em.createQuery("SELECT u " 
@@ -123,7 +123,7 @@ public class UserDAO extends GenericDAO<User> {
      */
     public List<User> findUserByIdOrNames(String id, String lastname, String firstname) {
     	
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		
 		DataBaseHelper.beginTx(em);
 		TypedQuery<User> query = em.createQuery("SELECT u " 
