@@ -16,6 +16,17 @@ angular.module('CreateMember', [])
 		$rootScope.mediaActive = '';
 		$rootScope.memberActive = 'active';
 		
+		// Subscription date set to today
+		obj.subscriptionDate = new Date(Date.now());
+		
+		// Age to set
+		obj.getAge = function() {
+			if (obj.birthdate != undefined) {
+				var currentDate = new Date(Date.now());			
+				obj.age = currentDate.getFullYear() - obj.birthdate.getFullYear();
+			}
+		}
+		
 		obj.setMemberSheet = function() {
 			
 			var currentDate = new Date();			
