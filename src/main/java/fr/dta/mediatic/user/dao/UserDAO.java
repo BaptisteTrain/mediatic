@@ -7,28 +7,25 @@ import javax.persistence.TypedQuery;
 
 import fr.dta.mediatic.helper.DataBaseHelper;
 import fr.dta.mediatic.helper.GenericDAO;
-import fr.dta.mediatic.member.dao.MemberDAO;
-import fr.dta.mediatic.member.model.Member;
 import fr.dta.mediatic.user.model.User;
 
 public class UserDAO extends GenericDAO<User> {
 
-	
 	private static UserDAO dao;
-	
+
 	public UserDAO() {
 		super(User.class);
 	}
-		
+
 	public static UserDAO instance() {
 		if (dao == null) {
 			dao = new UserDAO();
 		}
-		
+
 		return dao;
 	}
-    
-    /**
+	
+	 /**
      * Select all the users
      * 
      * @return List<User>
@@ -65,8 +62,8 @@ public class UserDAO extends GenericDAO<User> {
 		em.close();
 	
 		return singleReturn;
-    }
-
+    }    
+   
     /**
      * Find user by partial id
      * 
@@ -83,6 +80,7 @@ public class UserDAO extends GenericDAO<User> {
 							+ "WHERE u.identifier LIKE :id", User.class);
 	
 		query.setParameter("id",  id + "%");
+
 		List<User> listeReturn = query.getResultList();
 		em.close();
 
@@ -105,12 +103,13 @@ public class UserDAO extends GenericDAO<User> {
 							+ "FROM User u " 
 							+ "WHERE upper(u.person.lastname) LIKE :lastname " 
 							+ "AND upper(u.person.firstname) LIKE :firstname", User.class);
-	
+
 		query.setParameter("lastname", "%" + lastname.toUpperCase() + "%");
 		query.setParameter("firstname", "%" + firstname.toUpperCase() + "%");
+		
 		List<User> listeReturn = query.getResultList();
 		em.close();
-	
+
 		return listeReturn;
     }
 
@@ -132,12 +131,14 @@ public class UserDAO extends GenericDAO<User> {
 							+ "WHERE u.person.lastname LIKE :lastname " 
 							+ "OR u.person.firstname LIKE :firstname " 
 							+ "OR u.identifier LIKE :id", User.class);
+
 		query.setParameter("id", id + "%");
 		query.setParameter("lastname", "%" + lastname + "%");
 		query.setParameter("firstname", "%" + firstname + "%");
+		
 		List<User> listeReturn = query.getResultList();
 		em.close();
 		
 		return listeReturn;
-    }
+	}
 }

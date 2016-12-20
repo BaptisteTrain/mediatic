@@ -40,7 +40,7 @@ public class EntityManagerFactory {
 		return ds;
 	}
 
-	@Bean(name = "em")
+	@Bean(name = "entityManager")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource());

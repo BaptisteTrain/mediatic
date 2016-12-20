@@ -31,7 +31,7 @@ public class MemberDAO extends GenericDAO<Member> {
      * @return
      */
     public List<Member> selectAllMembers() {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Member> query = em.createQuery("SELECT m "
 							+ "FROM Member m " 
@@ -47,7 +47,7 @@ public class MemberDAO extends GenericDAO<Member> {
      * @return List<Member>
      */
     public List<Member> findMembersByIdPartial(String id) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 	
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Member> query = em.createQuery(
@@ -68,7 +68,7 @@ public class MemberDAO extends GenericDAO<Member> {
      * @return Member
      */
     public Member findMemberById(String id) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 	
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Member> query = em.createQuery(
@@ -90,7 +90,7 @@ public class MemberDAO extends GenericDAO<Member> {
      * @return List<Member>
      */
     public List<Member> findMemberByName(String lastname, String firstname) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 	
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Member> query = em.createQuery(
@@ -113,7 +113,7 @@ public class MemberDAO extends GenericDAO<Member> {
      * @return List<Member>
      */
     public List<Member> findMembersFromMedia(Media media) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Member> query = em.createQuery(
 			"SELECT m " 
@@ -136,7 +136,7 @@ public class MemberDAO extends GenericDAO<Member> {
      * @return List<Member>
      */
     public List<Member> findMembersByIdOrNames(String id, String lastname, String firstname) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Member> query = em.createQuery(
 			"SELECT m " 

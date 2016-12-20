@@ -32,7 +32,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @return
 	 */
 	public List<Media> selectAllMedias() {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
 											   + "FROM Media m "
@@ -48,7 +48,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @return
 	 */
 	public List<Media> selectMediasFromMember(Member member) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
 											   + "FROM Media m "
@@ -67,7 +67,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @return
 	 */
 	public List<Media> findMediaByTitle(String title) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
 											   + "FROM Media m "
@@ -85,7 +85,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @return
 	 */
 	public List<Media> findMediaByAuthor(String author) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m " 
 											   + "FROM Media m "
@@ -103,7 +103,7 @@ public class MediaDAO extends GenericDAO<Media> {
 	 * @return
 	 */
 	public List<Media> findMediaByType(TypeMedia type) {
-		EntityManager em = DataBaseHelper.createEntityManager();
+		EntityManager em = DataBaseHelper.getEntityManager();
 		DataBaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("SELECT m "
 											   + "FROM Media m "

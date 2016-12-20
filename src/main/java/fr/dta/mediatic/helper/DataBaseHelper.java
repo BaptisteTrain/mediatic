@@ -1,18 +1,15 @@
 package fr.dta.mediatic.helper;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 public class DataBaseHelper {
 
-	private static EntityManagerFactory entityManagerFactory;
+	@PersistenceContext
+	private static EntityManager entityManager;
 
-	public static EntityManager createEntityManager() {
-		if (entityManagerFactory == null) {
-			entityManagerFactory = Persistence.createEntityManagerFactory("unit");
-		}
-		return entityManagerFactory.createEntityManager();
+	public static EntityManager getEntityManager() {
+		return entityManager;
 	}
 
 	public static void commitTxAndClose(EntityManager entityManager) {
