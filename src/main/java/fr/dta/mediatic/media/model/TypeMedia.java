@@ -1,5 +1,7 @@
 package fr.dta.mediatic.media.model;
 
+import fr.dta.mediatic.Constants;
+
 public enum TypeMedia {
 
 	BOOK, CD, DVD;
@@ -12,11 +14,11 @@ public enum TypeMedia {
 	public static Integer getDuration(TypeMedia typeMedia) {
 		switch (typeMedia) {
 		case BOOK:
-			return 30;
+			return Constants.MEDIA_DURATION_BOOK;
 		case CD:
-			return 15;
+			return Constants.MEDIA_DURATION_CD;
 		case DVD:
-			return 15;
+			return Constants.MEDIA_DURATION_DVD;
 		default:
 			return 0;
 		}

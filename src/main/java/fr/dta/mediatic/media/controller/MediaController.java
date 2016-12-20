@@ -1,4 +1,4 @@
-package fr.dta.mediatic;
+package fr.dta.mediatic.media.controller;
 
 import java.util.List;
 

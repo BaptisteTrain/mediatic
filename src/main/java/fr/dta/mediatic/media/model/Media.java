@@ -2,7 +2,18 @@ package fr.dta.mediatic.media.model;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import fr.dta.mediatic.loan.model.Loan;
 
@@ -16,10 +27,21 @@ public class Media {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 4)
+    @Length(max = 4)
+	@NotNull
+	@NotBlank
     private TypeMedia type;
 
+    @Column(length = 150)
+    @Length(max = 150)
+	@NotNull
+	@NotBlank
     private String title;
 
+    @Column(length = 150)
+    @Length(max = 150)
+	@NotNull
+	@NotBlank
     private String author;
 
     @OneToMany(mappedBy = "media")

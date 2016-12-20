@@ -2,7 +2,17 @@ package fr.dta.mediatic.loan.model;
 
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import fr.dta.mediatic.media.model.Media;
 import fr.dta.mediatic.member.model.Member;
@@ -16,12 +26,19 @@ public class Loan {
 	private Long id;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@NotNull
+	@NotBlank
 	private Date loanDate;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date returnDate;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@NotNull
+	@NotBlank
 	private Date plannedReturnDate;
 
 	@ManyToOne
