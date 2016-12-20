@@ -42,7 +42,7 @@ public class MemberDAO extends GenericDAO<Member> {
     }
 
     /**
-     * 
+     * Search for Members by partial ID
      * @param id
      * @return List<Member>
      */
@@ -63,7 +63,7 @@ public class MemberDAO extends GenericDAO<Member> {
     }
 
     /**
-     * Return the member with this id 
+     * Returns the Member with the given ID 
      * @param id
      * @return Member
      */
@@ -84,7 +84,7 @@ public class MemberDAO extends GenericDAO<Member> {
     }
 
     /**
-     * Find members by name
+     * Search for Members by Lastname and Firstname
      * @param lastname
      * @param firstname
      * @return List<Member>
@@ -108,7 +108,7 @@ public class MemberDAO extends GenericDAO<Member> {
     }
 
     /**
-     * Find the members and its loan from a media
+     * Search for Members who loaned a specific Media
      * @param media
      * @return List<Member>
      */
@@ -129,7 +129,7 @@ public class MemberDAO extends GenericDAO<Member> {
     }
 
     /**
-     * Find the members by id or lastname or firstname
+     * Search for Members by ID, Lastname and Firstname
      * @param id
      * @param lastname
      * @param firstname

@@ -21,7 +21,7 @@ public class MemberService {
 	}
 	
 	/**
-	 * Returns a unique Member based on his complete ID.
+	 * Returns a unique Member based on his exact ID.
 	 * @param id
 	 * @return Member
 	 */
