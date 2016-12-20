@@ -27,45 +27,48 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @PropertySource("classpath:application.properties")
 public class EntityManagerFactory {
 
-	@Autowired
-	private Environment env;
+    @Autowired
+    private Environment env;
 
-	@Bean(name = "dataSource")
-	public DataSource dataSource() {
-		BoneCPDataSource ds = new BoneCPDataSource();
-		ds.setDriverClass(env.getRequiredProperty("hibernate.driverClassName"));
-		ds.setJdbcUrl(env.getRequiredProperty("hibernate.url"));
-		ds.setUsername(env.getRequiredProperty("hibernate.username"));
-		ds.setPassword(env.getRequiredProperty("hibernate.password"));
-		return ds;
-	}
+    @Bean(name = "dataSource")
+    public DataSource dataSource() {
+	BoneCPDataSource ds = new BoneCPDataSource();
+	ds.setDriverClass(env.getRequiredProperty("hibernate.driverClassName"));
+	ds.setJdbcUrl(env.getRequiredProperty("hibernate.url"));
+	ds.setUsername(env.getRequiredProperty("hibernate.username"));
+	ds.setPassword(env.getRequiredProperty("hibernate.password"));
+	ds.setMaxConnectionsPerPartition(100);
+	ds.setMinConnectionsPerPartition(1);
+	ds.setPartitionCount(2);
+	ds.setConnectionTestStatement("select 1");
+	return ds;
+    }
 
-	@Bean(name = "entityManager")
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-		emf.setDataSource(dataSource());
-		emf.setPackagesToScan(new String[] { "fr.dta.mediatic" });
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		emf.setJpaVendorAdapter(vendorAdapter);
-		emf.setJpaProperties(additionalProperties());
-		return emf;
-	}
+    @Bean(name = "entityManager")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+	emf.setDataSource(dataSource());
+	emf.setPackagesToScan(new String[] { "fr.dta.mediatic" });
+	JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+	emf.setJpaVendorAdapter(vendorAdapter);
+	emf.setJpaProperties(additionalProperties());
+	return emf;
+    }
 
-	Properties additionalProperties() {
-		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
-		properties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-		properties.setProperty("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
-		properties.setProperty("hibernate.use_second_level_cache",
-				env.getRequiredProperty("hibernate.cache.use_second_level_cache"));
-		return properties;
-	}
+    private Properties additionalProperties() {
+	Properties properties = new Properties();
+	properties.setProperty("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
+	properties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+	properties.setProperty("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+	properties.setProperty("hibernate.use_second_level_cache", env.getRequiredProperty("hibernate.cache.use_second_level_cache"));
+	return properties;
+    }
 
-	@Bean
-	public PlatformTransactionManager transactionManager(javax.persistence.EntityManagerFactory emf) {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(emf);
-		return transactionManager;
-	}
+    @Bean
+    public PlatformTransactionManager transactionManager(javax.persistence.EntityManagerFactory emf) {
+	JpaTransactionManager transactionManager = new JpaTransactionManager();
+	transactionManager.setEntityManagerFactory(emf);
+	return transactionManager;
+    }
 
 }

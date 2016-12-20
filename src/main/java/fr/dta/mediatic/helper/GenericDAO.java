@@ -1,8 +1,15 @@
 package fr.dta.mediatic.helper;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-public class GenericDAO<T> {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public abstract class GenericDAO<T> {
+    
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     private Class<T> klass;
 
@@ -10,17 +17,16 @@ public class GenericDAO<T> {
         this.klass = klass;
     }
 
+
     public T find(Long id) {
-        EntityManager entityManager = DataBaseHelper.getEntityManager();
         T t = entityManager.find(klass, id);
         entityManager.close();
         return t;
     }
 
     public T persist(T t) {
-        EntityManager entityManager = DataBaseHelper.getEntityManager();
         try {
-        	DataBaseHelper.beginTx(entityManager);
+            DataBaseHelper.beginTx(entityManager);
             entityManager.persist(t);
             DataBaseHelper.commitTxAndClose(entityManager);
             return t;
@@ -31,7 +37,6 @@ public class GenericDAO<T> {
     }
 
     public T merge(T t) {
-        EntityManager entityManager = DataBaseHelper.getEntityManager();
         try {
             DataBaseHelper.beginTx(entityManager);
             entityManager.merge(t);
@@ -44,7 +49,6 @@ public class GenericDAO<T> {
     }
 
     public void remove(Long id) {
-        EntityManager entityManager = DataBaseHelper.getEntityManager();
         try {
             DataBaseHelper.beginTx(entityManager);
             entityManager.remove(entityManager.find(klass, id));
