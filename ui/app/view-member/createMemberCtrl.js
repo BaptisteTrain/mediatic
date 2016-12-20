@@ -18,17 +18,24 @@ angular.module('CreateMember', [])
 		
 		obj.setMemberSheet = function() {
 			
-			/*var currentDate = new Date();			
+			var currentDate = new Date();			
 			var age = currentDate.getFullYear() - obj.birthdate.getFullYear();
-			*/
+			
+			obj.age = age;
+			
+			var endDate = new Date();
+			endDate.setFullYear(new Date().getFullYear() + 1);
+			
+			obj.subscriptionDate = new Date();
+			
 			var data = {
                 'nom': obj.lastname,
                 'prenom': obj.firstname,
                 'date_naissance': obj.birthdate,
                 'email': obj.email,
                 'adresse': {'ligne1': '', 'ligne2': '', 'codepostal': obj.postalcode, 'ville': obj.town},
-                'cotisation': {'debut': new Date(Date.now()), 'fin': '', 'montant': obj.subscriptionAmount},
-                'age': 0,
+                'cotisation': {'debut': new Date(), 'fin': endDate, 'montant': obj.subscriptionAmount},
+                'age': age,
                 'emprunt': [],
                 'nombre_media': 0
             };
