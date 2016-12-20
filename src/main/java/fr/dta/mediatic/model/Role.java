@@ -1,12 +1,12 @@
 package fr.dta.mediatic.model;
 
-public enum Gender {
+public enum Role {
 
-    Homme('M'), Femme('F');
+    Manager('M'), Employee('E');
 
     private char code;
 
-    private Gender(char code) {
+    private Role(char code) {
 
 	this.code = code;
     }
@@ -15,4 +15,5 @@ public enum Gender {
 
 	return code;
     }
+
 }
