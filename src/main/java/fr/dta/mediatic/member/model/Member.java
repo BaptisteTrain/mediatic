@@ -1,10 +1,27 @@
 package fr.dta.mediatic.member.model;
 
-import java.util.*;
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import fr.dta.mediatic.loan.model.Loan;
-import fr.dta.mediatic.model.*;
+import fr.dta.mediatic.model.Address;
+import fr.dta.mediatic.model.Gender;
+import fr.dta.mediatic.model.Person;
 import fr.dta.mediatic.subscription.model.Subscription;
 
 @Entity
@@ -14,13 +31,19 @@ public class Member {
 
     @Id
     @GeneratedValue
+    @Min(0)
     @Column(name = "id")
     private Long id;
     
-    @Column(name = "identifier")
+    @NotBlank
+    @Length(min=4)
+    @Pattern(regexp="^[a-zA-Z0-9]+$")
+    @Column(name = "identifier",unique=true)
     private String identifier;
 
+    @Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "birthDate")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     @Column(name = "numberOfLoans")

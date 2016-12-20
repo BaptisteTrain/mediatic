@@ -1,7 +1,18 @@
 package fr.dta.mediatic.subscription.model;
 
-import java.util.*;
-import javax.persistence.*;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Subscription {
@@ -9,14 +20,21 @@ public class Subscription {
     /* COLUMNS */
     @Id
     @GeneratedValue
+    @Min(0)
     private Long id;
 
+    @NotBlank
     @Column(name = "amount")
     private int amount;
 
+    @NotBlank
+    @Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "paymentDate")
+    @Temporal(TemporalType.DATE)
     private Date paymentDate;
 
+    @NotBlank
+    @Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "subscriptionEndDate")
     @Temporal(TemporalType.DATE)
     private Date subscriptionEndDate;

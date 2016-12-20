@@ -3,6 +3,8 @@ package fr.dta.mediatic.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import org.hibernate.validator.constraints.Length;
+
 @Embeddable
 public class Address {
 
@@ -11,7 +13,8 @@ public class Address {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "postalCode", length = 5)
+    @Length(min=5,max=5)
+    @Column(name = "postalCode")
     private String postalCode;
 
     @Column(name = "city")

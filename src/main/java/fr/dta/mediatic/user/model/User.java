@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import fr.dta.mediatic.model.Gender;
@@ -20,12 +23,16 @@ public class User {
 	
 	@Id
 	@GeneratedValue
+	@Min(0)
 	private long id;
 	
+	@Length(min=4)
+    @Pattern(regexp="^[a-zA-Z0-9]+$")
 	@Column(name="login",unique=true)
 	private String login;
 	
 	@NotBlank
+	@Length(min=8)
 	@Column(name="password")
 	private String password;
 	

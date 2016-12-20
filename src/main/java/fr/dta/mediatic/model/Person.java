@@ -3,6 +3,8 @@ package fr.dta.mediatic.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Embeddable
@@ -11,14 +13,17 @@ public class Person {
     /* COLUMNS */
 
     @NotBlank
+    @Length(max=30)
     @Column(name = "lastname")
     private String lastname;
 
     @NotBlank
+    @Length(max=30)
     @Column(name = "firstname")
     private String firstname;
 
     @NotBlank
+    @Email
     @Column(name = "email")
     private String email;
 
