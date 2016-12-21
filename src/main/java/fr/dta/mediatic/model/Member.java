@@ -4,17 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -28,6 +25,21 @@ public class Member extends AbstractEntity {
     @Pattern(regexp="^[a-zA-Z0-9]+$")
     @Column(name = "identifier",unique=true)
     private String identifier;
+    
+    @NotBlank
+	@Length(max=30)
+	@Column(name = "lastname")
+	private String lastname;
+
+	@NotBlank
+	@Length(max=30)
+	@Column(name = "firstname")
+	private String firstname;
+	
+	@NotBlank
+	@Email
+	@Column(name = "email")
+	private String email;
 
     @Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "birthDate")
@@ -35,13 +47,20 @@ public class Member extends AbstractEntity {
     private Date birthDate;
 
     @Column(name = "numberOfLoans")
-    private int numberOfLoans;
+    private int numberOfLoans; 
+	
+	@Column(name = "gender")
+	private Gender gender;
 
-  /*  @Embedded
-    private Person person;
-
-    @Embedded
-    private Address address;*/
+	@Column(name = "address")
+	private String address;
+	
+	@Length(min=5,max=5)
+	@Column(name = "postalCode")
+	private String postalCode;
+	
+	@Column(name = "city")
+	private String city;
 
     @OneToOne
     private Subscription subscription;
@@ -68,54 +87,86 @@ public class Member extends AbstractEntity {
     /* GETTERS / SETTERS */
 
     public Long getId() {
-	return id;
+    	return id;
     }
 
     public void setId(Long id) {
-	this.id = id;
+    	this.id = id;
     }
     
     public String getIdentifier() {
-	return identifier;
+    	return identifier;
     }
 
     public void setIdentifier(String identifier) {
-	this.identifier = identifier;
+    	this.identifier = identifier;
     }
 
-    public Date getBirthDate() {
-	return birthDate;
+    public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getBirthDate() {
+    	return birthDate;
     }
 
     public void setBirthDate(Date birthDate) {
-	this.birthDate = birthDate;
+    	this.birthDate = birthDate;
     }
 
     public int getNumberOfLoans() {
-	return numberOfLoans;
+    	return numberOfLoans;
     }
 
     public void setNumberOfLoans(int numberOfLoans) {
-	this.numberOfLoans = numberOfLoans;
+    	this.numberOfLoans = numberOfLoans;
     }
 
-/*    public Person getPerson() {
-	return person;
+    public String getAddress() {
+    	return address;
     }
 
-    public void setPerson(Person person) {
-	this.person = person;
+    public void setAddress(String address) {
+    	this.address = address;
     }
 
-    public Address getAddress() {
-	return address;
-    }
+    public String getPostalCode() {
+		return postalCode;
+	}
 
-    public void setAddress(Address address) {
-	this.address = address;
-    }*/
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
 
-    public Subscription getSubscription() {
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Subscription getSubscription() {
 	return subscription;
     }
 
@@ -128,5 +179,4 @@ public class Member extends AbstractEntity {
 	return "Member [identifier=" + identifier + ", birthDate=" + birthDate + ", numberOfLoans=" + numberOfLoans + /*", person=" + person + ", address=" + address +*/ ", subscription=" + subscription
 		+ "]";
     }
-
 }

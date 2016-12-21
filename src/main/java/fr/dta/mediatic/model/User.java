@@ -5,11 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "user_")
+@Table(name = "usr")
 public class User extends AbstractEntity {
 
     /* COLUMNS */
@@ -23,13 +24,24 @@ public class User extends AbstractEntity {
     @Length(min = 8)
     @Column(name = "password")
     private String password;
+    
+    @NotBlank
+	@Length(max=30)
+	@Column(name = "lastname")
+	private String lastname;
+
+	@NotBlank
+	@Length(max=30)
+	@Column(name = "firstname")
+	private String firstname;
+	
+	@NotBlank
+	@Email
+	@Column(name = "email")
+	private String email;
 
     @Column(name = "role")
     private Role role;
-
-    /*
-     * @Embedded private Person person;
-     */
 
     /* CRONSTRUCTORS */
 
@@ -75,24 +87,35 @@ public class User extends AbstractEntity {
 	this.password = password;
     }
 
-    public Role getRole() {
+    public String getLastname() {
+		return lastname;
+	}
 
-	return role;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Role getRole() {
+		return role;
     }
 
     public void setRole(Role role) {
-
-	this.role = role;
+    	this.role = role;
     }
-
-    /*
-     * public Person getPerson() {
-     * 
-     * return person; }
-     * 
-     * public void setPerson(Person person) {
-     * 
-     * this.person = person; }
-     */
-
 }

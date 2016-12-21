@@ -19,62 +19,62 @@ import fr.dta.mediatic.service.UserService;
 @RequestMapping(value="/api/user")
 public class UserController {
 	
-//	@Autowired
-//	private UserService userService;
-//	
-//	/**
-//	 * Select all users
-//	 * 
-//	 * @return List<User>
-//	 */
-//	@RequestMapping(value="/allUser", method=RequestMethod.GET)
-//	@ResponseBody
-//	public List<User> getAllUsers() {
-//		
-//		return userService.getAllUsers();
-//	}
-//	
-//	/**
-//	 * Select one user by his id
-//	 * 
-//	 * @param id
-//	 * 
-//	 * @return User
-//	 */
-//	@RequestMapping(value="{id}", method=RequestMethod.GET)
-//	@ResponseBody
-//	public User getUserById(@PathVariable String id) {
-//		
-//		return userService.getUserById(id);
-//	}
-//	
-//	/**
-//	 * Select user by name
-//	 * 
-//	 * @param firstname
-//	 * @param lastname
-//	 * 
-//	 * @return List<User>
-//	 */
-//	@RequestMapping(value="/userByName", method=RequestMethod.GET)
-//	public List<User> getUserByName(@RequestBody String firstname, @RequestBody String lastname) {
-//		
-//		return userService.getUserByName(firstname, lastname);
-//	}
-//	
-//	/**
-//	 * Select User by id or name
-//	 * 
-//	 * @param id
-//	 * @param firstname
-//	 * @param lastname 
-//	 * 
-//	 * @return List<User>
-//	 */
-//	@RequestMapping(value="/userByIdOrName", method=RequestMethod.GET)
-//	public List<User> getUserByIdOrName(@RequestBody String id, @RequestBody String firstname, @RequestBody String lastname){
-//		
-//		return userService.getUserByIdOrName(id, firstname, lastname);
-//	}
+	@Autowired
+	private UserService userService;
+	
+	/**
+	 * Select all users
+	 * 
+	 * @return List<User>
+	 */
+	@RequestMapping(value="/allUser", method=RequestMethod.GET)
+	@ResponseBody
+	public List<User> getAllUsers() {
+		
+		return userService.getAllUsers();
+	}
+	
+	/**
+	 * Select one user by his id
+	 * 
+	 * @param id
+	 * 
+	 * @return User
+	 */
+	@RequestMapping(value="{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public User getUserById(@PathVariable int id) {
+		
+		return userService.getUserById(id);
+	}
+	
+	/**
+	 * Select user by name
+	 * 
+	 * @param firstname
+	 * @param lastname
+	 * 
+	 * @return List<User>
+	 */
+	@RequestMapping(value="/userByName?lastname={lastname}&firstname={firstname}", method=RequestMethod.GET)
+	public List<User> getUserByName(@RequestBody String firstname, @RequestBody String lastname) {
+		
+		return userService.getUserByName(firstname, lastname);
+	}
+	
+	/**
+	 * Select User by id or name
+	 * 
+	 * @param id
+	 * @param firstname
+	 * @param lastname 
+	 * 
+	 * @return List<User>
+	 */
+	@RequestMapping(value="/userByIdOrName?id={id}&lastname={lastname}&firstname={firstname}", method=RequestMethod.GET)
+	public List<User> getUserByIdOrName(@RequestBody String id, @RequestBody String firstname, @RequestBody String lastname){
+		
+		return userService.getUserByIdOrName(id, firstname, lastname);
+	}
 
 }
