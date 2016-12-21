@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "loan")
 public class Loan extends AbstractEntity {
@@ -33,6 +35,7 @@ public class Loan extends AbstractEntity {
     private Date plannedReturnDate;
 
     @ManyToOne
+    @JsonIgnore
     private Media media;
 
     @ManyToOne

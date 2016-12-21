@@ -6,17 +6,16 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Member extends AbstractEntity {
@@ -37,16 +36,17 @@ public class Member extends AbstractEntity {
     @Column(name = "numberOfLoans")
     private int numberOfLoans;
 
-  /*  @Embedded
+    @Embedded
     private Person person;
 
     @Embedded
-    private Address address;*/
+    private Address address;
 
     @OneToOne
     private Subscription subscription;
 
     @OneToMany(mappedBy = "member")
+    @JsonIgnore
     private List<Loan> listLoan;
 
     /* CONSTRUCTORS */
@@ -60,8 +60,8 @@ public class Member extends AbstractEntity {
 	this.identifier = identifier;
 	this.birthDate = birthDate;
 	this.numberOfLoans = 0;
-/*	this.person = new Person(lastname, firstname, email, gender);
-	this.address = new Address(address, postalCode, city);*/
+	this.person = new Person(lastname, firstname, email, gender);
+	this.address = new Address(address, postalCode, city);
 	this.subscription = sub;
     }
 
@@ -99,7 +99,7 @@ public class Member extends AbstractEntity {
 	this.numberOfLoans = numberOfLoans;
     }
 
-/*    public Person getPerson() {
+    public Person getPerson() {
 	return person;
     }
 
@@ -113,7 +113,7 @@ public class Member extends AbstractEntity {
 
     public void setAddress(Address address) {
 	this.address = address;
-    }*/
+    }
 
     public Subscription getSubscription() {
 	return subscription;
@@ -125,7 +125,7 @@ public class Member extends AbstractEntity {
 
     @Override
     public String toString() {
-	return "Member [identifier=" + identifier + ", birthDate=" + birthDate + ", numberOfLoans=" + numberOfLoans + /*", person=" + person + ", address=" + address +*/ ", subscription=" + subscription
+	return "Member [identifier=" + identifier + ", birthDate=" + birthDate + ", numberOfLoans=" + numberOfLoans + ", person=" + person + ", address=" + address + ", subscription=" + subscription
 		+ "]";
     }
 

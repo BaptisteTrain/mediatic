@@ -1,6 +1,7 @@
 package fr.dta.mediatic.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
@@ -9,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "user_")
+@Table(name = "users")
 public class User extends AbstractEntity {
 
     /* COLUMNS */
@@ -27,9 +28,8 @@ public class User extends AbstractEntity {
     @Column(name = "role")
     private Role role;
 
-    /*
-     * @Embedded private Person person;
-     */
+    @Embedded
+    private Person person;
 
     /* CRONSTRUCTORS */
 
@@ -42,7 +42,7 @@ public class User extends AbstractEntity {
 	this.login = login;
 	this.password = password;
 	this.role = role;
-	// this.person = new Person(lastname, firstname, email, gender);
+	this.person = new Person(lastname, firstname, email, gender);
     }
 
     /* GETTERS AND SETTERS */
@@ -85,14 +85,14 @@ public class User extends AbstractEntity {
 	this.role = role;
     }
 
-    /*
-     * public Person getPerson() {
-     * 
-     * return person; }
-     * 
-     * public void setPerson(Person person) {
-     * 
-     * this.person = person; }
-     */
+    public Person getPerson() {
+
+	return person;
+    }
+
+    public void setPerson(Person person) {
+
+	this.person = person;
+    }
 
 }
