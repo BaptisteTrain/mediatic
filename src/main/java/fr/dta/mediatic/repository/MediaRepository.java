@@ -30,7 +30,7 @@ public class MediaRepository extends AbstractRepository<Media> {
 	List<Media> listeReturn = query.getResultList();
 	// Initialize the lazy list of loans
 	for (Media m : listeReturn) {
-	    System.out.println(m.getLoanList());
+	    m.getLoanList().size();
 	}
 	return listeReturn;
     }

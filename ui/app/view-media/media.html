@@ -78,7 +78,7 @@
 						<td ng-bind="med.type"></td>
 						<td ng-bind="med.author"></td>
 						<td ng-bind="med.borrower"></td>
-						<td ng-bind="med.returnDate"></td>
+						<td ng-bind="med.returnDate | date : 'dd/MM/yyyy'"></td>
 						<td><i class="glyphicon glyphicon-eye-open pointer" aria-hidden="true" ng-click="media.goMediaSheet(med.id)"></i></td>
 					</tr>
 				</tbody>

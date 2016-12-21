@@ -49,22 +49,28 @@ angular.module('Media', [])
 		$http.get(url).then(function(response) {
 			console.log('ENTER');
 			for (var i in response.data) {
-				console.log(response.data[i]);
-				// If there's no borrower on the media, the line stays empty
+				var media = response.data[i];
+				// If there's no borrower on the media, the line stays empty, idem for return date
 				var aBorrower = '';
 				var aPlannedReturnDate = '';
-				if (response.data[i].loanList != undefined) {
-					// Seek the borrower #TODO chercher un emprunteur en cours
-					console.log('member = '+response.data[i].loanList[0].member);
-					aBorrower = response.data[i].loanList[0].member.person.firstname + ' ' + response.data[i].loanList[0].member.person.lastname;
-					console.log('member = '+response.data[i].loanList[0].plannedReturnDat);
-					aPlannedReturnDate = response.data[i].loanList[0].plannedReturnDate;
+				var listLoan = media.loanList;
+				if (listLoan != undefined) {
+					// Seek the borrower
+					var i = 0;
+					console.log('date = '+media.loanList[i].returnDate);
+					while (i < media.loanList.length && media.loanList[i].returnDate != undefined) {
+						i++;
+					}
+					if (i < media.loanList.length) {
+						aBorrower = media.loanList[0].member.person.firstname + ' ' + media.loanList[0].member.person.lastname;
+						aPlannedReturnDate = media.loanList[0].plannedReturnDate;
+					}
 				}
 				// Push in the mediaList
-				self.mediasList.push({id: response.data[i].id, 
-									  title: response.data[i].title, 
-									  author: response.data[i].author,
-									  type: response.data[i].type,
+				self.mediasList.push({id: media.id, 
+									  title: media.title, 
+									  author: media.author,
+									  type: media.type,
 									  borrower: aBorrower,
 									  returnDate: aPlannedReturnDate
 								  	});
