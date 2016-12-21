@@ -19,9 +19,6 @@ public class Media extends AbstractEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 4)
-    @Length(max = 4)
-    @NotNull
-    @NotBlank
     private TypeMedia type;
 
     @Column(length = 150)

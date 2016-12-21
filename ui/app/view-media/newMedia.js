@@ -15,10 +15,10 @@ angular.module('NewMedia', [])
 	var self = this;
 	
 	// Check if authenticated
-	if (! AuthenticationService.isConnected()) {
+	/*if (! AuthenticationService.isConnected()) {
 		// Redirection toward login
 		$location.url('/login');
-	}
+	}*/
 
 	// Page's title
 	$rootScope.titre = 'Nouveau Media';
@@ -37,9 +37,9 @@ angular.module('NewMedia', [])
 	
 	// Add a new media
 	this.addMedia = function() {
-		var url = 'http://'+IpService+':8090/resource/media.creation';
-		var mediaToSend = {titre: self.mediaToAdd.title, 
-						   auteur: self.mediaToAdd.author, 
+		var url = 'http://localhost:8080/mediatic/media/new';
+		var mediaToSend = {title: self.mediaToAdd.title, 
+						   author: self.mediaToAdd.author, 
 						   type: self.mediaToAdd.type};
 		$http.post(url, mediaToSend).then(function(response) {
 			// Show a message
