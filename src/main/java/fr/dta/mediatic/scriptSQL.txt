@@ -1,0 +1,19 @@
+INSERT INTO media (id, author, title, type) VALUES (1, 'Jean','titre','CD');
+INSERT INTO media (id, author, title, type) VALUES (2, 'Luc','titre 2','DVD');
+INSERT INTO media (id, author, title, type) VALUES (3, 'Lulu','titre 3','BOOK');
+
+INSERT INTO loan (id, loandate, plannedreturndate, returndate, media_id, member_id) VALUES (45, '2016-10-12','2016-10-22','2016-10-15',1,10);
+INSERT INTO loan (id, loandate, plannedreturndate, returndate, media_id, member_id) VALUES (78, '2016-10-12','2016-10-22','2016-10-15',2,20);
+INSERT INTO loan (id, loandate, plannedreturndate, returndate, media_id, member_id) VALUES (99, '2016-10-12','2016-10-22','2016-10-15',3,30);
+
+INSERT INTO member (id, address, city, postalcode, email, firstname, lastname, gender, identifier, subscription_id, numberofloans) VALUES (10,'7 rue des rues','Ruelle','44300','a@a.fr','Jean','DUDU',1,'1',1, 1);
+INSERT INTO member (id, address, city, postalcode, email, firstname, lastname, gender, identifier, subscription_id, numberofloans) VALUES (20,'7 rue des rues','Ruelle','44300','b@b.fr','Luc','LULU',0,'2',2, 1);
+INSERT INTO member (id, address, city, postalcode, email, firstname, lastname, gender, identifier, subscription_id, numberofloans) VALUES (30,'7 rue des rues','Ruelle','44300','c@c.fr','Ludo','RIRI',1,'3',3, 1);
+
+INSERT INTO subscription (id, amount, paymentdate,subscriptionenddate) VALUES (1, 15, '2016-10-12', '2017-10-12');
+INSERT INTO subscription (id, amount, paymentdate,subscriptionenddate)  VALUES (2, 15, '2016-09-10', '2017-09-10');
+INSERT INTO subscription (id, amount, paymentdate,subscriptionenddate) VALUES (3, 5, '2015-11-10', '2016-11-10');
+
+INSERT INTO users (id, login, password, email, firstname, gender, lastname, role) VALUES (1, 'tomate', 'tomatos', 'a@a.fr', 'toto', 1, 'titi', 1);
+INSERT INTO users (id, login, password, email, firstname, gender, lastname, role) VALUES (2, 'patate', 'potatos', 'b@b.fr', 'popo', 2, 'popo', 2);
+INSERT INTO users (id, login, password, email, firstname, gender, lastname, role) VALUES (3, 'rotate', 'rotate', 'c@c.fr', 'roro', 1, 'roro', 1);
