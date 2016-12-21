@@ -47,7 +47,6 @@ angular.module('Media', [])
 	this.searchMedias = function() {
 		var url = 'http://localhost:8080/mediatic/media/all';
 		$http.get(url).then(function(response) {
-			console.log('ENTER');
 			for (var i in response.data) {
 				var media = response.data[i];
 				// If there's no borrower on the media, the line stays empty, idem for return date
@@ -57,7 +56,6 @@ angular.module('Media', [])
 				if (listLoan != undefined) {
 					// Seek the borrower
 					var i = 0;
-					console.log('date = '+media.loanList[i].returnDate);
 					while (i < media.loanList.length && media.loanList[i].returnDate != undefined) {
 						i++;
 					}
