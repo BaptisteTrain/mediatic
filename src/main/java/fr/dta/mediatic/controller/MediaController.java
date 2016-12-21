@@ -12,16 +12,16 @@ import fr.dta.mediatic.model.Media;
 import fr.dta.mediatic.service.MediaService;
 
 @RestController
-@RequestMapping("/medias")
+@RequestMapping("/media")
 public class MediaController {
 
-    @Autowired
-    private MediaService mediaService;
+	@Autowired
+	private MediaService mediaService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public List<Media> getAll() {
-	return mediaService.getAllMedias();
-    }
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	//@ResponseBody
+	public List<Media> getAllMedia() {
+		return mediaService.getAllMedias();
+	}
 
 }

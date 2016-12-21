@@ -18,10 +18,10 @@ angular.module('Media', [])
 	self.itemsPerPage = 10;
 	
 	// Check if authenticated
-	if (! AuthenticationService.isConnected()) {
+	/*if (! AuthenticationService.isConnected()) {
 		// Redirection toward login
 		$location.url('/login');
-	}
+	}*/
 
 	// Page's title
 	$rootScope.titre = 'Media';
@@ -31,7 +31,7 @@ angular.module('Media', [])
 	$rootScope.memberActive = '';
 	
 	// Has the right to create a new media
-	this.displayButtonAdd = AuthenticationService.hasRightMediaCreation();
+	this.displayButtonAdd = true; //AuthenticationService.hasRightMediaCreation();
 	
 	// Redirection from button add a media to page newMedia
 	this.goNewMedia = function() {
@@ -45,7 +45,7 @@ angular.module('Media', [])
 	// Loading list of medias
 	this.mediasList = [];
 	this.searchMedias = function() {
-		var url = 'http://'+IpService+':8090/resource/media.recherche';
+		var url = 'http://localhost:8080/mediatic/media/all';
 		$http.get(url).then(function(response) {
 			for (var i in response.data) {
 				// If there's no borrower on the media, the line stays empty
