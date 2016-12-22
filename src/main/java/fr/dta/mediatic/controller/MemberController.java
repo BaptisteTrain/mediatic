@@ -49,17 +49,17 @@ public class MemberController {
 		return memberService.findMembersFromMedia(media);
 	}
 	/**
-	 * Search for Members by ID, Lastname and/or Firstname.
-	 * Access page: /api/member/searchmembers?id={id}&lastname={lastname}&firstname={firstname}
+	 * Search for Members by Identifier, Lastname and/or Firstname.
+	 * Access page: /api/member/searchmembers?identifier={identifier}&lastname={lastname}&firstname={firstname}
 	 * Request method: GET
-	 * @param id
+	 * @param identifier
 	 * @param lastname
 	 * @param firstname
 	 * @return List<Member>
 	 */
 	//@RequestMapping(value = "/searchmembers?id={id}&lastname={lastname}&firstname={firstname}", method = RequestMethod.GET)
 	@RequestMapping(value = "/searchmembers", method = RequestMethod.GET)
-	public List<Member> findMembersByIdOrNames(@RequestParam Optional<String> id, @RequestParam Optional<String> lastname, @RequestParam Optional<String> firstname) {
-		return memberService.findMembersByIdOrNames(id, lastname, firstname);
+	public List<Member> findMembersByIdOrNames(@RequestParam (value = "identifier", required = false) String identifier, @RequestParam (value = "lastname", required = false) String lastname, @RequestParam (value = "firstname", required = false) String firstname) {
+		return memberService.findMembersByIdOrNames(identifier, lastname, firstname);
 	}
 }

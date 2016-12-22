@@ -36,17 +36,17 @@ public class MemberRepository extends AbstractRepository<Member> {
     }
 
     /**
-     * Search for Members by partial ID
-     * @param id
+     * Search for Members by partial Identifier
+     * @param identifier
      * @return List<Member>
      */
-    public List<Member> findMembersByIdPartial(long id) {
+    public List<Member> findMembersByIdPartial(String identifier) {
 		TypedQuery<Member> query = em.createQuery(
 			"SELECT m " 
 			+ "FROM Member m " 
-			+ "WHERE m.identifier LIKE :id", Member.class);
+			+ "WHERE m.identifier LIKE :identifier", Member.class);
 	
-		query.setParameter("id",  id + "%");
+		query.setParameter("identifier",  identifier + "%");
 		List<Member> listeReturn = query.getResultList();
 	
 		return listeReturn;
@@ -91,21 +91,21 @@ public class MemberRepository extends AbstractRepository<Member> {
     }
 
     /**
-     * Search for Members by ID, Lastname and Firstname
-     * @param id
+     * Search for Members by Identifier, Lastname and Firstname
+     * @param identifier
      * @param lastname
      * @param firstname
      * @return List<Member>
      */
-    public List<Member> findMembersByIdOrNames(long id, String lastname, String firstname) {
+    public List<Member> findMembersByIdOrNames(String identifier, String lastname, String firstname) {
 		TypedQuery<Member> query = em.createQuery(
 			"SELECT m " 
 			+ "FROM Member m " 
 			+ "WHERE m.lastname LIKE :lastname " 
 			+ "OR m.firstname LIKE :firstname " 
-			+ "OR m.identifier LIKE :id", Member.class);
+			+ "OR m.identifier LIKE :identifier", Member.class);
 		
-		query.setParameter("id", id + "%");
+		query.setParameter("identifier", identifier + "%");
 		query.setParameter("lastname", "%" + lastname + "%");
 		query.setParameter("firstname", "%" + firstname + "%");
 		List<Member> listeReturn = query.getResultList();
