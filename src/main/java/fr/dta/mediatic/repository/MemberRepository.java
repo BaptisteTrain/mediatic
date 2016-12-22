@@ -21,17 +21,27 @@ public class MemberRepository extends AbstractRepository<Member> {
      * @return
      */
     public List<Member> selectAllMembers() {
-		TypedQuery<Member> query = em.createQuery(
-			"SELECT m "
-			+ "FROM Member m " 
-			+ "LEFT OUTER JOIN m.listLoan l ", Member.class);
+		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m LEFT OUTER JOIN m.listLoan l ", Member.class);
 		List<Member> result = query.getResultList();
-		
 		// Initialize the lazy list of Loans
 		for (Member m : result) {
 		    System.out.println(m.getListLoan());
 		}
-		
+		return result;
+    }
+    
+    /**
+     * Select all the members with the loans list and the media of the loan
+     * @return
+     */
+    public List<Member> selectAllMembersWhoLoanMediaByIdMedia(Long id) {
+		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m LEFT OUTER JOIN m.listLoan l LEFT JOIN Media mda WHERE mda.id = :id", Member.class);
+		query.setParameter("id", id);
+		List<Member> result = query.getResultList();
+		// Initialize the lazy list of Loans
+		for (Member m : result) {
+		    System.out.println(m.getListLoan());
+		}
 		return result;
     }
 
@@ -45,10 +55,8 @@ public class MemberRepository extends AbstractRepository<Member> {
 			"SELECT m " 
 			+ "FROM Member m " 
 			+ "WHERE m.identifier LIKE :identifier", Member.class);
-	
 		query.setParameter("identifier",  identifier + "%");
 		List<Member> listeReturn = query.getResultList();
-	
 		return listeReturn;
     }
     
@@ -64,11 +72,9 @@ public class MemberRepository extends AbstractRepository<Member> {
 			+ "FROM Member m " 
 			+ "WHERE UPPER(m.lastname) LIKE :lastname " 
 			+ "AND UPPER(m.firstname) LIKE :firstname", Member.class);
-	
 		query.setParameter("lastname", "%" + lastname.toUpperCase() + "%");
 		query.setParameter("firstname", "%" + firstname.toUpperCase() + "%");
 		List<Member> listeReturn = query.getResultList();
-	
 		return listeReturn;
     }
     
@@ -83,10 +89,8 @@ public class MemberRepository extends AbstractRepository<Member> {
 			+ "FROM Member m " 
 			+ "JOIN m.listLoan l " 
 			+ "WHERE l.media.id = :id ", Member.class);
-		
 		query.setParameter("id", media.getId());
 		List<Member> listeReturn = query.getResultList();
-		
 		return listeReturn;
     }
 
@@ -104,12 +108,10 @@ public class MemberRepository extends AbstractRepository<Member> {
 			+ "WHERE m.lastname LIKE :lastname " 
 			+ "OR m.firstname LIKE :firstname " 
 			+ "OR m.identifier LIKE :identifier", Member.class);
-		
 		query.setParameter("identifier", identifier + "%");
 		query.setParameter("lastname", "%" + lastname + "%");
 		query.setParameter("firstname", "%" + firstname + "%");
 		List<Member> listeReturn = query.getResultList();
-		
 		return listeReturn;
     }
 }
