@@ -45,7 +45,7 @@ public class LoanRepository extends AbstractRepository<Loan> {
 	 * @return int
 	 */
 	public int howManyAllLoanMedia() {
-		Query query = em.createQuery("SELECT count(l) FROM Loan l ");
+		Query query = em.createQuery(" SELECT count(l) FROM Loan l ");
 		int count = ((Integer) query.getSingleResult()).intValue();
 		return count;
 	}
