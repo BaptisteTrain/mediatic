@@ -14,6 +14,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private SubscriptionService subscriptionService;
 	
 	/**
 	 * Returns all Members of the application.
@@ -34,7 +37,7 @@ public class MemberController {
 	 * @return Member
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public Member getMemberById(@PathVariable String id) {	
+	public Member getMemberById(@PathVariable long id) {	
 		return memberService.getMemberById(id);
 	}
 	
@@ -70,9 +73,28 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addmember", method = RequestMethod.POST)
-	@ResponseBody
 	public void addMember(@RequestBody @Valid Member member) {
-		//return memberService.findMembersByIdOrNames(identifier, lastname, firstname);
-		memberService.addMember(member);
+		/*System.out.println(member.getSubscription().toString());
+		Subscription sub = member.getSubscription();
+		subscriptionService.create(sub);
+		memberService.addMember(member);*/
+	}
+	
+	/**
+	 * Update a Member.
+	 * Access page: /api/member/{id}
+	 * Request method: PUT
+	 * @param id
+	 * @return Member
+	 */
+	@RequestMapping(value = "{id}", method = RequestMethod.POST)
+	public void updateMember(@PathVariable String id, @RequestBody @Valid Member member) {
+		System.out.println("Updateeeeeee");
+		memberService.updateMember(member);
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.PUT)
+	public String updateMember() {
+		return "Test Update";
 	}
 }

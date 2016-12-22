@@ -39,7 +39,7 @@ public class Member extends AbstractEntity {
 	private String firstname;
 	
 	@NotBlank
-	@Email
+	//@Email
 	@Column(name = "email")
 	private String email;
 

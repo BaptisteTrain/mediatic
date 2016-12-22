@@ -26,8 +26,8 @@ public class MemberService {
 	 * @param id
 	 * @return Member
 	 */
-	public Member getMemberById(String id) {
-		return repo.getById(Long.parseLong(id));
+	public Member getMemberById(long id) {
+		return repo.getById(id);
 	}
 	
 	/**
@@ -78,5 +78,13 @@ public class MemberService {
 	 */
 	public void addMember(Member member) {
 		repo.add(member);
+	}
+	
+	/**
+	 * Update a Member in the database
+	 * @param member
+	 */
+	public void updateMember(Member member) {
+		repo.update(member);
 	}
 }
