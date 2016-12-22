@@ -1,6 +1,7 @@
 package fr.dta.mediatic.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
@@ -10,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "usr")
+@Table(name = "users")
 public class User extends AbstractEntity {
 
     /* COLUMNS */
@@ -49,15 +50,17 @@ public class User extends AbstractEntity {
 
     }
 
-    public User(String login, String password, Role role, String lastname, String firstname, String email, Gender gender) {
+    public User(String login, String password, String lastname, String firstname, String email, Role role) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.email = email;
+		this.role = role;
+	}
 
-	this.login = login;
-	this.password = password;
-	this.role = role;
-	// this.person = new Person(lastname, firstname, email, gender);
-    }
-
-    /* GETTERS AND SETTERS */
+	/* GETTERS AND SETTERS */
 
     public Long getId() {
 	return id;

@@ -15,6 +15,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Member extends AbstractEntity {
 
@@ -66,6 +68,7 @@ public class Member extends AbstractEntity {
     private Subscription subscription;
 
     @OneToMany(mappedBy = "member")
+    @JsonIgnore
     private List<Loan> listLoan;
 
     /* CONSTRUCTORS */
@@ -73,20 +76,28 @@ public class Member extends AbstractEntity {
     public Member() {
 	this.numberOfLoans = 0;
     }
-
-    public Member(Long id, String identifier, Date birthDate, String lastname, String firstname, String email, Gender gender, String address, String postalCode, String city, Subscription sub) {
-	this.id = id;
-	this.identifier = identifier;
-	this.birthDate = birthDate;
-	this.numberOfLoans = 0;
-/*	this.person = new Person(lastname, firstname, email, gender);
-	this.address = new Address(address, postalCode, city);*/
-	this.subscription = sub;
-    }
+    
+    public Member(String identifier, String lastname, String firstname, String email, Date birthDate, int numberOfLoans,
+			Gender gender, String address, String postalCode, String city, Subscription subscription,
+			List<Loan> listLoan) {
+		super();
+		this.identifier = identifier;
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.email = email;
+		this.birthDate = birthDate;
+		this.numberOfLoans = numberOfLoans;
+		this.gender = gender;
+		this.address = address;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.subscription = subscription;
+		this.listLoan = listLoan;
+	}
 
     /* GETTERS / SETTERS */
 
-    public Long getId() {
+	public Long getId() {
     	return id;
     }
 
@@ -157,7 +168,7 @@ public class Member extends AbstractEntity {
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-
+	
 	public String getCity() {
 		return city;
 	}
@@ -176,7 +187,7 @@ public class Member extends AbstractEntity {
 
     @Override
     public String toString() {
-	return "Member [identifier=" + identifier + ", birthDate=" + birthDate + ", numberOfLoans=" + numberOfLoans + /*", person=" + person + ", address=" + address +*/ ", subscription=" + subscription
+	return "Member [identifier=" + identifier + ", birthDate=" + birthDate + ", numberOfLoans=" + numberOfLoans + ", person=" + lastname + " " + firstname + " " + email + " " + gender + ", address=" + address + ", subscription=" + subscription
 		+ "]";
     }
 }

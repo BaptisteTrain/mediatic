@@ -12,10 +12,10 @@ angular
 		var ctrl = this;
 		
 		// Check if authenticated
-		if (! AuthenticationService.isConnected()) {
+		/*if (! AuthenticationService.isConnected()) {
 			// Redirection toward login
 			$location.url('/login');
-		}
+		}*/
 		
 		// Menu active
 		$rootScope.mediaActive = 'active';
@@ -23,14 +23,13 @@ angular
 
 		// Load of the media
 		var id   = $routeParams.id;
-		var url1 = 'http://'+IpService+':8090/resource/media.accession?id='+id;
+		var url1 = 'http://localhost:8080/mediatic/media/detail?id='+id;
 		var url2 = 'http://'+IpService+':8090/resource/adherent.recherche';
-		//console.log('Je commande à charger le média.');
+
 		$scope.myMedia = {};
 		function loadData(){
 			$http.get(url1)
 				.then(function(response) {
-					//console.log('J\'ai fini de charger le média.');
 					$scope.myMedia = response.data;
 				});
 			$http.get(url2)

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.dta.mediatic.model.Media;
+import fr.dta.mediatic.model.Member;
 import fr.dta.mediatic.repository.MediaRepository;
 
 @Service
@@ -19,15 +20,44 @@ public class MediaService {
      * @return
      */
     public List<Media> getAllMedias() {
-	return repo.getAll();
+	return repo.getAllMediasAndLoan();
     }
+    
+    /**
+     * Select the media by its id
+     * @param id
+     * @return
+     */
+    public Media getMediaById(Integer id) {
+	return repo.getById(id);
+    }
+    
+    /**
+     * Create a new media
+     * @param media
+     * @return
+     */
+    public void createNewMedia(Media media) {
+	repo.add(media);
+    }
+    
+    /**
+     * Update a media
+     * @param media
+     * @return
+     */
+    public void updateMedia(Media media) {
+	repo.update(media);
+    }
+    
+    
 
     /**
      * Select all the medias with the loans list for the member in param
      * @return
-     *
+     */
     public List<Media> selectMediasFromMember(Member member) {
-    	return mediaRepository.selectMediasFromMember(member);
+    	return repo.selectMediasFromMember(member);
     }
     
     /**
@@ -36,7 +66,7 @@ public class MediaService {
      * @return
      *
     public List<Media> findMediaByTitle(String title) {
-    	return mediaRepository.findMediaByTitle(title);
+    	return repo.findMediaByTitle(title);
     }
     
     /**
@@ -45,7 +75,7 @@ public class MediaService {
      * @return
      *
     public List<Media> findMediaByAuthor(String author) {
-    	return mediaRepository.findMediaByAuthor(author);
+    	return repo.findMediaByAuthor(author);
     }
     
     /**
@@ -54,6 +84,6 @@ public class MediaService {
      * @return
      *
     public List<Media> findMediaByType(TypeMedia type) {
-    	return mediaRepository.findMediaByType(type);
+    	return repo.findMediaByType(type);
     }*/
 }
