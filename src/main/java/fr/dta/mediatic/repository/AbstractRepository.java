@@ -28,7 +28,7 @@ public abstract class AbstractRepository<T extends AbstractEntity> {
     @PersistenceContext
     protected EntityManager em;
 
-    public T getById(int id) {
+    public T getById(long id) {
 	return em.find(entityClass, id);
     }
 
