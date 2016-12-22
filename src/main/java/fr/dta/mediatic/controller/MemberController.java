@@ -1,6 +1,7 @@
 package fr.dta.mediatic.controller;
 
 import java.util.*;
+import javax.validation.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +49,7 @@ public class MemberController {
 	public List<Member> findMembersFromMedia(Media media) {
 		return memberService.findMembersFromMedia(media);
 	}
+	
 	/**
 	 * Search for Members by Identifier, Lastname and/or Firstname.
 	 * Access page: /api/member/searchmembers?identifier={identifier}&lastname={lastname}&firstname={firstname}
@@ -57,9 +59,20 @@ public class MemberController {
 	 * @param firstname
 	 * @return List<Member>
 	 */
-	//@RequestMapping(value = "/searchmembers?id={id}&lastname={lastname}&firstname={firstname}", method = RequestMethod.GET)
 	@RequestMapping(value = "/searchmembers", method = RequestMethod.GET)
 	public List<Member> findMembersByIdOrNames(@RequestParam (value = "identifier", required = false) String identifier, @RequestParam (value = "lastname", required = false) String lastname, @RequestParam (value = "firstname", required = false) String firstname) {
 		return memberService.findMembersByIdOrNames(identifier, lastname, firstname);
+	}
+	
+	/**
+	 * Create a new Member
+	 * @param member
+	 * @return
+	 */
+	@RequestMapping(value = "/addmember", method = RequestMethod.POST)
+	@ResponseBody
+	public void addMember(@RequestBody @Valid Member member) {
+		//return memberService.findMembersByIdOrNames(identifier, lastname, firstname);
+		memberService.addMember(member);
 	}
 }

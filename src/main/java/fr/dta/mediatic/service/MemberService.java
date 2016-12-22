@@ -59,20 +59,24 @@ public class MemberService {
 	public List<Member> findMembersByIdOrNames(String identifier, String lastname, String firstname) {
 		
 		if( (identifier == null || "".equals(identifier)) && (lastname == null || "".equals(lastname)) && (firstname == null || "".equals(firstname)) ) {
-			System.out.println("ALL");
 			return repo.selectAllMembers();
 		}
 		else if(identifier == null || "".equals(identifier)) {
-			System.out.println("NAMES");
 			return repo.findMemberByName(lastname, firstname);
 		}
 		else if( (lastname == null || "".equals(lastname)) && (firstname == null || "".equals(firstname)) ) {
-			System.out.println("ID");
 			return repo.findMembersByIdPartial(identifier);
 		}
 		else {
-			System.out.println("ID&NAMES");
 			return repo.findMembersByIdOrNames(identifier, lastname, firstname);
 		}
+	}
+	
+	/**
+	 * Create a new Member in the database
+	 * @param member
+	 */
+	public void addMember(Member member) {
+		repo.add(member);
 	}
 }

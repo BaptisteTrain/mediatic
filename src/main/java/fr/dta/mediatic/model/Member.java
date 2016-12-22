@@ -43,7 +43,8 @@ public class Member extends AbstractEntity {
 	@Column(name = "email")
 	private String email;
 
-    @Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}")
+    //@Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+    //@Pattern(regexp="^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$")
     @Column(name = "birthDate")
     @Temporal(TemporalType.DATE)
     private Date birthDate;
