@@ -14,9 +14,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-
-	@Autowired
-	private SubscriptionService subscriptionService;
 	
 	/**
 	 * Returns all Members of the application.
@@ -74,10 +71,8 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/addmember", method = RequestMethod.POST)
 	public void addMember(@RequestBody @Valid Member member) {
-		/*System.out.println(member.getSubscription().toString());
-		Subscription sub = member.getSubscription();
-		subscriptionService.create(sub);
-		memberService.addMember(member);*/
+		//return memberService.findMembersByIdOrNames(identifier, lastname, firstname);
+		memberService.addMember(member);
 	}
 	
 	/**
