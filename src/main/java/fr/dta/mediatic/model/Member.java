@@ -185,7 +185,23 @@ public class Member extends AbstractEntity {
 	this.subscription = subscription;
     }
 
-    @Override
+    public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public List<Loan> getListLoan() {
+		return listLoan;
+	}
+
+	public void setListLoan(List<Loan> listLoan) {
+		this.listLoan = listLoan;
+	}
+
+	@Override
     public String toString() {
 	return "Member [identifier=" + identifier + ", birthDate=" + birthDate + ", numberOfLoans=" + numberOfLoans + ", person=" + lastname + " " + firstname + " " + email + " " + gender + ", address=" + address + ", subscription=" + subscription
 		+ "]";
