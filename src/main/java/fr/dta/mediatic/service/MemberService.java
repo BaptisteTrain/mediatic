@@ -1,27 +1,24 @@
 package fr.dta.mediatic.service;
 
-import java.util.List;
+import java.util.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import fr.dta.mediatic.model.Media;
-import fr.dta.mediatic.model.Member;
-import fr.dta.mediatic.repository.MemberRepository;
+import fr.dta.mediatic.model.*;
+import fr.dta.mediatic.repository.*;
 
 @Service
 public class MemberService {
 	
-	/** Instanciation of the Repository in order to access its methods. **/
 	@Autowired
-	private MemberRepository memberRepository;
+	private MemberRepository repo;
 	
 	/**
 	 * Returns all Members of the application.
 	 * @return List<Member>
 	 */
 	public List<Member> selectAllMembers() {
-		return memberRepository.selectAllMembers();
+		return repo.selectAllMembers();
 	}
 	
 	/**
@@ -29,8 +26,8 @@ public class MemberService {
 	 * @param id
 	 * @return Member
 	 */
-	public Member getMemberById(int id) {
-		return memberRepository.findMemberById(id);
+	public Member getMemberById(String id) {
+		return repo.getById(Long.parseLong(id));
 	}
 	
 	/**
@@ -39,12 +36,12 @@ public class MemberService {
 	 * @return List<Member>
 	 */
 	public List<Member> findMembersFromMedia(Media media) {
-		return memberRepository.findMembersFromMedia(media);
+		return repo.findMembersFromMedia(media);
 	}
 	
 	/**
 	 * Search for Members by ID, Lastname and/or Firstname.
-	 * Depending on the value of the parameters, a different Repository method will be called.
+	 * Depending on the value of the parameters, a different DAO method will be called.
 	 * 
 	 * If all parameters are empty it will return the complete list of Members.
 	 * Else
@@ -59,18 +56,22 @@ public class MemberService {
 	 * @param firstname
 	 * @return List<Member>
 	 */
-	public List<Member> findMembersByIdOrNames(String id, String lastname, String firstname) {
-		if( (id == null || "".equals(id)) && (lastname == null || "".equals(lastname)) && (firstname == null || "".equals(firstname)) ) {
-			return memberRepository.selectAllMembers();
+	public List<Member> findMembersByIdOrNames(Optional<String> id, Optional<String> lastname, Optional<String> firstname) {
+		
+		System.out.println("ID: " + id + " / Last: " + lastname);
+		
+		/*if( (id == null || "".equals(id)) && (lastname == null || "".equals(lastname)) && (firstname == null || "".equals(firstname)) ) {
+			return repo.selectAllMembers();
 		}
 		else if(id == null || "".equals(id)) {
-			return memberRepository.findMemberByName(lastname, firstname);
+			return repo.findMemberByName(lastname, firstname);
 		}
 		else if( (lastname == null || "".equals(lastname)) && (firstname == null || "".equals(firstname)) ) {
-			return memberRepository.findMembersByIdPartial(id);
+			return repo.findMembersByIdPartial(Long.parseLong(id.get()));
 		}
 		else {
-			return memberRepository.findMembersByIdOrNames(id, lastname, firstname);
-		}
+			return repo.findMembersByIdOrNames(Long.parseLong(id), lastname, firstname);
+		}*/
+		return null;
 	}
 }
