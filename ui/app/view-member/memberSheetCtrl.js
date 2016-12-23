@@ -27,8 +27,8 @@ angular.module('MemberSheet', [])
 		
 		/* Récupération de la Fiche Adhérent en fonction de l'ID passé en paramètre dans la barre d'adresse */
 		MemberSheetService.getSheet($routeParams.idMember).then(function(liste) {
-			console.log("La fiche du membre est: ");
-			console.log(liste);
+			//console.log("La fiche du membre est: ");
+			//console.log(liste);
 			mbshCtrl.identifier = liste.identifier;
 			mbshCtrl.lastname = liste.lastname;
 			mbshCtrl.firstname = liste.firstname;
@@ -64,8 +64,9 @@ angular.module('MemberSheet', [])
 			//console.log("Titre: " + mbshCtrl.title);
 			//console.log("Author: " + mbshCtrl.author);
 			//console.log("Type: " + mbshCtrl.type);
-			MemberSheetService.getMedias(mbshCtrl.title || "", mbshCtrl.author || "", mbshCtrl.type || "").then(function(listeMedia) {
+			MemberSheetService.getMedias().then(function(listeMedia) {
 				mbshCtrl.medias = listeMedia;
+				console.log(mbshCtrl.medias);
 			});
 		};
 		
@@ -273,11 +274,9 @@ angular.module('MemberSheet', [])
 			},
 			
 			/* Récupère les Medias en fonction du Titre, de l'Auteur et du Type */
-			getMedias : function(title,author,type) {
+			getMedias : function() {
 				var resource = "media/all";
-				//var request = "?titre=" + title + "&auteur=" + author + "&type=" + type;
-				//console.log("URL + Resource + Request: " + url + resource + request);
-				return $http.get(url + resource /* + request*/).then(function(response) {
+				return $http.get(url + resource).then(function(response) {
 					//console.log("Data: " + response.data);
 					return response.data;
 				});

@@ -232,8 +232,8 @@
 						<tbody>
 							<tr ng-repeat="media in mbshCtrl.medias | paginationFilter:paginationCtrl.currentPage:mbshCtrl.itemsPerPage" ts-repeat>
 								<td ng-bind="media.id"></td>
-								<td ng-bind="media.titre"></td>
-								<td ng-bind="media.auteur"></td>
+								<td ng-bind="media.title"></td>
+								<td ng-bind="media.author"></td>
 								<td ng-bind="media.type"></td>
 								<td class="form-group"><input type="radio" id="media_{{media.id}}" name="media.select" ng-model="mbshCtrl.idMedia" value="{{media.id}}" ng-required="true"/></td>
 							</tr>
@@ -241,7 +241,7 @@
 					</table>
 					<!-- PAGINATION -->
 					<div class="paginationElement">
-						<div uib-pagination	boundary-links="true" 
+						<div uib-pagination	boundary-links="true"
 									total-items="mbshCtrl.medias.length" 
 									items-per-page="mbshCtrl.itemsPerPage" 
 									ng-model="paginationCtrl.currentPage" 
