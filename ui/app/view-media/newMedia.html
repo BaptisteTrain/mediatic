@@ -15,13 +15,13 @@
 				<div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Titre&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.title" id="titre" name="title" placeholder="Titre" ng-required="true" maxlength=200>
+						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.title" id="titre" name="title" placeholder="Titre" ng-required="true" maxlength=150>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-2 col-lg-2">Auteur&nbsp;<span class="text-danger">*</span></label>
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.author" id="auteur" name="author" placeholder="Auteur" ng-required="true" maxlength=200>
+						<input type="text" class="form-control" ng-model="newMedia.mediaToAdd.author" id="auteur" name="author" placeholder="Auteur" ng-required="true" maxlength=150>
 					</div>
 				</div>
 				<div class="form-group">
@@ -38,7 +38,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-5 col-md-5 col-lg-5">
 						<!-- BUTTON CANCEL -->
-						<input type="button" class="btn btn-default hidden-xs" value="Annuler" ng-click="newMedia.goBackMedia()">
+						<input type="button" class="btn btn-default hidden-xs" value="Retour" ng-click="newMedia.goBackMedia()">
 						<button type="button" class="btn btn-default visible-xs-inline-block" ng-click="newMedia.goBackMedia()">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</button>

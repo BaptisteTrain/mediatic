@@ -45,6 +45,7 @@ angular.module('Media', [])
 	// Loading list of medias
 	this.mediasList = [];
 	this.searchMedias = function() {
+		this.mediasList = [];
 		var url = 'http://localhost:8080/mediatic/media/all';
 		$http.get(url).then(function(response) {
 			for (var i in response.data) {
@@ -55,20 +56,25 @@ angular.module('Media', [])
 				var listLoan = media.loanList;
 				if (listLoan != undefined) {
 					// Seek the borrower
-					var i = 0;
-					while (i < media.loanList.length && media.loanList[i].returnDate != undefined) {
-						i++;
+					var j = 0;
+					while (j < media.loanList.length && media.loanList[j].returnDate != undefined) {
+						j++;
 					}
-					if (i < media.loanList.length) {
-						aBorrower = media.loanList[0].member.person.firstname + ' ' + media.loanList[0].member.person.lastname;
-						aPlannedReturnDate = media.loanList[0].plannedReturnDate;
+					if (j < media.loanList.length) {
+						aBorrower = media.loanList[j].member.firstname + ' ' + media.loanList[j].member.lastname;
+						aPlannedReturnDate = media.loanList[j].plannedReturnDate;
 					}
+				}
+				// Change the name of the type (yes it's not pretty)
+				var typeM = media.type;
+				if (typeM == 'BOOK') {
+					typeM = 'Livre';
 				}
 				// Push in the mediaList
 				self.mediasList.push({id: media.id, 
 									  title: media.title, 
 									  author: media.author,
-									  type: media.type,
+									  type: typeM,
 									  borrower: aBorrower,
 									  returnDate: aPlannedReturnDate
 								  	});

@@ -4,10 +4,10 @@ angular.module('SearchMember', [])
 		var obj = this;
 		
 		// Check if authenticated
-		if (! AuthenticationService.isConnected()) {
+		/*if (! AuthenticationService.isConnected()) {
 			// Redirection toward login
 			$location.url('/login');
-		}
+		}*/
 
 		// Page's title
 		$rootScope.titre = 'Adherents';
@@ -17,7 +17,7 @@ angular.module('SearchMember', [])
 		$rootScope.memberActive = 'active';
 		
 		// Has the right to create a new member
-		obj.displayButtonAdd = AuthenticationService.hasRightMemberCreation();
+		obj.displayButtonAdd = true; // AuthenticationService.hasRightMemberCreation();
 		
 		
 		obj.adherents;

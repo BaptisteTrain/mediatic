@@ -4,10 +4,10 @@ angular.module('CreateMember', [])
 		var obj = this;
 		
 		// Check if authenticated
-		if (! AuthenticationService.isConnected()) {
+		/*if (! AuthenticationService.isConnected()) {
 			// Redirection toward login
 			$location.url('/login');
-		}
+		}*/
 
 		// Page's title
 		$rootScope.titre = 'Nouveau Membre';
@@ -40,15 +40,21 @@ angular.module('CreateMember', [])
 			obj.subscriptionDate = new Date();
 			
 			var data = {
-                'nom': obj.lastname,
-                'prenom': obj.firstname,
-                'date_naissance': obj.birthdate,
-                'email': obj.email,
-                'adresse': {'ligne1': '', 'ligne2': '', 'codepostal': obj.postalcode, 'ville': obj.town},
-                'cotisation': {'debut': new Date(), 'fin': endDate, 'montant': obj.subscriptionAmount},
-                'age': age,
-                'emprunt': [],
-                'nombre_media': 0
+                identifier: obj.lastname + obj.firstname,
+				lastname: obj.lastname,
+				firstname: obj.firstname,
+				email: obj.email,
+				birthdate: obj.birthdate.toISOString().substring(0, 10),
+				numberOfLoans: 0,
+				gender: obj.gender,
+				address: obj.address,
+				postalcode: obj.postalcode,
+				city: obj.town,
+				subscription: {
+					amount: obj.subscriptionAmount,
+					paymentDate: obj.subscriptionDate,
+					subscriptionEndDate: endDate
+				}
             };
 
 			MemberSheetService.setSheet(data).then(function(response) {

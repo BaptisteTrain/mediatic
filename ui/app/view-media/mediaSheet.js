@@ -23,16 +23,14 @@ angular
 
 		// Load of the media
 		var id   = $routeParams.id;
-		console.log("id = "+id);
 		var url1 = 'http://localhost:8080/mediatic/media/detail/'+id;
-		var url2 = 'http://localhost:8080/mediatic/api/member/allmembers';
+		var url2 = 'http://localhost:8080/mediatic/api/member/all';
 
 		$scope.myMedia = {};
 		function loadData(){
 			$http.get(url1)
 				.then(function(response) {
 					$scope.myMedia = response.data;
-					console.log("myMedia = ", $scope.myMedia);
 				});
 			$http.get(url2)
 				.then(function(response){
@@ -91,8 +89,7 @@ angular
 		$scope.showError = false;
 		$scope.showSuccessEdit = false;
 		$scope.showErrorEdit = false;
-		console.log('showerror = ', $scope.showError);
-		//$scope.doFade = false;
+		
 		// show/hide search form
 		$scope.isNavCollapsed = true;
 		$scope.isCollapsed = false;
@@ -105,23 +102,28 @@ angular
 		
 		ctrl.itemsPerPage = 10;
 		
-		$scope.$watch('myMedia.emprunteurs', function(newValue, oldValue){
+		$scope.$watch('myMedia.loanList', function(newValue, oldValue){
 			ctrl.emprunteurs.splice(0,ctrl.emprunteurs.length);
-			//console.log('J\'utilise le média.', newValue, oldValue);
-			for(var i in $scope.myMedia.emprunteurs) {
+			for(var i in $scope.myMedia.loanList) {
+				var dateReturn = $scope.myMedia.loanList[0].returnDate;
+				if(dateReturn == undefined) {
+					dateReturn = '';
+				}
 				ctrl.emprunteurs.push({
-					nom    : $scope.myMedia.emprunteurs[i].adherent.nom,
-					prenom : $scope.myMedia.emprunteurs[i].adherent.prenom
+					nom        : $scope.myMedia.loanList[i].member.lastname,
+					prenom     : $scope.myMedia.loanList[i].member.firstname,
+					dateLoan   : $scope.myMedia.loanList[0].loanDate,
+					dateReturn : $scope.myMedia.loanList[0].returnDate
 				});
 			}
-			//console.log('Les emprunteurs : ', ctrl.emprunteurs);
+			
 			ctrl.media = {
 				mediaEditId  	: $scope.myMedia.id,
 				mediaEditTitre  : $scope.myMedia.title,
 				mediaEditAuteur : $scope.myMedia.author,
 				mediaEditType   : $scope.myMedia.type
 			};
-			console.log('$scope.myMedia : ', $scope.myMedia, "$scope.myMedia.title : ", $scope.myMedia.title);
+
 			// Page's title
 			$rootScope.titre = $scope.myMedia.titre;
 		});
@@ -134,7 +136,6 @@ angular
 				mediaEditAuteur : $scope.myMedia.author,
 				mediaEditType   : $scope.myMedia.type
 			};
-			console.log('new $scope.myMedia : ', $scope.myMedia, "$scope.myMedia.title : ", $scope.myMedia.title);
 		});
 
 		// Edit a media
@@ -171,47 +172,53 @@ angular
 				for(var i in $scope.mySearch) {
 					ctrl.mySearchList.push({
 						id 			: $scope.mySearch[i].id,
-						firstname   : $scope.mySearch[i].nom,
-						secondename : $scope.mySearch[i].prenom
+						firstname   : $scope.mySearch[i].firstname,
+						secondename : $scope.mySearch[i].lastname
 					});
 				}
-				//console.log(ctrl.mySearchList);
 			});
 		}
 
-		ctrl.addLoan = function(idMember) {
+		ctrl.addLoan = function(idMem) {
+			var idMember = parseInt(idMem); 
 			if(loanForm.$invalid){
 				return;
 			}
 			var url = 'http://localhost:8080/mediatic/loan/new';
-			var time;
-
-			var idMedia   = $scope.myMedia.id;
-			var typeMedia = $scope.myMedia.type;
-			if(typeMedia == 'Livre') {
-				time = 30;
-			}else{
-				time = 15;
+//			var time;
+//			var typeMedia = $scope.myMedia.type;
+//			if(typeMedia == 'Livre') {
+//				time = 30;
+//			}else{
+//				time = 15;
+//			}
+//			var today     = '05/12/2016';
+//			var tabDate   = today.split('/');
+//			var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0]); // + time
+			
+			var memberObj;
+			
+			for (var i=0; i<$scope.mySearch.length; i++) {
+				if ($scope.mySearch[i].id === idMember) {
+					memberObj = $scope.mySearch[i];
+					break;
+				}
 			}
-			var today     = '05/12/2016';
-			var tabDate   = today.split('/');
-			var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0] + 30);
 			
 			var data      = {
-				id_adherent : idMember,
-				id_media	: idMedia,
-				depart		: nextDate
+				'member'    : memberObj,
+				'media'	    : $scope.myMedia
 			};
 			
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {
-					console.log('SUCCESS');
+					console.log('SUCCESS ADD LOAN');
 					$scope.$emit('addLoan');
 					ctrl.loanMember = null;
 					$scope.isNavCollapsed = true;
 	            })
 	            .error(function (data, status, header, config) {
-	            	console.log('ERROR');
+	            	console.log('ERROR ADD LOAN');
 	            	$scope.$emit('errorLoan');
 	            });
 		}

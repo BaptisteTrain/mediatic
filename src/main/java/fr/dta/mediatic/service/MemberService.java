@@ -87,4 +87,13 @@ public class MemberService {
 	public void updateMember(Member member) {
 		repo.update(member);
 	}
+	
+	/**
+	 * Returns a unique Member based on his exact ID.
+	 * @param id
+	 * @return List<Loan>
+	 */
+	public List<Loan> getMemberLoans(long id) {
+		return repo.getMemberLoans(id);
+	}
 }
