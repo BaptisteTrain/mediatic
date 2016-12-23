@@ -82,7 +82,7 @@ public class MemberController {
 	 * @return Member
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void updateMember(@PathVariable String id, @RequestBody @Valid Member member) {
+	public void updateMember(@RequestBody @Valid Member member) {
 		memberService.updateMember(member);
 	}
 }
