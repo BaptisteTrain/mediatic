@@ -23,7 +23,6 @@ angular
 
 		// Load of the media
 		var id   = $routeParams.id;
-		console.log("id = "+id);
 		var url1 = 'http://localhost:8080/mediatic/media/detail/'+id;
 		var url2 = 'http://localhost:8080/mediatic/api/member/all';
 
@@ -32,7 +31,6 @@ angular
 			$http.get(url1)
 				.then(function(response) {
 					$scope.myMedia = response.data;
-					console.log("myMedia = ", $scope.myMedia);
 				});
 			$http.get(url2)
 				.then(function(response){
@@ -91,8 +89,7 @@ angular
 		$scope.showError = false;
 		$scope.showSuccessEdit = false;
 		$scope.showErrorEdit = false;
-		console.log('showerror = ', $scope.showError);
-		//$scope.doFade = false;
+		
 		// show/hide search form
 		$scope.isNavCollapsed = true;
 		$scope.isCollapsed = false;
@@ -107,21 +104,20 @@ angular
 		
 		$scope.$watch('myMedia.loanList', function(newValue, oldValue){
 			ctrl.emprunteurs.splice(0,ctrl.emprunteurs.length);
-			//console.log('J\'utilise le média.', newValue, oldValue);
-			for(var i in $scope.myMedia.loanList) {
+			for (var i in $scope.myMedia.loanList) {
 				ctrl.emprunteurs.push({
 					nom    : $scope.myMedia.loanList[i].member.lastname,
 					prenom : $scope.myMedia.loanList[i].member.firstname
 				});
 			}
-			//console.log('Les emprunteurs : ', ctrl.emprunteurs);
+			
 			ctrl.media = {
 				mediaEditId  	: $scope.myMedia.id,
 				mediaEditTitre  : $scope.myMedia.title,
 				mediaEditAuteur : $scope.myMedia.author,
 				mediaEditType   : $scope.myMedia.type
 			};
-			console.log('$scope.myMedia : ', $scope.myMedia, "$scope.myMedia.title : ", $scope.myMedia.title);
+
 			// Page's title
 			$rootScope.titre = $scope.myMedia.titre;
 		});
@@ -134,7 +130,6 @@ angular
 				mediaEditAuteur : $scope.myMedia.author,
 				mediaEditType   : $scope.myMedia.type
 			};
-			console.log('new $scope.myMedia : ', $scope.myMedia, "$scope.myMedia.title : ", $scope.myMedia.title);
 		});
 
 		// Edit a media
@@ -175,7 +170,6 @@ angular
 						secondename : $scope.mySearch[i].lastname
 					});
 				}
-				//console.log(ctrl.mySearchList);
 			});
 		}
 
@@ -196,37 +190,29 @@ angular
 //			var tabDate   = today.split('/');
 //			var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0]); // + time
 			
-			//console.log('idMember = ', idMember);
 			var memberObj;
 			
-			console.log('id = ', idMember);
-			console.log('$scope.mySearch = ', $scope.mySearch);
-			
-			for(var i=0; i<$scope.mySearch.length; i++) {
-				console.log('$scope.mySearch[i].id = ', $scope.mySearch[i].id);
-				if($scope.mySearch[i].id === idMember) {
+			for (var i=0; i<$scope.mySearch.length; i++) {
+				if ($scope.mySearch[i].id === idMember) {
 					memberObj = $scope.mySearch[i];
 					break;
 				}
 			}
-			console.log('memberObj = ', memberObj);
 			
 			var data      = {
 				'member'    : memberObj,
 				'media'	    : $scope.myMedia
 			};
 			
-			console.log('data = ', data);
-			
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {
-					console.log('SUCCESS');
+					console.log('SUCCESS ADD LOAN');
 					$scope.$emit('addLoan');
 					ctrl.loanMember = null;
 					$scope.isNavCollapsed = true;
 	            })
 	            .error(function (data, status, header, config) {
-	            	console.log('ERROR');
+	            	console.log('ERROR ADD LOAN');
 	            	$scope.$emit('errorLoan');
 	            });
 		}
