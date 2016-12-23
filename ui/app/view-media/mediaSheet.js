@@ -109,12 +109,19 @@ angular
 			ctrl.emprunteurs.splice(0,ctrl.emprunteurs.length);
 			//console.log('J\'utilise le média.', newValue, oldValue);
 			for(var i in $scope.myMedia.loanList) {
+				var dateReturn = $scope.myMedia.loanList[0].returnDate;
+				if(dateReturn == undefined) {
+					dateReturn = '';
+				}
 				ctrl.emprunteurs.push({
-					nom    : $scope.myMedia.loanList[i].member.lastname,
-					prenom : $scope.myMedia.loanList[i].member.firstname
+					nom        : $scope.myMedia.loanList[i].member.lastname,
+					prenom     : $scope.myMedia.loanList[i].member.firstname,
+					dateLoan   : $scope.myMedia.loanList[0].loanDate,
+					dateReturn : $scope.myMedia.loanList[0].returnDate
 				});
+				//console.log('Les emprunteurs : ', $scope.myMedia.loanList[0]);
 			}
-			//console.log('Les emprunteurs : ', ctrl.emprunteurs);
+			
 			ctrl.media = {
 				mediaEditId  	: $scope.myMedia.id,
 				mediaEditTitre  : $scope.myMedia.title,
