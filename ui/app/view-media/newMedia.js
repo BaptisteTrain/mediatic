@@ -43,6 +43,7 @@ angular.module('NewMedia', [])
 						   type: self.mediaToAdd.type};
 		$http.post(url, mediaToSend).then(function(response) {
 			// Show a message
+			$scope.doFade = false;
 			self.messCreateOk = true;
 			$timeout(function(){
 		    	$scope.doFade = true;
