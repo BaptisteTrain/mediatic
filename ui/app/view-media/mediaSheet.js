@@ -105,13 +105,13 @@ angular
 		
 		ctrl.itemsPerPage = 10;
 		
-		$scope.$watch('myMedia.emprunteurs', function(newValue, oldValue){
+		$scope.$watch('myMedia.loanList', function(newValue, oldValue){
 			ctrl.emprunteurs.splice(0,ctrl.emprunteurs.length);
 			//console.log('J\'utilise le média.', newValue, oldValue);
-			for(var i in $scope.myMedia.emprunteurs) {
+			for(var i in $scope.myMedia.loanList) {
 				ctrl.emprunteurs.push({
-					nom    : $scope.myMedia.emprunteurs[i].adherent.nom,
-					prenom : $scope.myMedia.emprunteurs[i].adherent.prenom
+					nom    : $scope.myMedia.loanList[i].member.lastname,
+					prenom : $scope.myMedia.loanList[i].member.firstname
 				});
 			}
 			//console.log('Les emprunteurs : ', ctrl.emprunteurs);
