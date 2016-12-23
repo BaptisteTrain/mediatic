@@ -29,24 +29,7 @@ public class UserRepository extends AbstractRepository<User> {
 		List<User> listeReturn = query.getResultList();
 		
 		return listeReturn;
-    }
-    
-    /**
-     * Find user by complete id
-     * 
-     * @param id
-     * @return List<User>
-     */
-    public User findUsersById(int id) {
-		TypedQuery<User> query = em.createQuery("SELECT u " 
-							+ "FROM Usr u " 
-							+ "WHERE u.id = :id", User.class);
-	
-		query.setParameter("id",  id);
-		User singleReturn = query.getSingleResult();
-	
-		return singleReturn;
-    }    
+    }   
    
     /**
      * Find user by partial id
@@ -54,12 +37,12 @@ public class UserRepository extends AbstractRepository<User> {
      * @param id
      * @return List<User>
      */
-    public List<User> findUsersByIdPartial(String id) {
+    public List<User> findUsersByIdPartial(String login) {
 		TypedQuery<User> query = em.createQuery("SELECT u " 
 							+ "FROM Usr u " 
-							+ "WHERE u.login LIKE :id", User.class);
+							+ "WHERE u.login LIKE :login", User.class);
 	
-		query.setParameter("id",  id + "%");
+		query.setParameter("login",  login + "%");
 
 		List<User> listeReturn = query.getResultList();
 
@@ -95,19 +78,19 @@ public class UserRepository extends AbstractRepository<User> {
      * @param firstname
      * @return List<User>
      */
-    public List<User> findUserByIdOrNames(String id, String lastname, String firstname) {
+    public List<User> findUserByIdOrNames(String login, String lastname, String firstname) {
 		TypedQuery<User> query = em.createQuery("SELECT u " 
 							+ "FROM Usr u " 
 							+ "WHERE upper(u.person.lastname) LIKE :lastname " 
 							+ "OR upper(u.person.firstname) LIKE :firstname " 
-							+ "OR u.login LIKE :id", User.class);
+							+ "OR u.login LIKE :login", User.class);
 
-		query.setParameter("id", id + "%");
+		query.setParameter("login", login + "%");
 		query.setParameter("lastname", "%" + lastname + "%");
 		query.setParameter("firstname", "%" + firstname + "%");
 		
 		List<User> listeReturn = query.getResultList();
 		
 		return listeReturn;
-	}    
+	}
 }
