@@ -21,11 +21,11 @@ public class MemberRepository extends AbstractRepository<Member> {
      * @return
      */
     public List<Member> selectAllMembers() {
-		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m LEFT OUTER JOIN m.listLoan l ", Member.class);
+		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m", Member.class);
 		List<Member> result = query.getResultList();
 		// Initialize the lazy list of Loans
 		for (Member m : result) {
-		    System.out.println(m.getListLoan());
+		    m.getListLoan().size();
 		}
 		return result;
     }
