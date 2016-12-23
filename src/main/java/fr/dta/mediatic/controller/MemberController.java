@@ -71,7 +71,6 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/addmember", method = RequestMethod.POST)
 	public void addMember(@RequestBody @Valid Member member) {
-		//return memberService.findMembersByIdOrNames(identifier, lastname, firstname);
 		memberService.addMember(member);
 	}
 	
@@ -84,12 +83,6 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
 	public void updateMember(@PathVariable String id, @RequestBody @Valid Member member) {
-		System.out.println("Updateeeeeee");
 		memberService.updateMember(member);
-	}
-	
-	@RequestMapping(value = "/test", method = RequestMethod.PUT)
-	public String updateMember() {
-		return "Test Update";
 	}
 }
