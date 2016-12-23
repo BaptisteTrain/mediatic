@@ -2,8 +2,6 @@ package fr.dta.mediatic.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import fr.dta.mediatic.model.AbstractEntity;
 import fr.dta.mediatic.repository.AbstractRepository;
 

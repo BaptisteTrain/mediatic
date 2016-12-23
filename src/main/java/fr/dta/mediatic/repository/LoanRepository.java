@@ -55,9 +55,7 @@ public class LoanRepository extends AbstractRepository<Loan> {
 	 * @return int
 	 */
 	public int howManyLoaningMedia() {
-		Query query = em.createQuery(" SELECT count(l) "
-									+ "FROM Loan l "
-									+ "WHERE l.returnDate is null ");
+		Query query = em.createQuery(" SELECT count(l) FROM Loan l WHERE l.returnDate is null ");
 		int count = ((Integer) query.getSingleResult()).intValue();
 		return count;
 	}
@@ -68,9 +66,7 @@ public class LoanRepository extends AbstractRepository<Loan> {
 	 * @return int
 	 */
 	public int howManyLoanByIdMember(Long id) {
-		Query query = em.createQuery(" SELECT count(l) "
-									+ "FROM Loan l JOIN Member m "
-									+ "WHERE l.returnDate is null AND m.id = :id");
+		Query query = em.createQuery(" SELECT count(l) FROM Loan l JOIN Member m WHERE l.returnDate is null AND m.id = :id");
 		query.setParameter("id", id);
 		int count = ((Integer) query.getSingleResult()).intValue();
 		return count;

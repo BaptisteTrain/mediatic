@@ -171,37 +171,52 @@ angular
 				for(var i in $scope.mySearch) {
 					ctrl.mySearchList.push({
 						id 			: $scope.mySearch[i].id,
-						firstname   : $scope.mySearch[i].nom,
-						secondename : $scope.mySearch[i].prenom
+						firstname   : $scope.mySearch[i].firstname,
+						secondename : $scope.mySearch[i].lastname
 					});
 				}
 				//console.log(ctrl.mySearchList);
 			});
 		}
 
-		ctrl.addLoan = function(idMember) {
+		ctrl.addLoan = function(idMem) {
+			var idMember = parseInt(idMem); 
 			if(loanForm.$invalid){
 				return;
 			}
 			var url = 'http://localhost:8080/mediatic/loan/new';
-			var time;
-
-			var idMedia   = $scope.myMedia.id;
-			var typeMedia = $scope.myMedia.type;
-			if(typeMedia == 'Livre') {
-				time = 30;
-			}else{
-				time = 15;
+//			var time;
+//			var typeMedia = $scope.myMedia.type;
+//			if(typeMedia == 'Livre') {
+//				time = 30;
+//			}else{
+//				time = 15;
+//			}
+//			var today     = '05/12/2016';
+//			var tabDate   = today.split('/');
+//			var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0]); // + time
+			
+			//console.log('idMember = ', idMember);
+			var memberObj;
+			
+			console.log('id = ', idMember);
+			console.log('$scope.mySearch = ', $scope.mySearch);
+			
+			for(var i=0; i<$scope.mySearch.length; i++) {
+				console.log('$scope.mySearch[i].id = ', $scope.mySearch[i].id);
+				if($scope.mySearch[i].id === idMember) {
+					memberObj = $scope.mySearch[i];
+					break;
+				}
 			}
-			var today     = '05/12/2016';
-			var tabDate   = today.split('/');
-			var nextDate  = new Date(tabDate[2], tabDate[1]-1, + tabDate[0] + 30);
+			console.log('memberObj = ', memberObj);
 			
 			var data      = {
-				id_adherent : idMember,
-				id_media	: idMedia,
-				depart		: nextDate
+				'member'    : memberObj,
+				'media'	    : $scope.myMedia
 			};
+			
+			console.log('data = ', data);
 			
 			$http.post(url, data)
 				.success(function (data, status, headers, config) {

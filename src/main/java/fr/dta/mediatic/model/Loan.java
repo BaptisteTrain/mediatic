@@ -21,7 +21,6 @@ public class Loan extends AbstractEntity {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @NotNull
-    @NotBlank
     private Date loanDate;
 
     @Temporal(TemporalType.DATE)
@@ -31,7 +30,6 @@ public class Loan extends AbstractEntity {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @NotNull
-    @NotBlank
     private Date plannedReturnDate;
 
     @ManyToOne
