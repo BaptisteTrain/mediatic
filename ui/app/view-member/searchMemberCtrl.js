@@ -4,10 +4,10 @@ angular.module('SearchMember', [])
 		var obj = this;
 		
 		// Check if authenticated
-		if (! AuthenticationService.isConnected()) {
+		/*if (! AuthenticationService.isConnected()) {
 			// Redirection toward login
 			$location.url('/login');
-		}
+		}*/
 
 		// Page's title
 		$rootScope.titre = 'Adherents';

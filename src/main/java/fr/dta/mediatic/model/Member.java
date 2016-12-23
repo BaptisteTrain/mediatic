@@ -45,9 +45,9 @@ public class Member extends AbstractEntity {
 
     //@Pattern(regexp="^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
     //@Pattern(regexp="^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$")
-    @Column(name = "birthDate")
+    @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private Date birthdate;
 
     @Column(name = "numberOfLoans")
     private int numberOfLoans; 
@@ -59,8 +59,8 @@ public class Member extends AbstractEntity {
 	private String address;
 	
 	@Length(min=5,max=5)
-	@Column(name = "postalCode")
-	private String postalCode;
+	@Column(name = "postalcode")
+	private String postalcode;
 	
 	@Column(name = "city")
 	private String city;
@@ -86,11 +86,11 @@ public class Member extends AbstractEntity {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.email = email;
-		this.birthDate = birthDate;
+		this.birthdate = birthDate;
 		this.numberOfLoans = numberOfLoans;
 		this.gender = gender;
 		this.address = address;
-		this.postalCode = postalCode;
+		this.postalcode = postalCode;
 		this.city = city;
 		this.subscription = subscription;
 		this.listLoan = listLoan;
@@ -138,12 +138,12 @@ public class Member extends AbstractEntity {
 		this.email = email;
 	}
 
-	public Date getBirthDate() {
-    	return birthDate;
+	public Date getBirthdate() {
+    	return birthdate;
     }
 
-    public void setBirthDate(Date birthDate) {
-    	this.birthDate = birthDate;
+    public void setBirthdate(Date birthdate) {
+    	this.birthdate = birthdate;
     }
 
     public int getNumberOfLoans() {
@@ -162,12 +162,12 @@ public class Member extends AbstractEntity {
     	this.address = address;
     }
 
-    public String getPostalCode() {
-		return postalCode;
+    public String getPostalcode() {
+		return postalcode;
 	}
 
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+	public void setPostalcode(String postalcode) {
+		this.postalcode = postalcode;
 	}
 	
 	public String getCity() {
@@ -204,7 +204,7 @@ public class Member extends AbstractEntity {
 
 	@Override
     public String toString() {
-	return "Member [identifier=" + identifier + ", birthDate=" + birthDate + ", numberOfLoans=" + numberOfLoans + ", person=" + lastname + " " + firstname + " " + email + " " + gender + ", address=" + address + ", subscription=" + subscription
+	return "Member [identifier=" + identifier + ", birthDate=" + birthdate + ", numberOfLoans=" + numberOfLoans + ", person=" + lastname + " " + firstname + " " + email + " " + gender + ", address=" + address + ", subscription=" + subscription
 		+ "]";
     }
 }

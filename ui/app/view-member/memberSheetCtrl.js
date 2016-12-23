@@ -6,10 +6,10 @@ angular.module('MemberSheet', [])
 		var mbshCtrl = this;
 		
 		// Check if authenticated
-		if (! AuthenticationService.isConnected()) {
+		/*if (! AuthenticationService.isConnected()) {
 			// Redirection toward login
 			$location.url('/login');
-		}
+		}*/
 		
 		// Menu active
 		$rootScope.mediaActive = '';
@@ -27,26 +27,24 @@ angular.module('MemberSheet', [])
 		
 		/* Récupération de la Fiche Adhérent en fonction de l'ID passé en paramètre dans la barre d'adresse */
 		MemberSheetService.getSheet($routeParams.idMember).then(function(liste) {
-			//console.log("La fiche du membre est: ");
-			//console.log(liste);
-			mbshCtrl.lastname = liste.nom;
-			mbshCtrl.firstname = liste.prenom;
+			console.log("La fiche du membre est: ");
+			console.log(liste);
+			mbshCtrl.lastname = liste.lastname;
+			mbshCtrl.firstname = liste.firstname;
 			
 			// Page's title
-			$rootScope.titre = 'Adherent '+mbshCtrl.lastname+' '+liste.prenom;
+			$rootScope.titre = "Member page: " + mbshCtrl.lastname + " " + mbshCtrl.firstname;
 			
-			mbshCtrl.birthdate = new Date(liste.date_naissance);
+			mbshCtrl.birthdate = new Date(liste.birthdate);
 			mbshCtrl.email = liste.email;
-			mbshCtrl.address = liste.adresse.ligne1;
-			/* Not used in form */mbshCtrl.ligne1 = liste.adresse.ligne1;
-			/* Not used in form */mbshCtrl.ligne2 = liste.adresse.ligne2;
-			mbshCtrl.postalcode =  liste.adresse.codepostal;
-			mbshCtrl.town =  liste.adresse.ville;
-			mbshCtrl.age = liste.age;
-			mbshCtrl.subscriptionAmount = liste.cotisation.montant;
-			mbshCtrl.subscriptionDate = new Date(liste.cotisation.debut);
-			mbshCtrl.subscriptionEndDate = new Date(liste.cotisation.fin);
-			mbshCtrl.loans = liste.emprunt;
+			mbshCtrl.address = liste.address;
+			mbshCtrl.postalcode =  liste.postalcode;
+			mbshCtrl.town =  liste.city;
+			mbshCtrl.age = 666;
+			mbshCtrl.subscriptionAmount = liste.subscription.amount;
+			mbshCtrl.subscriptionDate = new Date(liste.subscription.paymentDate);
+			mbshCtrl.subscriptionEndDate = new Date(liste.subscription.subscriptionEndDate);
+			mbshCtrl.loans = [];
 		},
 		function(response) {
 			console.log("Cet Adhérent n'existe pas. Redirection sur la page d'Ajout d'un nouvel adhérent.");
@@ -216,12 +214,14 @@ angular.module('MemberSheet', [])
 	})
 	/* Services permettant de communiquer avec la BDD */
 	.factory('MemberSheetService', function($http, IpService) {
-		var url = 'http://' + IpService + ':8090/resource/';
+		//var url = 'http://' + IpService + ':8090/resource/';
+		var url = 'http://localhost:8080/mediatic/api/member/';
 		
 		return {
 			/* Récupère l'Adhérent en fonction de l'ID */
 			getSheet : function(id) {
-				var resource = "adherent.accession?id=";
+				//var resource = "adherent.accession?id=";
+				var resource = "";
 				//console.log("ID: " + id);
 				//console.log("URL + Resource + ID: " + url + resource + id);
 				return $http.get(url + resource + id).then(function(response) {
@@ -232,9 +232,11 @@ angular.module('MemberSheet', [])
 			
 			/* Modifie un Adhérent avec les données passées en paramètres */
 			setSheet : function(data) {
-				var resource = "adherent.modification";
+				//var resource = "adherent.modification";
+				var resource = "update";
 				if(data.id==undefined){
-					var resource = "adherent.creation";
+					//var resource = "adherent.creation";
+					var resource = "create";
 				}
 				//console.log("URL + Resource: " + url + resource);
 				return $http.post(url + resource, data).then(function(response) {

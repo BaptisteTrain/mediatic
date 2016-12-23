@@ -15,6 +15,9 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private SubscriptionService subscriptionService;
+	
 	/**
 	 * Returns all Members of the application.
 	 * Access page: /api/member/allmembers
@@ -71,7 +74,15 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public void addMember(@RequestBody @Valid Member member) {
+		Subscription subscription = member.getSubscription();
+		//member.setSubscription(null);
+		//subscription.setId(null);
+		subscriptionService.create(subscription);
 		memberService.addMember(member);
+	}
+	@RequestMapping(value = "/createSub", method = RequestMethod.POST)
+	public void addSub(@RequestBody @Valid Subscription subscription) {
+		subscriptionService.create(subscription);
 	}
 	
 	/**
@@ -84,5 +95,17 @@ public class MemberController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void updateMember(@RequestBody @Valid Member member) {
 		memberService.updateMember(member);
+	}
+	
+	/**
+	 * Returns the List of Loans from a Member based on his ID.
+	 * Access page: /api/member/loans/{id}
+	 * Request method: GET
+	 * @param id
+	 * @return List<Loan>
+	 */
+	@RequestMapping(value = "/loans/{id}", method = RequestMethod.GET)
+	public List<Loan> getMemberLoans(@PathVariable long id) {	
+		return memberService.getMemberLoans(id);
 	}
 }

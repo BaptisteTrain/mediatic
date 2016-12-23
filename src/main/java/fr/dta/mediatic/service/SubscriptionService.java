@@ -3,10 +3,12 @@ package fr.dta.mediatic.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.dta.mediatic.model.Subscription;
 import fr.dta.mediatic.repository.SubscriptionRepository;
 
+@Service
 public class SubscriptionService {
 	
 	@Autowired
@@ -43,7 +45,7 @@ public class SubscriptionService {
 	 * 
 	 * @param entity
 	 */
-	public void create (Subscription entity) {
+	public void create(Subscription entity) {
 		
 		subscriptionRepository.add(entity);
 	}

@@ -114,4 +114,14 @@ public class MemberRepository extends AbstractRepository<Member> {
 		List<Member> listeReturn = query.getResultList();
 		return listeReturn;
     }
+    
+    public List<Loan> getMemberLoans(long id) {
+		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m LEFT OUTER JOIN m.listLoan l WHERE m.id = :id", Member.class);
+		query.setParameter("id", id);
+		Member result = query.getSingleResult();
+		List<Loan> list = result.getListLoan();
+		System.out.println(list);
+		
+		return list;
+    }
 }

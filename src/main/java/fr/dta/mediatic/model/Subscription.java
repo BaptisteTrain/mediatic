@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -14,17 +15,17 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Subscription extends AbstractEntity {
 
-    @NotBlank
+    @NotNull
     @Column(name = "amount")
     private int amount;
 
-    @NotBlank
+    //@NotBlank
    // @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "paymentDate")
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
 
-    @NotBlank
+    //@NotBlank
     //@Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "subscriptionEndDate")
     @Temporal(TemporalType.DATE)
