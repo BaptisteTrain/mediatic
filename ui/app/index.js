@@ -22,6 +22,6 @@ angular
 	.controller('IndexCtrl', function(AuthenticationService) {
 		// Check the authentication
 		this.isConnect = function(){
-			return AuthenticationService.isConnected();
+			return true; //AuthenticationService.isConnected();
 		};
 	});

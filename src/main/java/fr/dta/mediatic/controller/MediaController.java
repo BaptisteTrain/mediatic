@@ -16,23 +16,28 @@ import fr.dta.mediatic.service.MediaService;
 @RequestMapping("/media")
 public class MediaController {
 
-    @Autowired
-    private MediaService mediaService;
+	@Autowired
+	private MediaService mediaService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<Media> getAllMedia() {
-	return mediaService.getAllMedias();
-    }
-    
-    @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public Media getDetailMedia(@PathVariable Integer id) {
-	return mediaService.getMediaById(id);
-    }
-    
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public void createNewMedia(@RequestBody Media media) {
-	mediaService.createNewMedia(media);
-    }
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Media> getAllMedia() {
+		return mediaService.getAllMedias();
+	}
 
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public Media getDetailMedia(@PathVariable Long id) {
+		System.out.println("id = "+ id);
+		return mediaService.getMediaById(id);
+	}
+
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public void createNewMedia(@RequestBody Media media) {
+		mediaService.createNewMedia(media);
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public void updateMedia(@RequestBody Media media) {
+		mediaService.updateMedia(media);
+	}
 
 }

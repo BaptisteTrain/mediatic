@@ -19,13 +19,13 @@ public class Subscription extends AbstractEntity {
     private int amount;
 
     @NotBlank
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}")
+   // @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "paymentDate")
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
 
     @NotBlank
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}")
+    //@Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}")
     @Column(name = "subscriptionEndDate")
     @Temporal(TemporalType.DATE)
     private Date subscriptionEndDate;

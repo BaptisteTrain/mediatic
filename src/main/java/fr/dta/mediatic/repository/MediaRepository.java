@@ -15,79 +15,85 @@ import fr.dta.mediatic.model.TypeMedia;
 @Transactional
 public class MediaRepository extends AbstractRepository<Media> {
 
-    @Override
-    protected Class<Media> getEntityClass() {
-	return Media.class;
-    }
-    
-    /**
-     * Select all the medias with their loans list
-     * @return
-     */
-    public List<Media> getAllMediasAndLoan() {
-	TypedQuery<Media> query = em.createQuery("SELECT m " 
-					       + "FROM Media m", Media.class);
-	List<Media> listeReturn = query.getResultList();
-	// Initialize the lazy list of loans
-	for (Media m : listeReturn) {
-	    m.getLoanList().size();
+	@Override
+	protected Class<Media> getEntityClass() {
+		return Media.class;
 	}
-	return listeReturn;
-    }
 
-    /**
-     * Select all the medias with the loans list for the member in param
-     * @return
-     */
-    public List<Media> selectMediasFromMember(Member member) {
-	TypedQuery<Media> query = em.createQuery("SELECT m " 
-					       + "FROM Media m " 
-					       + "LEFT OUTER JOIN m.loanList l " 
-					       + "WHERE l.member.id = :id ", Media.class);
-	query.setParameter("id", member.getId());
-	List<Media> listeReturn = query.getResultList();
-	return listeReturn;
-    }
+	/**
+	 * Select all the medias with their loans list
+	 * 
+	 * @return
+	 */
+	public List<Media> getAllMediasAndLoan() {
+		TypedQuery<Media> query = em.createQuery("SELECT m " + "FROM Media m", Media.class);
+		List<Media> listeReturn = query.getResultList();
+		// Initialize the lazy list of loans
+		for (Media m : listeReturn) {
+			m.getLoanList().size();
+		}
+		return listeReturn;
+	}
 
-    /**
-     * Find the media by its title
-     * @param title
-     * @return
-     */
-    public List<Media> findMediaByTitle(String title) {
-	TypedQuery<Media> query = em.createQuery("SELECT m " 
-					       + "FROM Media m " 
-					       + "WHERE upper(m.title) LIKE :title", Media.class);
-	query.setParameter("title", title.toUpperCase() + '%');
-	List<Media> listeReturn = query.getResultList();
-	return listeReturn;
-    }
+	public Media getMediaById(long id) {
+		Media m = em.find(getEntityClass(), id);
+		m.getLoanList().size();
+		return m;
+	}
 
-    /**
-     * Find the media by its author
-     * @param author
-     * @return
-     */
-    public List<Media> findMediaByAuthor(String author) {
-	TypedQuery<Media> query = em.createQuery("SELECT m " 
-					       + "FROM Media m " 
-					       + "WHERE upper(m.author) LIKE :author", Media.class);
-	query.setParameter("author", author.toUpperCase() + '%');
-	List<Media> listeReturn = query.getResultList();
-	return listeReturn;
-    }
+	/**
+	 * Select all the medias with the loans list for the member in param
+	 * 
+	 * @return
+	 */
+	public List<Media> selectMediasFromMember(Member member) {
+		TypedQuery<Media> query = em.createQuery(
+				"SELECT m " + "FROM Media m " + "LEFT OUTER JOIN m.loanList l " + "WHERE l.member.id = :id ",
+				Media.class);
+		query.setParameter("id", member.getId());
+		List<Media> listeReturn = query.getResultList();
+		return listeReturn;
+	}
 
-    /**
-     * Find the media by its type
-     * @param type
-     * @return
-     */
-    public List<Media> findMediaByType(TypeMedia type) {
-	TypedQuery<Media> query = em.createQuery("SELECT m " 
-					       + "FROM Media m " 
-					       + "WHERE m.type = :type", Media.class);
-	query.setParameter("type", type);
-	List<Media> listeReturn = query.getResultList();
-	return listeReturn;
-    }
+	/**
+	 * Find the media by its title
+	 * 
+	 * @param title
+	 * @return
+	 */
+	public List<Media> findMediaByTitle(String title) {
+		TypedQuery<Media> query = em.createQuery("SELECT m " + "FROM Media m " + "WHERE upper(m.title) LIKE :title",
+				Media.class);
+		query.setParameter("title", title.toUpperCase() + '%');
+		List<Media> listeReturn = query.getResultList();
+		return listeReturn;
+	}
+
+	/**
+	 * Find the media by its author
+	 * 
+	 * @param author
+	 * @return
+	 */
+	public List<Media> findMediaByAuthor(String author) {
+		TypedQuery<Media> query = em.createQuery("SELECT m " + "FROM Media m " + "WHERE upper(m.author) LIKE :author",
+				Media.class);
+		query.setParameter("author", author.toUpperCase() + '%');
+		List<Media> listeReturn = query.getResultList();
+		return listeReturn;
+	}
+
+	/**
+	 * Find the media by its type
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public List<Media> findMediaByType(TypeMedia type) {
+		TypedQuery<Media> query = em.createQuery("SELECT m " + "FROM Media m " + "WHERE m.type = :type", Media.class);
+		query.setParameter("type", type);
+		List<Media> listeReturn = query.getResultList();
+		return listeReturn;
+	}
+
 }

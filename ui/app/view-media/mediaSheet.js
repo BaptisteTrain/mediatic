@@ -7,7 +7,7 @@ angular
 		    ControllerAs : 'MediaSheet'
 		});
 	})
-
+	// the main controller
 	.controller('MediaSheetCtrl', function($scope, $http, $routeParams, $rootScope, $location, IpService, AuthenticationService, $timeout) {
 		var ctrl = this;
 		
@@ -23,14 +23,16 @@ angular
 
 		// Load of the media
 		var id   = $routeParams.id;
-		var url1 = 'http://localhost:8080/mediatic/media/detail?id='+id;
-		var url2 = 'http://'+IpService+':8090/resource/adherent.recherche';
+		console.log("id = "+id);
+		var url1 = 'http://localhost:8080/mediatic/media/detail/'+id;
+		var url2 = 'http://localhost:8080/mediatic/api/member/allmembers';
 
 		$scope.myMedia = {};
 		function loadData(){
 			$http.get(url1)
 				.then(function(response) {
 					$scope.myMedia = response.data;
+					console.log("myMedia = ", $scope.myMedia);
 				});
 			$http.get(url2)
 				.then(function(response){
@@ -96,7 +98,7 @@ angular
 		$scope.isCollapsed = false;
 		$scope.isCollapsedHorizontal = false;
 	})
-	
+	// The controller of media detail and borrower
 	.controller('MediaSheetMediaCtrl', function($scope, $http, $rootScope, IpService) {
 		var ctrl = this;
 		ctrl.emprunteurs = [];
@@ -112,25 +114,36 @@ angular
 					prenom : $scope.myMedia.emprunteurs[i].adherent.prenom
 				});
 			}
-			console.log('Les emprunteurs : ', ctrl.emprunteurs);
+			//console.log('Les emprunteurs : ', ctrl.emprunteurs);
 			ctrl.media = {
 				mediaEditId  	: $scope.myMedia.id,
-				mediaEditTitre  : $scope.myMedia.titre,
-				mediaEditAuteur : $scope.myMedia.auteur,
+				mediaEditTitre  : $scope.myMedia.title,
+				mediaEditAuteur : $scope.myMedia.author,
 				mediaEditType   : $scope.myMedia.type
-			};			
-			
+			};
+			console.log('$scope.myMedia : ', $scope.myMedia, "$scope.myMedia.title : ", $scope.myMedia.title);
 			// Page's title
 			$rootScope.titre = $scope.myMedia.titre;
+		});
+		
+		// get the media detail
+		$scope.$watch('myMedia', function(newValue, oldValue){
+			ctrl.media = {
+				mediaEditId  	: $scope.myMedia.id,
+				mediaEditTitre  : $scope.myMedia.title,
+				mediaEditAuteur : $scope.myMedia.author,
+				mediaEditType   : $scope.myMedia.type
+			};
+			console.log('new $scope.myMedia : ', $scope.myMedia, "$scope.myMedia.title : ", $scope.myMedia.title);
 		});
 
 		// Edit a media
 		ctrl.editMedia = function(id, title, author, type) {
-			var url = 'http://'+IpService+':8090/resource/media.modification';
+			var url = 'http://localhost:8080/mediatic/media/update';
 			var data = {
 				id	   : id,
-				titre  : title, 
-				auteur : author,
+				title  : title, 
+				author : author,
 				type   : type
 			}
 			$http.post(url, data)
@@ -144,7 +157,7 @@ angular
 	            });
 		}
 	})
-	
+	// The controller of loan media
 	.controller('MediaSheetLoanCtrl', function($scope, $http, IpService) {
 		var ctrl = this;
 		ctrl.mySearchList = [];
@@ -170,7 +183,7 @@ angular
 			if(loanForm.$invalid){
 				return;
 			}
-			var url = 'http://'+IpService+':8090/resource/emprunt.ajout';
+			var url = 'http://localhost:8080/mediatic/loan/new';
 			var time;
 
 			var idMedia   = $scope.myMedia.id;
