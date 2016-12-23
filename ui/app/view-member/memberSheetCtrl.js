@@ -5,6 +5,8 @@ angular.module('MemberSheet', [])
 		function($http, $rootScope, $routeParams, $location, $scope, $timeout, IpService, MemberSheetService, AuthenticationService) {
 		var mbshCtrl = this;
 		
+		mbshCtrl.itemsPerPage = 5;
+		
 		// Check if authenticated
 		/*if (! AuthenticationService.isConnected()) {
 			// Redirection toward login
