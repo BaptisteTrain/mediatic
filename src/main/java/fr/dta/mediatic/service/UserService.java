@@ -32,7 +32,7 @@ public class UserService {
 	 */
 	public User getUserById(int id) {
 
-		return userRepository.findUsersById(id);
+		return userRepository.getById(id);
 	}
 
 	/**
@@ -44,7 +44,11 @@ public class UserService {
 	 */
 	public List<User> getUserByName(String firstname, String lastname) {
 
-		return userRepository.findUserByName(lastname, firstname);
+		if ((firstname == null || "".equals(firstname)) && (lastname == null || "".equals(lastname))) {
+			return userRepository.getAll();
+		} else {
+			return userRepository.findUserByName(lastname, firstname);
+		}
 	}
 
 	/**
@@ -63,18 +67,46 @@ public class UserService {
 	 * @param lastname
 	 * @return
 	 */
-	public List<User> getUserByIdOrName(String id, String firstname, String lastname) {
+	public List<User> getUserByIdOrName(String login, String firstname, String lastname) {
 
-		if ((id == null || "".equals(id)) && (firstname == null || "".equals(firstname)) && (lastname == null || "".equals(lastname))) {System.out.println("hre");
+		if ((login == null || "".equals(login)) && (firstname == null || "".equals(firstname)) && (lastname == null || "".equals(lastname))) {System.out.println("hre");
 			return userRepository.selectAllUsers();
-		} else if (id == null || "".equals(id)) {
+		} else if (login == null || "".equals(login)) {
 			return userRepository.findUserByName(lastname, firstname);
 		} else if ((firstname == null || "".equals(firstname)) && (lastname == null || "".equals(lastname))) {
-			return userRepository.findUsersByIdPartial(id);
+			return userRepository.findUsersByIdPartial(login);
 		} else {
-			return userRepository.findUserByIdOrNames(id, lastname, firstname);
+			return userRepository.findUserByIdOrNames(login, lastname, firstname);
 		}
 	}
 	
+	/**
+	 * Create a user
+	 * 
+	 * @param entity
+	 */
+	public void addUser(User user) {
+		
+		userRepository.add(user);
+	}
 	
+	/**
+	 * Delete a user
+	 * 
+	 * @param user
+	 */
+	public void deleteUser(User user) {
+		
+		userRepository.delete(user);
+	}
+	
+	/**
+	 * Update a user
+	 * 
+	 * @param user
+	 */
+	public void updateUser(User user) {
+		
+		userRepository.update(user);
+	}
 }
