@@ -29,22 +29,30 @@ angular.module('MemberSheet', [])
 		MemberSheetService.getSheet($routeParams.idMember).then(function(liste) {
 			console.log("La fiche du membre est: ");
 			console.log(liste);
+			mbshCtrl.identifier = liste.identifier;
 			mbshCtrl.lastname = liste.lastname;
 			mbshCtrl.firstname = liste.firstname;
+			mbshCtrl.email = liste.email;
+			mbshCtrl.birthdate = new Date(liste.birthdate);
+			mbshCtrl.numberOfLoans = liste.numberOfLoans;
+			mbshCtrl.gender = liste.gender;
+			mbshCtrl.address = liste.address;
+			mbshCtrl.postalcode =  liste.postalcode;
+			mbshCtrl.town = liste.city;
+			mbshCtrl.age = new Date().getYear() - mbshCtrl.birthdate.getYear();
+			mbshCtrl.subscription = liste.subscription;
+			mbshCtrl.subscriptionAmount = liste.subscription.amount;
+			mbshCtrl.subscriptionDate = new Date(liste.subscription.paymentDate);
+			mbshCtrl.subscriptionEndDate = new Date(liste.subscription.subscriptionEndDate);
 			
 			// Page's title
 			$rootScope.titre = "Member page: " + mbshCtrl.lastname + " " + mbshCtrl.firstname;
 			
-			mbshCtrl.birthdate = new Date(liste.birthdate);
-			mbshCtrl.email = liste.email;
-			mbshCtrl.address = liste.address;
-			mbshCtrl.postalcode =  liste.postalcode;
-			mbshCtrl.town =  liste.city;
-			mbshCtrl.age = 666;
-			mbshCtrl.subscriptionAmount = liste.subscription.amount;
-			mbshCtrl.subscriptionDate = new Date(liste.subscription.paymentDate);
-			mbshCtrl.subscriptionEndDate = new Date(liste.subscription.subscriptionEndDate);
-			mbshCtrl.loans = [];
+			MemberSheetService.getLoan($routeParams.idMember).then(function(loans) {
+				console.log("Emprunts: ");
+				console.log(loans);
+				mbshCtrl.loans = loans;
+			});
 		},
 		function(response) {
 			console.log("Cet Adhérent n'existe pas. Redirection sur la page d'Ajout d'un nouvel adhérent.");
@@ -76,16 +84,17 @@ angular.module('MemberSheet', [])
 			/* Tableau contenant les données à envoyer à la BDD */
 			var data = {
 				id: parseInt($routeParams.idMember),
-				nom: mbshCtrl.lastname,
-				prenom: mbshCtrl.firstname,
-				date_naissance: mbshCtrl.birthdate.toISOString().substring(0, 10),
+				identifier: mbshCtrl.identifier,
+				lastname: mbshCtrl.lastname,
+				firstname: mbshCtrl.firstname,
 				email: mbshCtrl.email,
-				adresse: {ligne1: mbshCtrl.address || null, ligne2: mbshCtrl.ligne2 || null, codepostal: mbshCtrl.postalcode || null, ville: mbshCtrl.town || null},
-				cotisation: {debut: mbshCtrl.subscriptionDate.toISOString().substring(0, 10), fin: mbshCtrl.subscriptionEndDate.toISOString().substring(0, 10), montant: mbshCtrl.subscriptionAmount}
-				//cotisation: null
-				//age: mbshCtrl.age,
-				//emprunt: mbshCtrl.loans,
-				//nombre_media: mbshCtrl.nbLoans
+				birthdate: mbshCtrl.birthdate.toISOString().substring(0, 10),
+				numberOfLoans: mbshCtrl.loans.length,
+				gender: mbshCtrl.gender,
+				address: mbshCtrl.address,
+				postalcode: mbshCtrl.postalcode,
+				city: mbshCtrl.town,
+				subscription: mbshCtrl.subscription
 			};
 			
 			//console.log("Data à envoyer: ");
@@ -215,13 +224,13 @@ angular.module('MemberSheet', [])
 	/* Services permettant de communiquer avec la BDD */
 	.factory('MemberSheetService', function($http, IpService) {
 		//var url = 'http://' + IpService + ':8090/resource/';
-		var url = 'http://localhost:8080/mediatic/api/member/';
+		var url = 'http://localhost:8080/mediatic/';
 		
 		return {
 			/* Récupère l'Adhérent en fonction de l'ID */
 			getSheet : function(id) {
 				//var resource = "adherent.accession?id=";
-				var resource = "";
+				var resource = "api/member/";
 				//console.log("ID: " + id);
 				//console.log("URL + Resource + ID: " + url + resource + id);
 				return $http.get(url + resource + id).then(function(response) {
@@ -233,10 +242,11 @@ angular.module('MemberSheet', [])
 			/* Modifie un Adhérent avec les données passées en paramètres */
 			setSheet : function(data) {
 				//var resource = "adherent.modification";
-				var resource = "update";
+				var resource = "api/member/update";
+				
 				if(data.id==undefined){
 					//var resource = "adherent.creation";
-					var resource = "create";
+					var resource = "api/member/create";
 				}
 				//console.log("URL + Resource: " + url + resource);
 				return $http.post(url + resource, data).then(function(response) {
@@ -245,9 +255,16 @@ angular.module('MemberSheet', [])
 				});
 			},
 			
+			getLoan : function(id) {
+				var resource = "api/member/loans/";
+				return $http.get(url + resource + id).then(function(response) {
+					return response.data;
+				});
+			},
+			
 			/* Ajout d'une Emprunt pour un Adhérent concernant un Media donné */
 			setLoan : function(data) {
-				var resource = "emprunt.ajout";
+				var resource = "loan/new";
 				//console.log("URL + Resource: " + url + resource);
 				return $http.post(url + resource, data).then(function(response) {
 					//console.log("Data: " + response.data);
@@ -257,10 +274,10 @@ angular.module('MemberSheet', [])
 			
 			/* Récupère les Medias en fonction du Titre, de l'Auteur et du Type */
 			getMedias : function(title,author,type) {
-				var resource = "media.recherche";
-				var request = "?titre=" + title + "&auteur=" + author + "&type=" + type;
+				var resource = "media/all";
+				//var request = "?titre=" + title + "&auteur=" + author + "&type=" + type;
 				//console.log("URL + Resource + Request: " + url + resource + request);
-				return $http.get(url + resource + request).then(function(response) {
+				return $http.get(url + resource /* + request*/).then(function(response) {
 					//console.log("Data: " + response.data);
 					return response.data;
 				});
