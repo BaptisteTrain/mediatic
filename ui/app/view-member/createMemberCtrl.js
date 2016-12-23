@@ -53,7 +53,7 @@ angular.module('CreateMember', [])
 				subscription: {
 					amount: obj.subscriptionAmount,
 					paymentDate: obj.subscriptionDate,
-					subscriptionEndDate: obj.subscriptionDate.setYear(obj.subscriptionDate.getYear() + 1)
+					subscriptionEndDate: endDate
 				}
             };
 
