@@ -104,10 +104,16 @@ angular
 		
 		$scope.$watch('myMedia.loanList', function(newValue, oldValue){
 			ctrl.emprunteurs.splice(0,ctrl.emprunteurs.length);
-			for (var i in $scope.myMedia.loanList) {
+			for(var i in $scope.myMedia.loanList) {
+				var dateReturn = $scope.myMedia.loanList[0].returnDate;
+				if(dateReturn == undefined) {
+					dateReturn = '';
+				}
 				ctrl.emprunteurs.push({
-					nom    : $scope.myMedia.loanList[i].member.lastname,
-					prenom : $scope.myMedia.loanList[i].member.firstname
+					nom        : $scope.myMedia.loanList[i].member.lastname,
+					prenom     : $scope.myMedia.loanList[i].member.firstname,
+					dateLoan   : $scope.myMedia.loanList[0].loanDate,
+					dateReturn : $scope.myMedia.loanList[0].returnDate
 				});
 			}
 			

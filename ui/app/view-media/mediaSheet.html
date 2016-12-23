@@ -57,12 +57,16 @@
 				<tr>
 					<th ts-criteria="nom" ts-default>Nom</th>
 					<th ts-criteria="prenom">Pr&eacute;nom</th>
+					<th ts-criteria="dateLoan">Date d'emprunt</th>
+					<th ts-criteria="dateReturn">Date de retour</th>
 				</tr>
 			</thead>
 			<tbody >
 				<tr ng-repeat="loan in MSMctrl.emprunteurs | paginationFilter:paginationCtrl.currentPage:MSMctrl.itemsPerPage" ts-repeat>
 					<td ng-bind="loan.nom"></td>
 					<td ng-bind="loan.prenom"></td>
+					<td ng-bind="loan.dateLoan | date : 'dd/MM/yyyy'"></td>
+					<td ng-bind="loan.dateReturn | date : 'dd/MM/yyyy'"></td>
 				</tr>
 			</tbody>
 		</table>
