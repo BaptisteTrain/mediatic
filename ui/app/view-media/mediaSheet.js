@@ -25,7 +25,7 @@ angular
 		var id   = $routeParams.id;
 		console.log("id = "+id);
 		var url1 = 'http://localhost:8080/mediatic/media/detail/'+id;
-		var url2 = 'http://localhost:8080/mediatic/api/member/allmembers';
+		var url2 = 'http://localhost:8080/mediatic/api/member/all';
 
 		$scope.myMedia = {};
 		function loadData(){

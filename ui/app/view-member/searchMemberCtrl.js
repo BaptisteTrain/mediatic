@@ -17,7 +17,7 @@ angular.module('SearchMember', [])
 		$rootScope.memberActive = 'active';
 		
 		// Has the right to create a new member
-		obj.displayButtonAdd = AuthenticationService.hasRightMemberCreation();
+		obj.displayButtonAdd = true; // AuthenticationService.hasRightMemberCreation();
 		
 		
 		obj.adherents;

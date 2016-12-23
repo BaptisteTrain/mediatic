@@ -60,8 +60,9 @@ angular.module('Media', [])
 					while (j < media.loanList.length && media.loanList[j].returnDate != undefined) {
 						j++;
 					}
+					console.log(media.loanList);
 					if (j < media.loanList.length) {
-						aBorrower = media.loanList[j].member.person.firstname + ' ' + media.loanList[j].member.person.lastname;
+						aBorrower = media.loanList[j].member.firstname + ' ' + media.loanList[j].member.lastname;
 						aPlannedReturnDate = media.loanList[j].plannedReturnDate;
 					}
 				}
