@@ -65,11 +65,16 @@ angular.module('Media', [])
 						aPlannedReturnDate = media.loanList[j].plannedReturnDate;
 					}
 				}
+				// Change the name of the type (yes it's not pretty)
+				var typeM = media.type;
+				if (typeM == 'BOOK') {
+					typeM = 'Livre';
+				}
 				// Push in the mediaList
 				self.mediasList.push({id: media.id, 
 									  title: media.title, 
 									  author: media.author,
-									  type: media.type,
+									  type: typeM,
 									  borrower: aBorrower,
 									  returnDate: aPlannedReturnDate
 								  	});
