@@ -21,7 +21,7 @@ public class MemberController {
 	 * Request method: GET
 	 * @return List<Member>
 	 */
-	@RequestMapping(value = "/allmembers", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<Member> selectAllMembers() {
 		return memberService.selectAllMembers();
 	}
@@ -59,7 +59,7 @@ public class MemberController {
 	 * @param firstname
 	 * @return List<Member>
 	 */
-	@RequestMapping(value = "/searchmembers", method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public List<Member> findMembersByIdOrNames(@RequestParam (value = "identifier", required = false) String identifier, @RequestParam (value = "lastname", required = false) String lastname, @RequestParam (value = "firstname", required = false) String firstname) {
 		return memberService.findMembersByIdOrNames(identifier, lastname, firstname);
 	}
@@ -69,7 +69,7 @@ public class MemberController {
 	 * @param member
 	 * @return
 	 */
-	@RequestMapping(value = "/addmember", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public void addMember(@RequestBody @Valid Member member) {
 		memberService.addMember(member);
 	}
@@ -81,7 +81,7 @@ public class MemberController {
 	 * @param id
 	 * @return Member
 	 */
-	@RequestMapping(value = "{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void updateMember(@PathVariable String id, @RequestBody @Valid Member member) {
 		memberService.updateMember(member);
 	}
