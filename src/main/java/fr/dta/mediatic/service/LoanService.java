@@ -14,44 +14,47 @@ import fr.dta.mediatic.repository.MemberRepository;
 @Service
 public class LoanService {
 
-	@Autowired
-	private LoanRepository loanRepo;
-	
-	@Autowired
-	private MediaRepository mediaRepo;
-	
-	@Autowired
-	private MemberRepository memberRepo;
+    @Autowired
+    private LoanRepository loanRepo;
 
-	/**
-	 * Select all the loans
-	 * @return
-	 */
-	public List<Media> getAllLoans() {
-		return mediaRepo.getAll();
-	}
+    @Autowired
+    private MediaRepository mediaRepo;
 
-	/**
-	 * Select loan's number by id member
-	 * @return
-	 */
-	public int getLoansByIdMember(Long id) {
-		return loanRepo.howManyLoanByIdMember(id);
-	}
-	
-	/**
-	 * Create a new loan's media
-	 * @return
-	 */
-	public void createNewLoan(Member member, Media media) {
-		loanRepo.insertLoan(member, media);
-	}
-	
-	/**
-	 * Select members who loan a media by id(media)
-	 * @return
-	 */
-	public List<Member> selectMembersWhoLoanMediaByIdMedia(Long id) {	
-		return memberRepo.selectAllMembersWhoLoanMediaByIdMedia(id);
-	}
+    @Autowired
+    private MemberRepository memberRepo;
+
+    /**
+     * Select all the loans
+     * @return
+     */
+    public List<Media> getAllLoans() {
+	return mediaRepo.getAll();
+    }
+
+    /**
+     * Select loan's number by id member
+     * @return
+     */
+    public int getLoansByIdMember(Long id) {
+	return loanRepo.howManyLoanByIdMember(id);
+    }
+
+    /**
+     * Create a new loan's media
+     * @return
+     */
+    public void createNewLoan(Member member, Media media) {
+	int nbLoans = member.getNumberOfLoans();
+	member.setNumberOfLoans(++nbLoans);
+	memberRepo.update(member);
+	loanRepo.insertLoan(member, media);
+    }
+
+    /**
+     * Select members who loan a media by id(media)
+     * @return
+     */
+    public List<Member> selectMembersWhoLoanMediaByIdMedia(Long id) {
+	return memberRepo.selectAllMembersWhoLoanMediaByIdMedia(id);
+    }
 }
