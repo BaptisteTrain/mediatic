@@ -216,12 +216,12 @@ angular.module('MemberSheet', [])
 	})
 	/* Services permettant de communiquer avec la BDD */
 	.factory('MemberSheetService', function($http, IpService) {
-		var url = 'http://' + IpService + ':8090/resource/';
+		var url = 'http://' + IpService + ':8080/mediatic/';
 		
 		return {
 			/* Récupère l'Adhérent en fonction de l'ID */
 			getSheet : function(id) {
-				var resource = "adherent.accession?id=";
+				var resource = "api/member/id=";
 				//console.log("ID: " + id);
 				//console.log("URL + Resource + ID: " + url + resource + id);
 				return $http.get(url + resource + id).then(function(response) {

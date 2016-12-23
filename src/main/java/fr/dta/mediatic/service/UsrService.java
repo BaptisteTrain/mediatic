@@ -5,21 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.dta.mediatic.model.User;
-import fr.dta.mediatic.repository.UserRepository;
+import fr.dta.mediatic.model.Usr;
+import fr.dta.mediatic.repository.UsrRepository;
 
 @Service
-public class UserService {
+public class UsrService {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UsrRepository userRepository;
 
 	/**
 	 * Ask for all users to Repository
 	 * 
 	 * @return
 	 */
-	public List<User> getAllUsers() {
+	public List<Usr> getAllUsers() {
 
 		return userRepository.selectAllUsers();
 	}
@@ -30,7 +30,7 @@ public class UserService {
 	 * @param id
 	 * @return
 	 */
-	public User getUserById(int id) {
+	public Usr getUserById(int id) {
 
 		return userRepository.getById(id);
 	}
@@ -42,7 +42,7 @@ public class UserService {
 	 * @param lastname
 	 * @return
 	 */
-	public List<User> getUserByName(String firstname, String lastname) {
+	public List<Usr> getUserByName(String firstname, String lastname) {
 
 		if ((firstname == null || "".equals(firstname)) && (lastname == null || "".equals(lastname))) {
 			return userRepository.getAll();
@@ -67,7 +67,7 @@ public class UserService {
 	 * @param lastname
 	 * @return
 	 */
-	public List<User> getUserByIdOrName(String login, String firstname, String lastname) {
+	public List<Usr> getUserByIdOrName(String login, String firstname, String lastname) {
 
 		if ((login == null || "".equals(login)) && (firstname == null || "".equals(firstname)) && (lastname == null || "".equals(lastname))) {System.out.println("hre");
 			return userRepository.selectAllUsers();
@@ -85,7 +85,7 @@ public class UserService {
 	 * 
 	 * @param entity
 	 */
-	public void addUser(User user) {
+	public void addUser(Usr user) {
 		
 		userRepository.add(user);
 	}
@@ -95,7 +95,7 @@ public class UserService {
 	 * 
 	 * @param user
 	 */
-	public void deleteUser(User user) {
+	public void deleteUser(Usr user) {
 		
 		userRepository.delete(user);
 	}
@@ -105,8 +105,29 @@ public class UserService {
 	 * 
 	 * @param user
 	 */
-	public void updateUser(User user) {
+	public void updateUser(Usr user) {
 		
 		userRepository.update(user);
+	}
+	
+	/**
+	 * Ask for authenticate
+	 * 
+	 * @param login
+	 * @param pwd
+	 */
+	public boolean authenticate(String login, String pwd) {
+		
+		return userRepository.authenticate(login, pwd);
+	}
+
+	/**
+	 * Ask for user by login
+	 * 
+	 * @return
+	 */
+	public Usr getUserByLogin(String login) {
+
+		return userRepository.findByLogin(login);
 	}
 }

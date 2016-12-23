@@ -11,8 +11,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "users")
-public class User extends AbstractEntity {
+@Table(name = "usr")
+public class Usr extends AbstractEntity {
 
     /* COLUMNS */
 
@@ -46,11 +46,11 @@ public class User extends AbstractEntity {
 
     /* CRONSTRUCTORS */
 
-    public User() {
+    public Usr() {
 
     }
 
-    public User(String login, String password, String lastname, String firstname, String email, Role role) {
+    public Usr(String login, String password, String lastname, String firstname, String email, Role role) {
 		super();
 		this.login = login;
 		this.password = password;
